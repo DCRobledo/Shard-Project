@@ -8,13 +8,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Level
+  - 
   - Water
   - UI
+  - Level
   - Entities
-  - 
-  - 
-  - 
+  - VFX
+  - Lights
   - 
   - 
   - 
@@ -46,4 +46,13 @@ TagManager:
     locked: 0
   - name: Entities
     uniqueID: 890116537
+    locked: 0
+  - name: Lights
+    uniqueID: 3458299507
+    locked: 0
+  - name: VFX
+    uniqueID: 1460945993
+    locked: 0
+  - name: UI
+    uniqueID: 1822665525
     locked: 0

@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6650873}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 249793953}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cameraTriggers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 410299527}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flowTriggers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 433936477}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: entities
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 496787333}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 502589380}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 558587840}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: deathTriggers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 606693119}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +383,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 626334914}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 770234677}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: triggers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +447,7 @@ GameObject:
   m_Component:
   - component: {fileID: 841421722}
   - component: {fileID: 841421723}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 930861608}
   - component: {fileID: 930861610}
   - component: {fileID: 930861609}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: background_tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19118,7 +19118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 963178139}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19151,7 +19151,7 @@ GameObject:
   - component: {fileID: 964593996}
   - component: {fileID: 964593995}
   - component: {fileID: 964593997}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: ground_tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21703,7 +21703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1053498954}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: mechanics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21733,7 +21733,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1230946874}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21800,7 +21800,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1875368606}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: structure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21831,7 +21831,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1919734783}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21861,7 +21861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2039639639}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21893,7 +21893,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2125687029}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pointLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21925,6 +21925,10 @@ PrefabInstance:
     - target: {fileID: 3635534061160073905, guid: 7ea25e4edaf362046ba11af949df28e9, type: 3}
       propertyPath: m_Name
       value: backgroundMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635534061160073905, guid: 7ea25e4edaf362046ba11af949df28e9, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7691759442678599393, guid: 7ea25e4edaf362046ba11af949df28e9, type: 3}
       propertyPath: m_RootOrder
@@ -21987,6 +21991,10 @@ PrefabInstance:
     - target: {fileID: 5225322144182017332, guid: 8db9f5d2b288fcc42ba8381f74d16348, type: 3}
       propertyPath: m_Name
       value: camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 5225322144182017332, guid: 8db9f5d2b288fcc42ba8381f74d16348, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5225322144182017338, guid: 8db9f5d2b288fcc42ba8381f74d16348, type: 3}
       propertyPath: orthographic size
@@ -22093,6 +22101,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: winTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 5038439156044892188, guid: 0be9972c4a15e4546b0fd484c1029cb9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0be9972c4a15e4546b0fd484c1029cb9, type: 3}
 --- !u!4 &5564956638155216704 stripped
@@ -22110,6 +22122,10 @@ PrefabInstance:
     - target: {fileID: 1037839966174533176, guid: 74b73bed40e9f9643a2eb9c6331c479d, type: 3}
       propertyPath: m_Name
       value: globalLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037839966174533176, guid: 74b73bed40e9f9643a2eb9c6331c479d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8364639515252664330, guid: 74b73bed40e9f9643a2eb9c6331c479d, type: 3}
       propertyPath: m_RootOrder
@@ -22217,6 +22233,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pointLight
       objectReference: {fileID: 0}
+    - target: {fileID: 9026396031862017390, guid: 613437fcabfbffe4b94849e69462fc89, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 613437fcabfbffe4b94849e69462fc89, type: 3}
 --- !u!4 &8321095585050317201 stripped
@@ -22278,6 +22298,10 @@ PrefabInstance:
     - target: {fileID: 8710090841162840084, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: m_Name
       value: player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710090841162840084, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
