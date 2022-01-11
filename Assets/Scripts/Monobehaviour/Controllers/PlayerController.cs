@@ -1,6 +1,6 @@
 using Shard.Classes.Entities;
-using Shard.Monobehaviour.Entities.Common;
 using Shard.Classes.Patterns.Command;
+using Shard.Monobehaviour.Entities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
