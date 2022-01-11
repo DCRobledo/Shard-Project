@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace Shard.Assets.Scripts.Entities
+namespace Shard.Classes.Entities
 {
     public class @PlayerInputActions : IInputActionCollection, IDisposable
     {

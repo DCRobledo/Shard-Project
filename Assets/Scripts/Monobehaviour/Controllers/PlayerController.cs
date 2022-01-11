@@ -1,10 +1,10 @@
-using Shard.Assets.Scripts.Entities;
+using Shard.Classes.Entities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Shard.Assets.Scripts.Monobehaviour.Controllers 
+namespace Shard.Monobehaviour.Controllers 
 {
     public class PlayerController : MonoBehaviour
     {

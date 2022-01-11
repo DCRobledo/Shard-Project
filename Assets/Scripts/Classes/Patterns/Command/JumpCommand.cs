@@ -1,9 +1,9 @@
-using Shard.Assets.Scripts.Monobehaviour.Entities.Common;
+using Shard.Monobehaviour.Entities.Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shard.Assets.Scripts.Classes.Patterns.Command 
+namespace Shard.Classes.Patterns.Command 
 {
     public class JumpCommand : Command
     {

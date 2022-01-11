@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shard.Assets.Scripts.Monobehaviour.Entities.Common
+namespace Shard.Monobehaviour.Entities.Common
 {
     public class EntityMovement : MonoBehaviour
     {
