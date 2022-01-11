@@ -5,24 +5,22 @@ using UnityEngine;
 
 namespace Shard.Classes.Patterns.Command 
 {
-    public class JumpCommand : Command
+    public class MoveCommand : Command
     {
         private EntityMovement entityMovement;
 
 
-        public JumpCommand(EntityMovement entityMovement)
+        public MoveCommand(EntityMovement entityMovement)
         {
             this.entityMovement = entityMovement;
         }
 
-        public override void Execute()
+        public override void ExecuteWithParameter<Vector2>(Vector2 direction)
         {
-            entityMovement.Jump();
+            entityMovement.Move<Vector2>(direction);
         }
 
-        public override void ExecuteWithParameter<ParameterType>(ParameterType parameter) { throw new System.NotImplementedException(); }
+        public override void Execute() { throw new System.NotImplementedException(); }
         public override void Undo() { throw new System.NotImplementedException(); }
     }
 }
-
-

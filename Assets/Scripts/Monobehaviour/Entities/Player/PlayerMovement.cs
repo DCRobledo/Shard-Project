@@ -10,6 +10,11 @@ namespace Shard.Monobehaviour.Entities
         {
             Debug.Log("Jump!");
         }
+
+        public override void Move<Vector2>(Vector2 direction) 
+        {
+            Debug.Log(direction);
+        }
     }
 }
 

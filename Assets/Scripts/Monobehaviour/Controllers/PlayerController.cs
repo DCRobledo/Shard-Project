@@ -13,6 +13,7 @@ namespace Shard.Monobehaviour.Controllers
         private GameObject player;
 
         private Command spaceButton;
+        private Command wasdButton;
 
         private PlayerInputActions playerInputActions;
         private InputAction movement;
@@ -31,6 +32,7 @@ namespace Shard.Monobehaviour.Controllers
             playerInputActions = new PlayerInputActions();
 
             spaceButton = new JumpCommand(playerMovement);
+            wasdButton = new MoveCommand(playerMovement);
         }
 
         private void OnEnable() {
@@ -54,7 +56,13 @@ namespace Shard.Monobehaviour.Controllers
             playerInputActions.Player.Jump.Disable();
         }
 
+        private void FixedUpdate() {
+            MovePlayer(movement.ReadValue<Vector2>());
+        }
 
+        private void MovePlayer(Vector2 direction) {
+            wasdButton.ExecuteWithParameter<Vector2>(direction);
+        }
 
         private void ExecuteCommand(Command command) {
             command.Execute();
