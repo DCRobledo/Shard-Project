@@ -11,23 +11,33 @@ namespace Shard.Monobehaviour.Controllers
     public class PlayerController : MonoBehaviour
     {
         private GameObject player;
-        private PlayerMovement playerMovement;
 
         private Command spaceButton;
 
         private PlayerInputActions playerInputActions;
         private InputAction movement;
 
+        private PlayerMovement playerMovement;
+
 
         private void Awake() {
             player = GameObject.Find("player");
             playerMovement = player.GetComponent<PlayerMovement>();
-            spaceButton = new JumpCommand(playerMovement);
 
+            AwakeInput();
+        }
+
+        private void AwakeInput() {
             playerInputActions = new PlayerInputActions();
+
+            spaceButton = new JumpCommand(playerMovement);
         }
 
         private void OnEnable() {
+            EnableInput();
+        }
+
+        private void EnableInput() {
             movement = playerInputActions.Player.Movement;
             movement.Enable();
 
@@ -36,6 +46,10 @@ namespace Shard.Monobehaviour.Controllers
         }
 
         private void OnDisable() {
+            DisableInput();
+        }
+
+        private void DisableInput() {
             movement.Disable();
             playerInputActions.Player.Jump.Disable();
         }
