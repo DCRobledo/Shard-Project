@@ -7,11 +7,16 @@ namespace Shard.Classes.Patterns.Command
 {
     public class JumpCommand : Command
     {
-        private EntityMovement entityMovement;
+        private PlayerMovement playerMovement;
+
+        public JumpCommand(PlayerMovement playerMovement)
+        {
+            this.playerMovement = playerMovement;
+        }
 
         public override void Execute()
         {
-            entityMovement.Jump();
+            playerMovement.Jump();
         }
 
         public override void Undo() {}

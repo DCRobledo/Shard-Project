@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Shard.Monobehaviour.Entities.Common
 {
-    public class EntityMovement : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         public void Jump() 
         {
