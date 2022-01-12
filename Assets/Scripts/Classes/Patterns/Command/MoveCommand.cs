@@ -15,9 +15,9 @@ namespace Shard.Classes.Patterns.Command
             this.entityMovement = entityMovement;
         }
 
-        public override void ExecuteWithParameter<Vector2>(Vector2 direction)
+        public override void ExecuteWithParameters(params object[] parameters)
         {
-            entityMovement.Move<Vector2>(direction);
+            entityMovement.Move((float) parameters[0], (float) parameters[1]);
         }
 
         public override void Execute() { throw new System.NotImplementedException(); }

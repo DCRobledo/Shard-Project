@@ -20,7 +20,7 @@ namespace Shard.Classes.Patterns.Command
             entityMovement.Jump();
         }
 
-        public override void ExecuteWithParameter<ParameterType>(ParameterType parameter) { throw new System.NotImplementedException(); }
+        public override void ExecuteWithParameters(params object[] parameters) { throw new System.NotImplementedException(); }
         public override void Undo() { throw new System.NotImplementedException(); }
     }
 }

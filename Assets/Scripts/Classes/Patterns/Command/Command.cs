@@ -8,7 +8,7 @@ namespace Shard.Classes.Patterns.Command
     {
         public abstract void Execute();
 
-        public abstract void ExecuteWithParameter<ParameterType>(ParameterType parameter);
+        public abstract void ExecuteWithParameters(params object[] parameters);
 
         public abstract void Undo();
     }

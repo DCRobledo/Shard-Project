@@ -60,8 +60,11 @@ namespace Shard.Monobehaviour.Controllers
             MovePlayer(movement.ReadValue<Vector2>());
         }
 
+
         private void MovePlayer(Vector2 direction) {
-            wasdButton.ExecuteWithParameter<Vector2>(direction);
+            object[] parameters = {direction.x, direction.y};
+            
+            wasdButton.ExecuteWithParameters(parameters);
         }
 
         private void ExecuteCommand(Command command) {

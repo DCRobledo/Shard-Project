@@ -6,7 +6,7 @@ namespace Shard.Monobehaviour.Entities
 {
     public abstract class EntityMovement : MonoBehaviour
     {
-        public abstract void Move<Vector2>(Vector2 direction);
+        public abstract void Move(float x, float y);
 
         public abstract void Jump();
     }
