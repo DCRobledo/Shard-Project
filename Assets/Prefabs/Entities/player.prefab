@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8710090841162840074}
   - component: {fileID: 8710090841162840072}
   - component: {fileID: 5811003760137256682}
-  - component: {fileID: 1966291040}
-  m_Layer: 6
+  - component: {fileID: 742019966}
+  m_Layer: 7
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 19
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -150,7 +150,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.18}
   serializedVersion: 2
   m_Radius: 0.32
---- !u!114 &1966291040
+--- !u!114 &742019966
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,9 +159,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8710090841162840084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20d790e2e81d5ea4c827472660d273cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 1926f492b8a870c42a7df823d3609c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
   jumpForce: 400
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
   smoothingFactor: 0.05

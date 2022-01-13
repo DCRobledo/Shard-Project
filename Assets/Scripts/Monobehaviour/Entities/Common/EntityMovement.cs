@@ -11,6 +11,8 @@ namespace Shard.Monobehaviour.Entities
         private float speed = 10f;
         [SerializeField]
         private float jumpForce = 400f;
+        [SerializeField]
+        private float gravity = 9.8f;
 
         [SerializeField]
         private LayerMask whatIsGround;
@@ -25,7 +27,6 @@ namespace Shard.Monobehaviour.Entities
 
         private bool shouldJump = false;
         private bool isFacingRight = true;
-        private bool isGrounded = true;
 
 
         private void Awake() 
@@ -35,27 +36,27 @@ namespace Shard.Monobehaviour.Entities
         }
 
         private void FixedUpdate() {
-            Debug.Log("Hola!");
+            Vector2 targetVelocity = rigidBody.velocity;
+            
+            // Jump if requested
+            targetVelocity.y = IsGrounded() && shouldJump ? jumpForce : 0f;
+
+            float gravityReduction =  gravity * Mathf.Pow(Time.deltaTime, 2);
+            if(targetVelocity.y >= gravityReduction) targetVelocity.y -= gravityReduction;
+
+            rigidBody.velocity.Set(targetVelocity.x, targetVelocity.y);
         }
 
 
         public void Move(float x, float y) 
         {
             // Compute the new target velocity, smooth it, and apply it
-            Vector3 targetVelocity = new Vector2(x, y) * speed;
+            Vector3 targetVelocity = new Vector2(Mathf.Round(x), 0f) * speed;
             rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, smoothingFactor);
 
             // Flip if necessary
             if      (x > 0 && !isFacingRight) isFacingRight = !isFacingRight;
             else if (x < 0 && isFacingRight)  isFacingRight = !isFacingRight;
-
-            // Jump if requested
-            if(IsGrounded() && shouldJump) {
-                shouldJump = false;
-
-                rigidBody.AddForce(new Vector2(0f, jumpForce));
-            }
-                
         }
 
         public void Jump() { shouldJump = true; } 
