@@ -18,12 +18,12 @@ namespace Shard.Monobehaviour.Controllers
         private PlayerInputActions playerInputActions;
         private InputAction movement;
 
-        private PlayerMovement playerMovement;
+        private EntityMovement playerMovement;
 
 
         private void Awake() {
             player = GameObject.Find("player");
-            playerMovement = player.GetComponent<PlayerMovement>();
+            playerMovement = player.GetComponent<EntityMovement>();
 
             AwakeInput();
         }

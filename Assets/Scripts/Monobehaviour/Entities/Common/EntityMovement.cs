@@ -1,37 +1,79 @@
+using Shard.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Shard.Monobehaviour.Entities
 {
-    public abstract class EntityMovement : MonoBehaviour
+    public class EntityMovement : MonoBehaviour
     {
         [SerializeField]
-        protected float speed = 10f;
+        private float speed = 10f;
         [SerializeField]
-        protected float jumpForce = 400f;
+        private float jumpForce = 400f;
 
         [SerializeField]
-        protected LayerMask whatIsGround;
+        private LayerMask whatIsGround;
 
         [SerializeField] [Range(0, .3f)]
-        protected float smoothingFactor = .05f;
+        private float smoothingFactor = .05f;
 
-        protected Vector3 velocity = Vector3.zero;
+        private Vector3 velocity = Vector3.zero;
 
-        protected Rigidbody2D rigidBody;
-        protected CircleCollider2D circleCollider; 
+        private Rigidbody2D rigidBody;
+        private CircleCollider2D circleCollider; 
 
-        protected bool shouldJump = false;
-        protected bool isFacingRight = true;
-        protected bool isGrounded = true;
+        private bool shouldJump = false;
+        private bool isFacingRight = true;
+        private bool isGrounded = true;
 
 
-        public abstract void Move(float x, float y);
+        private void Awake() 
+        {
+            this.rigidBody = this.GetComponent<Rigidbody2D>();
+            this.circleCollider =  this.GetComponent<CircleCollider2D>();
+        }
 
-        public abstract void Jump();
+        private void FixedUpdate() {
+            Debug.Log("Hola!");
+        }
 
-        public abstract bool IsGrounded();
+
+        public void Move(float x, float y) 
+        {
+            // Compute the new target velocity, smooth it, and apply it
+            Vector3 targetVelocity = new Vector2(x, y) * speed;
+            rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, smoothingFactor);
+
+            // Flip if necessary
+            if      (x > 0 && !isFacingRight) isFacingRight = !isFacingRight;
+            else if (x < 0 && isFacingRight)  isFacingRight = !isFacingRight;
+
+            // Jump if requested
+            if(IsGrounded() && shouldJump) {
+                shouldJump = false;
+
+                rigidBody.AddForce(new Vector2(0f, jumpForce));
+            }
+                
+        }
+
+        public void Jump() { shouldJump = true; } 
+
+        public bool IsGrounded() 
+        {
+            bool isGrounded;
+
+            // Check ground through raycasting the circle collider
+            Collider2D[] rayCastHit = Physics2D.OverlapCircleAll(circleCollider.bounds.center, circleCollider.radius + .5f, whatIsGround);
+            isGrounded = rayCastHit.Length > 0;
+
+            // Debug the raycast performed in overlapcircle
+            Color rayColor = isGrounded ? Color.green : Color.red;
+            DebugUtils.DebugCircleRayCast(circleCollider.bounds.center, circleCollider.radius, rayColor);
+
+            return isGrounded;
+        }
     }
 }
 
