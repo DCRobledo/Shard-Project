@@ -11,8 +11,6 @@ namespace Shard.Monobehaviour.Entities
         private float speed = 10f;
         [SerializeField]
         private float jumpForce = 400f;
-        [SerializeField]
-        private float gravity = 9.8f;
 
         [SerializeField]
         private LayerMask whatIsGround;
