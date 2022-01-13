@@ -36,28 +36,25 @@ namespace Shard.Monobehaviour.Entities
         }
 
         private void FixedUpdate() {
-            Vector2 targetVelocity = rigidBody.velocity;
-            
             // Jump if requested
-            targetVelocity.y = IsGrounded() && shouldJump ? jumpForce : 0f;
-
-            float gravityReduction =  gravity * Mathf.Pow(Time.deltaTime, 2);
-            if(targetVelocity.y >= gravityReduction) targetVelocity.y -= gravityReduction;
-
-            rigidBody.velocity.Set(targetVelocity.x, targetVelocity.y);
+            if (IsGrounded() && shouldJump) {
+                shouldJump = false;
+                rigidBody.AddForce(new Vector2(0f, jumpForce));
+		    }
         }
 
 
         public void Move(float x, float y) 
         {
             // Compute the new target velocity, smooth it, and apply it
-            Vector3 targetVelocity = new Vector2(Mathf.Round(x), 0f) * speed;
+            Vector3 targetVelocity = new Vector2(Mathf.Round(x) * speed, rigidBody.velocity.y);
             rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, smoothingFactor);
 
             // Flip if necessary
             if      (x > 0 && !isFacingRight) isFacingRight = !isFacingRight;
             else if (x < 0 && isFacingRight)  isFacingRight = !isFacingRight;
         }
+
 
         public void Jump() { shouldJump = true; } 
 

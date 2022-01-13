@@ -30302,17 +30302,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 433936477}
     m_Modifications:
-    - target: {fileID: 1966291040, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: jumpForce
-      value: 400
+    - target: {fileID: 742019966, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: speed
+      value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1966291040, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: whatIsGround.m_Bits
-      value: 64
+    - target: {fileID: 742019966, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: jumpForce
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 8710090841162840074, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: m_GravityScale
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8710090841162840075, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: m_RootOrder
@@ -30362,12 +30362,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
-    - target: {fileID: 8710090841162840084, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1966291040, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
 --- !u!1 &1457205610 stripped
 GameObject:
