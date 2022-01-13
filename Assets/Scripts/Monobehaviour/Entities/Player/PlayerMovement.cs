@@ -1,3 +1,4 @@
+using Shard.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,13 +8,12 @@ namespace Shard.Monobehaviour.Entities
     public class PlayerMovement : EntityMovement
     {
         
-        private void Awake() {
+        protected void Awake() 
+        {
             this.rigidBody = this.GetComponent<Rigidbody2D>();
+            this.circleCollider =  this.GetComponent<CircleCollider2D>();
         }
 
-        private void FixedUpdate() {
-            
-        }
 
         public override void Move(float x, float y) 
         {
@@ -26,17 +26,30 @@ namespace Shard.Monobehaviour.Entities
             else if (x < 0 && isFacingRight)  isFacingRight = !isFacingRight;
 
             // Jump if requested
-            if(shouldJump) {
-                isGrounded = false;
+            if(IsGrounded() && shouldJump) {
+                shouldJump = false;
 
                 rigidBody.AddForce(new Vector2(0f, jumpForce));
             }
+                
         }
 
-        public override void Jump() 
+        public override void Jump() { shouldJump = true; } 
+
+        public override bool IsGrounded() 
         {
-            shouldJump = true;
-        } 
+            bool isGrounded;
+
+            // Check ground through raycasting the circle collider
+            Collider2D[] rayCastHit = Physics2D.OverlapCircleAll(circleCollider.bounds.center, circleCollider.radius + .5f, whatIsGround);
+            isGrounded = rayCastHit.Length > 0;
+
+            // Debug the raycast performed in overlapcircle
+            Color rayColor = isGrounded ? Color.green : Color.red;
+            new DebugUtils().DebugCircleRayCast(circleCollider.bounds.center, circleCollider.radius, rayColor);
+
+            return isGrounded;
+        }
     }
 }
 
