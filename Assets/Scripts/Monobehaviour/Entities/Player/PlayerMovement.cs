@@ -46,7 +46,7 @@ namespace Shard.Monobehaviour.Entities
 
             // Debug the raycast performed in overlapcircle
             Color rayColor = isGrounded ? Color.green : Color.red;
-            new DebugUtils().DebugCircleRayCast(circleCollider.bounds.center, circleCollider.radius, rayColor);
+            DebugUtils.DebugCircleRayCast(circleCollider.bounds.center, circleCollider.radius, rayColor);
 
             return isGrounded;
         }
