@@ -10,7 +10,9 @@ namespace Shard.Monobehaviour.Entities
         [SerializeField]
         private float speed = 10f;
         [SerializeField]
-        private float jumpForce = 400f;
+        private float jumpForce = 12f;
+        [SerializeField] [Range(1, 10)]
+        private float fallMultiplier = 2.5f;
 
         [SerializeField]
         private LayerMask whatIsGround;
@@ -37,7 +39,11 @@ namespace Shard.Monobehaviour.Entities
             // Jump if requested
             if (IsGrounded() && shouldJump) {
                 shouldJump = false;
-                rigidBody.AddForce(new Vector2(0f, jumpForce));
+                //rigidBody.AddForce(new Vector2(0f, jumpForce));
+
+                rigidBody.velocity += Vector2.up * jumpForce;
+                if(rigidBody.velocity.y < 0)
+                    rigidBody.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.fixedDeltaTime;
 		    }
         }
 
