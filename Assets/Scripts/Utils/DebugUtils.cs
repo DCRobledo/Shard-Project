@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shard.Tools
+namespace Shard.Utils
 {
     public static class DebugUtils
     {

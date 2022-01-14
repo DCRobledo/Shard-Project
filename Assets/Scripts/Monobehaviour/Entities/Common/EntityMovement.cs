@@ -1,4 +1,4 @@
-using Shard.Tools;
+using Shard.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +15,8 @@ namespace Shard.Monobehaviour.Entities
         private float fallMultiplier = 2.5f;
         [SerializeField] [Range(1, 10)]
         private float lowJumpMultiplier = 2f;
+        [SerializeField]
+        private float jumpDelay = 1f;
 
         [SerializeField]
         private LayerMask whatIsGround;
@@ -27,6 +29,7 @@ namespace Shard.Monobehaviour.Entities
         private Rigidbody2D rigidBody;
         private BoxCollider2D boxCollider2D; 
 
+        public bool canJump = true;
         private bool shouldJump = false;
         private bool isFacingRight = true;
 
@@ -41,7 +44,6 @@ namespace Shard.Monobehaviour.Entities
             // Jump if requested
             if (IsGrounded() && shouldJump)
                 rigidBody.velocity += Vector2.up * jumpForce;
-
 
             // Regular jump gravity
             if(rigidBody.velocity.y < 0) {
@@ -66,7 +68,18 @@ namespace Shard.Monobehaviour.Entities
         }
 
 
-        public void Jump(bool shouldJump) { this.shouldJump = shouldJump; } 
+        public void Jump(bool jump) 
+        {
+            // Realising the jump button is always allowed
+            if(!jump) this.shouldJump = jump;
+
+            // But we want to delay the jumps between one another
+            else if(jump && canJump) {
+                this.shouldJump = jump;
+                
+                StartCoroutine(TimerOnJump(jumpDelay));
+            }
+        } 
 
         public bool IsGrounded() 
         {
@@ -95,6 +108,14 @@ namespace Shard.Monobehaviour.Entities
             );
 
             return isGrounded;
+        }
+
+        private IEnumerator TimerOnJump(float seconds) {
+            canJump = false;
+
+            yield return new WaitForSeconds(seconds);
+
+            canJump = true;
         }
     }
 }
