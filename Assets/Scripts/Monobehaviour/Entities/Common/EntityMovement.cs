@@ -76,8 +76,8 @@ namespace Shard.Monobehaviour.Entities
             // But we want to delay the jumps between one another
             else if(jump && canJump) {
                 this.shouldJump = jump;
-                
-                StartCoroutine(TimerOnJump(jumpDelay));
+
+                //StartCoroutine(TimerOnJump(jumpDelay));
             }
         } 
 

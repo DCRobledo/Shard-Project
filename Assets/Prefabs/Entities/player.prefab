@@ -146,8 +146,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  jumpForce: 650
+  jumpForce: 2
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
+  jumpDelay: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   smoothingFactor: 0.05
+  canJump: 1
