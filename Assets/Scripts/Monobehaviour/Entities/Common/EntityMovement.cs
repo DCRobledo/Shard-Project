@@ -39,14 +39,17 @@ namespace Shard.Monobehaviour.Entities
 
         private void FixedUpdate() {
             // Jump if requested
-            if (IsGrounded() && shouldJump) {  
+            if (IsGrounded() && shouldJump)
                 rigidBody.velocity += Vector2.up * jumpForce;
 
-                if(rigidBody.velocity.y < 0)
-                    rigidBody.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.fixedDeltaTime;
-		    }
 
-            if (rigidBody.velocity.y > 0 && !shouldJump)
+            // Regular jump gravity
+            if(rigidBody.velocity.y < 0) {
+                rigidBody.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.fixedDeltaTime;
+                shouldJump = false;
+            }
+            // Low jump gravity
+            else if (rigidBody.velocity.y > 0 && !shouldJump)
                 rigidBody.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
         }
 
