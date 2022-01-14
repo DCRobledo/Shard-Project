@@ -21,7 +21,7 @@ namespace Shard.Monobehaviour.Entities
         private Vector3 velocity = Vector3.zero;
 
         private Rigidbody2D rigidBody;
-        private CircleCollider2D circleCollider; 
+        private BoxCollider2D boxCollider2D; 
 
         private bool shouldJump = false;
         private bool isFacingRight = true;
@@ -30,7 +30,7 @@ namespace Shard.Monobehaviour.Entities
         private void Awake() 
         {
             this.rigidBody = this.GetComponent<Rigidbody2D>();
-            this.circleCollider =  this.GetComponent<CircleCollider2D>();
+            this.boxCollider2D =  this.GetComponent<BoxCollider2D>();
         }
 
         private void FixedUpdate() {
@@ -61,12 +61,26 @@ namespace Shard.Monobehaviour.Entities
             bool isGrounded;
 
             // Check ground through raycasting the circle collider
-            Collider2D[] rayCastHit = Physics2D.OverlapCircleAll(circleCollider.bounds.center, circleCollider.radius + .5f, whatIsGround);
-            isGrounded = rayCastHit.Length > 0;
+            RaycastHit2D rayCastHit = 
+            Physics2D.BoxCast(
+                boxCollider2D.bounds.center,
+                boxCollider2D.bounds.size,
+                0f,
+                Vector2.down,
+                1f,
+                whatIsGround
+            );      
+
+            isGrounded = rayCastHit.collider != null;
 
             // Debug the raycast performed in overlapcircle
             Color rayColor = isGrounded ? Color.green : Color.red;
-            DebugUtils.DebugCircleRayCast(circleCollider.bounds.center, circleCollider.radius, rayColor);
+            DebugUtils.DebugBoxRayCast(
+                boxCollider2D.bounds.center,
+                boxCollider2D.bounds.extents.x,
+                boxCollider2D.bounds.extents.y + .5f,
+                rayColor
+            );
 
             return isGrounded;
         }

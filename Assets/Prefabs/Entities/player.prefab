@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8710090841162840073}
   - component: {fileID: 8710090841162840074}
   - component: {fileID: 8710090841162840072}
-  - component: {fileID: 5811003760137256682}
   - component: {fileID: 742019966}
   m_Layer: 7
   m_Name: player
@@ -121,7 +120,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.16323085}
+  m_Offset: {x: 0, y: -0.00001513958}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -132,24 +131,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.6735383}
+  m_Size: {x: 1, y: 1.0000303}
   m_EdgeRadius: 0
---- !u!58 &5811003760137256682
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8710090841162840084}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.18}
-  serializedVersion: 2
-  m_Radius: 0.32
 --- !u!114 &742019966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,8 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  jumpForce: 600
-  gravity: 9.8
+  jumpForce: 650
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
