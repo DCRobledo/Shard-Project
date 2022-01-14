@@ -43,7 +43,8 @@ namespace Shard.Monobehaviour.Controllers
             movement = playerInputActions.Player.Movement;
             movement.Enable();
 
-            playerInputActions.Player.Jump.performed += context => ExecuteCommand(spaceButton);
+            playerInputActions.Player.Jump.started += context => spaceButton.ExecuteWithParameters(true);
+            playerInputActions.Player.Jump.canceled += context => spaceButton.ExecuteWithParameters(false);
             playerInputActions.Player.Jump.Enable();
         }
 
@@ -65,10 +66,6 @@ namespace Shard.Monobehaviour.Controllers
             object[] parameters = {direction.x, direction.y};
             
             wasdButton.ExecuteWithParameters(parameters);
-        }
-
-        private void ExecuteCommand(Command command) {
-            command.Execute();
         }
     }
 }

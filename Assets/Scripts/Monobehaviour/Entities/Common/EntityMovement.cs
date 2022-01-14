@@ -13,6 +13,8 @@ namespace Shard.Monobehaviour.Entities
         private float jumpForce = 12f;
         [SerializeField] [Range(1, 10)]
         private float fallMultiplier = 2.5f;
+        [SerializeField] [Range(1, 10)]
+        private float lowJumpMultiplier = 2f;
 
         [SerializeField]
         private LayerMask whatIsGround;
@@ -37,14 +39,15 @@ namespace Shard.Monobehaviour.Entities
 
         private void FixedUpdate() {
             // Jump if requested
-            if (IsGrounded() && shouldJump) {
-                shouldJump = false;
-                //rigidBody.AddForce(new Vector2(0f, jumpForce));
-
+            if (IsGrounded() && shouldJump) {  
                 rigidBody.velocity += Vector2.up * jumpForce;
+
                 if(rigidBody.velocity.y < 0)
                     rigidBody.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.fixedDeltaTime;
 		    }
+
+            if (rigidBody.velocity.y > 0 && !shouldJump)
+                rigidBody.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
         }
 
 
@@ -60,7 +63,7 @@ namespace Shard.Monobehaviour.Entities
         }
 
 
-        public void Jump() { shouldJump = true; } 
+        public void Jump(bool shouldJump) { this.shouldJump = shouldJump; } 
 
         public bool IsGrounded() 
         {
@@ -84,7 +87,7 @@ namespace Shard.Monobehaviour.Entities
             DebugUtils.DebugBoxRayCast(
                 boxCollider2D.bounds.center,
                 boxCollider2D.bounds.extents.x,
-                boxCollider2D.bounds.extents.y + .5f,
+                boxCollider2D.bounds.extents.y + .25f,
                 rayColor
             );
 

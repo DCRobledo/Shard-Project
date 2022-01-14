@@ -11,4 +11,4 @@ ScriptedImporter:
   generateWrapperCode: 1
   wrapperCodePath: Assets/Scripts/Classes/Entities/PlayerInputActions.cs
   wrapperClassName: 
-  wrapperCodeNamespace: Shard.Assets.Scripts.Entities
+  wrapperCodeNamespace: Shard.Classes.Entities
