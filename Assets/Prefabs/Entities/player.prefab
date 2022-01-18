@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8710090841162840074}
   - component: {fileID: 8710090841162840072}
   - component: {fileID: 742019966}
+  - component: {fileID: 1449738687}
   m_Layer: 7
   m_Name: player
   m_TagString: Player
@@ -149,9 +150,24 @@ MonoBehaviour:
   jumpForce: 2
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
-  jumpDelay: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   smoothingFactor: 0.05
   canJump: 1
+--- !u!114 &1449738687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710090841162840084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821a52de5a9a31e47a393b3059196676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsGrabbable:
+  - Robot
+  grabRange: 1.5
+  objectToReCall: {fileID: 0}

@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6307710219032108864}
   - component: {fileID: 6307710219032108866}
   - component: {fileID: 9209260213873858976}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: robot
-  m_TagString: Player
+  m_TagString: Robot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6307710219032108894}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.587, y: -6.965, z: 11.870356}
   m_LocalScale: {x: 0.974243, y: 1.478052, z: 1}
   m_Children: []

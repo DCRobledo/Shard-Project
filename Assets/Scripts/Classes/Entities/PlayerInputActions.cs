@@ -43,6 +43,14 @@ namespace Shard.Classes.Entities
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Grab"",
+                    ""type"": ""Button"",
+                    ""id"": ""c436d846-d79c-49dd-88cd-622a8fa5396c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -122,6 +130,17 @@ namespace Shard.Classes.Entities
                     ""action"": ""ReCall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d0c2b5c-b1c9-4469-abd1-e2cc6e62ee4e"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -133,6 +152,7 @@ namespace Shard.Classes.Entities
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_ReCall = m_Player.FindAction("ReCall", throwIfNotFound: true);
+            m_Player_Grab = m_Player.FindAction("Grab", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -185,6 +205,7 @@ namespace Shard.Classes.Entities
         private readonly InputAction m_Player_Movement;
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_ReCall;
+        private readonly InputAction m_Player_Grab;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -192,6 +213,7 @@ namespace Shard.Classes.Entities
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @ReCall => m_Wrapper.m_Player_ReCall;
+            public InputAction @Grab => m_Wrapper.m_Player_Grab;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -210,6 +232,9 @@ namespace Shard.Classes.Entities
                     @ReCall.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReCall;
                     @ReCall.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReCall;
                     @ReCall.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReCall;
+                    @Grab.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrab;
+                    @Grab.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrab;
+                    @Grab.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGrab;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -223,6 +248,9 @@ namespace Shard.Classes.Entities
                     @ReCall.started += instance.OnReCall;
                     @ReCall.performed += instance.OnReCall;
                     @ReCall.canceled += instance.OnReCall;
+                    @Grab.started += instance.OnGrab;
+                    @Grab.performed += instance.OnGrab;
+                    @Grab.canceled += instance.OnGrab;
                 }
             }
         }
@@ -232,6 +260,7 @@ namespace Shard.Classes.Entities
             void OnMovement(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
             void OnReCall(InputAction.CallbackContext context);
+            void OnGrab(InputAction.CallbackContext context);
         }
     }
 }

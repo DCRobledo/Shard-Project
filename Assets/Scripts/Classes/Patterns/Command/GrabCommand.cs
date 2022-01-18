@@ -1,18 +1,23 @@
+using Shard.Monobehaviour.Entities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrabCommand : MonoBehaviour
+namespace Shard.Classes.Patterns.Command 
 {
-    // Start is called before the first frame update
-    void Start()
+    public class GrabCommand : Command
     {
-        
-    }
+        private EntityActions entityActions;
 
-    // Update is called once per frame
-    void Update()
-    {
+
+        public GrabCommand(EntityActions entityActions)
+        {
+            this.entityActions = entityActions;
+        }
         
+        public override void Execute() { entityActions.Grab(); }
+
+        public override void ExecuteWithParameters(params object[] parameters) { throw new System.NotImplementedException(); }
+        public override void Undo() { throw new System.NotImplementedException(); }
     }
 }
