@@ -35,6 +35,14 @@ namespace Shard.Classes.Entities
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ReCall"",
+                    ""type"": ""Button"",
+                    ""id"": ""d65b957d-c381-44f9-b5d3-f9be48cc7a55"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -103,6 +111,17 @@ namespace Shard.Classes.Entities
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1669f3fc-15b0-4b3d-9e06-5397f224692f"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReCall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -113,6 +132,7 @@ namespace Shard.Classes.Entities
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+            m_Player_ReCall = m_Player.FindAction("ReCall", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -164,12 +184,14 @@ namespace Shard.Classes.Entities
         private IPlayerActions m_PlayerActionsCallbackInterface;
         private readonly InputAction m_Player_Movement;
         private readonly InputAction m_Player_Jump;
+        private readonly InputAction m_Player_ReCall;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
             public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
+            public InputAction @ReCall => m_Wrapper.m_Player_ReCall;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -185,6 +207,9 @@ namespace Shard.Classes.Entities
                     @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                    @ReCall.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReCall;
+                    @ReCall.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReCall;
+                    @ReCall.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReCall;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -195,6 +220,9 @@ namespace Shard.Classes.Entities
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
+                    @ReCall.started += instance.OnReCall;
+                    @ReCall.performed += instance.OnReCall;
+                    @ReCall.canceled += instance.OnReCall;
                 }
             }
         }
@@ -203,6 +231,7 @@ namespace Shard.Classes.Entities
         {
             void OnMovement(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnReCall(InputAction.CallbackContext context);
         }
     }
 }

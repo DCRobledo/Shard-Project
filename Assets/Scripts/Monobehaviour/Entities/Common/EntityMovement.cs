@@ -15,8 +15,8 @@ namespace Shard.Monobehaviour.Entities
         private float fallMultiplier = 2.5f;
         [SerializeField] [Range(1, 10)]
         private float lowJumpMultiplier = 2f;
-        [SerializeField]
-        private float jumpDelay = 1f;
+        // [SerializeField]
+        // private float jumpDelay = 1f;
 
         [SerializeField]
         private LayerMask whatIsGround;

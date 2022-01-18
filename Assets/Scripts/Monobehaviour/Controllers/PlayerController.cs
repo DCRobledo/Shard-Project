@@ -12,18 +12,22 @@ namespace Shard.Monobehaviour.Controllers
     {
         private GameObject player;
 
-        private Command spaceButton;
-        private Command wasdButton;
+        private Command jumpButton;
+        private Command moveButton;
+        private Command reCallButton;
 
         private PlayerInputActions playerInputActions;
         private InputAction movement;
 
         private EntityMovement playerMovement;
+        private EntityActions playerActions;
 
 
         private void Awake() {
             player = GameObject.Find("player");
+
             playerMovement = player.GetComponent<EntityMovement>();
+            playerActions = player.GetComponent<EntityActions>();
 
             AwakeInput();
         }
@@ -31,8 +35,9 @@ namespace Shard.Monobehaviour.Controllers
         private void AwakeInput() {
             playerInputActions = new PlayerInputActions();
 
-            spaceButton = new JumpCommand(playerMovement);
-            wasdButton = new MoveCommand(playerMovement);
+            jumpButton = new JumpCommand(playerMovement);
+            moveButton = new MoveCommand(playerMovement);
+            reCallButton = new ReCallCommand(playerActions);
         }
 
         private void OnEnable() {
@@ -43,9 +48,12 @@ namespace Shard.Monobehaviour.Controllers
             movement = playerInputActions.Player.Movement;
             movement.Enable();
 
-            playerInputActions.Player.Jump.started += context => spaceButton.ExecuteWithParameters(true);
-            playerInputActions.Player.Jump.canceled += context => spaceButton.ExecuteWithParameters(false);
+            playerInputActions.Player.Jump.started += context => jumpButton.ExecuteWithParameters(true);
+            playerInputActions.Player.Jump.canceled += context => jumpButton.ExecuteWithParameters(false);
             playerInputActions.Player.Jump.Enable();
+
+            playerInputActions.Player.ReCall.performed += context => reCallButton.Execute();
+            playerInputActions.Player.ReCall.Enable();
         }
 
         private void OnDisable() {
@@ -55,6 +63,7 @@ namespace Shard.Monobehaviour.Controllers
         private void DisableInput() {
             movement.Disable();
             playerInputActions.Player.Jump.Disable();
+            playerInputActions.Player.ReCall.Disable();
         }
 
         private void FixedUpdate() {
@@ -65,7 +74,7 @@ namespace Shard.Monobehaviour.Controllers
         private void MovePlayer(Vector2 direction) {
             object[] parameters = {direction.x, direction.y};
             
-            wasdButton.ExecuteWithParameters(parameters);
+            moveButton.ExecuteWithParameters(parameters);
         }
     }
 }
