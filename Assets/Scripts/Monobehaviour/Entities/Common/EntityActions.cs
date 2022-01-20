@@ -1,4 +1,5 @@
 using Shard.Utils;
+using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -57,8 +58,6 @@ namespace Shard.Monobehaviour.Entities
                 case Action.THROW:                break;
                 case Action.CLAP:                 break;
                 case Action.USE_OBJECT:           break;
-
-                default: break;
             }
         }
 
@@ -86,19 +85,20 @@ namespace Shard.Monobehaviour.Entities
         public void Grab() 
         {
             // Grab the nearest object if we are not grabbing anything else
-            grabJoint.connectedBody = grabJoint.connectedBody == null ? grabbableObjects[0].GetComponent<Rigidbody2D>() : null;
-            grabJoint.enabled = grabJoint.connectedBody != null;
+            if(grabbableObjects.Count > 0)
+            {
+                grabJoint.connectedBody = grabJoint.connectedBody == null ? grabbableObjects[0].GetComponent<Rigidbody2D>() : null;
+                grabJoint.enabled = grabJoint.connectedBody != null;
+            }
         }
 
         private List<GameObject> CheckGrabbableObjects() 
         {
             // Clear past objects
-            if(this.grabbableObjects.Count > 0) {
-                foreach (GameObject grabbableObject in grabbableObjects) {
-                    Color newColor = grabbableObject.GetComponent<SpriteRenderer>().color;
-                    newColor.r -= .2f; newColor.g -= .2f; newColor.b -= .2f;
-                    grabbableObject.GetComponent<SpriteRenderer>().color = newColor;
-                }
+            foreach (GameObject grabbableObject in grabbableObjects) {
+                Color newColor = grabbableObject.GetComponent<SpriteRenderer>().color;
+                newColor.r -= .2f; newColor.g -= .2f; newColor.b -= .2f;
+                grabbableObject.GetComponent<SpriteRenderer>().color = newColor;
             }
                 
             // Check all near objects

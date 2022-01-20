@@ -171,6 +171,7 @@ MonoBehaviour:
   whatIsGrabbable:
   - Robot
   grabRange: 1.5
+  reCallCoolDown: 1
   objectToReCall: {fileID: 0}
 --- !u!254 &1079310985
 RelativeJoint2D:
