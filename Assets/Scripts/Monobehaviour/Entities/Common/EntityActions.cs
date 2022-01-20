@@ -14,6 +14,8 @@ namespace Shard.Monobehaviour.Entities
 
         [SerializeField]
         private float grabRange = 1f;
+        [SerializeField]
+        private float reCallCoolDown = 1f;
 
         [SerializeField]
         private GameObject objectToReCall;
@@ -22,20 +24,39 @@ namespace Shard.Monobehaviour.Entities
         
         private RelativeJoint2D grabJoint;
 
+        private bool canReCall = true;
+
+
         private void Awake() {
             grabJoint = this.GetComponent<RelativeJoint2D>();
             grabJoint.enabled = false;
         } 
 
-
         private void Update() {
             grabbableObjects = CheckGrabbableObjects();
         }
 
+        public void ChangeObjectToReCall(GameObject objectToReCall) { this.objectToReCall = objectToReCall; }
+
 
         public void ReCall()
         {
-            Debug.Log(objectToReCall.transform.tag);
+            if (canReCall) {
+                // Recall the entity
+                Vector3 entityPosition = this.GetComponent<Transform>().position;
+                objectToReCall.GetComponent<Transform>().position = new Vector3(entityPosition.x + 1.5f, entityPosition.y + 1f);
+
+                // Start cooldown
+                StartCoroutine(ReCallCoolDown(reCallCoolDown));
+            }
+        }
+
+        private IEnumerator ReCallCoolDown(float seconds) {
+            canReCall = false;
+
+            yield return new WaitForSeconds(seconds);
+
+            canReCall = true;
         }
 
         public void Grab() 
@@ -74,9 +95,6 @@ namespace Shard.Monobehaviour.Entities
             return detectedGrabbableObjects;        
         }
 
-
-        public void ChangeObjectToReCall(GameObject objectToReCall) { this.objectToReCall = objectToReCall; }
     }
-
 }
 

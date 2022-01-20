@@ -30253,30 +30253,6 @@ Transform:
   m_Father: {fileID: 6650873}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1079310979 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8710090841162840084, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-  m_PrefabInstance: {fileID: 1314553789}
-  m_PrefabAsset: {fileID: 0}
---- !u!254 &1079310985
-RelativeJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1079310979}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_MaxForce: 10000
-  m_MaxTorque: 10000
-  m_CorrectionScale: 0.3
-  m_AutoConfigureOffset: 0
-  m_LinearOffset: {x: 1.4, y: 0.16}
-  m_AngularOffset: 0
 --- !u!4 &1147208632 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8710090841162840075, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
