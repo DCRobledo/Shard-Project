@@ -9,6 +9,15 @@ namespace Shard.Monobehaviour.Entities
 {
     public class EntityActions : MonoBehaviour
     {
+        public enum Action {
+            RECALL,
+            GRAB,
+            RELEASE,
+            THROW,
+            CLAP,
+            USE_OBJECT
+        }
+
         [TagSelector]
         public string[] whatIsGrabbable = new string[] { };
 
@@ -37,6 +46,21 @@ namespace Shard.Monobehaviour.Entities
         }
 
         public void ChangeObjectToReCall(GameObject objectToReCall) { this.objectToReCall = objectToReCall; }
+
+
+        public void ExecuteAction(Action action) {
+            switch (action)
+            {
+                case Action.RECALL:     ReCall(); break;
+                case Action.GRAB:       Grab();   break;
+                case Action.RELEASE:    Grab();   break;
+                case Action.THROW:                break;
+                case Action.CLAP:                 break;
+                case Action.USE_OBJECT:           break;
+
+                default: break;
+            }
+        }
 
 
         public void ReCall()
@@ -69,10 +93,12 @@ namespace Shard.Monobehaviour.Entities
         private List<GameObject> CheckGrabbableObjects() 
         {
             // Clear past objects
-            foreach (GameObject grabbableObject in grabbableObjects) {
-                Color newColor = grabbableObject.GetComponent<SpriteRenderer>().color;
-                newColor.r -= .2f; newColor.g -= .2f; newColor.b -= .2f;
-                grabbableObject.GetComponent<SpriteRenderer>().color = newColor;
+            if(this.grabbableObjects.Count > 0) {
+                foreach (GameObject grabbableObject in grabbableObjects) {
+                    Color newColor = grabbableObject.GetComponent<SpriteRenderer>().color;
+                    newColor.r -= .2f; newColor.g -= .2f; newColor.b -= .2f;
+                    grabbableObject.GetComponent<SpriteRenderer>().color = newColor;
+                }
             }
                 
             // Check all near objects
