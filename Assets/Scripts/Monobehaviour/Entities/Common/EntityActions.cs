@@ -19,6 +19,13 @@ namespace Shard.Monobehaviour.Entities
         private GameObject objectToReCall;
 
         private List<GameObject> grabbableObjects = new List<GameObject>();
+        
+        private RelativeJoint2D grabJoint;
+
+        private void Awake() {
+            grabJoint = this.GetComponent<RelativeJoint2D>();
+            grabJoint.enabled = false;
+        } 
 
 
         private void Update() {
@@ -33,9 +40,9 @@ namespace Shard.Monobehaviour.Entities
 
         public void Grab() 
         {
-            // Grab the nearest grabbable object
-            Destroy(grabbableObjects[0]);
-
+            // Grab the nearest object if we are not grabbing anything else
+            grabJoint.connectedBody = grabJoint.connectedBody == null ? grabbableObjects[0].GetComponent<Rigidbody2D>() : null;
+            grabJoint.enabled = grabJoint.connectedBody != null;
         }
 
         private List<GameObject> CheckGrabbableObjects() 
