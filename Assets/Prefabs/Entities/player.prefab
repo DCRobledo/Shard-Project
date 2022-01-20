@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8710090841162840072}
   - component: {fileID: 742019966}
   - component: {fileID: 1449738687}
+  - component: {fileID: 1079310985}
   m_Layer: 7
   m_Name: player
   m_TagString: Player
@@ -171,3 +172,22 @@ MonoBehaviour:
   - Robot
   grabRange: 1.5
   objectToReCall: {fileID: 0}
+--- !u!254 &1079310985
+RelativeJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710090841162840084}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_MaxForce: 10000
+  m_MaxTorque: 10000
+  m_CorrectionScale: 0.3
+  m_AutoConfigureOffset: 0
+  m_LinearOffset: {x: 1.4, y: 0.16}
+  m_AngularOffset: 0
