@@ -40,6 +40,13 @@ namespace Shard.Monobehaviour.Entities
 
         private List<GameObject> CheckGrabbableObjects() 
         {
+            // Clear past objects
+            foreach (GameObject grabbableObject in grabbableObjects) {
+                Color newColor = grabbableObject.GetComponent<SpriteRenderer>().color;
+                newColor.r -= .2f; newColor.g -= .2f; newColor.b -= .2f;
+                grabbableObject.GetComponent<SpriteRenderer>().color = newColor;
+            }
+                
             // Check all near objects
             Collider2D[] nearObjects = Physics2D.OverlapCircleAll(this.gameObject.transform.position, grabRange);
             
@@ -50,12 +57,12 @@ namespace Shard.Monobehaviour.Entities
                 if (!detectedGrabbableObjects.Contains(collider.gameObject) && whatIsGrabbable.Contains(collider.gameObject.transform.tag))
                     detectedGrabbableObjects.Add(collider.gameObject);
 
-            // // Add visual cue for grabbable objects
-            // foreach (GameObject grabbableObject in detectedGrabbableObjects) {
-            //     Color newColor = grabbableObject.GetComponent<SpriteRenderer>().color;
-            //     newColor.r += 10f; newColor.g += 10f; newColor.b += 10f;
-            //     grabbableObject.GetComponent<SpriteRenderer>().color = newColor;
-            // }
+            // Add visual cue for grabbable objects
+            foreach (GameObject grabbableObject in detectedGrabbableObjects) {
+                Color newColor = grabbableObject.GetComponent<SpriteRenderer>().color;
+                newColor.r += .2f; newColor.g += .2f; newColor.b += .2f;
+                grabbableObject.GetComponent<SpriteRenderer>().color = newColor;
+            }
 
             return detectedGrabbableObjects;        
         }
