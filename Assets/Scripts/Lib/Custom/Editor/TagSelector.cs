@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
  
-namespace Shard.Utils
+namespace Shard.Lib.Custom
 {
     public class TagSelectorAttribute : PropertyAttribute
     {

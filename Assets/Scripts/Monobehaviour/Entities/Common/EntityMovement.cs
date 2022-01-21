@@ -1,4 +1,4 @@
-using Shard.Utils;
+using Shard.Lib.Custom;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -97,7 +97,7 @@ namespace Shard.Monobehaviour.Entities
 
         private bool IsGrounded() 
         {
-            return DetectionUtils.DetectGround(this.boxCollider2D, this.whatIsGround, true);
+            return Detection.DetectGround(this.boxCollider2D, this.whatIsGround, true);
         }
 
         private IEnumerator TimerOnJump(float seconds) {

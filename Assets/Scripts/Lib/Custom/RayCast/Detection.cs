@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shard.Utils
+namespace Shard.Lib.Custom
 {
-    public static class DetectionUtils
+    public static class Detection
     {
         public static List<GameObject> DetectNearObjects(Vector3 center, float radius) {
             List<GameObject> detectedGameObjects = new List<GameObject>();

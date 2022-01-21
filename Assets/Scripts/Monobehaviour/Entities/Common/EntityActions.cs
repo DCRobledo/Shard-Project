@@ -1,4 +1,4 @@
-using Shard.Utils;
+using Shard.Lib.Custom;
 using System;
 using System.Linq;
 using System.Collections;
@@ -98,7 +98,7 @@ namespace Shard.Monobehaviour.Entities
             VisualUtils.ChangeObjectsColor(ref grabbableObjects, -.2f, -.2f, -.2f);
                 
             // Detect grabbable objects
-            List<GameObject> detectedGrabbableObjects = DetectionUtils.DetectNearObjects(this.gameObject.transform.position, grabRange, whatIsGrabbable);
+            List<GameObject> detectedGrabbableObjects = Detection.DetectNearObjects(this.gameObject.transform.position, grabRange, whatIsGrabbable);
 
             // Add visual cue for grabbable objects
             VisualUtils.ChangeObjectsColor(ref detectedGrabbableObjects, .2f, .2f, .2f);

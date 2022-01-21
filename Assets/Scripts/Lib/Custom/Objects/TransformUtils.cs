@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shard.Utils
+namespace Shard.Lib.Custom
 {
     public static class TransformUtils
     {
