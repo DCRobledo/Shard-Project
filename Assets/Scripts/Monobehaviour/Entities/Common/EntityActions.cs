@@ -19,8 +19,8 @@ namespace Shard.Monobehaviour.Entities
             USE_OBJECT
         }
 
-        [TagSelector]
-        public string[] whatIsGrabbable = new string[] { };
+        [TagSelector] [SerializeField]
+        private string[] whatIsGrabbable = new string[] { };
 
         [SerializeField]
         private float grabRange = 1f;
@@ -95,32 +95,16 @@ namespace Shard.Monobehaviour.Entities
         private List<GameObject> CheckGrabbableObjects() 
         {
             // Clear past objects
-            foreach (GameObject grabbableObject in grabbableObjects) {
-                Color newColor = grabbableObject.GetComponent<SpriteRenderer>().color;
-                newColor.r -= .2f; newColor.g -= .2f; newColor.b -= .2f;
-                grabbableObject.GetComponent<SpriteRenderer>().color = newColor;
-            }
+            VisualUtils.ChangeObjectsColor(ref grabbableObjects, -.2f, -.2f, -.2f);
                 
-            // Check all near objects
-            Collider2D[] nearObjects = Physics2D.OverlapCircleAll(this.gameObject.transform.position, grabRange);
-            
-            // Filter only grabables
-            List<GameObject> detectedGrabbableObjects = new List<GameObject>();
-
-            foreach (Collider2D collider in nearObjects)
-                if (!detectedGrabbableObjects.Contains(collider.gameObject) && whatIsGrabbable.Contains(collider.gameObject.transform.tag))
-                    detectedGrabbableObjects.Add(collider.gameObject);
+            // Detect grabbable objects
+            List<GameObject> detectedGrabbableObjects = DetectionUtils.DetectNearObjects(this.gameObject.transform.position, grabRange, whatIsGrabbable);
 
             // Add visual cue for grabbable objects
-            foreach (GameObject grabbableObject in detectedGrabbableObjects) {
-                Color newColor = grabbableObject.GetComponent<SpriteRenderer>().color;
-                newColor.r += .2f; newColor.g += .2f; newColor.b += .2f;
-                grabbableObject.GetComponent<SpriteRenderer>().color = newColor;
-            }
+            VisualUtils.ChangeObjectsColor(ref detectedGrabbableObjects, .2f, .2f, .2f);
 
             return detectedGrabbableObjects;        
         }
-
     }
 }
 

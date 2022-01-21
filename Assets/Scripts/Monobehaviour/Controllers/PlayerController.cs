@@ -25,11 +25,13 @@ namespace Shard.Monobehaviour.Controllers
 
 
         private void Awake() {
+            // Get the player game object and its components
             player = GameObject.Find("player");
 
             playerMovement = player.GetComponent<EntityMovement>();
             playerActions = player.GetComponent<EntityActions>();
 
+            // Initialize the input system
             AwakeInput();
         }
 
@@ -72,6 +74,7 @@ namespace Shard.Monobehaviour.Controllers
             playerInputActions.Player.ReCall.Disable();
             playerInputActions.Player.Grab.Disable();
         }
+
 
         private void FixedUpdate() {
             MovePlayer(movement.ReadValue<Vector2>());

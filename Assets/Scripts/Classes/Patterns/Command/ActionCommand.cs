@@ -7,8 +7,8 @@ namespace Shard.Classes.Patterns.Command
 {
     public class ActionCommand : Command
     {
-
         private EntityActions entityActions;
+
 
         public ActionCommand(EntityActions entityActions)
         {
@@ -16,6 +16,7 @@ namespace Shard.Classes.Patterns.Command
         }
     
         public override void ExecuteWithParameters(params object[] parameters) { 
+            
             entityActions.ExecuteAction((EntityActions.Action) parameters[0]); 
         }
 
