@@ -13,7 +13,6 @@ namespace Shard.Utils
             // Check all near 
             Collider2D[] nearObjects = Physics2D.OverlapCircleAll(center, radius);
             
-            // Filter by tag
             foreach (Collider2D collider in nearObjects)
                 if (!detectedGameObjects.Contains(collider.gameObject))
                     detectedGameObjects.Add(collider.gameObject);
@@ -34,5 +33,36 @@ namespace Shard.Utils
 
             return detectedGameObjects;
         }
+    
+        public static bool DetectGround(BoxCollider2D boxCollider2D, LayerMask whatIsGround, bool debug = false) {
+            bool isGrounded;
+
+            // Check ground through raycasting the circle collider
+            RaycastHit2D rayCastHit = 
+            Physics2D.BoxCast(
+                boxCollider2D.bounds.center,
+                boxCollider2D.bounds.size,
+                0f,
+                Vector2.down,
+                1f,
+                whatIsGround
+            );      
+
+            isGrounded = rayCastHit.collider != null;
+
+            if (debug) {
+                // Debug the raycast performed in overlapcircle
+                Color rayColor = isGrounded ? Color.green : Color.red;
+                DebugUtils.DebugBoxRayCast(
+                    boxCollider2D.bounds.center,
+                    boxCollider2D.bounds.extents.x,
+                    boxCollider2D.bounds.extents.y + .25f,
+                    rayColor
+                );
+            }
+            
+
+            return isGrounded;
+        } 
     }
 }

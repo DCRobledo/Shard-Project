@@ -15,8 +15,6 @@ namespace Shard.Monobehaviour.Entities
         private float fallMultiplier = 2.5f;
         [SerializeField] [Range(1, 10)]
         private float lowJumpMultiplier = 2f;
-        // [SerializeField]
-        // private float jumpDelay = 1f;
 
         [SerializeField]
         private LayerMask whatIsGround;
@@ -29,9 +27,8 @@ namespace Shard.Monobehaviour.Entities
         private Rigidbody2D rigidBody;
         private BoxCollider2D boxCollider2D; 
 
-        public bool canJump = true;
+        private bool canJump = true;
         private bool shouldJump = false;
-        private bool isFacingRight = true;
 
 
         private void Awake() 
@@ -45,14 +42,7 @@ namespace Shard.Monobehaviour.Entities
             if (IsGrounded() && shouldJump)
                 rigidBody.velocity += Vector2.up * jumpForce;
 
-            // Regular jump gravity
-            if(rigidBody.velocity.y < 0) {
-                rigidBody.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.fixedDeltaTime;
-                shouldJump = false;
-            }
-            // Low jump gravity
-            else if (rigidBody.velocity.y > 0 && !shouldJump)
-                rigidBody.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
+            ApplyGravity(this.fallMultiplier, this.lowJumpMultiplier);
         }
 
 
@@ -63,8 +53,21 @@ namespace Shard.Monobehaviour.Entities
             rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, smoothingFactor);
 
             // Flip if necessary
-            if      (x > 0 && !isFacingRight) isFacingRight = !isFacingRight;
-            else if (x < 0 && isFacingRight)  isFacingRight = !isFacingRight;
+            if      (x > 0 && this.gameObject.transform.localScale.x < 0) Flip();
+            else if (x < 0 && this.gameObject.transform.localScale.x > 0) Flip();
+        }
+
+        private void Flip() {
+            // Flip the entity
+            GameObject entity = this.gameObject;
+            TransformUtils.FlipObject(ref entity);
+
+            // Flip the anchor point of grab
+            this.GetComponent<RelativeJoint2D>().linearOffset = new Vector2(this.GetComponent<RelativeJoint2D>().linearOffset.x * -1, this.GetComponent<RelativeJoint2D>().linearOffset.y);
+        
+            // Flip the grabbed entity if it exists
+            GameObject grabbedEntity = this.GetComponent<RelativeJoint2D>().connectedBody?.gameObject;
+            if(grabbedEntity != null) TransformUtils.FlipObject(ref grabbedEntity);
         }
 
 
@@ -81,33 +84,20 @@ namespace Shard.Monobehaviour.Entities
             }
         } 
 
-        public bool IsGrounded() 
+        private void ApplyGravity(float fallMultiplier, float lowJumpMultiplier) {
+            // Regular jump gravity
+            if(rigidBody.velocity.y < 0) {
+                rigidBody.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.fixedDeltaTime;
+                shouldJump = false;
+            }
+            // Low jump gravity
+            else if (rigidBody.velocity.y > 0 && !shouldJump)
+                rigidBody.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
+        }
+
+        private bool IsGrounded() 
         {
-            bool isGrounded;
-
-            // Check ground through raycasting the circle collider
-            RaycastHit2D rayCastHit = 
-            Physics2D.BoxCast(
-                boxCollider2D.bounds.center,
-                boxCollider2D.bounds.size,
-                0f,
-                Vector2.down,
-                1f,
-                whatIsGround
-            );      
-
-            isGrounded = rayCastHit.collider != null;
-
-            // Debug the raycast performed in overlapcircle
-            Color rayColor = isGrounded ? Color.green : Color.red;
-            DebugUtils.DebugBoxRayCast(
-                boxCollider2D.bounds.center,
-                boxCollider2D.bounds.extents.x,
-                boxCollider2D.bounds.extents.y + .25f,
-                rayColor
-            );
-
-            return isGrounded;
+            return DetectionUtils.DetectGround(this.boxCollider2D, this.whatIsGround, true);
         }
 
         private IEnumerator TimerOnJump(float seconds) {
