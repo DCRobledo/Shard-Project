@@ -1,5 +1,6 @@
 using Shard.Classes.Input;
 using Shard.Classes.Patterns.Command;
+using Shard.Classes.Patterns.Singleton;
 using Shard.Classes.Entities;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,8 +9,11 @@ using UnityEngine.InputSystem;
 
 namespace Shard.Classes.Controllers 
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : SingletonUnity
     {
+        private static SingletonUnity instance = null;
+        public static new PlayerController Instance { get { return (PlayerController) instance; }}
+
         private GameObject player;
 
         private Command jumpButton;
@@ -23,8 +27,10 @@ namespace Shard.Classes.Controllers
         private EntityMovement playerMovement;
         private EntityActions playerActions;
 
-
         private void Awake() {
+            // Init the controller's instance
+            instance =  SingletonUnity.Instance;
+
             // Get the player game object and its components
             player = GameObject.Find("player");
 
