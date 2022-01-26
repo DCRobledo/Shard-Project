@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shard.Monobehaviour.Entities
+namespace Shard.Classes.Entities
 
 {
     public class EntityActions : MonoBehaviour

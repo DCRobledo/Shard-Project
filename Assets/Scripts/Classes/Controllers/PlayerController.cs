@@ -1,12 +1,12 @@
-using Shard.Classes.Entities;
+using Shard.Classes.Input;
 using Shard.Classes.Patterns.Command;
-using Shard.Monobehaviour.Entities;
+using Shard.Classes.Entities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Shard.Monobehaviour.Controllers 
+namespace Shard.Classes.Controllers 
 {
     public class PlayerController : MonoBehaviour
     {
@@ -17,7 +17,7 @@ namespace Shard.Monobehaviour.Controllers
         private Command reCallButton;
         private Command grabButton;
 
-        private PlayerInputActions playerInputActions;
+        private InputActions InputActions;
         private InputAction movement;
 
         private EntityMovement playerMovement;
@@ -36,7 +36,7 @@ namespace Shard.Monobehaviour.Controllers
         }
 
         private void AwakeInput() {
-            playerInputActions = new PlayerInputActions();
+            InputActions = new InputActions();
 
             jumpButton = new JumpCommand(playerMovement);
             moveButton = new MoveCommand(playerMovement);
@@ -49,18 +49,18 @@ namespace Shard.Monobehaviour.Controllers
         }
 
         private void EnableInput() {
-            movement = playerInputActions.Player.Movement;
+            movement = InputActions.Player.Movement;
             movement.Enable();
 
-            playerInputActions.Player.Jump.started += context => jumpButton.ExecuteWithParameters(true);
-            playerInputActions.Player.Jump.canceled += context => jumpButton.ExecuteWithParameters(false);
-            playerInputActions.Player.Jump.Enable();
+            InputActions.Player.Jump.started += context => jumpButton.ExecuteWithParameters(true);
+            InputActions.Player.Jump.canceled += context => jumpButton.ExecuteWithParameters(false);
+            InputActions.Player.Jump.Enable();
 
-            playerInputActions.Player.ReCall.performed += context => reCallButton.ExecuteWithParameters(EntityActions.Action.RECALL);
-            playerInputActions.Player.ReCall.Enable();
+            InputActions.Player.ReCall.performed += context => reCallButton.ExecuteWithParameters(EntityActions.Action.RECALL);
+            InputActions.Player.ReCall.Enable();
 
-            playerInputActions.Player.Grab.performed += context => grabButton.ExecuteWithParameters(EntityActions.Action.GRAB);
-            playerInputActions.Player.Grab.Enable();
+            InputActions.Player.Grab.performed += context => grabButton.ExecuteWithParameters(EntityActions.Action.GRAB);
+            InputActions.Player.Grab.Enable();
         }
 
         private void OnDisable() {
@@ -70,9 +70,9 @@ namespace Shard.Monobehaviour.Controllers
         private void DisableInput() {
             movement.Disable();
 
-            playerInputActions.Player.Jump.Disable();
-            playerInputActions.Player.ReCall.Disable();
-            playerInputActions.Player.Grab.Disable();
+            InputActions.Player.Jump.Disable();
+            InputActions.Player.ReCall.Disable();
+            InputActions.Player.Grab.Disable();
         }
 
 

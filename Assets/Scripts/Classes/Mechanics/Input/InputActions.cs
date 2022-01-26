@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Input/PlayerInputActions.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Input/InputActions.inputactions'
 
 using System;
 using System.Collections;
@@ -6,15 +6,15 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace Shard.Classes.Entities
+namespace Shard.Classes.Input
 {
-    public class @PlayerInputActions : IInputActionCollection, IDisposable
+    public class @InputActions : IInputActionCollection, IDisposable
     {
         public InputActionAsset asset { get; }
-        public @PlayerInputActions()
+        public @InputActions()
         {
             asset = InputActionAsset.FromJson(@"{
-    ""name"": ""PlayerInputActions"",
+    ""name"": ""InputActions"",
     ""maps"": [
         {
             ""name"": ""Player"",
@@ -208,8 +208,8 @@ namespace Shard.Classes.Entities
         private readonly InputAction m_Player_Grab;
         public struct PlayerActions
         {
-            private @PlayerInputActions m_Wrapper;
-            public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+            private @InputActions m_Wrapper;
+            public PlayerActions(@InputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @ReCall => m_Wrapper.m_Player_ReCall;

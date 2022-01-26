@@ -1,4 +1,4 @@
-using Shard.Monobehaviour.Entities;
+using Shard.Classes.Entities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
