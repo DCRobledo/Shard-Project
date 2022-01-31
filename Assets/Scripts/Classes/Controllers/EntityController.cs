@@ -9,10 +9,10 @@ using UnityEngine.InputSystem;
 
 namespace Shard.Classes.Controllers 
 {
-    public class PlayerController : SingletonUnity
+    public class EntityController : SingletonUnity
     {
         private static SingletonUnity instance = null;
-        public static new PlayerController Instance { get { return (PlayerController) instance; }}
+        public static new EntityController Instance { get { return (EntityController) instance; }}
 
         private GameObject player;
 
