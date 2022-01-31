@@ -30471,7 +30471,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 742019966, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: jumpForce
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1449738687, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: objectToReCall
