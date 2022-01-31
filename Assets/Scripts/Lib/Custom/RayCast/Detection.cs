@@ -7,11 +7,11 @@ namespace Shard.Lib.Custom
 {
     public static class Detection
     {
-        public static List<GameObject> DetectNearObjects(Vector3 center, float radius) {
+        public static List<GameObject> DetectNearObjects(Vector3 center, float radius, LayerMask layerMask) {
             List<GameObject> detectedGameObjects = new List<GameObject>();
 
             // Check all near 
-            Collider2D[] nearObjects = Physics2D.OverlapCircleAll(center, radius);
+            Collider2D[] nearObjects = Physics2D.OverlapCircleAll(center, radius, layerMask);
             
             foreach (Collider2D collider in nearObjects)
                 if (!detectedGameObjects.Contains(collider.gameObject))
