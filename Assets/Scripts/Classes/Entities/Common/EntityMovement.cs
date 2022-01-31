@@ -15,6 +15,9 @@ namespace Shard.Classes.Entities
         private float fallMultiplier = 2.5f;
         [SerializeField] [Range(1, 10)]
         private float lowJumpMultiplier = 2f;
+        [SerializeField] [Range(1, 10)]
+        private float crouchFactor = 2f;
+        
 
         [SerializeField]
         private LayerMask whatIsGround;
@@ -106,6 +109,17 @@ namespace Shard.Classes.Entities
             yield return new WaitForSeconds(seconds);
 
             canJump = true;
+        }
+    
+    
+        public void Crouch(bool crouch) {
+            // Modify player's y scale
+            Vector3 scale = this.transform.localScale;
+            scale.y = crouch ? scale.y - crouchFactor * .1f : scale.y + crouchFactor * .1f;
+            this.transform.localScale = scale;
+
+            // And movement speed
+            speed = crouch ? speed - crouchFactor : speed + crouchFactor;
         }
     }
 }

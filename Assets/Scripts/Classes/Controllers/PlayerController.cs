@@ -20,6 +20,7 @@ namespace Shard.Classes.Controllers
         private Command moveButton;
         private Command reCallButton;
         private Command grabButton;
+        private Command crouchButton;
 
         private InputActions InputActions;
         private InputAction movement;
@@ -46,9 +47,11 @@ namespace Shard.Classes.Controllers
 
             jumpButton = new JumpCommand(playerMovement);
             moveButton = new MoveCommand(playerMovement);
+            crouchButton = new CrouchCommand(playerMovement);
             reCallButton = new ActionCommand(playerActions);
             grabButton = new ActionCommand(playerActions);
         }
+
 
         private void OnEnable() {
             EnableInput();
@@ -61,6 +64,10 @@ namespace Shard.Classes.Controllers
             InputActions.Player.Jump.started += context => jumpButton.ExecuteWithParameters(true);
             InputActions.Player.Jump.canceled += context => jumpButton.ExecuteWithParameters(false);
             InputActions.Player.Jump.Enable();
+
+            InputActions.Player.Crouch.started += context => crouchButton.ExecuteWithParameters(true);
+            InputActions.Player.Crouch.canceled += context => crouchButton.ExecuteWithParameters(false);
+            InputActions.Player.Crouch.Enable();
 
             InputActions.Player.ReCall.performed += context => reCallButton.ExecuteWithParameters(EntityActions.Action.RECALL);
             InputActions.Player.ReCall.Enable();
@@ -77,6 +84,7 @@ namespace Shard.Classes.Controllers
             movement.Disable();
 
             InputActions.Player.Jump.Disable();
+            InputActions.Player.Crouch.Disable();
             InputActions.Player.ReCall.Disable();
             InputActions.Player.Grab.Disable();
         }
