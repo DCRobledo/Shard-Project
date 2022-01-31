@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  jumpForce: 8
+  jumpForce: 2
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   crouchFactor: 3
