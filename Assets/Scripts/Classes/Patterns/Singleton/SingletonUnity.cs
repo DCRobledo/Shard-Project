@@ -6,9 +6,9 @@ namespace Shard.Classes.Patterns.Singleton
 {
     public class SingletonUnity : MonoBehaviour
     {
+        public float id;
+        
         private static SingletonUnity instance = null;
-
-        private float id;
 
         public static SingletonUnity Instance {
             get {
