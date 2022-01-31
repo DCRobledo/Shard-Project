@@ -34,7 +34,7 @@ namespace Shard.Lib.Custom
             return detectedGameObjects;
         }
     
-        public static bool DetectGround(BoxCollider2D boxCollider2D, LayerMask whatIsGround, bool debug = false) {
+        public static bool DetectGround(BoxCollider2D boxCollider2D, LayerMask whatIsGround, float offset, bool debug = false) {
             bool isGrounded;
 
             // Check ground through raycasting the circle collider
@@ -44,7 +44,7 @@ namespace Shard.Lib.Custom
                 boxCollider2D.bounds.size,
                 0f,
                 Vector2.down,
-                1f,
+                offset,
                 whatIsGround
             );      
 
@@ -56,7 +56,7 @@ namespace Shard.Lib.Custom
                 DebugUtils.DebugBoxRayCast(
                     boxCollider2D.bounds.center,
                     boxCollider2D.bounds.extents.x,
-                    boxCollider2D.bounds.extents.y + .25f,
+                    boxCollider2D.bounds.extents.y + offset,
                     rayColor
                 );
             }
