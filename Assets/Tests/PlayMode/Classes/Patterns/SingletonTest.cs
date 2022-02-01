@@ -7,7 +7,7 @@ using UnityEngine.TestTools;
 
 namespace Shard.Tests.Patterns
 {
-    public class SingletonTest
+    public class SingletonTest : PlayModeTest
     {
         [UnityTest]
         public IEnumerator SingleInstanceTest()

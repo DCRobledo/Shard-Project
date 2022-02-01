@@ -9,7 +9,7 @@ using UnityEngine.TestTools;
 
 namespace Shard.Tests.Entities
 {
-    public class EntityActionsTest
+    public class EntityActionsTest : PlayModeTest
     {
         [UnityTest]
         public IEnumerator EntityGrabTest()
