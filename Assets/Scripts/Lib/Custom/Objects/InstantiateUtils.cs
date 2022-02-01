@@ -11,7 +11,7 @@ namespace Shard.Lib.Custom
             GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/Prefabs/" + path);
             GameObject go = Object.Instantiate(prefab as GameObject);
 
-            go.GetComponent<Rigidbody2D>().bodyType = applyGravity ? RigidbodyType2D.Dynamic : RigidbodyType2D.Static;
+            if(!applyGravity) go.GetComponent<Rigidbody2D>().gravityScale = 0;
             go.transform.position = position;
 
             return go;
