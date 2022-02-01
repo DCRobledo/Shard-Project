@@ -14,8 +14,6 @@ namespace Shard.Tests.Entities
         [UnityTest]
         public IEnumerator EntityMoveTest()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
             // Create player
             GameObject player = InstantiateUtils.InstantiatePlayer(new Vector3(0, 0, 0), false);
 
