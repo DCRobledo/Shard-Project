@@ -62,7 +62,24 @@ namespace Shard.Tests.Entities
         [UnityTest]
         public IEnumerator PlayerReCallTest()
         {
-            
+            // Create player
+            GameObject player = InstantiateUtils.InstantiatePlayer(new Vector3(0, 0, 0), false);
+
+            // Create robot
+            GameObject robot = InstantiateUtils.InstantiatePlayer(new Vector3(10f, 0, 0), false);
+
+
+            // Check that it is far
+            Assert.AreEqual(0, Detection.DetectNearObjects(player.transform.position, 5f, 1).Count);
+
+            // ReCall robot
+            player.GetComponent<EntityActions>().ChangeObjectToReCall(robot);
+            player.GetComponent<EntityActions>().ReCall();
+
+            // Check that it is near
+            Assert.AreEqual(0, Detection.DetectNearObjects(player.transform.position, 5f, 1).Count);
+
+
             yield return null;
         }
     }

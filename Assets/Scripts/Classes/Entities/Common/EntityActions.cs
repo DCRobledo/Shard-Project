@@ -39,6 +39,8 @@ namespace Shard.Classes.Entities
 
 
         private void Awake() {
+            objectToReCall = GameObject.Find("robot");
+
             grabJoint = this.GetComponent<RelativeJoint2D>();
             grabJoint.enabled = false;
         } 
