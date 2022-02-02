@@ -9,13 +9,11 @@ using UnityEngine.TestTools;
 
 namespace Shard.Tests.Entities
 {
-    public class EntityActionsTest
+    public class EntityActionsTest : PlayModeTest
     {
         [UnityTest]
         public IEnumerator EntityGrabTest()
         {
-            Clean.CleanGameObjects();
-
             // Create the player
             GameObject player = InstantiateUtils.InstantiatePlayer(new Vector3(0, 0, 0), false);
 
@@ -64,8 +62,6 @@ namespace Shard.Tests.Entities
         [UnityTest]
         public IEnumerator EntityReCallTest()
         {
-            Clean.CleanGameObjects();
-
             // Create player
             GameObject player = InstantiateUtils.InstantiatePlayer(new Vector3(0, 0, 0), false);
 

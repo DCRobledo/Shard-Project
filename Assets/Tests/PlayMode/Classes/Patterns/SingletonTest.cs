@@ -8,13 +8,11 @@ using UnityEngine.TestTools;
 
 namespace Shard.Tests.Patterns
 {
-    public class SingletonTest
+    public class SingletonTest : PlayModeTest
     {
         [UnityTest]
         public IEnumerator SingleInstanceTest()
         {
-            Clean.CleanGameObjects();
-
             // Create two singletons
             GameObject go = new GameObject();
             go.AddComponent<SingletonUnity>();
