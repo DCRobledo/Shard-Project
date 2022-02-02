@@ -9,11 +9,13 @@ using UnityEngine.TestTools;
 
 namespace Shard.Tests.Entities
 {
-    public class EntityMovementTest : PlayModeTest
+    public class EntityMovementTest
     {
         [UnityTest]
         public IEnumerator EntityMoveTest()
         {
+            Clean.CleanGameObjects();
+
             // Create player
             GameObject player = InstantiateUtils.InstantiatePlayer(new Vector3(0, 0, 0), false);
 
@@ -30,6 +32,8 @@ namespace Shard.Tests.Entities
         [UnityTest]
         public IEnumerator EntityJumpTest()
         {
+            Clean.CleanGameObjects();
+
             // Create player
             GameObject player = InstantiateUtils.InstantiatePlayer(new Vector3(0, 0, 0));
 

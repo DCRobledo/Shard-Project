@@ -1,3 +1,4 @@
+using Shard.Lib.Custom;
 using Shard.Classes.Patterns.Singleton;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,11 +8,13 @@ using UnityEngine.TestTools;
 
 namespace Shard.Tests.Patterns
 {
-    public class SingletonTest : PlayModeTest
+    public class SingletonTest
     {
         [UnityTest]
         public IEnumerator SingleInstanceTest()
         {
+            Clean.CleanGameObjects();
+
             // Create two singletons
             GameObject go = new GameObject();
             go.AddComponent<SingletonUnity>();
