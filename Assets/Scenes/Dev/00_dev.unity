@@ -30473,14 +30473,6 @@ PrefabInstance:
       propertyPath: objectToReCall
       value: 
       objectReference: {fileID: 2138330818}
-    - target: {fileID: 8710090841162840074, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: m_Simulated
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8710090841162840074, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: m_GravityScale
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8710090841162840075, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: m_RootOrder
       value: 1
