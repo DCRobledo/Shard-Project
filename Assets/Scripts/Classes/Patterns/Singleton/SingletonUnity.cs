@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shard.Classes.Patterns.Singleton
+namespace Shard.Patterns.Singleton
 {
     public class SingletonUnity : MonoBehaviour
     {

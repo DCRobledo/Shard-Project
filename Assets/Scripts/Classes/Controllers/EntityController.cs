@@ -1,13 +1,13 @@
-using Shard.Classes.Input;
-using Shard.Classes.Patterns.Command;
-using Shard.Classes.Patterns.Singleton;
-using Shard.Classes.Entities;
+using Shard.Input;
+using Shard.Patterns.Command;
+using Shard.Patterns.Singleton;
+using Shard.Entities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Shard.Classes.Controllers 
+namespace Shard.Controllers 
 {
     public class EntityController : SingletonUnity
     {

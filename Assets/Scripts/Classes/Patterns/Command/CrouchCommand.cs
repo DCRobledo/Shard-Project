@@ -1,9 +1,9 @@
-using Shard.Classes.Entities;
+using Shard.Entities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shard.Classes.Patterns.Command 
+namespace Shard.Patterns.Command 
 {
     public class CrouchCommand : Command
     {

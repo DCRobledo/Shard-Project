@@ -1,4 +1,4 @@
-using Shard.Classes.Controllers;
+using Shard.Controllers;
 using Shard.Lib.Custom;
 using System;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shard.Classes.Entities
+namespace Shard.Entities
 
 {
     public class EntityActions : MonoBehaviour

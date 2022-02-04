@@ -1,5 +1,5 @@
 using Shard.Lib.Custom;
-using Shard.Classes.Entities;
+using Shard.Entities;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;

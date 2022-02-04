@@ -1,5 +1,5 @@
 using Shard.Lib.Custom;
-using Shard.Classes.Patterns.Singleton;
+using Shard.Patterns.Singleton;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;

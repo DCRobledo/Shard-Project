@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shard.Classes.Patterns.Command 
+namespace Shard.Patterns.Command 
 {
     public abstract class Command
     {

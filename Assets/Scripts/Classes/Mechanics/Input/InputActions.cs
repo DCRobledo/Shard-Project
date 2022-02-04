@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace Shard.Classes.Input
+namespace Shard.Input
 {
     public partial class @InputActions : IInputActionCollection2, IDisposable
     {
