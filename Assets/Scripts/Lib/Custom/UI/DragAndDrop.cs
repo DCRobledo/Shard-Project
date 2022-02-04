@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Shard.Lib.Custom.UI
+namespace Shard.Lib.Custom
 {
     public class DragAndDrop : MonoBehaviour, IDragHandler
     {
@@ -14,8 +14,8 @@ namespace Shard.Lib.Custom.UI
         
         private RectTransform rectTransform;
 
-        private void Awake() {
-            rectTransform = transform as RectTransform;
+        protected void Awake() {
+            rectTransform = this.GetComponent<RectTransform>();
         }
 
         public void OnDrag(PointerEventData eventData)
