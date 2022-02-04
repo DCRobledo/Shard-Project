@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2946542566882599923}
   - component: {fileID: 2754756810094576545}
-  - component: {fileID: 4426280988512466494}
+  - component: {fileID: 1775549660428882026}
+  - component: {fileID: 4272430666289160553}
+  - component: {fileID: 4496808513079780615}
   m_Layer: 5
   m_Name: IF-ELSE
   m_TagString: Untagged
@@ -48,7 +50,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511664979210757610}
   m_CullTransparentMesh: 1
---- !u!114 &4426280988512466494
+--- !u!61 &1775549660428882026
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511664979210757610}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.13555908, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 141.42151, y: 34.614502}
+  m_EdgeRadius: 0
+--- !u!50 &4272430666289160553
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511664979210757610}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &4496808513079780615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,10 +106,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1511664979210757610}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1854eca33c5eeff4a93dab5b17d09f25, type: 3}
+  m_Script: {fileID: 11500000, guid: b5cda3e171a5a0747a42c1e4e1f8af4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dragSpeed: 0.05
 --- !u!1 &7210954912556296734
 GameObject:
   m_ObjectHideFlags: 0

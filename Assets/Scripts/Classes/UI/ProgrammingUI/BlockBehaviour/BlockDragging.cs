@@ -20,6 +20,7 @@ public class BlockDragging : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
     private GameObject blockImage;
 
+
     private void Awake() {
         blockImage = this.transform.GetChild(0).gameObject;
     }
@@ -56,7 +57,7 @@ public class BlockDragging : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         VisualUtils.ChangeImageAlpha(ref blockImage, .7f);
 
         // Place the draggable block
-        Destroy(draggableBlock.gameObject);
+        draggableBlock.GetComponent<DraggableBlock>().Place();
     }
 
     private void CreateDraggableBlock(){
@@ -64,7 +65,6 @@ public class BlockDragging : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         draggableBlockRectTransform = draggableBlock.GetComponent<RectTransform>();
 
         draggableBlock.transform.SetParent(GameObject.Find("blocks").transform, false);
-        draggableBlock.transform.position = this.transform.position;
-        
+        draggableBlock.transform.position = this.transform.position;   
     }
 }
