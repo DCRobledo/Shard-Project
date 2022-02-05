@@ -7,31 +7,40 @@ namespace Shard.UI.ProgrammingUI
 {
     public class BlockManagement : MonoBehaviour
     {
-        private List<(int, BehaviourBlock)> blocks = new List<(int, BehaviourBlock)>();
-
-        private int numOfBlocks = 7;
+        private GameObject[] blocks = new GameObject[7];
 
         private void Update() {
-            UpdateBlocks();
+            //PrintBlocks();
         }
 
 
-        private void UpdateBlocks() {
-            for (int i = 0; i < numOfBlocks; i++)
-            {
-                GameObject spaceBlock = this.transform.GetChild(i).gameObject;
+        public void PlaceBlock(int blockSpace, GameObject block) {
+            // Check if there is already a block in the space
+            GameObject existingBlock = blocks[blockSpace - 1];
 
-                if(spaceBlock.transform.childCount > 0)
-                    blocks.Add((i + 1, spaceBlock.transform.GetChild(0).gameObject.GetComponent<BehaviourBlock>()));
+            if(existingBlock == null) {
+                block.transform.SetParent(this.transform.GetChild(blockSpace - 1).transform);
+                block.transform.position = this.transform.GetChild(blockSpace - 1).transform.position;
+
+                blocks[blockSpace - 1] = block;
             }
+
+            else Destroy(block.gameObject);
         }
+
+        public void RemoveBlock(int blockSpace) {
+            blocks[blockSpace - 1] = null;
+        }
+
 
         private void PrintBlocks() {
             string message = "";
 
-            foreach ((int, BehaviourBlock) block in blocks)
+            for(int i = 0; i < blocks.Length; i++)
             {
-                message += block.Item1 + " -> " + block.Item2.blockType + "\n";
+                string blockType = blocks[i] == null ? "NULL" : blocks[i].GetComponent<BehaviourBlock>().blockType.ToString();
+
+                message += i + 1 + " -> " + blockType + "\n";
             }
 
             Debug.Log(message);

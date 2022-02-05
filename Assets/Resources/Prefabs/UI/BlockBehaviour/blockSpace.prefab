@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4790973676195882328}
   - component: {fileID: 4790973676195882342}
   - component: {fileID: 8097207137970670637}
+  - component: {fileID: -8758885774528494248}
   m_Layer: 5
   m_Name: blockSpace
   m_TagString: Block Space
@@ -53,7 +54,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.081604004, y: 0.6709757}
+  m_Offset: {x: -0.081604004, y: 3.3987427}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -64,7 +65,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 416.5805, y: 60.684143}
+  m_Size: {x: 416.5805, y: 30.88855}
   m_EdgeRadius: 0
 --- !u!222 &4790973676195882328
 CanvasRenderer:
@@ -125,3 +126,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-8758885774528494248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4790973676195882330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92fc6dfb09815574aa3f218f138d2878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0

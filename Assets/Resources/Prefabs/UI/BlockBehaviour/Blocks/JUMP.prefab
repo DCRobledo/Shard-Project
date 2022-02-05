@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5cda3e171a5a0747a42c1e4e1f8af4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dragSpeed: 0.05
 --- !u!114 &5221103486892452045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fd9dd025cae66a43b7bc87f9174237f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockType: 3
+  blockType: 4
 --- !u!1 &7210954912556296734
 GameObject:
   m_ObjectHideFlags: 0

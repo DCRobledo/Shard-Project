@@ -8,6 +8,7 @@ namespace Shard.UI.ProgrammingUI
     {
         public enum BlockType {
             IF,
+            ELSEIF,
             ELSE,
             WALK,
             JUMP,
