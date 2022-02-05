@@ -35254,7 +35254,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BRANCH
+  m_text: GO TO
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0f0cb75e992137488412cd62a35d04f, type: 2}
   m_sharedMaterial: {fileID: -5497694081935600096, guid: e0f0cb75e992137488412cd62a35d04f, type: 2}
@@ -35343,7 +35343,7 @@ GameObject:
   - component: {fileID: 1783093838}
   - component: {fileID: 1783093837}
   m_Layer: 5
-  m_Name: BRANCH
+  m_Name: GO TO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35368,8 +35368,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -22.155, y: -131.2}
-  m_SizeDelta: {x: 125.61, y: 34.94}
+  m_AnchoredPosition: {x: -34.89999, y: -131.2}
+  m_SizeDelta: {x: 100.12, y: 34.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1783093837
 CanvasRenderer:
@@ -35734,8 +35734,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 62.80503, y: -17.395006}
-  m_SizeDelta: {x: 125.61, y: 34.79}
+  m_AnchoredPosition: {x: 50.06004, y: -17.395006}
+  m_SizeDelta: {x: 100.12, y: 34.79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1878306275
 MonoBehaviour:

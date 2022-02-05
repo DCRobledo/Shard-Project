@@ -13,7 +13,7 @@ namespace Shard.UI.ProgrammingUI
             WALK,
             JUMP,
             FLIP,
-            BRANCH
+            GOTO
         } public BlockType blockType;
     }
 }

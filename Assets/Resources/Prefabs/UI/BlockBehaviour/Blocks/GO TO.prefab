@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 4496808513079780615}
   - component: {fileID: 5629973158349570927}
   m_Layer: 5
-  m_Name: BRANCH
+  m_Name: GO TO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,8 +168,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.0127, y: 0}
-  m_SizeDelta: {x: 181.2286, y: 34.981}
+  m_AnchoredPosition: {x: -0.0733, y: 0}
+  m_SizeDelta: {x: 172.0593, y: 34.981}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2754756810094576545
 CanvasRenderer:
@@ -192,7 +192,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03970337, y: 0}
+  m_Offset: {x: 0.13012695, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -203,7 +203,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 126.65399, y: 34.614502}
+  m_Size: {x: 172.50085, y: 34.614502}
   m_EdgeRadius: 0
 --- !u!50 &4272430666289160553
 Rigidbody2D:
@@ -367,8 +367,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44.575, y: 0}
-  m_SizeDelta: {x: 92.0787, y: 30}
+  m_AnchoredPosition: {x: 38.2, y: 0.09552}
+  m_SizeDelta: {x: 92.9409, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8104203077544282865
 CanvasRenderer:
@@ -1371,8 +1371,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -27.2, y: 0.09552}
-  m_SizeDelta: {x: 116.3248, y: 34.79}
+  m_AnchoredPosition: {x: -36, y: 0.09552}
+  m_SizeDelta: {x: 92.565, y: 34.79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2331236585462267677
 CanvasRenderer:
@@ -1402,7 +1402,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BRANCH
+  m_text: GO TO
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0f0cb75e992137488412cd62a35d04f, type: 2}
   m_sharedMaterial: {fileID: -5497694081935600096, guid: e0f0cb75e992137488412cd62a35d04f, type: 2}
@@ -1506,8 +1506,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0011349, y: 0}
-  m_SizeDelta: {x: 181.23, y: 34.79}
+  m_AnchoredPosition: {x: -0.00086498, y: 0}
+  m_SizeDelta: {x: 172.06, y: 34.79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2674894416526628096
 CanvasRenderer:
