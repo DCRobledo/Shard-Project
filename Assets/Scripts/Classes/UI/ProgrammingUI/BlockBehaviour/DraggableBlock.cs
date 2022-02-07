@@ -16,7 +16,7 @@ namespace Shard.UI.ProgrammingUI
         private Vector3 velocity = Vector3.zero;
 
         private GameObject currentBlockSpace;
-        private bool isInBlockSpace;
+        public bool isInBlockSpace;
 
         private void Awake() {
             rectTransform = this.GetComponent<RectTransform>();
@@ -34,7 +34,7 @@ namespace Shard.UI.ProgrammingUI
                 // Highlight new block space
                 currentBlockSpace = other.gameObject;
                 VisualUtils.ChangeObjectImage(ref currentBlockSpace, a: .07f);
-            } 
+            }
         }
 
         public void Place() {
