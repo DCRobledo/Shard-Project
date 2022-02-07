@@ -27,13 +27,19 @@ namespace Shard.UI.ProgrammingUI
             isInBlockSpace = other.gameObject.transform.tag == "Block Space";
 
             if(isInBlockSpace) {
+                GameObject blockSpaceImage;
+
                 // Restore previous block space's color
                 if(currentBlockSpace != null)
-                    VisualUtils.ChangeObjectImage(ref currentBlockSpace, a: -.07f);
-
+                {
+                    blockSpaceImage = currentBlockSpace.transform.GetChild(0).gameObject;
+                    VisualUtils.ChangeObjectImage(ref blockSpaceImage, a: -.07f);
+                }
+                    
                 // Highlight new block space
                 currentBlockSpace = other.gameObject;
-                VisualUtils.ChangeObjectImage(ref currentBlockSpace, a: .07f);
+                blockSpaceImage = currentBlockSpace.transform.GetChild(0).gameObject;
+                VisualUtils.ChangeObjectImage(ref blockSpaceImage, a: .07f);
             }
         }
 
@@ -60,6 +66,8 @@ namespace Shard.UI.ProgrammingUI
             RemoveBlock(
                 currentBlockSpace.GetComponent<BlockSpace>().index
             );
+
+            this.transform.SetParent(GameObject.Find("blocks").transform);
         }
 
         public void OnDrag(PointerEventData eventData)

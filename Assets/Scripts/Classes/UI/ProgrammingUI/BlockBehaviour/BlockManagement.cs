@@ -19,8 +19,8 @@ namespace Shard.UI.ProgrammingUI
             GameObject existingBlock = blocks[blockSpace - 1];
 
             if(existingBlock == null) {
-                block.transform.SetParent(this.transform.GetChild(blockSpace - 1).transform);
-                block.transform.position = this.transform.GetChild(blockSpace - 1).transform.position;
+                block.transform.SetParent(this.transform.GetChild(blockSpace - 1).GetChild(0).transform);
+                block.transform.position = this.transform.GetChild(blockSpace - 1).GetChild(0).transform.position;
 
                 blocks[blockSpace - 1] = block;
             }
