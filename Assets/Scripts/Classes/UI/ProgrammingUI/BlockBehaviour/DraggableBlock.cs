@@ -26,7 +26,15 @@ namespace Shard.UI.ProgrammingUI
         private void OnTriggerEnter2D(Collider2D other) {
             isInBlockSpace = other.gameObject.transform.tag == "Block Space";
 
-            if(isInBlockSpace) currentBlockSpace = other.gameObject;
+            if(isInBlockSpace) {
+                // Restore previous block space's color
+                if(currentBlockSpace != null)
+                    VisualUtils.ChangeObjectImage(ref currentBlockSpace, a: -.07f);
+
+                // Highlight new block space
+                currentBlockSpace = other.gameObject;
+                VisualUtils.ChangeObjectImage(ref currentBlockSpace, a: .07f);
+            } 
         }
 
         public void Place() {
@@ -34,12 +42,15 @@ namespace Shard.UI.ProgrammingUI
             if (!isInBlockSpace) Destroy(this.gameObject);
 
             //Otherwise, we place the block in the block space
-            else
+            else {
                 GameObject.Find("blocks").GetComponent<BlockManagement>().
                 PlaceBlock(
                     currentBlockSpace.GetComponent<BlockSpace>().index,
                     this.gameObject
                 );
+
+                VisualUtils.ChangeObjectImage(ref currentBlockSpace, a: -.05f);
+            }  
         }
 
 

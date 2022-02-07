@@ -47,7 +47,7 @@ namespace Shard.UI.ProgrammingUI
         public void OnBeginDrag(PointerEventData eventData)
         {
             // Enter dragging state
-            VisualUtils.ChangeImageAlpha(ref blockImage, -.7f);
+            VisualUtils.ChangeObjectImage(ref blockImage, a:-.7f);
 
             // Create the draggable block
             CreateDraggableBlock();
@@ -56,7 +56,7 @@ namespace Shard.UI.ProgrammingUI
         public void OnEndDrag(PointerEventData eventData)
         {
             // End dragging state
-            VisualUtils.ChangeImageAlpha(ref blockImage, .7f);
+            VisualUtils.ChangeObjectImage(ref blockImage, a:.7f);
 
             // Place the draggable block
             draggableBlock.GetComponent<DraggableBlock>().Place();
