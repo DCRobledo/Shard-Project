@@ -7,7 +7,11 @@ namespace Shard.UI.ProgrammingUI
 {
     public class BlockManagement : MonoBehaviour
     {
-        private GameObject[] blocks = new GameObject[7];
+        private GameObject[] blocks;
+
+        private void Awake() {
+            blocks = new GameObject[this.transform.childCount];
+        }
 
         private void Update() {
             //PrintBlocks();

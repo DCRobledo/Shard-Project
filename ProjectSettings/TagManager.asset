@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Robot
   - Block Space
+  - Scrollable Block Area
   layers:
   - Default
   - TransparentFX
