@@ -25,8 +25,11 @@ namespace Shard.UI.ProgrammingUI
 
 
         private void OnTriggerEnter2D(Collider2D other) {
-            //isInScrollableBlockArea = other.gameObject.transform.tag == "Scrollable Block Area";
-            isInBlockSpace = other.gameObject.transform.tag == "Block Space";
+            // Check if we are inside the visible block area
+            if(other.gameObject.transform.tag == "Scrollable Block Area" || other.gameObject.transform.tag == "Outside Scrollable Block Area")
+                isInScrollableBlockArea = other.gameObject.transform.tag == "Scrollable Block Area";
+
+            isInBlockSpace = isInScrollableBlockArea && other.gameObject.transform.tag == "Block Space";
 
             if(isInBlockSpace) {
                 // Restore previous block space's color
