@@ -25,7 +25,7 @@ namespace Shard.UI.ProgrammingUI
 
 
         private void OnTriggerEnter2D(Collider2D other) {
-            isInBlockSpace = other.gameObject.transform.tag == "Block Space" && other.gameObject.GetComponent<BlockSpace>().canBeUsed();
+            isInBlockSpace = other.gameObject.transform.tag == "Block Space" && other.gameObject.GetComponent<BlockSpace>().CanBeUsed();
 
             if(isInBlockSpace) {
                 // Restore previous block space's color

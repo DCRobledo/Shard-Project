@@ -8,9 +8,7 @@ namespace Shard.UI.ProgrammingUI
     {
         public int index;
         
-        [SerializeField]
-        private int indentationFactor = 5;
-        private float indentation;
+        public int indentation = 1;
 
         private bool isInScrollArea;
 
@@ -24,20 +22,21 @@ namespace Shard.UI.ProgrammingUI
             isInScrollArea = other.transform.tag == "Behaviour Block" ? isInScrollArea : other.transform.tag == "Scrollable Block Area";
         }
 
-        public bool canBeUsed() { return isInScrollArea; }
+        public bool CanBeUsed() { return isInScrollArea; }
 
-        public float GetIndentation()
+        public int GetIndentation()
         {
             return this.indentation;
         }
 
         public void ResetIndentation()
         {
-            this.indentation += indentationFactor;
+            this.indentation = 1;
         }
-        public void ModifyIndentation(float modifier)
+        
+        public void ModifyIndentation(int modifier)
         {
-            this.indentation += indentationFactor * modifier * 5;
+            this.indentation += modifier;
         }
     }
 }

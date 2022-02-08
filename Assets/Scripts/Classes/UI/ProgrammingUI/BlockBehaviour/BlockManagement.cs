@@ -7,6 +7,9 @@ namespace Shard.UI.ProgrammingUI
 {
     public class BlockManagement : MonoBehaviour
     {
+        [SerializeField] [Range(1, 100)]
+        private int indentationFactor = 10;
+
         private GameObject[] blocks;
 
         private void Awake() {
@@ -37,6 +40,8 @@ namespace Shard.UI.ProgrammingUI
 
         public void RemoveBlock(int blockSpace) {
             blocks[blockSpace - 1] = null;
+
+            UpdateIndentations();
         }
 
         private void UpdateIndentations() {
@@ -45,6 +50,7 @@ namespace Shard.UI.ProgrammingUI
             {
                 Transform blockSpaceTransform = this.transform.GetChild(i);
                 BlockSpace blockSpace = blockSpaceTransform.gameObject.GetComponent<BlockSpace>();
+
                 //blockSpace.gameObject.GetComponent<BlockSpace>().ResetIndentation();
 
                 // Check if there is a block within each block space 
@@ -87,7 +93,7 @@ namespace Shard.UI.ProgrammingUI
             blockPosition.x -= blockContainer.sizeDelta.x / 2;
             blockPosition.x += block.sizeDelta.x / 2;
 
-            blockPosition.x += indentation;
+            blockPosition.x += (indentation - 1) * indentationFactor;
 
             return blockPosition;
         }
