@@ -9,9 +9,16 @@ namespace Shard.UI.ProgrammingUI
         public int index;
         
         [SerializeField]
-        private float indentation = 5f;
+        private int indentationFactor = 5;
+        private float indentation;
 
         private bool isInScrollArea;
+
+
+        private void Awake() {
+            ResetIndentation();
+        }
+
 
         private void OnTriggerEnter2D(Collider2D other) {
             isInScrollArea = other.transform.tag == "Behaviour Block" ? isInScrollArea : other.transform.tag == "Scrollable Block Area";
@@ -24,11 +31,14 @@ namespace Shard.UI.ProgrammingUI
             return this.indentation;
         }
 
-        public void SetIndentation(float indentation)
+        public void ResetIndentation()
         {
-            this.indentation = indentation;
+            this.indentation += indentationFactor;
         }
-
+        public void ModifyIndentation(float modifier)
+        {
+            this.indentation += indentationFactor * modifier * 5;
+        }
     }
 }
 

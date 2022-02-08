@@ -8,6 +8,7 @@ TagManager:
   - Block Space
   - Scrollable Block Area
   - Outside Scrollable Block Area
+  - Behaviour Block
   layers:
   - Default
   - TransparentFX
