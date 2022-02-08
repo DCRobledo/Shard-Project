@@ -28,20 +28,7 @@ namespace Shard.UI.ProgrammingUI
         }
 
         public void OnDrag(PointerEventData eventData) {
-            if(RectTransformUtility.ScreenPointToWorldPointInRectangle(
-                draggableBlockRectTransform,
-                eventData.position,
-                eventData.pressEventCamera,
-                out var globalMousePosition
-            )) {
-                draggableBlockRectTransform.position =
-                Vector3.SmoothDamp(
-                    draggableBlockRectTransform.position,
-                    globalMousePosition,
-                    ref velocity,
-                    dragSpeed
-                );
-            }
+            DragAndDrop.Drag(eventData, dragSpeed, draggableBlockRectTransform);
         }
 
         public void OnBeginDrag(PointerEventData eventData)

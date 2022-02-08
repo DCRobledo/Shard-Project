@@ -5,20 +5,11 @@ using UnityEngine.EventSystems;
 
 namespace Shard.Lib.Custom
 {
-    public class DragAndDrop : MonoBehaviour, IDragHandler
+    public static class DragAndDrop
     {
-        [SerializeField]
-        private float dragSpeed = .05f;
+        private static Vector3 velocity = Vector3.zero;
 
-        private Vector3 velocity = Vector3.zero;
-        
-        private RectTransform rectTransform;
-
-        protected void Awake() {
-            rectTransform = this.GetComponent<RectTransform>();
-        }
-
-        public void OnDrag(PointerEventData eventData)
+        public static void Drag(PointerEventData eventData, float dragSpeed, RectTransform rectTransform)
         {
             if(RectTransformUtility.ScreenPointToWorldPointInRectangle(
                 rectTransform,

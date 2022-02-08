@@ -70,33 +70,14 @@ namespace Shard.UI.ProgrammingUI
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            GameObject.Find("blocks").GetComponent<BlockManagement>().
-            RemoveBlock(
-                currentBlockSpace.GetComponent<BlockSpace>().index
-            );
-
             this.transform.SetParent(GameObject.Find("block_behaviour").transform, false);
-            this.transform.position = currentBlockSpace.transform.position;
 
             HighlightBlockSpace(true);
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            if(RectTransformUtility.ScreenPointToWorldPointInRectangle(
-                rectTransform,
-                eventData.position,
-                eventData.pressEventCamera,
-                out var globalMousePosition
-            )) {
-                rectTransform.position =
-                Vector3.SmoothDamp(
-                    rectTransform.position,
-                    globalMousePosition,
-                    ref velocity,
-                    dragSpeed
-                );
-            }
+            DragAndDrop.Drag(eventData, dragSpeed, rectTransform);
         }
 
         public void OnEndDrag(PointerEventData eventData)
