@@ -610,7 +610,7 @@ GameObject:
   - component: {fileID: 250074384246902307}
   m_Layer: 5
   m_Name: IF
-  m_TagString: Untagged
+  m_TagString: Behaviour Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
