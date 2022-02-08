@@ -7,6 +7,9 @@ namespace Shard.UI.ProgrammingUI
     public class BlockSpace : MonoBehaviour
     {
         public int index;
+        
+        [SerializeField]
+        private float indentation = 5f;
 
         private bool isInScrollArea;
 
@@ -15,6 +18,17 @@ namespace Shard.UI.ProgrammingUI
         }
 
         public bool canBeUsed() { return isInScrollArea; }
+
+        public float GetIndentation()
+        {
+            return this.indentation;
+        }
+
+        public void SetIndentation(float indentation)
+        {
+            this.indentation = indentation;
+        }
+
     }
 }
 

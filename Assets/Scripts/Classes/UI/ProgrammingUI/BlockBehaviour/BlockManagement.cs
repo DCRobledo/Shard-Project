@@ -24,12 +24,27 @@ namespace Shard.UI.ProgrammingUI
 
             if(existingBlock == null) {
                 block.transform.SetParent(this.transform.GetChild(blockSpace - 1).GetChild(0).transform);
-                block.transform.position = this.transform.GetChild(blockSpace - 1).GetChild(0).transform.position;
+                block.GetComponent<RectTransform>().anchoredPosition = CalculateBlockPosition(
+                    this.transform.GetChild(blockSpace - 1).GetChild(0).GetComponent<RectTransform>(),
+                    block.GetComponent<RectTransform>(),
+                    this.transform.GetChild(blockSpace - 1).GetComponent<BlockSpace>().GetIndentation()
+                );
 
                 blocks[blockSpace - 1] = block;
             }
 
             else Destroy(block.gameObject);
+        }
+
+        private Vector3 CalculateBlockPosition(RectTransform blockSpace, RectTransform block, float indentation) {
+            Vector3 blockPosition = blockSpace.anchoredPosition;
+
+            blockPosition.x -= blockSpace.sizeDelta.x / 2;
+            blockPosition.x += block.sizeDelta.x / 2;
+            
+            blockPosition.x += indentation;
+
+            return blockPosition;
         }
 
         public void RemoveBlock(int blockSpace) {
