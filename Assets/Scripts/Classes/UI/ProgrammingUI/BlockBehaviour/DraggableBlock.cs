@@ -25,11 +25,7 @@ namespace Shard.UI.ProgrammingUI
 
 
         private void OnTriggerEnter2D(Collider2D other) {
-            // Check if we are inside the visible block area
-            if(other.gameObject.transform.tag == "Scrollable Block Area" || other.gameObject.transform.tag == "Outside Scrollable Block Area")
-                isInScrollableBlockArea = other.gameObject.transform.tag == "Scrollable Block Area";
-
-            isInBlockSpace = isInScrollableBlockArea && other.gameObject.transform.tag == "Block Space";
+            isInBlockSpace = other.gameObject.transform.tag == "Block Space" && other.gameObject.GetComponent<BlockSpace>().canBeUsed();
 
             if(isInBlockSpace) {
                 // Restore previous block space's color
@@ -70,6 +66,7 @@ namespace Shard.UI.ProgrammingUI
             GameObject blockSpaceImage = currentBlockSpace.transform.GetChild(0).gameObject;
             VisualUtils.ChangeObjectImage(ref blockSpaceImage, a: alphaModifier);
         }
+
 
         public void OnBeginDrag(PointerEventData eventData)
         {
