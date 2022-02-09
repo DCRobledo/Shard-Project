@@ -71,7 +71,9 @@ namespace Shard.UI.ProgrammingUI
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            this.transform.SetParent(GameObject.Find("blockBehaviour").transform, false);
+            Vector3 position = this.transform.position;
+            this.transform.SetParent(GameObject.Find("scrollableArea").transform, false);
+            this.transform.position = position;
 
             HighlightBlockSpace(true);
         }
