@@ -27,24 +27,30 @@ namespace Shard.UI.ProgrammingUI
         }
 
 
-        public void PlaceBlock(int blockSpace, GameObject block) {
+        public void PlaceBlock(int blockSpace, int indentation, GameObject block) {
             // Check if there is already a block in the space
             if(!IsOutOfMemory() && !IsThereBlock(blockSpace)) {
                 block.transform.SetParent(GetBlockContainer(blockSpace - 1).transform);
+
+                block.GetComponent<RectTransform>().anchoredPosition = CalculateBlockPosition(
+                    GetBlockContainer(blockSpace).GetComponent<RectTransform>(),
+                    block.GetComponent<RectTransform>(),
+                    indentation
+                );
                 
-                UpdateBlockPosition(blockSpace - 1);
+                //UpdateBlockPosition(blockSpace - 1);
             }
 
             else Destroy(block.gameObject);
 
-            UpdateIndentations();
+            //UpdateIndentations();
         }
 
         private void UpdateIndentations() {
             // Check all block spaces
             for (int i = 0; i < this.transform.childCount - 1; i++)
             {
-                Transform blockSpaceTransform = GetBlockSpace(i).transform;
+                Transform blockSpaceTransform = GetBlockParent(i).transform;
                 BlockSpace blockSpace = blockSpaceTransform.gameObject.GetComponent<BlockSpace>();
 
                 // Check if there is a block within each block space 
@@ -53,7 +59,7 @@ namespace Shard.UI.ProgrammingUI
 
                     // For conditional blocks, we indent the very next block
                     if(behaviourBlock.blockType == BehaviourBlock.BlockType.IF || behaviourBlock.blockType == BehaviourBlock.BlockType.ELSE || behaviourBlock.blockType == BehaviourBlock.BlockType.ELSEIF) {
-                        BlockSpace nextBlockSpace = GetBlockSpace(i + 1).GetComponent<BlockSpace>();
+                        BlockSpace nextBlockSpace = GetBlockParent(i + 1).GetComponent<BlockSpace>();
 
                         // Only modify indentation if needed
                         if(blockSpace.GetIndentation() == nextBlockSpace.GetIndentation()) {
@@ -76,7 +82,7 @@ namespace Shard.UI.ProgrammingUI
             block.GetComponent<RectTransform>().anchoredPosition = CalculateBlockPosition(
                 GetBlockContainer(index).GetComponent<RectTransform>(),
                 block.GetComponent<RectTransform>(),
-                GetBlockSpace(index).GetComponent<BlockSpace>().GetIndentation()
+                GetBlockParent(index).GetComponent<BlockSpace>().GetIndentation()
             );
         }
 
@@ -101,19 +107,23 @@ namespace Shard.UI.ProgrammingUI
 
 
         private GameObject GetBlock(int index) {
-            return IsThereBlock(index) ? GetBlockSpace(index).transform.GetChild(0).transform.GetChild(0).gameObject : null;
+            return IsThereBlock(index) ? GetBlockParent(index).transform.GetChild(0).transform.GetChild(0).gameObject : null;
+        }
+
+        private GameObject GetBlockSpace(int index, int indentationLevel) {
+            return GetBlockParent(index).transform.GetChild(2).transform.GetChild(indentationLevel).gameObject;
         }
 
         private GameObject GetBlockContainer(int index) {
-            return GetBlockSpace(index).transform.GetChild(0).gameObject;
+            return GetBlockParent(index).transform.GetChild(0).gameObject;
         }
 
-        private GameObject GetBlockSpace(int index) {
+        private GameObject GetBlockParent(int index) {
             return this.transform.GetChild(index).gameObject;
         }
 
         private bool IsThereBlock(int index) {
-            return GetBlockSpace(index).transform.GetChild(0).childCount > 0;
+            return GetBlockParent(index).transform.GetChild(0).childCount > 0;
         }
 
         private int GetNumOfBlocks() {
@@ -135,7 +145,7 @@ namespace Shard.UI.ProgrammingUI
 
             for(int i = 0; i < this.transform.childCount; i++)
             {
-                string blockType = GetBlockSpace(i) == null ? "NULL" : GetBlockSpace(i).GetComponent<BehaviourBlock>().blockType.ToString();
+                string blockType = GetBlockParent(i) == null ? "NULL" : GetBlockParent(i).GetComponent<BehaviourBlock>().blockType.ToString();
 
                 message += i + 1 + " -> " + blockType + "\n";
             }

@@ -27,6 +27,8 @@ namespace Shard.UI.ProgrammingUI
         private void OnTriggerEnter2D(Collider2D other) {
             isInBlockSpace = other.gameObject.transform.tag == "Block Space" && other.gameObject.GetComponent<BlockSpace>().CanBeUsed();
 
+            Debug.Log(other.gameObject.name);
+
             if(isInBlockSpace) {
                 // Restore previous block space's color
                 if(currentBlockSpace != null)
@@ -52,7 +54,8 @@ namespace Shard.UI.ProgrammingUI
             else {
                 GameObject.Find("blocks").GetComponent<BlockManagement>().
                 PlaceBlock(
-                    currentBlockSpace.GetComponent<BlockSpace>().index,
+                    currentBlockSpace.GetComponent<BlockSpace>().GetIndex(),
+                    currentBlockSpace.GetComponent<BlockSpace>().GetIndentation(),
                     this.gameObject
                 );
 
@@ -63,7 +66,7 @@ namespace Shard.UI.ProgrammingUI
         private void HighlightBlockSpace(bool highlight) {
             float alphaModifier = highlight ? .07f : -.07f;
 
-            GameObject blockSpaceImage = currentBlockSpace.transform.GetChild(0).gameObject;
+            GameObject blockSpaceImage = currentBlockSpace.transform.parent.parent.GetChild(0).gameObject;
             VisualUtils.ChangeObjectImage(ref blockSpaceImage, a: alphaModifier);
         }
 
