@@ -81,7 +81,18 @@ namespace Shard.UI.ProgrammingUI
             return blockPosition;
         }
 
-        
+        public void ClearBlocks() {
+            for (int i = 0; i < this.transform.childCount - 1; i++) {
+                GameObject block = GetBlock(i);
+
+                if (block != null) Destroy(block);
+            }
+        }
+
+        private GameObject GetBlock(int index) {
+            return IsThereBlock(index) ? GetBlockSpace(index).transform.GetChild(0).transform.GetChild(0).gameObject : null;
+        }
+
         private GameObject GetBlockSpace(int blockSpace) {
             return this.transform.GetChild(blockSpace).gameObject;
         }
