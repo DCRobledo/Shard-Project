@@ -3470,7 +3470,7 @@ GameObject:
   - component: {fileID: 611266675}
   - component: {fileID: 611266674}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: memory_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3516,7 +3516,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 7 KB FREE
+  m_text: 10 KB FREE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0f0cb75e992137488412cd62a35d04f, type: 2}
   m_sharedMaterial: {fileID: -5497694081935600096, guid: e0f0cb75e992137488412cd62a35d04f, type: 2}
@@ -3984,7 +3984,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64dfc04841aefac40b144f793914cc5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxMemory: 10
   indentationFactor: 20
+  memoryLeft: {fileID: 611266672}
 --- !u!114 &759452251
 MonoBehaviour:
   m_ObjectHideFlags: 0

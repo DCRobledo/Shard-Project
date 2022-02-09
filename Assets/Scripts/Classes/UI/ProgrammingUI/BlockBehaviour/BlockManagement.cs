@@ -2,22 +2,34 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace Shard.UI.ProgrammingUI
 {
     public class BlockManagement : MonoBehaviour
     {
+        [SerializeField] [Range(0, 20)]
+        private int maxMemory = 10;
+
         [SerializeField] [Range(1, 100)]
         private int indentationFactor = 10;
 
+        public GameObject memoryLeft;
+        private TextMeshProUGUI memoryLeftText;
+
+
+        private void Awake() {
+            memoryLeftText = memoryLeft.GetComponent<TextMeshProUGUI>();
+        }
+
         private void Update() {
-            //PrintBlocks();
+            memoryLeftText.SetText((maxMemory - GetNumOfBlocks()) + " KB FREE");
         }
 
 
         public void PlaceBlock(int blockSpace, GameObject block) {
             // Check if there is already a block in the space
-            if(!IsThereBlock(blockSpace)) {
+            if(!IsOutOfMemory() && !IsThereBlock(blockSpace)) {
                 block.transform.SetParent(GetBlockContainer(blockSpace - 1).transform);
                 
                 UpdateBlockPosition(blockSpace - 1);
@@ -80,7 +92,7 @@ namespace Shard.UI.ProgrammingUI
         }
 
         public void ClearBlocks() {
-            for (int i = 0; i < this.transform.childCount - 1; i++) {
+            for (int i = 0; i < this.transform.childCount; i++) {
                 GameObject block = GetBlock(i);
 
                 if (block != null) Destroy(block);
@@ -102,6 +114,19 @@ namespace Shard.UI.ProgrammingUI
 
         private bool IsThereBlock(int index) {
             return GetBlockSpace(index).transform.GetChild(0).childCount > 0;
+        }
+
+        private int GetNumOfBlocks() {
+            int numOfBlocks = 0;
+
+            for (int i = 0; i < this.transform.childCount; i++)
+                if (IsThereBlock(i)) numOfBlocks++;
+
+            return numOfBlocks;
+        }
+
+        private bool IsOutOfMemory() {
+            return GetNumOfBlocks() >= maxMemory;
         }
 
 
