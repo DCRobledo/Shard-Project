@@ -18,7 +18,7 @@ namespace Shard.UI.ProgrammingUI
         public void PlaceBlock(int blockSpace, GameObject block) {
             // Check if there is already a block in the space
             if(!IsThereBlock(blockSpace)) {
-                block.transform.SetParent(this.transform.GetChild(blockSpace - 1).GetChild(0).transform);
+                block.transform.SetParent(GetBlockContainer(blockSpace - 1).transform);
                 
                 UpdateBlockPosition(blockSpace - 1);
             }
@@ -32,16 +32,16 @@ namespace Shard.UI.ProgrammingUI
             // Check all block spaces
             for (int i = 0; i < this.transform.childCount - 1; i++)
             {
-                Transform blockSpaceTransform = this.transform.GetChild(i);
+                Transform blockSpaceTransform = GetBlockSpace(i).transform;
                 BlockSpace blockSpace = blockSpaceTransform.gameObject.GetComponent<BlockSpace>();
 
                 // Check if there is a block within each block space 
                 if(IsThereBlock(i)) {
-                    BehaviourBlock behaviourBlock = blockSpaceTransform.GetChild(0).transform.GetChild(0).GetComponent<BehaviourBlock>();
+                    BehaviourBlock behaviourBlock = GetBlock(i).GetComponent<BehaviourBlock>();
 
                     // For conditional blocks, we indent the very next block
                     if(behaviourBlock.blockType == BehaviourBlock.BlockType.IF || behaviourBlock.blockType == BehaviourBlock.BlockType.ELSE || behaviourBlock.blockType == BehaviourBlock.BlockType.ELSEIF) {
-                        BlockSpace nextBlockSpace = this.transform.GetChild(i + 1).gameObject.GetComponent<BlockSpace>();
+                        BlockSpace nextBlockSpace = GetBlockSpace(i + 1).GetComponent<BlockSpace>();
 
                         // Only modify indentation if needed
                         if(blockSpace.GetIndentation() == nextBlockSpace.GetIndentation()) {
@@ -59,14 +59,12 @@ namespace Shard.UI.ProgrammingUI
         }
 
         private void UpdateBlockPosition(int index) {
-            GameObject blockSpace = this.transform.GetChild(index).gameObject;
-            GameObject blockContainer = blockSpace.transform.GetChild(0).gameObject;
-            GameObject block = blockContainer.transform.GetChild(0).gameObject;
+            GameObject block = GetBlock(index);
 
             block.GetComponent<RectTransform>().anchoredPosition = CalculateBlockPosition(
-                blockContainer.GetComponent<RectTransform>(),
+                GetBlockContainer(index).GetComponent<RectTransform>(),
                 block.GetComponent<RectTransform>(),
-                blockSpace.GetComponent<BlockSpace>().GetIndentation()
+                GetBlockSpace(index).GetComponent<BlockSpace>().GetIndentation()
             );
         }
 
@@ -89,16 +87,21 @@ namespace Shard.UI.ProgrammingUI
             }
         }
 
+
         private GameObject GetBlock(int index) {
             return IsThereBlock(index) ? GetBlockSpace(index).transform.GetChild(0).transform.GetChild(0).gameObject : null;
         }
 
-        private GameObject GetBlockSpace(int blockSpace) {
-            return this.transform.GetChild(blockSpace).gameObject;
+        private GameObject GetBlockContainer(int index) {
+            return GetBlockSpace(index).transform.GetChild(0).gameObject;
         }
 
-        private bool IsThereBlock(int blockSpace) {
-            return this.transform.GetChild(blockSpace).GetChild(0).childCount > 0;
+        private GameObject GetBlockSpace(int index) {
+            return this.transform.GetChild(index).gameObject;
+        }
+
+        private bool IsThereBlock(int index) {
+            return GetBlockSpace(index).transform.GetChild(0).childCount > 0;
         }
 
 
