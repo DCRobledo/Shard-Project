@@ -11,7 +11,7 @@ namespace Shard.UI.ProgrammingUI
         [SerializeField]
         private int indentation;
 
-        private bool isInScrollArea;
+        public bool isInScrollArea;
 
 
         private void Awake() {

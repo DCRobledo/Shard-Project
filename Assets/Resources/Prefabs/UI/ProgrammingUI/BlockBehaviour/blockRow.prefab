@@ -186,7 +186,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.8059616, y: 0.19702911}
@@ -216,6 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 1
   indentation: 3
+  isInScrollArea: 0
 --- !u!50 &8841385333273322691
 Rigidbody2D:
   serializedVersion: 4
@@ -224,7 +225,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3049530961643331512}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -326,7 +327,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.019515991, y: 0.19703007}
@@ -356,6 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 1
   indentation: 1
+  isInScrollArea: 0
 --- !u!50 &1003076704281256104
 Rigidbody2D:
   serializedVersion: 4
@@ -364,7 +366,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3049530961978011742}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -505,7 +507,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.84498596, y: 0.19702911}
@@ -535,6 +537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 1
   indentation: 2
+  isInScrollArea: 0
 --- !u!50 &8284697606352671902
 Rigidbody2D:
   serializedVersion: 4
@@ -543,7 +546,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3049530962915814387}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
