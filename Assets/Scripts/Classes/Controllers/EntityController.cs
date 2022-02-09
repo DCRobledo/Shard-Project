@@ -11,7 +11,7 @@ namespace Shard.Controllers
 {
     public class EntityController : SingletonUnity
     {
-        private static SingletonUnity instance = null;
+        private static EntityController instance = null;
         public static new EntityController Instance { get { return (EntityController) instance; }}
 
         private GameObject player;
@@ -21,6 +21,7 @@ namespace Shard.Controllers
         private Command reCallButton;
         private Command grabButton;
         private Command crouchButton;
+        private Command programButton;
 
         private InputActions InputActions;
         private InputAction movement;
@@ -30,7 +31,7 @@ namespace Shard.Controllers
 
         private void Awake() {
             // Init the controller's instance
-            instance =  SingletonUnity.Instance;
+            instance = this;
 
             // Get the player game object and its components
             player = GameObject.Find("player");
@@ -50,6 +51,7 @@ namespace Shard.Controllers
             crouchButton = new CrouchCommand(playerMovement);
             reCallButton = new ActionCommand(playerActions);
             grabButton = new ActionCommand(playerActions);
+            programButton = new ProgramCommand();
         }
 
 
@@ -74,6 +76,9 @@ namespace Shard.Controllers
 
             InputActions.Player.Grab.performed += context => grabButton.ExecuteWithParameters(EntityActions.Action.GRAB);
             InputActions.Player.Grab.Enable();
+
+            InputActions.Player.Program.performed += context => programButton.Execute();
+            InputActions.Player.Program.Enable();
         }
 
         private void OnDisable() {
@@ -87,6 +92,7 @@ namespace Shard.Controllers
             InputActions.Player.Crouch.Disable();
             InputActions.Player.ReCall.Disable();
             InputActions.Player.Grab.Disable();
+            InputActions.Player.Program.Disable();
         }
 
 

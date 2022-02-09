@@ -70,7 +70,7 @@ namespace Shard.UI.ProgrammingUI
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            this.transform.SetParent(GameObject.Find("block_behaviour").transform, false);
+            this.transform.SetParent(GameObject.Find("blockBehaviour").transform, false);
 
             HighlightBlockSpace(true);
         }

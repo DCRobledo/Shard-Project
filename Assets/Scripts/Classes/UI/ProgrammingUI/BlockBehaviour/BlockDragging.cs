@@ -53,7 +53,7 @@ namespace Shard.UI.ProgrammingUI
             draggableBlock = Instantiate(draggableBlockPrefab);
             draggableBlockRectTransform = draggableBlock.GetComponent<RectTransform>();
 
-            draggableBlock.transform.SetParent(GameObject.Find("block_behaviour").transform, false);
+            draggableBlock.transform.SetParent(GameObject.Find("blockBehaviour").transform, false);
             draggableBlock.transform.position = this.transform.position;   
         }
     }
