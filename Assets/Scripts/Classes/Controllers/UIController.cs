@@ -12,7 +12,7 @@ namespace Shard.Controllers
 
         private enum UIType {
             PROGRAMMING_UI,
-            HUD,
+            HUD
         }
 
         private GameObject programmingUI;

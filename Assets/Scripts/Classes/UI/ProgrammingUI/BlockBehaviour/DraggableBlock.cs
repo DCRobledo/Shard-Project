@@ -16,6 +16,7 @@ namespace Shard.UI.ProgrammingUI
         private Vector3 velocity = Vector3.zero;
 
         private GameObject currentBlockSpace;
+        
         private bool isInBlockSpace;
         private bool isInScrollableBlockArea;
 

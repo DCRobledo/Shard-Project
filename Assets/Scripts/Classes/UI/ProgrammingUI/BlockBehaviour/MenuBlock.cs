@@ -27,9 +27,6 @@ namespace Shard.UI.ProgrammingUI
             blockImage = this.transform.GetChild(0).gameObject;
         }
 
-        public void OnDrag(PointerEventData eventData) {
-            DragAndDrop.Drag(eventData, dragSpeed, draggableBlockRectTransform);
-        }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
@@ -40,6 +37,10 @@ namespace Shard.UI.ProgrammingUI
             CreateDraggableBlock();
         }
 
+        public void OnDrag(PointerEventData eventData) {
+            DragAndDrop.Drag(eventData, dragSpeed, draggableBlockRectTransform);
+        }
+
         public void OnEndDrag(PointerEventData eventData)
         {
             // End dragging state
@@ -48,6 +49,7 @@ namespace Shard.UI.ProgrammingUI
             // Place the draggable block
             draggableBlock.GetComponent<DraggableBlock>().Place();
         }
+
 
         private void CreateDraggableBlock(){
             draggableBlock = Instantiate(draggableBlockPrefab);
