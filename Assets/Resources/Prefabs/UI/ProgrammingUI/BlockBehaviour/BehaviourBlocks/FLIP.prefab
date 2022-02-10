@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1775549660428882026}
   - component: {fileID: 4272430666289160553}
   - component: {fileID: 4496808513079780615}
-  - component: {fileID: -2471238776398945175}
+  - component: {fileID: -5555997192105627740}
   m_Layer: 5
   m_Name: FLIP
   m_TagString: Behaviour Block
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragSpeed: 0.05
---- !u!114 &-2471238776398945175
+--- !u!114 &-5555997192105627740
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,10 +120,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1511664979210757610}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fd9dd025cae66a43b7bc87f9174237f, type: 3}
+  m_Script: {fileID: 11500000, guid: 50db84d3e0b08b44482ddc08818377ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockType: 5
+  type: 0
+  action: 1
 --- !u!1 &7210954912556296734
 GameObject:
   m_ObjectHideFlags: 0

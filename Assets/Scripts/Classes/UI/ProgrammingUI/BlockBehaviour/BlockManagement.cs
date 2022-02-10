@@ -97,18 +97,18 @@ namespace Shard.UI.ProgrammingUI
         }
 
 
-        private void PrintBlocks() {
-            string message = "";
+        // private void PrintBlocks() {
+        //     string message = "";
 
-            for(int i = 1; i < this.transform.childCount + 1; i++)
-            {
-                string blockType = GetBlockParent(i - 1) == null ? "NULL" : GetBlockParent(i - 1).GetComponent<BehaviourBlock>().blockType.ToString();
+        //     for(int i = 1; i < this.transform.childCount + 1; i++)
+        //     {
+        //         string blockType = GetBlockParent(i - 1) == null ? "NULL" : GetBlockParent(i - 1).GetComponent<BehaviourBlock>().blockType.ToString();
 
-                message += i + 1 + " -> " + blockType + "\n";
-            }
+        //         message += i + 1 + " -> " + blockType + "\n";
+        //     }
 
-            Debug.Log(message);
-        }
+        //     Debug.Log(message);
+        // }
     }
 
 }
