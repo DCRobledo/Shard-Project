@@ -20,7 +20,10 @@ namespace Shard.Entities
             USE_OBJECT
         }
 
-        [TagSelector] [SerializeField]
+        #if UNITY_EDITOR 
+            [TagSelector]
+         #endif
+        [SerializeField]
         private string[] whatIsGrabbable = new string[] { };
 
         [SerializeField]
