@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Shard.UI.ProgrammingUI
 {
-    public class BlockDragging : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+    public class MenuBlock : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
         [SerializeField]
         private GameObject draggableBlockPrefab;
