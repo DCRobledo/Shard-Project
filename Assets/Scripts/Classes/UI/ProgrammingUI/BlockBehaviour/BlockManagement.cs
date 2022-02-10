@@ -14,7 +14,8 @@ namespace Shard.UI.ProgrammingUI
         [SerializeField] [Range(1, 100)]
         private int indentationFactor = 10;
 
-        public GameObject memoryLeft;
+        [SerializeField]
+        private GameObject memoryLeft;
         private TextMeshProUGUI memoryLeftText;
 
 
@@ -29,11 +30,11 @@ namespace Shard.UI.ProgrammingUI
 
         public void PlaceBlock(int blockSpace, int indentation, GameObject block) {
             // Check if there is already a block in the space
-            if(!IsOutOfMemory() && !IsThereBlock(blockSpace)) {
+            if(!IsOutOfMemory() && !IsThereBlock(blockSpace - 1)) {
                 block.transform.SetParent(GetBlockContainer(blockSpace - 1).transform);
 
                 block.GetComponent<RectTransform>().anchoredPosition = CalculateBlockPosition(
-                    GetBlockContainer(blockSpace).GetComponent<RectTransform>(),
+                    GetBlockContainer(blockSpace - 1).GetComponent<RectTransform>(),
                     block.GetComponent<RectTransform>(),
                     indentation
                 );
@@ -54,8 +55,8 @@ namespace Shard.UI.ProgrammingUI
         }
 
         public void ClearBlocks() {
-            for (int i = 0; i < this.transform.childCount; i++) {
-                GameObject block = GetBlock(i);
+            for (int i = 1; i < this.transform.childCount + 1; i++) {
+                GameObject block = GetBlock(i - 1);
 
                 if (block != null) Destroy(block);
             }
@@ -85,8 +86,8 @@ namespace Shard.UI.ProgrammingUI
         private int GetNumOfBlocks() {
             int numOfBlocks = 0;
 
-            for (int i = 0; i < this.transform.childCount; i++)
-                if (IsThereBlock(i)) numOfBlocks++;
+            for (int i = 1; i < this.transform.childCount + 1; i++)
+                if (IsThereBlock(i - 1)) numOfBlocks++;
 
             return numOfBlocks;
         }
@@ -99,9 +100,9 @@ namespace Shard.UI.ProgrammingUI
         private void PrintBlocks() {
             string message = "";
 
-            for(int i = 0; i < this.transform.childCount; i++)
+            for(int i = 1; i < this.transform.childCount + 1; i++)
             {
-                string blockType = GetBlockParent(i) == null ? "NULL" : GetBlockParent(i).GetComponent<BehaviourBlock>().blockType.ToString();
+                string blockType = GetBlockParent(i - 1) == null ? "NULL" : GetBlockParent(i - 1).GetComponent<BehaviourBlock>().blockType.ToString();
 
                 message += i + 1 + " -> " + blockType + "\n";
             }
