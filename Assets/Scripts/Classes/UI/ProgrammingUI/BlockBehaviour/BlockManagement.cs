@@ -31,13 +31,20 @@ namespace Shard.UI.ProgrammingUI
         public void PlaceBlock(int blockSpace, int indentation, GameObject block) {
             // Check if there is already a block in the space
             if(!IsOutOfMemory() && !IsThereBlock(blockSpace - 1)) {
-                block.transform.SetParent(GetBlockContainer(blockSpace - 1).transform);
+                
+                // Avoid conditional block placing in indentation level 3
+                if(block.GetComponent<BehaviourBlock>().GetType() == BehaviourBlock.BlockType.CONDITIONAL && indentation == 3) 
+                    Destroy(block.gameObject);
+                
+                else {
+                    block.transform.SetParent(GetBlockContainer(blockSpace - 1).transform);
 
-                block.GetComponent<RectTransform>().anchoredPosition = CalculateBlockPosition(
-                    GetBlockContainer(blockSpace - 1).GetComponent<RectTransform>(),
-                    block.GetComponent<RectTransform>(),
-                    indentation
-                );
+                    block.GetComponent<RectTransform>().anchoredPosition = CalculateBlockPosition(
+                        GetBlockContainer(blockSpace - 1).GetComponent<RectTransform>(),
+                        block.GetComponent<RectTransform>(),
+                        indentation
+                    );
+                }
             }
 
             else Destroy(block.gameObject);
