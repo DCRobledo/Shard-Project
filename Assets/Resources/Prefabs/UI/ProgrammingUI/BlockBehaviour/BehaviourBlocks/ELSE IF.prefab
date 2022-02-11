@@ -210,6 +210,10 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: VOID
       m_Image: {fileID: 0}
+    - m_Text: SPIKE
+      m_Image: {fileID: 0}
+    - m_Text: BOX
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -345,6 +349,8 @@ MonoBehaviour:
   m_Options:
     m_Options:
     - m_Text: AHEAD
+      m_Image: {fileID: 0}
+    - m_Text: BEHIND
       m_Image: {fileID: 0}
     - m_Text: BELOW
       m_Image: {fileID: 0}

@@ -21,7 +21,7 @@ namespace Shard.UI.ProgrammingUI
         }
 
         public override string ToString() {
-            return "BRANCH      -> GO TO " + nextBlockIndex.ToString();
+            return "BRANCH            -> GO TO " + nextBlockIndex.ToString();
         }
 
 

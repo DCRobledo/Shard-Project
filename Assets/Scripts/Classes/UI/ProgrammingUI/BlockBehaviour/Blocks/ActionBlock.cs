@@ -31,7 +31,7 @@ namespace Shard.UI.ProgrammingUI
         }
 
         public override string ToString() {
-            return "ACTION      -> " + action.ToString();
+            return "ACTION            -> " + action.ToString();
         }
 
 
