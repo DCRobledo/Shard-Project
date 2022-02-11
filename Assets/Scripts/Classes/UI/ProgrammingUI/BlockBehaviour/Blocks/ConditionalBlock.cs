@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace Shard.UI.ProgrammingUI
 {
@@ -29,6 +30,12 @@ namespace Shard.UI.ProgrammingUI
             ABOVE
         }
 
+        [SerializeField]
+        private TMP_Dropdown elementDropDown;
+
+        [SerializeField]
+        private TMP_Dropdown stateDropDown;
+
         private Condition condition;
 
         private int nextBlockIndex;
@@ -40,6 +47,9 @@ namespace Shard.UI.ProgrammingUI
             type = BlockType.CONDITIONAL;
 
             condition = new Condition("wall", "ahead");
+
+            elementDropDown.onValueChanged.AddListener(context => SetConditionElement(elementDropDown.value));
+            stateDropDown.onValueChanged.AddListener(context => SetConditionState(stateDropDown.value));
         }
 
 
