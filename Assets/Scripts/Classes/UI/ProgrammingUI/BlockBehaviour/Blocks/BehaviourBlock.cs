@@ -21,7 +21,7 @@ namespace Shard.UI.ProgrammingUI
         public abstract BlockLocation GetNextBlockLocation();
 
         public abstract new string ToString();
-
+        
 
         public new BlockType GetType()
         {
@@ -49,6 +49,10 @@ namespace Shard.UI.ProgrammingUI
 
         public int GetIndentation() {
             return this.location.GetIndentation();
+        }
+
+        public bool Equals(BehaviourBlock block) {
+            return GetIndex() == block.GetIndex() && GetIndentation() == block.GetIndentation();
         }
     }
 

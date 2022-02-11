@@ -21,6 +21,9 @@ namespace Shard.UI.ProgrammingUI
             type = BlockType.ACTION;
         }
 
+        public void Execute() {
+            Debug.Log(action.ToString());
+        }
 
         public override BlockLocation GetNextBlockLocation()
         {

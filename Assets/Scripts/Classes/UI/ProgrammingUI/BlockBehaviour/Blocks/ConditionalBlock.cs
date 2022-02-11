@@ -7,14 +7,14 @@ namespace Shard.UI.ProgrammingUI
 {
     public class ConditionalBlock : BehaviourBlock
     {
-        public enum ContionalType {
+        public enum ConditionalType {
             IF,
             ELSE_IF,
             ELSE
         }
 
         [SerializeField]
-        private ContionalType conditionalType;
+        private ConditionalType conditionalType;
 
         private enum ConditionalElement{
             WALL,
@@ -48,7 +48,7 @@ namespace Shard.UI.ProgrammingUI
 
             condition = new Condition("wall", "ahead");
 
-            if(conditionalType != ContionalType.ELSE) {
+            if(conditionalType != ConditionalType.ELSE) {
                 elementDropDown.onValueChanged.AddListener(context => SetConditionElement(elementDropDown.value));
                 stateDropDown.onValueChanged.AddListener(context => SetConditionState(stateDropDown.value));
             } 
@@ -58,7 +58,7 @@ namespace Shard.UI.ProgrammingUI
         public override BlockLocation GetNextBlockLocation()
         {
             switch(conditionalType) {
-                case ContionalType.IF: case ContionalType.ELSE_IF:
+                case ConditionalType.IF: case ConditionalType.ELSE_IF:
 
                         // Condition is met
                         if(condition.IsMet(/* ref Robot */)) 
@@ -82,19 +82,25 @@ namespace Shard.UI.ProgrammingUI
             
             if(condition != null)
                 message += " " + condition.ToString();
+
+            if(elseBlock != null)
+                message += " (ELSE_BLOCK = [" + elseBlock.GetIndex() + ", " + elseBlock.GetIndentation() + "])";
             
             return message;
         }
 
+        public ConditionalType GetConditionalType() {
+            return this.conditionalType;
+        }
 
         public void SetNextBlockIndex(int nextBlockIndex)
         {
             this.nextBlockIndex = nextBlockIndex;
         }
 
-        public void SetElseBlock(GameObject elseBlock) 
+        public void SetElseBlock(ConditionalBlock elseBlock) 
         {
-            this.elseBlock = elseBlock.GetComponent<ConditionalBlock>();
+            this.elseBlock = elseBlock;
         }
     
         public void SetConditionElement(int element) {
@@ -119,7 +125,7 @@ namespace Shard.UI.ProgrammingUI
 
         public bool IsMet(/*ref RobotController robot*/) {
             // TODO
-            return true;
+            return element == "wall";
         }
 
 
