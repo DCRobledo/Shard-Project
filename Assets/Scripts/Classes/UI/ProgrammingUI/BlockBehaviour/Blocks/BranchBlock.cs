@@ -20,6 +20,11 @@ namespace Shard.UI.ProgrammingUI
             return new BlockLocation(nextBlockIndex, -1);
         }
 
+        public override string ToString() {
+            return "BRANCH      -> GO TO " + nextBlockIndex.ToString();
+        }
+
+
         public void SetNextBlockIndex(int nextBlockIndex)
         {
             this.nextBlockIndex = nextBlockIndex + 1;

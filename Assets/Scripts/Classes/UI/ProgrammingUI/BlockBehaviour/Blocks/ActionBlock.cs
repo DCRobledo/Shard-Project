@@ -27,6 +27,10 @@ namespace Shard.UI.ProgrammingUI
             return new BlockLocation(location.GetIndex() + 1, -1);
         }
 
+        public override string ToString() {
+            return "ACTION      -> " + action.ToString();
+        }
+
 
         public BlockAction GetAction()
         {

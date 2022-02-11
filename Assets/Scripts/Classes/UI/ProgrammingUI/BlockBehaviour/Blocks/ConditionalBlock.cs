@@ -77,6 +77,16 @@ namespace Shard.UI.ProgrammingUI
             
         }
 
+        public override string ToString() {
+            string message = "CONDITIONAL -> " + conditionalType.ToString();
+            
+            if(condition != null)
+                message += " " + condition.ToString();
+            
+            return message;
+        }
+
+
         public void SetNextBlockIndex(int nextBlockIndex)
         {
             this.nextBlockIndex = nextBlockIndex;
@@ -100,7 +110,6 @@ namespace Shard.UI.ProgrammingUI
     {
         private string element;
         private string state;
-
 
         public Condition(string element, string state) {
             this.element = element.ToLower();
@@ -134,8 +143,8 @@ namespace Shard.UI.ProgrammingUI
             this.state = state;
         }
 
-        public void Print() {
-            Debug.Log("IF " + GetElement() + " " + GetState());
+        public new string ToString() {
+            return GetElement() + " " + GetState();
         }
     }
 }

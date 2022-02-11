@@ -20,6 +20,8 @@ namespace Shard.UI.ProgrammingUI
 
         public abstract BlockLocation GetNextBlockLocation();
 
+        public abstract new string ToString();
+
 
         public new BlockType GetType()
         {
@@ -36,9 +38,9 @@ namespace Shard.UI.ProgrammingUI
             return this.location;
         }
 
-        public void SetBlockLocation(BlockLocation location)
+        public void SetBlockLocation(int index, int indentation)
         {
-            this.location = location;
+            this.location = new BlockLocation(index, indentation);
         }
     
         public int GetIndex() {

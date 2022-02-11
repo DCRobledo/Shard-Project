@@ -28,22 +28,24 @@ namespace Shard.UI.ProgrammingUI
         }
 
 
-        public void PlaceBlock(int blockSpace, int indentation, GameObject block) {
+        public void PlaceBlock(int index, int indentation, GameObject block) {
             // Check if there is already a block in the space
-            if(!IsOutOfMemory() && !IsThereBlock(blockSpace - 1)) {
+            if(!IsOutOfMemory() && !IsThereBlock(index - 1)) {
                 
                 // Avoid conditional block placing in indentation level 3
                 if(block.GetComponent<BehaviourBlock>().GetType() == BehaviourBlock.BlockType.CONDITIONAL && indentation == 3) 
                     Destroy(block.gameObject);
                 
                 else {
-                    block.transform.SetParent(GetBlockContainer(blockSpace - 1).transform);
+                    block.transform.SetParent(GetBlockContainer(index - 1).transform);
 
                     block.GetComponent<RectTransform>().anchoredPosition = CalculateBlockPosition(
-                        GetBlockContainer(blockSpace - 1).GetComponent<RectTransform>(),
+                        GetBlockContainer(index - 1).GetComponent<RectTransform>(),
                         block.GetComponent<RectTransform>(),
                         indentation
                     );
+
+                    block.GetComponent<BehaviourBlock>().SetBlockLocation(index, indentation);
                 }
             }
 
@@ -71,12 +73,20 @@ namespace Shard.UI.ProgrammingUI
 
         public void GenerateBlockBehaviour() {
             List<GameObject> blocks = new List<GameObject>();
+            int maxIndex = 0;
 
             for (int i = 1; i < this.transform.childCount + 1; i++)
-                if (IsThereBlock(i - 1)) blocks.Add(GetBlock(i - 1));
+                if (IsThereBlock(i - 1)) {
+                    GameObject block = GetBlock(i - 1);
+                    blocks.Add(block);
 
-            BlockBehaviour blockBehaviour = new BlockBehaviour(blocks);
+                    int blockIndex = block.GetComponent<BehaviourBlock>().GetIndex();
+                    if(maxIndex < blockIndex) maxIndex = blockIndex;
+                } 
+
+            BlockBehaviour blockBehaviour = new BlockBehaviour(maxIndex, blocks);
         }
+
 
         private GameObject GetBlock(int index) {
             return IsThereBlock(index) ? GetBlockParent(index).transform.GetChild(0).transform.GetChild(0).gameObject : null;
