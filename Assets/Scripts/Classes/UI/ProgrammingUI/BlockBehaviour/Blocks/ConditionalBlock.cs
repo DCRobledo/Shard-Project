@@ -15,6 +15,20 @@ namespace Shard.UI.ProgrammingUI
         [SerializeField]
         private ContionalType conditionalType;
 
+        private enum ConditionalElement{
+            WALL,
+            VOID,
+            SPIKE,
+            BOX
+        }
+
+        private enum ConditionalState{
+            AHEAD,
+            BEHIND,
+            BELOW,
+            ABOVE
+        }
+
         private Condition condition;
 
         private int nextBlockIndex;
@@ -24,6 +38,8 @@ namespace Shard.UI.ProgrammingUI
 
         private void Awake() {
             type = BlockType.CONDITIONAL;
+
+            condition = new Condition("wall", "ahead");
         }
 
 
@@ -58,6 +74,16 @@ namespace Shard.UI.ProgrammingUI
         {
             this.elseBlock = elseBlock.GetComponent<ConditionalBlock>();
         }
+    
+        public void SetConditionElement(int element) {
+            condition =  new Condition(((ConditionalElement) element).ToString(), condition.GetState());
+            condition.Print();
+        }
+
+        public void SetConditionState(int state) {
+            condition =  new Condition(condition.GetElement(), ((ConditionalState) state).ToString());
+            condition.Print();
+        }
     }
 
     public class Condition
@@ -67,8 +93,8 @@ namespace Shard.UI.ProgrammingUI
 
 
         public Condition(string element, string state) {
-            this.element = element;
-            this.state = state;
+            this.element = element.ToLower();
+            this.state = state.ToLower();
         }
 
 
@@ -96,6 +122,10 @@ namespace Shard.UI.ProgrammingUI
         public void SetState(string state)
         {
             this.state = state;
+        }
+
+        public void Print() {
+            Debug.Log("IF " + GetElement() + " " + GetState());
         }
     }
 }
