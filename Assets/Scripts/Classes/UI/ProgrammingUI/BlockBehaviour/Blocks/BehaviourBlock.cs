@@ -40,6 +40,14 @@ namespace Shard.UI.ProgrammingUI
         {
             this.location = location;
         }
+    
+        public int GetIndex() {
+            return this.location.GetIndex();
+        }
+
+        public int GetIndentation() {
+            return this.location.GetIndentation();
+        }
     }
 
     public class BlockLocation

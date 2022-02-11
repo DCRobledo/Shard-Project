@@ -69,6 +69,14 @@ namespace Shard.UI.ProgrammingUI
             }
         }
 
+        public void GenerateBlockBehaviour() {
+            List<GameObject> blocks = new List<GameObject>();
+
+            for (int i = 1; i < this.transform.childCount + 1; i++)
+                if (IsThereBlock(i - 1)) blocks.Add(GetBlock(i - 1));
+
+            BlockBehaviour blockBehaviour = new BlockBehaviour(blocks);
+        }
 
         private GameObject GetBlock(int index) {
             return IsThereBlock(index) ? GetBlockParent(index).transform.GetChild(0).transform.GetChild(0).gameObject : null;
@@ -102,20 +110,6 @@ namespace Shard.UI.ProgrammingUI
         private bool IsOutOfMemory() {
             return GetNumOfBlocks() >= maxMemory;
         }
-
-
-        // private void PrintBlocks() {
-        //     string message = "";
-
-        //     for(int i = 1; i < this.transform.childCount + 1; i++)
-        //     {
-        //         string blockType = GetBlockParent(i - 1) == null ? "NULL" : GetBlockParent(i - 1).GetComponent<BehaviourBlock>().blockType.ToString();
-
-        //         message += i + 1 + " -> " + blockType + "\n";
-        //     }
-
-        //     Debug.Log(message);
-        // }
     }
 
 }

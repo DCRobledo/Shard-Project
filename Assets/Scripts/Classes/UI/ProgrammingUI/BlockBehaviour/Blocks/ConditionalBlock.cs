@@ -48,8 +48,10 @@ namespace Shard.UI.ProgrammingUI
 
             condition = new Condition("wall", "ahead");
 
-            elementDropDown.onValueChanged.AddListener(context => SetConditionElement(elementDropDown.value));
-            stateDropDown.onValueChanged.AddListener(context => SetConditionState(stateDropDown.value));
+            if(conditionalType != ContionalType.ELSE) {
+                elementDropDown.onValueChanged.AddListener(context => SetConditionElement(elementDropDown.value));
+                stateDropDown.onValueChanged.AddListener(context => SetConditionState(stateDropDown.value));
+            } 
         }
 
 
@@ -87,12 +89,10 @@ namespace Shard.UI.ProgrammingUI
     
         public void SetConditionElement(int element) {
             condition =  new Condition(((ConditionalElement) element).ToString(), condition.GetState());
-            condition.Print();
         }
 
         public void SetConditionState(int state) {
             condition =  new Condition(condition.GetElement(), ((ConditionalState) state).ToString());
-            condition.Print();
         }
     }
 

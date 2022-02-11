@@ -721,6 +721,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   conditionalType: 1
+  elementDropDown: {fileID: 1004776681071408659}
+  stateDropDown: {fileID: 7805295160130725339}
 --- !u!1 &1653081262091184423
 GameObject:
   m_ObjectHideFlags: 0
