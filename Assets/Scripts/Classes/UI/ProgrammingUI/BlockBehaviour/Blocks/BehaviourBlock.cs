@@ -86,5 +86,8 @@ namespace Shard.UI.ProgrammingUI
             this.indentation = indentation;
         }
 
+        public new string ToString() {
+            return "Block (" + this.index + ", " + this.indentation + ")";
+        }
     }
 }

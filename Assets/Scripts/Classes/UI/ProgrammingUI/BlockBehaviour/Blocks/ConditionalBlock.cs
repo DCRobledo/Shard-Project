@@ -42,6 +42,9 @@ namespace Shard.UI.ProgrammingUI
 
         private ConditionalBlock elseBlock = null;
 
+        private BlockBehaviour trueSubBehaviour;
+        private BlockBehaviour falseSubBehaviour;
+
 
         private void Awake() {
             type = BlockType.CONDITIONAL;
@@ -72,9 +75,8 @@ namespace Shard.UI.ProgrammingUI
                         return new BlockLocation(location.GetIndex() + 1, location.GetIndentation()); // Next block in the same indentation level
 
                 default:
-                        return new BlockLocation(elseBlock.location.GetIndex() + 1, -1); 
+                        return new BlockLocation(location.GetIndex() + 1, -1); 
             }
-            
         }
 
         public override string ToString() {
@@ -83,11 +85,15 @@ namespace Shard.UI.ProgrammingUI
             if(condition != null)
                 message += " " + condition.ToString();
 
-            if(elseBlock != null)
-                message += " (ELSE_BLOCK = [" + elseBlock.GetIndex() + ", " + elseBlock.GetIndentation() + "])";
+            if(trueSubBehaviour != null)  message += "#TRUE \n"  + trueSubBehaviour.ToString()  + "#END_TRUE \n";
+            if(falseSubBehaviour != null) message += "#FALSE \n" + falseSubBehaviour.ToString() + "#END_FALSE \n";
+
+            // if(elseBlock != null)
+            //     message += " (ELSE_BLOCK = [" + elseBlock.GetIndex() + ", " + elseBlock.GetIndentation() + "])";
             
             return message;
         }
+
 
         public ConditionalType GetConditionalType() {
             return this.conditionalType;
@@ -102,13 +108,27 @@ namespace Shard.UI.ProgrammingUI
         {
             this.elseBlock = elseBlock;
         }
-    
+
+        public ConditionalBlock GetElseBlock() {
+            return this.elseBlock;
+        }
+
         public void SetConditionElement(int element) {
             condition =  new Condition(((ConditionalElement) element).ToString(), condition.GetState());
         }
 
         public void SetConditionState(int state) {
             condition =  new Condition(condition.GetElement(), ((ConditionalState) state).ToString());
+        }
+    
+        public void SetSubBehaviour(bool selector, BlockBehaviour subBehaviour) {
+            if(selector) this.trueSubBehaviour = subBehaviour;
+            else         this.falseSubBehaviour = subBehaviour;
+        }
+
+        public BlockBehaviour GetSubBehaviour(bool selector) {
+            if (selector) return trueSubBehaviour;
+                          return falseSubBehaviour;
         }
     }
 

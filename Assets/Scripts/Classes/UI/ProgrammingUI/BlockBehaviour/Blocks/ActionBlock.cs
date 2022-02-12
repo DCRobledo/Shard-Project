@@ -22,7 +22,7 @@ namespace Shard.UI.ProgrammingUI
         }
 
         public void Execute() {
-            Debug.Log(action.ToString());
+            //Debug.Log(action.ToString());
         }
 
         public override BlockLocation GetNextBlockLocation()
