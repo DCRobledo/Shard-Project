@@ -81,7 +81,7 @@ namespace Shard.UI.ProgrammingUI
                                 conditionalBlock.SetSubBehaviour(true, CreateSubBehaviour(conditionalBlock.GetIndex(), conditionalBlock));
 
                                 // And only a false sub-behaviour if there is an else block
-                                if(conditionalBlock.GetElseBlock() != null)
+                                if(conditionalBlock.GetElseBlock() != null && conditionalBlock.GetElseBlock().GetConditionalType() == ConditionalBlock.ConditionalType.ELSE)
                                     conditionalBlock.SetSubBehaviour(false, CreateSubBehaviour(conditionalBlock.GetElseBlock().GetIndex(), conditionalBlock));
                             }
                         }
