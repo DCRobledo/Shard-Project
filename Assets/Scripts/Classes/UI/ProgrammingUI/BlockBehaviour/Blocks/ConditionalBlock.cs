@@ -85,8 +85,8 @@ namespace Shard.UI.ProgrammingUI
             if(condition != null)
                 message += " " + condition.ToString();
 
-            if(trueSubBehaviour != null)  message += "#TRUE \n"  + trueSubBehaviour.ToString()  + "#END_TRUE \n";
-            if(falseSubBehaviour != null) message += "#FALSE \n" + falseSubBehaviour.ToString() + "#END_FALSE \n";
+            if(trueSubBehaviour != null)  message += "\n#TRUE\n"  + trueSubBehaviour.ToString()  + "#END_TRUE\n";
+            if(falseSubBehaviour != null) message += "#FALSE\n"   + falseSubBehaviour.ToString() + "#END_FALSE\n";
 
             // if(elseBlock != null)
             //     message += " (ELSE_BLOCK = [" + elseBlock.GetIndex() + ", " + elseBlock.GetIndentation() + "])";

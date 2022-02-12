@@ -85,6 +85,7 @@ namespace Shard.UI.ProgrammingUI
                 } 
 
             BlockBehaviour blockBehaviour = new BlockBehaviour(maxIndex, blocks);
+            blockBehaviour.Print();
         }
 
 

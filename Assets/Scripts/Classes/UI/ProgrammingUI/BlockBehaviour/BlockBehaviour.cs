@@ -25,27 +25,7 @@ namespace Shard.UI.ProgrammingUI
             AssingElseBlocks();
             CreateSubBehaviours();
 
-            Debug.Log(this.ToString());
-
             //ExecuteBehavior();
-        }
-
-        private void CreateSubBehaviours() {
-            // Each conditional block creates sub-behaviours for both of its branches
-            for(int i = 1; i <= maxIndex; i++) {
-                for(int j = 1; j <= 3; j++) {
-                    BehaviourBlock currentBlock = GetBlock(i, j);
-                    if(currentBlock != null) {
-
-                        if(currentBlock.GetType() == BehaviourBlock.BlockType.CONDITIONAL) {
-                            ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
-
-                            if(conditionalBlock.GetConditionalType() != ConditionalBlock.ConditionalType.ELSE)
-                                CreateSubBehaviour(ref conditionalBlock);
-                        }
-                    }
-                }
-            } 
         }
 
         private void AssingElseBlocks() {
@@ -86,38 +66,41 @@ namespace Shard.UI.ProgrammingUI
             }
         }
 
-        private void CreateSubBehaviour(ref ConditionalBlock block) {
-            block.SetSubBehaviour(true, CreateTrueSubBehaviour(block));
-            block.SetSubBehaviour(false, CreateFalseSubBehaviour(block));
-        }
+        private void CreateSubBehaviours() {
+            // Each conditional block creates sub-behaviours for both of its branches
+            for(int i = 1; i <= maxIndex; i++) {
+                for(int j = 1; j <= 3; j++) {
+                    BehaviourBlock currentBlock = GetBlock(i, j);
+                    if(currentBlock != null) {
 
-        private BlockBehaviour CreateTrueSubBehaviour(ConditionalBlock block) {
-            List<GameObject> blocks = new List<GameObject>();
-            int maxIndex = 0;
+                        if(currentBlock.GetType() == BehaviourBlock.BlockType.CONDITIONAL) {
+                            ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
 
-            // We add all blocks until we find the ELSE block
-            for(int i = block.GetIndex(); i <= block.GetElseBlock().GetIndex(); i++) {
-                BehaviourBlock currentBlock = GetBlock(i, block.GetIndentation() + 1);
-                if (currentBlock != null) {
-                    blocks.Add(currentBlock.gameObject);
+                            if(conditionalBlock.GetConditionalType() != ConditionalBlock.ConditionalType.ELSE) {
+                                // We always have a true sub-behaviour
+                                conditionalBlock.SetSubBehaviour(true, CreateSubBehaviour(conditionalBlock.GetIndex(), conditionalBlock));
 
-                    if(maxIndex < currentBlock.GetIndex()) maxIndex = currentBlock.GetIndex();
+                                // And only a false sub-behaviour if there is an else block
+                                if(conditionalBlock.GetElseBlock() != null)
+                                    conditionalBlock.SetSubBehaviour(false, CreateSubBehaviour(conditionalBlock.GetElseBlock().GetIndex(), conditionalBlock));
+                            }
+                        }
+                    }
                 }
-            }
-
-            return new BlockBehaviour(maxIndex, blocks);
+            } 
         }
 
-        private BlockBehaviour CreateFalseSubBehaviour(ConditionalBlock block) {
+        private BlockBehaviour CreateSubBehaviour(int startIndex, ConditionalBlock block) {
             List<GameObject> blocks = new List<GameObject>();
             int maxIndex = 0;
 
-            // We add all blocks until que find one with the same indentation as the ELSE block
-            for(int i = block.GetElseBlock().GetIndex(); i <= maxIndex; i++) {
-                BehaviourBlock currentBlock = GetBlock(i, block.GetIndentation() + 1);
+            // We add all blocks until que find one with the same indentation as the conditional block
+            for(int i = startIndex + 1; i <= this.maxIndex; i++) {
+                BehaviourBlock currentBlock = GetBlock(i);
+              
                 if (currentBlock != null) {
 
-                    if(currentBlock.GetIndentation() == block.GetElseBlock().GetIndentation())
+                    if(currentBlock.GetIndentation() == block.GetIndentation())
                         break;
 
                     blocks.Add(currentBlock.gameObject);
@@ -174,7 +157,11 @@ namespace Shard.UI.ProgrammingUI
         }
 
 
-        private new string ToString() {
+        public void Print() {
+            Debug.Log(this.ToString());
+        }
+
+        public new string ToString() {
             string message = "";
 
             for(int i = 1; i <= maxIndex; i++)
