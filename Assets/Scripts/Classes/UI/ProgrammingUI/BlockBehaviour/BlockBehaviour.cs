@@ -105,6 +105,10 @@ namespace Shard.UI.ProgrammingUI
 
                     blocks.Add(currentBlock.gameObject);
 
+                    // If a block is part of a sub-behaviour, it is no longer part of the main behaviour
+                    if (GetBlock(currentBlock.GetIndex(), currentBlock.GetIndentation()) != null)
+                        SetBlock(currentBlock.GetIndex(), currentBlock.GetIndentation(), null);
+
                     if(maxIndex < currentBlock.GetIndex()) maxIndex = currentBlock.GetIndex();
                 }
             }
@@ -131,6 +135,9 @@ namespace Shard.UI.ProgrammingUI
             }
         }
 
+        private void SetBlock(int index, int indentation, BehaviourBlock block) {
+            this.blocks[index - 1, indentation - 1] = block;
+        }
 
         private BehaviourBlock GetBlock()
         {
@@ -158,16 +165,18 @@ namespace Shard.UI.ProgrammingUI
 
 
         public void Print() {
-            Debug.Log(this.ToString());
+            Debug.Log(this.ToString(0));
         }
 
-        public new string ToString() {
+        public string ToString(int indentation) {
             string message = "";
 
             for(int i = 1; i <= maxIndex; i++)
                 for(int j = 1; j <= 3; j++)
-                    if (GetBlock(i, j) != null)
+                    if (GetBlock(i, j) != null){
+                        for(int k = 0; k < indentation; k++) message += "\t";
                         message += "Block (" + GetBlock(i, j).GetIndex().ToString() + ", " + GetBlock(i, j).GetIndentation().ToString() + ") = " + GetBlock(i, j).ToString() + "\n";
+                    }
                     
             return message;
         }
