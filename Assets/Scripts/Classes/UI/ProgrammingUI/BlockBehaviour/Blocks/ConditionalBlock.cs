@@ -60,7 +60,7 @@ namespace Shard.UI.ProgrammingUI
 
         public override BlockLocation Execute()
         {
-            if(conditionalType == ConditionalType.ELSE) return new BlockLocation(this.GetIndex(), -1);
+            if(conditionalType == ConditionalType.ELSE) return new BlockLocation(this.GetIndex() + 1, -1);
 
             // If the condition is meet, we execute the true sub-behaviour, and if it's not, the false sub-behaviour
             if(condition.IsMet()) trueSubBehaviour.ExecuteBehavior();

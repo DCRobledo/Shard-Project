@@ -9,6 +9,8 @@ namespace Shard.Entities
     {
         private BlockBehaviour blockBehaviour;
 
+        private bool isRunning;
+
 
         private void OnEnable() {
             BlockManagement.generateBlockBehaviourEvent += SetBlockBehaviour;
@@ -25,42 +27,50 @@ namespace Shard.Entities
     
     
         public void TurnOn() {
+            if(isRunning) StopCoroutine(ExecuteBehaviour());
+
             StartCoroutine(ExecuteBehaviour());
         }
 
         public void TurnOff() {
-            StopCoroutine(ExecuteBehaviour());
+            if(isRunning) StopCoroutine(ExecuteBehaviour());
+        }
+
+        private IEnumerator ExecuteBehaviour() {
+            isRunning = true;
+
+            blockBehaviour.ExecuteBehavior();
+
+            isRunning = false;
+
+            yield return null;
         }
 
         // private IEnumerator ExecuteBehaviour() {
-        //     blockBehaviour.ExecuteBehavior();
+        //     isRunning = true;
 
-        //     yield return null;
+        //     // Execute the first block
+        //     BehaviourBlock currentBlock = blockBehaviour.GetBlock();
+
+        //     Debug.Log("Execute -> " + currentBlock.GetBlockLocation().ToString());
+
+        //     BlockLocation nextBlockLocation = currentBlock.Execute(); 
+
+        //     // Now, we go through each block in the behaviour until we reach the end of it
+        //     while(nextBlockLocation.GetIndex() <= blockBehaviour.GetMaxIndex()) {
+        //         // Get the next block
+        //         currentBlock = blockBehaviour.GetBlock(nextBlockLocation.GetIndex(), nextBlockLocation.GetIndentation());
+
+        //         if(currentBlock != null) {   
+        //             Debug.Log("Execute -> " + currentBlock.GetBlockLocation().ToString());
+
+        //             // Execute the block and get the next block location
+        //             nextBlockLocation = currentBlock.Execute();
+        //         }
+        //     }
+
+        //     yield return new WaitForSeconds(0);
         // }
-
-        private IEnumerator ExecuteBehaviour() {
-            // Execute the first block
-            BehaviourBlock currentBlock = blockBehaviour.GetBlock();
-
-            Debug.Log("Execute -> " + currentBlock.GetBlockLocation().ToString());
-
-            BlockLocation nextBlockLocation = currentBlock.Execute(); 
-
-            // Now, we go through each block in the behaviour until we reach the end of it
-            while(nextBlockLocation.GetIndex() <= blockBehaviour.GetMaxIndex()) {
-                // Get the next block
-                currentBlock = blockBehaviour.GetBlock(nextBlockLocation.GetIndex(), nextBlockLocation.GetIndentation());
-
-                if(currentBlock != null) {   
-                    Debug.Log("Execute -> " + currentBlock.GetBlockLocation().ToString());
-
-                    // Execute the block and get the next block location
-                    nextBlockLocation = currentBlock.Execute();
-                }
-            }
-
-            yield return new WaitForSeconds(0);
-        }
     }
 }
 
