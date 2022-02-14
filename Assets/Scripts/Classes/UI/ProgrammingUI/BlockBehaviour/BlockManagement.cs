@@ -78,7 +78,7 @@ namespace Shard.UI.ProgrammingUI
             List<GameObject> blocks = new List<GameObject>();
             int maxIndex = 0;
 
-            for (int i = 1; i < this.transform.childCount + 1; i++)
+            for (int i = 1; i < this.transform.childCount + 1; i++) {
                 if (IsThereBlock(i - 1)) {
                     GameObject block = GetBlock(i - 1);
                     blocks.Add(block);
@@ -86,6 +86,7 @@ namespace Shard.UI.ProgrammingUI
                     int blockIndex = block.GetComponent<BehaviourBlock>().GetIndex();
                     if(maxIndex < blockIndex) maxIndex = blockIndex;
                 } 
+            }
 
             generateBlockBehaviourEvent?.Invoke(new BlockBehaviour(maxIndex, blocks));
         }
