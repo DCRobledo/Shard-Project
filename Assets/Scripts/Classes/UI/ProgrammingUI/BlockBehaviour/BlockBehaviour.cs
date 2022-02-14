@@ -91,7 +91,7 @@ namespace Shard.UI.ProgrammingUI
 
         private BlockBehaviour CreateSubBehaviour(int startIndex, ConditionalBlock block, bool isTrueBehaviour) {
             List<GameObject> blocks = new List<GameObject>();
-            int maxIndex = 0;
+            int maxIndex = startIndex;
 
             // We add all blocks until que find one with the same indentation as the conditional block, which is not part of its false sub-behaviour
             for(int i = startIndex + 1; i <= this.maxIndex; i++) {

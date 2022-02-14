@@ -63,8 +63,8 @@ namespace Shard.UI.ProgrammingUI
             if(conditionalType == ConditionalType.ELSE) return new BlockLocation(this.GetIndex() + 1, -1);
 
             // If the condition is meet, we execute the true sub-behaviour, and if it's not, the false sub-behaviour
-            if(condition.IsMet()) trueSubBehaviour.ExecuteBehavior();
-            else                  falseSubBehaviour?.ExecuteBehavior();
+            if(condition.IsMet() && trueSubBehaviour.GetMaxIndex() > this.GetIndex())        trueSubBehaviour?.ExecuteBehavior();
+            else if (!condition.IsMet() && trueSubBehaviour.GetMaxIndex() > this.GetIndex()) falseSubBehaviour?.ExecuteBehavior();
 
 
             if(falseSubBehaviour == null) return new BlockLocation(this.GetSubBehaviour(true).GetMaxIndex() + 1, this.GetIndentation());
