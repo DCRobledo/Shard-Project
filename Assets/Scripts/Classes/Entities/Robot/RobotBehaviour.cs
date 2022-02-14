@@ -9,7 +9,7 @@ namespace Shard.Entities
     {
         private BlockBehaviour blockBehaviour;
 
-        private bool isRunning;
+        private Coroutine behaviourExecution;
 
 
         private void OnEnable() {
@@ -27,50 +27,22 @@ namespace Shard.Entities
     
     
         public void TurnOn() {
-            if(isRunning) StopCoroutine(ExecuteBehaviour());
+            if(behaviourExecution != null)
+                StopCoroutine(behaviourExecution);
 
-            StartCoroutine(ExecuteBehaviour());
+            behaviourExecution = StartCoroutine(ExecuteBehaviour());
         }
 
         public void TurnOff() {
-            if(isRunning) StopCoroutine(ExecuteBehaviour());
+            if(behaviourExecution != null)
+                StopCoroutine(behaviourExecution);
         }
 
         private IEnumerator ExecuteBehaviour() {
-            isRunning = true;
-
             blockBehaviour.ExecuteBehavior();
-
-            isRunning = false;
 
             yield return null;
         }
-
-        // private IEnumerator ExecuteBehaviour() {
-        //     isRunning = true;
-
-        //     // Execute the first block
-        //     BehaviourBlock currentBlock = blockBehaviour.GetBlock();
-
-        //     Debug.Log("Execute -> " + currentBlock.GetBlockLocation().ToString());
-
-        //     BlockLocation nextBlockLocation = currentBlock.Execute(); 
-
-        //     // Now, we go through each block in the behaviour until we reach the end of it
-        //     while(nextBlockLocation.GetIndex() <= blockBehaviour.GetMaxIndex()) {
-        //         // Get the next block
-        //         currentBlock = blockBehaviour.GetBlock(nextBlockLocation.GetIndex(), nextBlockLocation.GetIndentation());
-
-        //         if(currentBlock != null) {   
-        //             Debug.Log("Execute -> " + currentBlock.GetBlockLocation().ToString());
-
-        //             // Execute the block and get the next block location
-        //             nextBlockLocation = currentBlock.Execute();
-        //         }
-        //     }
-
-        //     yield return new WaitForSeconds(0);
-        // }
     }
 }
 
