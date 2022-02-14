@@ -53,12 +53,13 @@ namespace Shard.UI.ProgrammingUI
                 if(currentBlock != null) {
                     if(currentBlock.GetType() == BehaviourBlock.BlockType.CONDITIONAL) {
                         ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
-                        
-                        // This prevents two blocks to have the same elseBlock
-                        //if (conditionalBlock.GetConditionalType() != ConditionalBlock.ConditionalType.IF) return;
 
-                        if(!block.Equals(conditionalBlock))
-                            block.SetElseBlock(conditionalBlock); return;   
+                        if(!block.Equals(conditionalBlock) && conditionalBlock.GetConditionalType() != ConditionalBlock.ConditionalType.IF) {
+                            block.SetElseBlock(conditionalBlock);
+
+                            return;   
+                        }
+                            
                     }
                 }
             }
@@ -76,11 +77,11 @@ namespace Shard.UI.ProgrammingUI
 
                             if(conditionalBlock.GetConditionalType() != ConditionalBlock.ConditionalType.ELSE) {
                                 // We always have a true sub-behaviour
-                                conditionalBlock.SetSubBehaviour(true, CreateSubBehaviour(conditionalBlock.GetIndex(), conditionalBlock));
+                                conditionalBlock.SetSubBehaviour(true, CreateSubBehaviour(conditionalBlock.GetIndex(), conditionalBlock, true));
 
                                 // And only a false sub-behaviour if there is an else block
-                                if(conditionalBlock.GetElseBlock() != null && conditionalBlock.GetElseBlock().GetConditionalType() == ConditionalBlock.ConditionalType.ELSE)
-                                    conditionalBlock.SetSubBehaviour(false, CreateSubBehaviour(conditionalBlock.GetElseBlock().GetIndex(), conditionalBlock));
+                                if(conditionalBlock.GetElseBlock() != null)
+                                    conditionalBlock.SetSubBehaviour(false, CreateSubBehaviour(conditionalBlock.GetElseBlock().GetIndex() - 1, conditionalBlock, false));
                             }
                         }
                     }
@@ -88,18 +89,29 @@ namespace Shard.UI.ProgrammingUI
             } 
         }
 
-        private BlockBehaviour CreateSubBehaviour(int startIndex, ConditionalBlock block) {
+        private BlockBehaviour CreateSubBehaviour(int startIndex, ConditionalBlock block, bool isTrueBehaviour) {
             List<GameObject> blocks = new List<GameObject>();
             int maxIndex = 0;
 
-            // We add all blocks until que find one with the same indentation as the conditional block
+            // We add all blocks until que find one with the same indentation as the conditional block, which is not part of its false sub-behaviour
             for(int i = startIndex + 1; i <= this.maxIndex; i++) {
                 BehaviourBlock currentBlock = GetBlock(i);
               
                 if (currentBlock != null) {
 
-                    if(currentBlock.GetIndentation() == block.GetIndentation())
-                        break;
+                    if(currentBlock.GetIndentation() == block.GetIndentation()) {
+                        if(isTrueBehaviour) break;
+
+                        if(currentBlock.GetType() == BehaviourBlock.BlockType.CONDITIONAL) {
+                            ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
+
+                            if(conditionalBlock.GetConditionalType() == ConditionalBlock.ConditionalType.IF)
+                                break;
+                        }
+
+                        else break;
+                    }
+                        
 
                     blocks.Add(currentBlock.gameObject);
 
@@ -119,28 +131,30 @@ namespace Shard.UI.ProgrammingUI
             // Execute the first block
             BehaviourBlock currentBlock = GetBlock();
 
+            Debug.Log("Execute -> " + currentBlock.GetBlockLocation().ToString());
+
             BlockLocation nextBlockLocation = currentBlock.Execute(); 
 
             // Now, we go through each block in the behaviour until we reach the end of it
-            while(nextBlockLocation.GetIndex() < this.maxIndex) {
-                if(currentBlock != null) {
+            while(nextBlockLocation.GetIndex() <= this.maxIndex) {
+                // Get the next block
+                currentBlock = GetBlock(nextBlockLocation.GetIndex(), nextBlockLocation.GetIndentation());
+
+                if(currentBlock != null) {   
                     Debug.Log("Execute -> " + currentBlock.GetBlockLocation().ToString());
 
                     // Execute the block and get the next block location
-                    nextBlockLocation = currentBlock.Execute();   
-
-                    // Get the next block
-                    currentBlock = GetBlock(nextBlockLocation.GetIndex(), nextBlockLocation.GetIndentation());
+                    nextBlockLocation = currentBlock.Execute();
                 }
             }
         }
 
 
-        private void SetBlock(int index, int indentation, BehaviourBlock block) {
+        public void SetBlock(int index, int indentation, BehaviourBlock block) {
             this.blocks[index - 1, indentation - 1] = block;
         }
 
-        private BehaviourBlock GetBlock()
+        public BehaviourBlock GetBlock()
         {
             for (int i = 1; i <= maxIndex; i++)
                 if (GetBlock(i) != null)
@@ -149,7 +163,7 @@ namespace Shard.UI.ProgrammingUI
             return null;
         }
 
-        private BehaviourBlock GetBlock(int index)
+        public BehaviourBlock GetBlock(int index)
         {
             if(index == -1) return GetBlock();
 
@@ -158,7 +172,7 @@ namespace Shard.UI.ProgrammingUI
                                                  return GetBlock(index, 3);
         }
 
-        private BehaviourBlock GetBlock(int index, int indentation)
+        public BehaviourBlock GetBlock(int index, int indentation)
         {
             BehaviourBlock block = indentation == -1 ? GetBlock(index) : blocks[index - 1, indentation - 1];
             return block;

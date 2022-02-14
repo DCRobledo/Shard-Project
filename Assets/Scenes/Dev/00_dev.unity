@@ -345,6 +345,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 6803199341699231596}
+        m_TargetAssemblyTypeName: Shard.Entities.RobotBehaviour, Scripts
+        m_MethodName: TurnOff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &17128639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33091,6 +33103,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6803199341699231596}
+        m_TargetAssemblyTypeName: Shard.Entities.RobotBehaviour, Scripts
+        m_MethodName: TurnOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1121565914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38240,6 +38264,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6307710219032108865, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
   m_PrefabInstance: {fileID: 711758715675865130}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6803199341699231596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138330818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efb23a6eaf08e4442966bcf08408f690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6820156122828862432
 PrefabInstance:
   m_ObjectHideFlags: 0

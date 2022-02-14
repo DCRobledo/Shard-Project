@@ -60,13 +60,15 @@ namespace Shard.UI.ProgrammingUI
 
         public override BlockLocation Execute()
         {
+            if(conditionalType == ConditionalType.ELSE) return new BlockLocation(this.GetIndex(), -1);
+
             // If the condition is meet, we execute the true sub-behaviour, and if it's not, the false sub-behaviour
             if(condition.IsMet()) trueSubBehaviour.ExecuteBehavior();
-            else                  falseSubBehaviour.ExecuteBehavior();
+            else                  falseSubBehaviour?.ExecuteBehavior();
 
-            // In both cases, the next block to execute is the end of the conditional (i.e. the end of the false sub-behaviour, if it exists)
-            BlockLocation nextBlockLocation = falseSubBehaviour == null ? new BlockLocation(trueSubBehaviour.GetMaxIndex(), this.GetIndentation()) : new BlockLocation(falseSubBehaviour.GetMaxIndex(), this.GetIndentation());
-            return nextBlockLocation;
+
+            if(falseSubBehaviour == null) return new BlockLocation(this.GetSubBehaviour(true).GetMaxIndex() + 1, this.GetIndentation());
+                                          return new BlockLocation(this.GetSubBehaviour(false).GetMaxIndex() + 1, this.GetIndentation());
         }
 
         public override string ToString() {
