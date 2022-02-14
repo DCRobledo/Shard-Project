@@ -24,8 +24,6 @@ namespace Shard.UI.ProgrammingUI
 
             AssingElseBlocks();
             CreateSubBehaviours();
-
-            ExecuteBehavior();
         }
 
         private void AssingElseBlocks() {

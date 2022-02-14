@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace Shard.UI.ProgrammingUI
         [SerializeField]
         private GameObject memoryLeft;
         private TextMeshProUGUI memoryLeftText;
+
+        public static event Action<BlockBehaviour> generateBlockBehaviourEvent;
 
 
         private void Awake() {
@@ -84,8 +87,7 @@ namespace Shard.UI.ProgrammingUI
                     if(maxIndex < blockIndex) maxIndex = blockIndex;
                 } 
 
-            BlockBehaviour blockBehaviour = new BlockBehaviour(maxIndex, blocks);
-            blockBehaviour.Print();
+            generateBlockBehaviourEvent?.Invoke(new BlockBehaviour(maxIndex, blocks));
         }
 
 
