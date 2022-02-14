@@ -25,7 +25,7 @@ namespace Shard.UI.ProgrammingUI
             AssingElseBlocks();
             CreateSubBehaviours();
 
-            //ExecuteBehavior();
+            ExecuteBehavior();
         }
 
         private void AssingElseBlocks() {
@@ -118,22 +118,25 @@ namespace Shard.UI.ProgrammingUI
 
 
         public void ExecuteBehavior() {
+            // Execute the first block
             BehaviourBlock currentBlock = GetBlock();
 
-            while (true)
-            {
-                Debug.Log(currentBlock.GetBlockLocation().ToString());
+            BlockLocation nextBlockLocation = currentBlock.Execute(); 
 
-                if(currentBlock.GetType() ==  BehaviourBlock.BlockType.ACTION)
-                    (currentBlock as ActionBlock).Execute();
+            // Now, we go through each block in the behaviour until we reach the end of it
+            while(nextBlockLocation.GetIndex() < this.maxIndex) {
+                if(currentBlock != null) {
+                    Debug.Log("Execute -> " + currentBlock.GetBlockLocation().ToString());
 
-                BlockLocation nextBlockLocation = currentBlock.GetNextBlockLocation();
+                    // Execute the block and get the next block location
+                    nextBlockLocation = currentBlock.Execute();   
 
-                if (nextBlockLocation.GetIndex() > maxIndex) break;
-
-                currentBlock = GetBlock(nextBlockLocation.GetIndex(), nextBlockLocation.GetIndentation());
+                    // Get the next block
+                    currentBlock = GetBlock(nextBlockLocation.GetIndex(), nextBlockLocation.GetIndentation());
+                }
             }
         }
+
 
         private void SetBlock(int index, int indentation, BehaviourBlock block) {
             this.blocks[index - 1, indentation - 1] = block;
@@ -161,6 +164,10 @@ namespace Shard.UI.ProgrammingUI
         {
             BehaviourBlock block = indentation == -1 ? GetBlock(index) : blocks[index - 1, indentation - 1];
             return block;
+        }
+
+        public int GetMaxIndex() {
+            return this.maxIndex;
         }
 
 

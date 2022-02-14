@@ -58,25 +58,15 @@ namespace Shard.UI.ProgrammingUI
         }
 
 
-        public override BlockLocation GetNextBlockLocation()
+        public override BlockLocation Execute()
         {
-            switch(conditionalType) {
-                case ConditionalType.IF: case ConditionalType.ELSE_IF:
+            // If the condition is meet, we execute the true sub-behaviour, and if it's not, the false sub-behaviour
+            if(condition.IsMet()) trueSubBehaviour.ExecuteBehavior();
+            else                  falseSubBehaviour.ExecuteBehavior();
 
-                        // Condition is met
-                        if(condition.IsMet(/* ref Robot */)) 
-                            return new BlockLocation(location.GetIndex() + 1, -1);                    // Next block
-
-                        // Condition is not met and there is an ELSE block
-                        else if (elseBlock != null)
-                            return new BlockLocation(elseBlock.location.GetIndex() + 1, -1);          // Next block to the ELSE block
-
-                        // Condition is not met and there is not an ELSE block
-                        return new BlockLocation(location.GetIndex() + 1, location.GetIndentation()); // Next block in the same indentation level
-
-                default:
-                        return new BlockLocation(location.GetIndex() + 1, -1); 
-            }
+            // In both cases, the next block to execute is the end of the conditional (i.e. the end of the false sub-behaviour, if it exists)
+            BlockLocation nextBlockLocation = falseSubBehaviour == null ? new BlockLocation(trueSubBehaviour.GetMaxIndex(), this.GetIndentation()) : new BlockLocation(falseSubBehaviour.GetMaxIndex(), this.GetIndentation());
+            return nextBlockLocation;
         }
 
         public override string ToString() {

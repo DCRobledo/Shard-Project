@@ -18,7 +18,7 @@ namespace Shard.UI.ProgrammingUI
         protected BlockLocation location;
 
 
-        public abstract BlockLocation GetNextBlockLocation();
+        public abstract BlockLocation Execute();
 
         public abstract new string ToString();
         

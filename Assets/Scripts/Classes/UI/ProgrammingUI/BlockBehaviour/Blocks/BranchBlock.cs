@@ -15,7 +15,7 @@ namespace Shard.UI.ProgrammingUI
             nextBlockIndex = 1;
         }
 
-        public override BlockLocation GetNextBlockLocation()
+        public override BlockLocation Execute()
         {
             return new BlockLocation(nextBlockIndex, -1);
         }
