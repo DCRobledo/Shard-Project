@@ -9,12 +9,14 @@ using UnityEngine.InputSystem;
 
 namespace Shard.Controllers 
 {
-    public class EntityController : SingletonUnity
+    public class PlayerController : SingletonUnity
     {
-        private static EntityController instance = null;
-        public static new EntityController Instance { get { return (EntityController) instance; }}
+        private static PlayerController instance = null;
+        public static new PlayerController Instance { get { return (PlayerController) instance; }}
 
         private GameObject player;
+        private EntityMovement playerMovement;
+        private EntityActions playerActions;
 
         private Command jumpButton;
         private Command moveButton;
@@ -26,8 +28,6 @@ namespace Shard.Controllers
         private InputActions InputActions;
         private InputAction movement;
 
-        private EntityMovement playerMovement;
-        private EntityActions playerActions;
 
         private void Awake() {
             // Init the controller's instance
