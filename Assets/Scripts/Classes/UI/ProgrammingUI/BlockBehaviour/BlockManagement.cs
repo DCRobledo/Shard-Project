@@ -19,7 +19,7 @@ namespace Shard.UI.ProgrammingUI
         private GameObject memoryLeft;
         private TextMeshProUGUI memoryLeftText;
 
-        public static event Action<BlockBehaviour> generateBlockBehaviourEvent;
+        public static event Action<int, List<GameObject>> generateBlockBehaviourEvent;
 
 
         private void Awake() {
@@ -88,7 +88,7 @@ namespace Shard.UI.ProgrammingUI
                 } 
             }
 
-            generateBlockBehaviourEvent?.Invoke(new BlockBehaviour(maxIndex, blocks));
+            generateBlockBehaviourEvent?.Invoke(maxIndex, blocks);
         }
 
 

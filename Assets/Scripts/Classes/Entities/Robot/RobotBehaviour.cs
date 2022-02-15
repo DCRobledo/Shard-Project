@@ -21,8 +21,9 @@ namespace Shard.Entities
         }
 
 
-        private void SetBlockBehaviour(BlockBehaviour blockBehaviour) {
-            this.blockBehaviour = blockBehaviour;
+        private void SetBlockBehaviour(int maxIndex, List<GameObject> blocks) {
+            this.blockBehaviour = this.gameObject.AddComponent<BlockBehaviour>();
+            this.blockBehaviour.CreateBlockBehaviour(maxIndex, blocks);
         }
     
     
@@ -30,18 +31,12 @@ namespace Shard.Entities
             if(behaviourExecution != null)
                 StopCoroutine(behaviourExecution);
 
-            behaviourExecution = StartCoroutine(ExecuteBehaviour());
+            behaviourExecution = StartCoroutine(blockBehaviour.ExecuteBehavior());
         }
 
         public void TurnOff() {
             if(behaviourExecution != null)
                 StopCoroutine(behaviourExecution);
-        }
-
-        private IEnumerator ExecuteBehaviour() {
-            blockBehaviour.ExecuteBehavior();
-
-            yield return null;
         }
     }
 }
