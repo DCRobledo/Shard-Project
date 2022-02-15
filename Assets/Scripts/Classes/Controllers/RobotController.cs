@@ -17,11 +17,12 @@ namespace Shard.Controllers
         private EntityMovement robotMovement;
         private EntityActions robotActions;
 
+        [SerializeField]
+        private LayerMask sensorDetectionLayer;
+
         private Command jumpCommand;
         private Command moveCommand;
         private Command flipCommand;
-        private Command grabCommand;
-        private Command crouchCommand;
 
         private BlockBehaviour blockBehaviour;
         private Coroutine blockBehaviourExecution;
@@ -34,11 +35,12 @@ namespace Shard.Controllers
             robotMovement = robot.GetComponent<EntityMovement>();
             robotActions = robot.GetComponent<EntityActions>();
 
+            RobotSensors.SetBoxCollider2D(robot.GetComponent<BoxCollider2D>());
+            RobotSensors.SetLayerMask(sensorDetectionLayer);
+
             jumpCommand = new JumpCommand(robotMovement);
             moveCommand = new MoveCommand(robotMovement);
             flipCommand = new FlipCommand(robotMovement);
-            crouchCommand = new CrouchCommand(robotMovement);
-            grabCommand = new ActionCommand(robotActions);
         }
 
         private void OnEnable() {
@@ -58,7 +60,7 @@ namespace Shard.Controllers
             blockBehaviour.CreateBlockBehaviour(minIndex, maxIndex, blocks);
             
             LinkActionBlocks();
-            //LinkConditionalBlocks();
+            LinkConditionalBlocks();
         }
 
         private void LinkActionBlocks() {
@@ -84,8 +86,9 @@ namespace Shard.Controllers
         }
 
         private void LinkConditionalBlocks() {
-            for (int i = 0; i < blockBehaviour.GetMaxIndex(); i++) {
+            for (int i = blockBehaviour.GetMinIndex() + 1; i < blockBehaviour.GetMaxIndex() + 1; i++) {
                 BehaviourBlock currentBlock = blockBehaviour.GetBlock(i);
+
                 if (currentBlock.GetType() == BehaviourBlock.BlockType.CONDITIONAL) {
                     ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
 
@@ -95,7 +98,14 @@ namespace Shard.Controllers
         }
 
         private void LinkRobotSensor(ref ConditionalBlock block) {
+            switch(block.GetCondition().GetState()) {
+                case Condition.ConditionalState.AHEAD:  block.GetCondition().isMetEvent += RobotSensors.CheckAhead;  break;
+                case Condition.ConditionalState.BEHIND: block.GetCondition().isMetEvent += RobotSensors.CheckBehind; break;
+                case Condition.ConditionalState.ABOVE:  block.GetCondition().isMetEvent += RobotSensors.CheckAbove;  break;
+                case Condition.ConditionalState.BELOW:  block.GetCondition().isMetEvent += RobotSensors.CheckBelow;  break;
 
+                default: break;
+            }
         }
 
 

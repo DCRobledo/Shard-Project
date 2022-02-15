@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -16,20 +16,6 @@ namespace Shard.UI.ProgrammingUI
         [SerializeField]
         private ConditionalType conditionalType;
 
-        private enum ConditionalElement{
-            WALL,
-            VOID,
-            SPIKE,
-            BOX
-        }
-
-        private enum ConditionalState{
-            AHEAD,
-            BEHIND,
-            BELOW,
-            ABOVE
-        }
-
         [SerializeField]
         private TMP_Dropdown elementDropDown;
 
@@ -37,19 +23,17 @@ namespace Shard.UI.ProgrammingUI
         private TMP_Dropdown stateDropDown;
 
         private Condition condition;
+    
 
         public int endOfConditional;
         public int nextBlockIndex;
         private ConditionalBlock elseBlock = null;
 
-        private BlockBehaviour trueSubBehaviour;
-        private BlockBehaviour falseSubBehaviour; 
-
 
         private void Awake() {
             type = BlockType.CONDITIONAL;
 
-            condition = conditionalType == ConditionalType.ELSE ? null : new Condition("wall", "ahead");
+            condition = conditionalType == ConditionalType.ELSE ? null : new Condition(1, 1);
 
             if(conditionalType != ConditionalType.ELSE) {
                 elementDropDown.onValueChanged.AddListener(context => SetConditionElement(elementDropDown.value));
@@ -119,49 +103,65 @@ namespace Shard.UI.ProgrammingUI
         }
 
         public void SetConditionElement(int element) {
-            condition =  new Condition(((ConditionalElement) element).ToString(), condition.GetState());
+            condition.SetElement(element);
         }
 
         public void SetConditionState(int state) {
-            condition =  new Condition(condition.GetElement(), ((ConditionalState) state).ToString());
+            condition.SetState(state);
+        }
+    
+        public Condition GetCondition() {
+            return this.condition;
         }
     }
 
     public class Condition
     {
-        private string element;
-        private string state;
+        public enum ConditionalElement{
+            WALL,
+            VOID,
+            SPIKE,
+            BOX
+        } private ConditionalElement element;
 
-        public Condition(string element, string state) {
-            this.element = element.ToLower();
-            this.state = state.ToLower();
+        public enum ConditionalState {
+            AHEAD,
+            BEHIND,
+            BELOW,
+            ABOVE
+        } private ConditionalState state;
+
+        public Func<string> isMetEvent;
+
+        public Condition(int element, int state) {
+            SetElement(element);
+            SetState(state);
         }
 
 
-        public bool IsMet(/*ref RobotController robot*/) {
-            // TODO
-            return element == "wall";
+        public bool IsMet() {
+            return isMetEvent?.Invoke() == element.ToString().ToLower();
         }
 
 
-        public string GetElement()
+        public ConditionalElement GetElement()
         {
             return this.element;
         }
 
-        public void SetElement(string element)
+        public void SetElement(int element)
         {
-            this.element = element;
+            this.element = (ConditionalElement) element;
         }
 
-        public string GetState()
+        public ConditionalState GetState()
         {
             return this.state;
         }
 
-        public void SetState(string state)
+        public void SetState(int state)
         {
-            this.state = state;
+            this.state = (ConditionalState) state;
         }
 
         public new string ToString() {
