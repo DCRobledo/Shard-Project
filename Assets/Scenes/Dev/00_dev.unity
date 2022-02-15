@@ -31826,21 +31826,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1489311540624490959, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1489311540624490963, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
       propertyPath: m_Name
       value: robot
-      objectReference: {fileID: 0}
-    - target: {fileID: 1489311540624490963, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7803451227821160568, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: objectToReCall
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
