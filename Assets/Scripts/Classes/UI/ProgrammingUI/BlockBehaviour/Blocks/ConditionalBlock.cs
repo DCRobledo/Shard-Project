@@ -58,18 +58,6 @@ namespace Shard.UI.ProgrammingUI
         }
 
 
-        // public override BlockLocation Execute()
-        // {
-        //     if(conditionalType == ConditionalType.ELSE) return new BlockLocation(this.GetIndex() + 1, -1);
-
-        //     // If the condition is meet, we execute the true sub-behaviour, and if it's not, the false sub-behaviour
-        //     if(condition.IsMet() && trueSubBehaviour.GetMaxIndex() > this.GetIndex())        trueSubBehaviour?.ExecuteBehavior();
-        //     else if (!condition.IsMet() && trueSubBehaviour.GetMaxIndex() > this.GetIndex()) falseSubBehaviour?.ExecuteBehavior();
-
-
-        //     if(falseSubBehaviour == null) return new BlockLocation(this.GetSubBehaviour(true).GetMaxIndex() + 1, this.GetIndentation());
-        //                                   return new BlockLocation(this.GetSubBehaviour(false).GetMaxIndex() + 1, this.GetIndentation());
-        // }
         public override BlockLocation Execute()
         {
             // In case this is an else block, we check if the nextBlockIndex is modified, and if it is not, we continue with the normal flow
@@ -95,25 +83,6 @@ namespace Shard.UI.ProgrammingUI
             
             if(condition != null)
                 message += " " + condition.ToString();
-
-            // if(trueSubBehaviour != null) {
-            //     for(int k = 0; k < location.GetIndentation() - 1; k++) message += "\t";
-            //     message += "#TRUE\n"  + trueSubBehaviour.ToString(location.GetIndentation());
-
-            //     for(int k = 0; k < location.GetIndentation() - 1; k++) message += "\t";
-            //     message += "#END_TRUE\n";
-            // }  
-
-            // if(falseSubBehaviour != null) {
-            //     for(int k = 0; k < location.GetIndentation() - 1; k++) message += "\t";
-            //     message += "#FALSE\n"  + falseSubBehaviour.ToString(location.GetIndentation());
-                
-            //     for(int k = 0; k < location.GetIndentation() - 1; k++) message += "\t";
-            //     message += "#END_FALSE\n";
-            // }
-
-            // if(elseBlock != null)
-            //     message += " (ELSE_BLOCK = [" + elseBlock.GetIndex() + ", " + elseBlock.GetIndentation() + "])";
             
             return message;
         }
@@ -148,16 +117,6 @@ namespace Shard.UI.ProgrammingUI
         public void SetConditionState(int state) {
             condition =  new Condition(condition.GetElement(), ((ConditionalState) state).ToString());
         }
-    
-        // public void SetSubBehaviour(bool selector, BlockBehaviour subBehaviour) {
-        //     if(selector) this.trueSubBehaviour = subBehaviour;
-        //     else         this.falseSubBehaviour = subBehaviour;
-        // }
-
-        // public BlockBehaviour GetSubBehaviour(bool selector) {
-        //     if (selector) return trueSubBehaviour;
-        //                   return falseSubBehaviour;
-        // }
     }
 
     public class Condition

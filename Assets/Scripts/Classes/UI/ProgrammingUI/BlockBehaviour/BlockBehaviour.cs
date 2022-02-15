@@ -6,7 +6,7 @@ namespace Shard.UI.ProgrammingUI
 {
     public class BlockBehaviour : MonoBehaviour
     {
-        // The rows represent the block's index, and the columns, the block's indentation
+        // The rows represent the block's index, and the columns the block's indentation
         private BehaviourBlock[,] blocks;
 
         private int maxIndex;
@@ -89,70 +89,6 @@ namespace Shard.UI.ProgrammingUI
 
             block.SetEndOfConditional(endOfConditional);
         }
-
-
-
-        // private void CreateSubBehaviours() {
-        //     // Each conditional block creates sub-behaviours for both of its branches
-        //     for(int i = 1; i <= maxIndex; i++) {
-        //         for(int j = 1; j <= 3; j++) {
-        //             BehaviourBlock currentBlock = GetBlock(i, j);
-        //             if(currentBlock != null) {
-
-        //                 if(currentBlock.GetType() == BehaviourBlock.BlockType.CONDITIONAL) {
-        //                     ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
-
-        //                     if(conditionalBlock.GetConditionalType() != ConditionalBlock.ConditionalType.ELSE) {
-        //                         // We always have a true sub-behaviour
-        //                         conditionalBlock.SetSubBehaviour(true, CreateSubBehaviour(conditionalBlock.GetIndex(), conditionalBlock, true));
-
-        //                         // And only a false sub-behaviour if there is an else block
-        //                         if(conditionalBlock.GetElseBlock() != null)
-        //                             conditionalBlock.SetSubBehaviour(false, CreateSubBehaviour(conditionalBlock.GetElseBlock().GetIndex() - 1, conditionalBlock, false));
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     } 
-        // }
-
-        // private void CreateSubBehaviour(int startIndex, ref ConditionalBlock block, bool isTrueBehaviour) {
-        //     List<GameObject> blocks = new List<GameObject>();
-        //     int maxIndex = startIndex;
-
-        //     // We add all blocks until que find one with the same indentation as the conditional block, which is not part of its false sub-behaviour
-        //     for(int i = startIndex + 1; i <= this.maxIndex; i++) {
-        //         BehaviourBlock currentBlock = GetBlock(i);
-              
-        //         if (currentBlock != null) {
-
-        //             if(currentBlock.GetIndentation() == block.GetIndentation()) {
-        //                 if(isTrueBehaviour) break;
-
-        //                 if(currentBlock.GetType() == BehaviourBlock.BlockType.CONDITIONAL) {
-        //                     ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
-
-        //                     if(conditionalBlock.GetConditionalType() == ConditionalBlock.ConditionalType.IF)
-        //                         break;
-        //                 }
-
-        //                 else break;
-        //             }
-                        
-
-        //             blocks.Add(currentBlock.gameObject);
-
-        //             // If a block is part of a sub-behaviour, it is no longer part of the main behaviour
-        //             if (GetBlock(currentBlock.GetIndex(), currentBlock.GetIndentation()) != null)
-        //                 SetBlock(currentBlock.GetIndex(), currentBlock.GetIndentation(), null);
-
-        //             if(maxIndex < currentBlock.GetIndex()) maxIndex = currentBlock.GetIndex();
-        //         }
-        //     }
-
-        //     //return new BlockBehaviour(maxIndex, blocks);
-        //     return null;
-        // }
 
 
         public IEnumerator ExecuteBehavior() {
