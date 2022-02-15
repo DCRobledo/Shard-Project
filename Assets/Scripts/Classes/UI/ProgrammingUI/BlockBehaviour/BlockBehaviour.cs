@@ -9,11 +9,13 @@ namespace Shard.UI.ProgrammingUI
         // The rows represent the block's index, and the columns the block's indentation
         private BehaviourBlock[,] blocks;
 
+        private int minIndex;
         private int maxIndex;
 
 
-        public void CreateBlockBehaviour (int maxIndex, List<GameObject> blocks) {
+        public void CreateBlockBehaviour (int minIndex, int maxIndex, List<GameObject> blocks) {
             this.blocks = new BehaviourBlock[maxIndex, 3];
+            this.minIndex = minIndex;
             this.maxIndex = maxIndex;
 
             foreach(GameObject block in blocks) {
@@ -23,7 +25,6 @@ namespace Shard.UI.ProgrammingUI
             }
 
             AssignConditionalInformation();
-            //CreateSubBehaviours();
         }
 
         private void AssignConditionalInformation() {
@@ -97,8 +98,6 @@ namespace Shard.UI.ProgrammingUI
             // Execute the first block
             BehaviourBlock currentBlock = GetBlock();
 
-            Debug.Log("Execute -> " + currentBlock.GetBlockLocation().ToString());
-
             BlockLocation nextBlockLocation = currentBlock.Execute(); 
 
             yield return null;
@@ -111,8 +110,6 @@ namespace Shard.UI.ProgrammingUI
                 currentBlock = GetBlock(nextBlockLocation.GetIndex(), nextBlockLocation.GetIndentation());
 
                 if(currentBlock != null) {   
-                    Debug.Log("Execute -> " + currentBlock.GetBlockLocation().ToString());
-
                     // Execute the block and get the next block location
                     nextBlockLocation = currentBlock.Execute();
                 }
@@ -146,6 +143,10 @@ namespace Shard.UI.ProgrammingUI
         {
             BehaviourBlock block = indentation == -1 ? GetBlock(index) : blocks[index - 1, indentation - 1];
             return block;
+        }
+
+        public int GetMinIndex() {
+            return this.minIndex;
         }
 
         public int GetMaxIndex() {

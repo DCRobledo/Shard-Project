@@ -15,12 +15,16 @@ namespace Shard.Patterns.Command
             this.entityMovement = entityMovement;
         }
 
+        public override void Execute() 
+        {
+            entityMovement.Jump();
+        }
+
         public override void ExecuteWithParameters(params object[] parameters)
         {
             entityMovement.Jump((bool) parameters[0]);
         }
 
-        public override void Execute() { throw new System.NotImplementedException(); }
         public override void Undo() { throw new System.NotImplementedException(); }
     }
 }

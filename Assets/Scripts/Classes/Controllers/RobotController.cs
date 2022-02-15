@@ -1,4 +1,5 @@
 using Shard.Entities;
+using Shard.Patterns.Command;
 using Shard.Patterns.Singleton;
 using Shard.UI.ProgrammingUI;
 using System.Collections;
@@ -16,6 +17,12 @@ namespace Shard.Controllers
         private EntityMovement robotMovement;
         private EntityActions robotActions;
 
+        private Command jumpCommand;
+        private Command moveCommand;
+        private Command flipCommand;
+        private Command grabCommand;
+        private Command crouchCommand;
+
         private BlockBehaviour blockBehaviour;
         private Coroutine blockBehaviourExecution;
 
@@ -26,6 +33,12 @@ namespace Shard.Controllers
 
             robotMovement = robot.GetComponent<EntityMovement>();
             robotActions = robot.GetComponent<EntityActions>();
+
+            jumpCommand = new JumpCommand(robotMovement);
+            moveCommand = new MoveCommand(robotMovement);
+            flipCommand = new FlipCommand(robotMovement);
+            crouchCommand = new CrouchCommand(robotMovement);
+            grabCommand = new ActionCommand(robotActions);
         }
 
         private void OnEnable() {
@@ -38,19 +51,20 @@ namespace Shard.Controllers
 
 
 
-        private void SetBlockBehaviour(int maxIndex, List<GameObject> blocks) {
+        private void SetBlockBehaviour(int minIndex, int maxIndex, List<GameObject> blocks) {
             if(blockBehaviour != null) Destroy(robot.GetComponent<BlockBehaviour>());
 
             blockBehaviour = robot.AddComponent<BlockBehaviour>();
-            blockBehaviour.CreateBlockBehaviour(maxIndex, blocks);
+            blockBehaviour.CreateBlockBehaviour(minIndex, maxIndex, blocks);
             
             LinkActionBlocks();
-            LinkConditionalBlocks();
+            //LinkConditionalBlocks();
         }
 
         private void LinkActionBlocks() {
-            for (int i = 0; i < blockBehaviour.GetMaxIndex(); i++) {
+            for (int i = blockBehaviour.GetMinIndex() + 1; i < blockBehaviour.GetMaxIndex() + 1; i++) {
                 BehaviourBlock currentBlock = blockBehaviour.GetBlock(i);
+
                 if (currentBlock.GetType() == BehaviourBlock.BlockType.ACTION) {
                     ActionBlock actionBlock = currentBlock as ActionBlock;
 
@@ -60,13 +74,13 @@ namespace Shard.Controllers
         }
 
         private void LinkRobotAction(ref ActionBlock block) {
-            // switch (block.GetAction()) {
-            //     case ActionBlock.BlockAction.WALK: block.executeActionEvent += robotMovement.Move; break;
-            //     case ActionBlock.BlockAction.JUMP: block.executeActionEvent += robotMovement.Jump; break;
-            //     case ActionBlock.BlockAction.FLIP: block.executeActionEvent += robotMovement.Flip; break;
+            switch (block.GetAction()) {
+                case ActionBlock.BlockAction.WALK: block.executeActionEvent += moveCommand.Execute ; break;
+                case ActionBlock.BlockAction.JUMP: block.executeActionEvent += jumpCommand.Execute; break;
+                case ActionBlock.BlockAction.FLIP: block.executeActionEvent += flipCommand.Execute; break;
 
-            //     default: break;
-            // }
+                default: break;
+            }
         }
 
         private void LinkConditionalBlocks() {

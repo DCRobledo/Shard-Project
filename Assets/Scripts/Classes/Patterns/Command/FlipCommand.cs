@@ -5,24 +5,21 @@ using UnityEngine;
 
 namespace Shard.Patterns.Command 
 {
-    public class MoveCommand : Command
+    public class FlipCommand : Command
     {
         private EntityMovement entityMovement;
 
 
-        public MoveCommand(EntityMovement entityMovement)
+        public FlipCommand(EntityMovement entityMovement)
         {
             this.entityMovement = entityMovement;
         }
 
         public override void Execute() {
-            entityMovement.Move();
+            entityMovement.Flip();
         }
 
-        public override void ExecuteWithParameters(params object[] parameters)
-        {
-            entityMovement.Move((float) parameters[0], (float) parameters[1]);
-        }
+        public override void ExecuteWithParameters(params object[] parameters) { throw new System.NotImplementedException(); }
         
         public override void Undo() { throw new System.NotImplementedException(); }
     }

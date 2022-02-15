@@ -32,12 +32,15 @@ namespace Shard.Entities
 
         private bool canJump = true;
         private bool shouldJump = false;
+        private bool isFacingRight = true;
 
 
         private void Awake() 
         {
             this.rigidBody = this.GetComponent<Rigidbody2D>();
             this.boxCollider2D =  this.GetComponent<BoxCollider2D>();
+
+            isFacingRight = this.transform.localScale.x >= 0f;
         }
 
         private void FixedUpdate() {
@@ -48,6 +51,11 @@ namespace Shard.Entities
             ApplyGravity(this.fallMultiplier, this.lowJumpMultiplier);
         }
 
+        public void Move() {
+            float x = isFacingRight ? 1 : -1;
+
+            Move(x, 0f);
+        }
 
         public void Move(float x, float y) 
         {
@@ -60,10 +68,11 @@ namespace Shard.Entities
             else if (x < 0 && this.gameObject.transform.localScale.x > 0) Flip();
         }
 
-        private void Flip() {
+        public void Flip() {
             // Flip the entity
             GameObject entity = this.gameObject;
             TransformUtils.FlipObject(ref entity);
+            isFacingRight = !isFacingRight;
 
             // Flip the anchor point of grab
             this.GetComponent<RelativeJoint2D>().linearOffset = new Vector2(this.GetComponent<RelativeJoint2D>().linearOffset.x * -1, this.GetComponent<RelativeJoint2D>().linearOffset.y);
@@ -73,6 +82,9 @@ namespace Shard.Entities
             if(grabbedEntity != null) TransformUtils.FlipObject(ref grabbedEntity);
         }
 
+        public void Jump() {
+            if(canJump) this.shouldJump = true;
+        }
 
         public void Jump(bool jump) 
         {
@@ -80,11 +92,8 @@ namespace Shard.Entities
             if(!jump) this.shouldJump = jump;
 
             // But we want to delay the jumps between one another
-            else if(jump && canJump) {
+            else if(jump && canJump)
                 this.shouldJump = jump;
-
-                //StartCoroutine(TimerOnJump(jumpDelay));
-            }
         } 
 
         private void ApplyGravity(float fallMultiplier, float lowJumpMultiplier) {
