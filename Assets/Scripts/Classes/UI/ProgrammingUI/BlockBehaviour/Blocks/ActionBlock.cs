@@ -1,6 +1,4 @@
-using Shard.UI.ProgrammingUI;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace Shard.UI.ProgrammingUI
@@ -16,13 +14,15 @@ namespace Shard.UI.ProgrammingUI
         [SerializeField]
         private BlockAction action;
 
+        public Action executeActionEvent;
+
 
         private void Awake() {
             type = BlockType.ACTION;
         }
 
         public override BlockLocation Execute() {
-            //Debug.Log(action.ToString());
+            executeActionEvent?.Invoke();
 
             return new BlockLocation(location.GetIndex() + 1, -1);
         }

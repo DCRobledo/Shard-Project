@@ -43,8 +43,48 @@ namespace Shard.Controllers
 
             blockBehaviour = robot.AddComponent<BlockBehaviour>();
             blockBehaviour.CreateBlockBehaviour(maxIndex, blocks);
-            blockBehaviour.Print();
+            
+            LinkActionBlocks();
+            LinkConditionalBlocks();
         }
+
+        private void LinkActionBlocks() {
+            for (int i = 0; i < blockBehaviour.GetMaxIndex(); i++) {
+                BehaviourBlock currentBlock = blockBehaviour.GetBlock(i);
+                if (currentBlock.GetType() == BehaviourBlock.BlockType.ACTION) {
+                    ActionBlock actionBlock = currentBlock as ActionBlock;
+
+                    LinkRobotAction(ref actionBlock);
+                }
+            }
+        }
+
+        private void LinkRobotAction(ref ActionBlock block) {
+            // switch (block.GetAction()) {
+            //     case ActionBlock.BlockAction.WALK: block.executeActionEvent += robotMovement.Move; break;
+            //     case ActionBlock.BlockAction.JUMP: block.executeActionEvent += robotMovement.Jump; break;
+            //     case ActionBlock.BlockAction.FLIP: block.executeActionEvent += robotMovement.Flip; break;
+
+            //     default: break;
+            // }
+        }
+
+        private void LinkConditionalBlocks() {
+            for (int i = 0; i < blockBehaviour.GetMaxIndex(); i++) {
+                BehaviourBlock currentBlock = blockBehaviour.GetBlock(i);
+                if (currentBlock.GetType() == BehaviourBlock.BlockType.CONDITIONAL) {
+                    ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
+
+                    LinkRobotSensor(ref conditionalBlock);
+                }
+            }
+        }
+
+        private void LinkRobotSensor(ref ConditionalBlock block) {
+
+        }
+
+
     
         public void TurnOn() {
             if(blockBehaviourExecution != null)
