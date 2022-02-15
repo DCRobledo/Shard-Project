@@ -60,22 +60,30 @@ namespace Shard.UI.ProgrammingUI
 
         public override BlockLocation Execute()
         {
-            // In case this is an else block, we check if the nextBlockIndex is modified, and if it is not, we continue with the normal flow
-            if(conditionalType == ConditionalType.ELSE)  
-                return nextBlockIndex != 0 ? new BlockLocation(nextBlockIndex, -1) : new BlockLocation(this.GetIndex() + 1, -1);
-
-            // If the condition is meet, we follow the usual path and modify the elseblock's nextBlockIndex
-            if (condition.IsMet()) {
+            // If the next block index has been modified, we should follow it
+            if (nextBlockIndex != 0) {
+                // This propagates the information in multiple IF-ELSE-IF-ELSE combinations
                 elseBlock?.SetNextBlockIndex(endOfConditional);
 
-                return new BlockLocation(GetIndex() + 1, GetIndentation() + 1);
+                return new BlockLocation(nextBlockIndex, -1);
+            } 
+
+            // If the condition is meet, we follow the usual path and modify the elseblock's nextBlockIndex
+            if (condition != null) {
+                if(condition.IsMet()) {
+                    elseBlock?.SetNextBlockIndex(endOfConditional);
+
+                    return new BlockLocation(GetIndex() + 1, GetIndentation() + 1);
+                }
+                else {
+                    elseBlock?.SetNextBlockIndex(0);
+
+                    return elseBlock != null ? new BlockLocation(elseBlock.GetIndex(), -1) : new BlockLocation(endOfConditional + 1, -1);
+                }
             }
 
-            // Otherwise, we just jump into the else block, if it exists
-            if(elseBlock != null) return new BlockLocation(elseBlock.GetIndex() + 1, -1);
 
-            // If the conditions is not meet, and there is not an else block, we just go out of the conditional
-            return new BlockLocation(endOfConditional, -1);
+            return new BlockLocation(this.GetIndex() + 1, -1);
         }
 
         public override string ToString() {

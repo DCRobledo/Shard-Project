@@ -74,7 +74,7 @@ namespace Shard.UI.ProgrammingUI
 
             for(int i = block.GetIndex() + 1; i < this.maxIndex; i++) {
                 // The conditional ends when we encounter a block, which is not the else block, with the same indentation as the conditional block
-                BehaviourBlock currentBlock = GetBlock(i, block.GetIndentation());
+                BehaviourBlock currentBlock = GetBlock(i);
                 if(currentBlock != null) {
 
                     if(currentBlock.GetType() == BehaviourBlock.BlockType.CONDITIONAL) {
@@ -82,8 +82,10 @@ namespace Shard.UI.ProgrammingUI
                         if(block.GetElseBlock().Equals(conditionalBlock)) continue;
                     }
 
-                    endOfConditional = currentBlock.GetIndex();
-                    break;
+                    if(currentBlock.GetIndentation() <= block.GetIndentation()) {
+                        endOfConditional = currentBlock.GetIndex();
+                        break;
+                    }
                 }
             }
 
