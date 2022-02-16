@@ -19,19 +19,19 @@ namespace Shard.Entities
 
 
         public string CheckAhead() {
-            return Detection.DetectObject(boxCollider2D, sensorDetectionLayer, Detection.Direction.RIGHT, 0.5f, true);
+            return Detection.DetectObject(boxCollider2D, sensorDetectionLayer, Detection.Direction.RIGHT, 0.5f);
         }
 
         public string CheckBehind() {
-            return Detection.DetectObject(boxCollider2D, sensorDetectionLayer, Detection.Direction.LEFT, 0.5f, true);
+            return Detection.DetectObject(boxCollider2D, sensorDetectionLayer, Detection.Direction.LEFT, 0.5f);
         }
 
         public string CheckBelow() {
-            return Detection.DetectObject(boxCollider2D, sensorDetectionLayer, Detection.Direction.DOWN, 0.5f, true);
+            return Detection.DetectObject(boxCollider2D, sensorDetectionLayer, Detection.Direction.DOWN, 0.5f);
         }
 
         public string CheckAbove() {
-            return Detection.DetectObject(boxCollider2D, sensorDetectionLayer, Detection.Direction.UP, 0.5f, true);
+            return Detection.DetectObject(boxCollider2D, sensorDetectionLayer, Detection.Direction.UP, 0.5f);
         }
     }
 }

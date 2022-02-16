@@ -109,7 +109,7 @@ namespace Shard.Entities
 
         private bool IsGrounded() 
         {
-            return Detection.DetectGround(this.boxCollider2D, this.whatIsGround, .25f, true);
+            return Detection.DetectGround(this.boxCollider2D, this.whatIsGround, .25f, false);
         }
 
         private IEnumerator TimerOnJump(float seconds) {

@@ -8,10 +8,10 @@ namespace Shard.Lib.Custom
     public static class Detection
     {
         public enum Direction {
-            RIGHT = 1,
-            LEFT = -1,
-            UP = 1,
-            DOWN = -1
+            RIGHT,
+            LEFT,
+            UP,
+            DOWN
         }
 
 
@@ -62,6 +62,7 @@ namespace Shard.Lib.Custom
                 Color rayColor = isGrounded ? Color.green : Color.red;
                 DebugUtils.DebugBoxRayCast(
                     boxCollider2D.bounds.center,
+                    Vector2.down,
                     boxCollider2D.bounds.extents.x,
                     boxCollider2D.bounds.extents.y + offset,
                     rayColor
@@ -72,9 +73,9 @@ namespace Shard.Lib.Custom
             return isGrounded;
         }
 
-        public static string DetectObject(BoxCollider2D boxCollider2D, LayerMask layerMask, Direction direction, float offset, bool debug = false) {
-            float xDirection = (direction == Direction.RIGHT || direction == Direction.LEFT) ? (float) direction : 0f;
-            float yDirection = (direction == Direction.UP || direction == Direction.DOWN) ? (float) direction : 0f;
+        public static string DetectObject(BoxCollider2D boxCollider2D, LayerMask layerMask, Direction direction, float offset) {
+            float xDirection = direction == Direction.RIGHT ? 1f : (direction == Direction.LEFT ? -1f : 0f);
+            float yDirection = direction == Direction.UP ? 1f : (direction == Direction.DOWN ? -1f : 0f);
 
             Vector2 castDirection = new Vector2(xDirection, yDirection);
 
@@ -87,18 +88,6 @@ namespace Shard.Lib.Custom
                 offset,
                 layerMask
             );      
-
-            bool isDetecting = rayCastHit.collider != null;
-
-            if (debug) {
-                Color rayColor = isDetecting ? Color.green : Color.red;
-                DebugUtils.DebugBoxRayCast(
-                    boxCollider2D.bounds.center,
-                    boxCollider2D.bounds.center.x + boxCollider2D.bounds.extents.x * castDirection.x + offset,
-                    boxCollider2D.bounds.center.y + boxCollider2D.bounds.extents.y * castDirection.y + offset,
-                    rayColor
-                );
-            }
 
             return rayCastHit.collider != null ? rayCastHit.collider.transform.tag : null;
         }  

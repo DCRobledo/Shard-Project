@@ -118,7 +118,7 @@ namespace Shard.UI.ProgrammingUI
     public class Condition
     {
         public enum ConditionalElement{
-            WALL,
+            GROUND,
             VOID,
             SPIKE,
             BOX

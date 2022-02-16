@@ -48,7 +48,6 @@ namespace Shard.Controllers
         }
 
 
-
         private void SetBlockBehaviour(int minIndex, int maxIndex, List<GameObject> blocks) {
             if(blockBehaviour != null) Destroy(robot.GetComponent<BlockBehaviour>());
 
