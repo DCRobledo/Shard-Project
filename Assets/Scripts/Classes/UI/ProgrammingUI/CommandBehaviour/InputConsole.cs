@@ -35,7 +35,7 @@ namespace Shard.UI.ProgrammingUI
             
             // Parse the command
             string result = "";
-            bool isValid = CommandParser.ParseCommand(command, ref result);
+            bool isValid = CommandParser.ParseCommand(command, out result);
             
             // Record it in the history
             submitCommandEvent?.Invoke(command, result);;
