@@ -140,8 +140,7 @@ namespace Shard.UI.ProgrammingUI
 
 
         public bool IsMet() {
-            Debug.Log(isMetEvent?.Invoke());
-            return isMetEvent?.Invoke() == element.ToString().ToLower();
+            return isMetEvent?.Invoke()?.ToLower() == element.ToString().ToLower();
         }
 
 
