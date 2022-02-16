@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1489311540624490958}
   - component: {fileID: 1489311540624490957}
   - component: {fileID: 1489311540624490959}
+  - component: {fileID: 7803451227653538638}
   - component: {fileID: 7803451229057493689}
   - component: {fileID: 7803451227821160568}
-  - component: {fileID: 7803451227653538638}
+  - component: {fileID: 1879859047307610033}
   m_Layer: 7
   m_Name: robot
   m_TagString: Robot
@@ -136,6 +137,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.0000303}
   m_EdgeRadius: 0
+--- !u!254 &7803451227653538638
+RelativeJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489311540624490963}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_MaxForce: 10000
+  m_MaxTorque: 10000
+  m_CorrectionScale: 0.3
+  m_AutoConfigureOffset: 0
+  m_LinearOffset: {x: 1.4, y: 0.16}
+  m_AngularOffset: 0
 --- !u!114 &7803451229057493689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,22 +193,18 @@ MonoBehaviour:
   grabRange: 1.5
   reCallCoolDown: 1
   objectToReCall: {fileID: 0}
---- !u!254 &7803451227653538638
-RelativeJoint2D:
+--- !u!114 &1879859047307610033
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489311540624490963}
   m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_MaxForce: 10000
-  m_MaxTorque: 10000
-  m_CorrectionScale: 0.3
-  m_AutoConfigureOffset: 0
-  m_LinearOffset: {x: 1.4, y: 0.16}
-  m_AngularOffset: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b060fa3ca7b9e134693dd36f7883327c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensorDetectionLayer:
+    serializedVersion: 2
+    m_Bits: 192

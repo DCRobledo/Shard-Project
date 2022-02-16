@@ -62,7 +62,7 @@ namespace Shard.UI.ProgrammingUI
                 else {
                     elseBlock?.SetNextBlockIndex(0);
 
-                    return elseBlock != null ? new BlockLocation(elseBlock.GetIndex(), -1) : new BlockLocation(endOfConditional + 1, -1);
+                    return elseBlock != null ? new BlockLocation(elseBlock.GetIndex(), -1) : new BlockLocation(endOfConditional, -1);
                 }
             }
 
@@ -140,6 +140,7 @@ namespace Shard.UI.ProgrammingUI
 
 
         public bool IsMet() {
+            Debug.Log(isMetEvent?.Invoke());
             return isMetEvent?.Invoke() == element.ToString().ToLower();
         }
 

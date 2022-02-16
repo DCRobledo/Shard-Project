@@ -16,9 +16,7 @@ namespace Shard.Controllers
         private GameObject robot;
         private EntityMovement robotMovement;
         private EntityActions robotActions;
-
-        [SerializeField]
-        private LayerMask sensorDetectionLayer;
+        private RobotSensors robotSensors;
 
         private Command jumpCommand;
         private Command moveCommand;
@@ -34,9 +32,7 @@ namespace Shard.Controllers
 
             robotMovement = robot.GetComponent<EntityMovement>();
             robotActions = robot.GetComponent<EntityActions>();
-
-            RobotSensors.SetBoxCollider2D(robot.GetComponent<BoxCollider2D>());
-            RobotSensors.SetLayerMask(sensorDetectionLayer);
+            robotSensors = robot.GetComponent<RobotSensors>();
 
             jumpCommand = new JumpCommand(robotMovement);
             moveCommand = new MoveCommand(robotMovement);
@@ -100,13 +96,12 @@ namespace Shard.Controllers
         private void LinkRobotSensor(ref ConditionalBlock block) {
             // Remove previous events
             block.GetCondition().isMetEvent = null;
-                
 
             switch(block.GetCondition().GetState()) {
-                case Condition.ConditionalState.AHEAD:  block.GetCondition().isMetEvent += RobotSensors.CheckAhead;  break;
-                case Condition.ConditionalState.BEHIND: block.GetCondition().isMetEvent += RobotSensors.CheckBehind; break;
-                case Condition.ConditionalState.ABOVE:  block.GetCondition().isMetEvent += RobotSensors.CheckAbove;  break;
-                case Condition.ConditionalState.BELOW:  block.GetCondition().isMetEvent += RobotSensors.CheckBelow;  break;
+                case Condition.ConditionalState.AHEAD:  block.GetCondition().isMetEvent += robotSensors.CheckAhead;  break;
+                case Condition.ConditionalState.BEHIND: block.GetCondition().isMetEvent += robotSensors.CheckBehind; break;
+                case Condition.ConditionalState.ABOVE:  block.GetCondition().isMetEvent += robotSensors.CheckAbove;  break;
+                case Condition.ConditionalState.BELOW:  block.GetCondition().isMetEvent += robotSensors.CheckBelow;  break;
 
                 default: break;
             }

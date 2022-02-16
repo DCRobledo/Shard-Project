@@ -5,33 +5,33 @@ using UnityEngine;
 
 namespace Shard.Entities 
 {
-    public static class RobotSensors
+    public class RobotSensors : MonoBehaviour
     {
-        private static BoxCollider2D boxCollider2D;
+        [SerializeField]
+        private LayerMask sensorDetectionLayer;
 
-        private static LayerMask layerMask;
+        private BoxCollider2D boxCollider2D;
 
-        public static void SetBoxCollider2D(BoxCollider2D boxCollider2D) { RobotSensors.boxCollider2D = boxCollider2D; }
-        public static void SetLayerMask(LayerMask layerMask) { RobotSensors.layerMask = layerMask; }
 
-        public static string CheckAhead() {
-            Debug.Log("AHEAD");
-            return Detection.DetectObject(RobotSensors.boxCollider2D, layerMask, Detection.Direction.RIGHT, 0.5f, true);
+        private void Awake() {
+            boxCollider2D = this.GetComponent<BoxCollider2D>();
         }
 
-        public static string CheckBehind() {
-            Debug.Log("BEHIND");
-            return Detection.DetectObject(RobotSensors.boxCollider2D, layerMask, Detection.Direction.LEFT, 0.5f, true);
+
+        public string CheckAhead() {
+            return Detection.DetectObject(boxCollider2D, sensorDetectionLayer, Detection.Direction.RIGHT, 0.5f, true);
         }
 
-        public static string CheckBelow() {
-            Debug.Log("BELOW");
-            return Detection.DetectObject(RobotSensors.boxCollider2D, layerMask, Detection.Direction.DOWN, 0.5f, true);
+        public string CheckBehind() {
+            return Detection.DetectObject(boxCollider2D, sensorDetectionLayer, Detection.Direction.LEFT, 0.5f, true);
         }
 
-        public static string CheckAbove() {
-            Debug.Log("ABOVE");
-            return Detection.DetectObject(RobotSensors.boxCollider2D, layerMask, Detection.Direction.UP, 0.5f, true);
+        public string CheckBelow() {
+            return Detection.DetectObject(boxCollider2D, sensorDetectionLayer, Detection.Direction.DOWN, 0.5f, true);
+        }
+
+        public string CheckAbove() {
+            return Detection.DetectObject(boxCollider2D, sensorDetectionLayer, Detection.Direction.UP, 0.5f, true);
         }
     }
 }

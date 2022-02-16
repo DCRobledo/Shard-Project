@@ -31570,6 +31570,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8545845645374075560, guid: 3a1f18463cb92bf45bdf074f23d8c65d, type: 3}
+      propertyPath: sensorDetectionLayer.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a1f18463cb92bf45bdf074f23d8c65d, type: 3}
 --- !u!1001 &7377906615097686902
