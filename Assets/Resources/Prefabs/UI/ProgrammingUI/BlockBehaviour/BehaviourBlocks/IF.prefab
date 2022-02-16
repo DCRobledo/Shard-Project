@@ -257,8 +257,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 78.6, y: -0.19998}
-  m_SizeDelta: {x: 101.6963, y: 24.0609}
+  m_AnchoredPosition: {x: 69.47146, y: -0.19998}
+  m_SizeDelta: {x: 119.9534, y: 24.0609}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6441778542633533254
 CanvasRenderer:
@@ -642,8 +642,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 67.795166, y: 0}
-  m_SizeDelta: {x: 276.7801, y: 34.981}
+  m_AnchoredPosition: {x: 75.82385, y: 0}
+  m_SizeDelta: {x: 292.8375, y: 34.981}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2754756810094576545
 CanvasRenderer:
@@ -729,6 +729,8 @@ MonoBehaviour:
   conditionalType: 0
   elementDropDown: {fileID: 1004776681071408659}
   stateDropDown: {fileID: 7805295160130725339}
+  endOfConditional: 0
+  nextBlockIndex: 0
 --- !u!1 &1653081262091184423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2217,7 +2219,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -113.2, y: -0.19995}
+  m_AnchoredPosition: {x: -122.4, y: 0.0000011772}
   m_SizeDelta: {x: 33.2794, y: 34.79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2331236585462267677
@@ -2709,8 +2711,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00096226, y: 0}
-  m_SizeDelta: {x: 276.78, y: 34.79}
+  m_AnchoredPosition: {x: -0.00010586, y: 0}
+  m_SizeDelta: {x: 292.84, y: 34.79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2674894416526628096
 CanvasRenderer:

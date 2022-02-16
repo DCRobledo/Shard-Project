@@ -2,7 +2,7 @@ using Shard.Entities;
 using Shard.Patterns.Command;
 using Shard.Patterns.Singleton;
 using Shard.UI.ProgrammingUI;
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -98,6 +98,10 @@ namespace Shard.Controllers
         }
 
         private void LinkRobotSensor(ref ConditionalBlock block) {
+            // Remove previous events
+            block.GetCondition().isMetEvent = null;
+                
+
             switch(block.GetCondition().GetState()) {
                 case Condition.ConditionalState.AHEAD:  block.GetCondition().isMetEvent += RobotSensors.CheckAhead;  break;
                 case Condition.ConditionalState.BEHIND: block.GetCondition().isMetEvent += RobotSensors.CheckBehind; break;

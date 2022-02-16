@@ -33,7 +33,7 @@ namespace Shard.UI.ProgrammingUI
         private void Awake() {
             type = BlockType.CONDITIONAL;
 
-            condition = conditionalType == ConditionalType.ELSE ? null : new Condition(1, 1);
+            condition = conditionalType == ConditionalType.ELSE ? null : new Condition(0, 0);
 
             if(conditionalType != ConditionalType.ELSE) {
                 elementDropDown.onValueChanged.AddListener(context => SetConditionElement(elementDropDown.value));
