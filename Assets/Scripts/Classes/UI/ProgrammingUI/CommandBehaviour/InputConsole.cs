@@ -34,22 +34,15 @@ namespace Shard.UI.ProgrammingUI
             string command = inputField.text;
             
             // Parse the command
-            string result = ParseCommand(command);
+            string result = "";
+            bool isValid = CommandParser.ParseCommand(command, ref result);
             
             // Record it in the history
-            SubmitCommand(command, result);
+            submitCommandEvent?.Invoke(command, result);;
 
             // Create the command behaviour
             // CreateCommandBehavior();
 
-        }
-
-        private string ParseCommand(string command) {
-            return "result";
-        }
-
-        private void SubmitCommand(string command, string result) {
-            submitCommandEvent?.Invoke(command, result);
         }
     }
 }
