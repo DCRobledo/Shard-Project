@@ -2,6 +2,7 @@ using Shard.Input;
 using Shard.Patterns.Command;
 using Shard.Patterns.Singleton;
 using Shard.Entities;
+using Shard.UI.ProgrammingUI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,6 +58,10 @@ namespace Shard.Controllers
 
         private void OnEnable() {
             EnableInput();
+
+            // Subscribe enabling and disabling to input console state management
+            InputConsole.enterInputStateEvent += DisableInput;
+            InputConsole.exitInputStateEvent += EnableInput;
         }
 
         private void EnableInput() {
@@ -83,6 +88,10 @@ namespace Shard.Controllers
 
         private void OnDisable() {
             DisableInput();
+
+            // Unsubscribe enabling and disabling to input console state management
+            InputConsole.enterInputStateEvent -= DisableInput;
+            InputConsole.exitInputStateEvent -= EnableInput;
         }
 
         private void DisableInput() {
