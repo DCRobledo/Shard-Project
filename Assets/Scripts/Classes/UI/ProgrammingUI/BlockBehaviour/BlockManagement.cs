@@ -19,6 +19,8 @@ namespace Shard.UI.ProgrammingUI
         private GameObject memoryLeft;
         private TextMeshProUGUI memoryLeftText;
 
+        private bool isModifiable = true;
+
         public static event Action<int, int, List<GameObject>> generateBlockBehaviourEvent;
 
 
@@ -91,6 +93,11 @@ namespace Shard.UI.ProgrammingUI
             }
 
             generateBlockBehaviourEvent?.Invoke(minIndex, maxIndex, blocks);
+        }
+
+
+        public void SetIsModifiable(bool isModifiable) {
+            this.isModifiable = isModifiable;
         }
 
 
