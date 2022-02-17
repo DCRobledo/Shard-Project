@@ -9,12 +9,8 @@ namespace Shard.UI.ProgrammingUI
         public static bool ParseCommand(string command, out string result) {
             result = "";
 
-            Debug.Log(command);
-
             // Parse main structure -> <event>(<trigger>).*<delay>
-            string[] split = result.Split(".");
-
-            Debug.Log(split.Length);
+            string[] split = command.Split(".");
 
             // Check that there are no more than two main elements
             if (split.Length > 2) {
@@ -42,14 +38,14 @@ namespace Shard.UI.ProgrammingUI
 
 
         private static bool ParseDelay(string delay) {
-            return int.TryParse("0123456789", out _);
+            return int.TryParse(delay, out _);
         }
 
 
         private static string ParserError(string element, string message) {
             string error = "";
 
-            error += "ERROR: There is a problem with the command's " + element;
+            error += "ERROR: There is a problem with the command's " + element + "\n";
             error += "\t" + message;
 
             return error;
