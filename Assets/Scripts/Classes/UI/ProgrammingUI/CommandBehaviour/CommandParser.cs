@@ -31,6 +31,7 @@ namespace Shard.UI.ProgrammingUI
             "turn_on"
         };
 
+
         public static bool ParseCommand(string command, out string result) {
             string[] split = command.Split(".");
 
@@ -57,7 +58,7 @@ namespace Shard.UI.ProgrammingUI
 
 
             // Parse the trigger
-            string commandTrigger = split[1];
+            string commandTrigger = split[1].Split(')')[0];
 
             if (!ParseTrigger(commandTrigger, out result)) return false;
     
@@ -73,10 +74,7 @@ namespace Shard.UI.ProgrammingUI
 
             // This contemplates that the trigger element is doesn't have opening bracket
             if(split.Length < 2) {
-                result = ParserError(
-                    "main structure",
-                    "The event and trigger elements are not differentiated"
-                );
+                result = "ERROR: The event and trigger elements are not differentiated";
 
                 return false;
             }
@@ -84,11 +82,8 @@ namespace Shard.UI.ProgrammingUI
             // This contemplates that the trigger element is doesn't have ending bracket
             string[] secondSplit = split[1].Split(')');
 
-            if(split.Length < 2) {
-                result = ParserError(
-                    "main structure",
-                    "The event and trigger elements are not differentiated"
-                );
+            if(secondSplit.Length < 2) {
+                result = "ERROR: The event and trigger elements are not differentiated";
 
                 return false;
             }
@@ -100,11 +95,8 @@ namespace Shard.UI.ProgrammingUI
         private static bool ParseMainStructure(string command, out string[] split, out string result) {
             split = command.Split(".");
             bool parseOk = split.Length <= 2;
-            
-            result = parseOk ? "" : ParserError(
-                                        "main structure",
-                                        "There are more than 3 elements"
-                                    );
+
+            result = parseOk ? "" : "ERROR: There are more than 3 elements";
 
             return parseOk;
         }
@@ -112,10 +104,7 @@ namespace Shard.UI.ProgrammingUI
         private static bool ParseDelay(string commandDelay, out string result) {
             bool parseOk = int.TryParse(commandDelay, out _);
 
-            result = parseOk ? "" : ParserError(
-                                        "delay",
-                                        "The delay element is not a number"
-                                    );
+            result = parseOk ? "" : "ERROR: The delay element is not a number";
 
             return parseOk;
         }
@@ -123,10 +112,7 @@ namespace Shard.UI.ProgrammingUI
         private static bool ParseEvent(string commandEvent, out string result) {
             bool parseOk = Array.IndexOf(possibleEvents, commandEvent) > -1;
 
-            result = parseOk ? "" : ParserError(
-                                        "delay",
-                                        "The delay element is not a number"
-                                    );
+            result = parseOk ? "" : "ERROR: The event element is not a valid option";
 
             return parseOk;
         }
@@ -134,22 +120,9 @@ namespace Shard.UI.ProgrammingUI
         private static bool ParseTrigger(string commandTrigger, out string result) {
             bool parseOk = Array.IndexOf(possibleTriggers, commandTrigger) > -1;
 
-            result = parseOk ? "" : ParserError(
-                                        "delay",
-                                        "The delay element is not a number"
-                                    );
+            result = parseOk ? "" : "ERROR: The trigger element is not a valid option";
 
             return parseOk;
-        }
-
-
-        private static string ParserError(string element, string message) {
-            string error = "";
-
-            error += "ERROR: There is a problem with the command's " + element + "\n";
-            error += "\t" + message;
-
-            return error;
         }
     }
 }
