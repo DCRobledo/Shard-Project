@@ -7,10 +7,13 @@ namespace Shard.UI.ProgrammingUI
 {
     public class CommandHistory : MonoBehaviour
     {
+        [SerializeField]
+        private GameObject commandPrefab;
+
+
         private TextMeshProUGUI historyText;
 
         private List<string> commandHistory = new List<string>();
-        private List<string> resultHistory = new List<string>();
 
 
         private void Awake() {
@@ -27,22 +30,34 @@ namespace Shard.UI.ProgrammingUI
 
 
         private void RecordCommand(string command, string result) {
-            commandHistory.Add(command);
-            resultHistory.Add(result);
+            GameObject commandGO = InstantiateCommand();
+            StyleCommand(commandGO, command, result);
 
-            UpdateHistoryText();
+            commandHistory.Add(command);
         }
 
-        private void UpdateHistoryText() {
-            string historyText = "";
+        private GameObject InstantiateCommand() {
+            GameObject commandGO = Object.Instantiate(commandPrefab);
 
-            for (int i = 0; i < commandHistory.Count; i++) {
-                historyText += commandHistory[i] + "\n";
-                historyText += "\t" + resultHistory[i] + "\n";
-            }
+            commandGO.name = "command_" + commandHistory.Count;
+            commandGO.transform.SetParent(this.transform.GetChild(0));
 
-            this.historyText.text = historyText;
-        } 
+            return commandGO;
+        }
+
+        private void StyleCommand(GameObject commandGO, string command, string result) {
+            GameObject commandTextGO = commandGO.transform.GetChild(0).gameObject;
+            commandTextGO.GetComponent<TextMeshProUGUI>().SetText(command);
+
+            GameObject resultTextGO = commandGO.transform.GetChild(1).gameObject;
+            resultTextGO.GetComponent<TextMeshProUGUI>().SetText(result);
+        }
+
+
+
+        public string GetCommand(int index) {
+            return this.commandHistory[index];
+        }
     }
 }
 
