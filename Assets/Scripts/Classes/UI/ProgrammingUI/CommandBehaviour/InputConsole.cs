@@ -31,14 +31,14 @@ namespace Shard.UI.ProgrammingUI
 
 
         public void EnterCommand() {
-            string command = inputField.text;
+            string command = inputField.text.ToLower();
             
             // Parse the command
             string result = "";
             bool isValid = CommandParser.ParseCommand(command, out result);
             
             // Record it in the history
-            submitCommandEvent?.Invoke(command, result);;
+            submitCommandEvent?.Invoke(command, result);
 
             // Create the command behaviour
             // CreateCommandBehavior();
