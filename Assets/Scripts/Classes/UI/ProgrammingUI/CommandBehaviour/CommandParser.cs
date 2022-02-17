@@ -32,40 +32,46 @@ namespace Shard.UI.ProgrammingUI
         };
 
         public static bool ParseCommand(string command, out string result) {
-            result = "";
-
-            // Parse main structure -> <event>(<trigger>).*<delay>
             string[] split = command.Split(".");
 
             // Check that there are no more than two main elements
-            if (split.Length > 2) {
-                result = ParserError(
-                    "main structure",
-                    "There are more than 3 elements"
-                );
+            if (!ParseMainStructure(command, out split, out result)) return false;
 
-                return false;
-            } 
 
             // Parse the delay, if it exists
             if (split.Length > 1){
                 string commandDelay = split[1];
 
-                if (!ParseDelay(commandDelay)) {
-                    result = ParserError(
-                        "delay",
-                        "The delay element is not a number"
-                    );
-
-                    return false;
-                } 
+                if (!ParseDelay(commandDelay, out result)) return false; 
             }
                 
 
-            // Now, split again into event and trigger
-            split = split[0].Split('(');
+            // Now, check that the trigger is surroned by brackets
+            if (!ParseTriggersBrackets(split[0], out split, out result)) return false;
 
-            // This contemplates that the trigger element is not bracket-surronded
+
+            // Parse the event
+            string commandEvent = split[0];
+
+            if (!ParseEvent(commandEvent, out result)) return false;
+
+
+            // Parse the trigger
+            string commandTrigger = split[1];
+
+            if (!ParseTrigger(commandTrigger, out result)) return false;
+    
+
+            // Parse OK
+            result = "OK: A new command behaviour has been created"; 
+            return true;
+        }
+
+
+        private static bool ParseTriggersBrackets(string command, out string[] split, out string result) {
+            split = command.Split('(');
+
+            // This contemplates that the trigger element is doesn't have opening bracket
             if(split.Length < 2) {
                 result = ParserError(
                     "main structure",
@@ -75,60 +81,65 @@ namespace Shard.UI.ProgrammingUI
                 return false;
             }
 
-            // Parse the event
-            string commandEvent = split[0];
+            // This contemplates that the trigger element is doesn't have ending bracket
+            string[] secondSplit = split[1].Split(')');
 
-            if (!ParseEvent(commandEvent)) {
-                result = ParserError(
-                    "event",
-                    "This event option is not allowed"
-                );
-
-                return false;
-            } 
-
-
-            // Check that the brackets are closed
-            string commandTriggerWithBracket = split[1];
-
-            split = commandTriggerWithBracket.Split(')');
             if(split.Length < 2) {
                 result = ParserError(
                     "main structure",
-                    "The trigger elements is not surronded by curly brackets"
+                    "The event and trigger elements are not differentiated"
                 );
 
                 return false;
             }
 
-            // Parse the trigger
-            string commandTrigger = split[0];
-
-            if (!ParseTrigger(commandTrigger)) {
-                result = ParserError(
-                    "trigger",
-                    "This trigger option is not allowed"
-                );
-
-                return false;
-            }
-
-            // Parse OK
-            result = "OK: A new command behaviour has been created"; 
+            result = "";
             return true;
         }
 
+        private static bool ParseMainStructure(string command, out string[] split, out string result) {
+            split = command.Split(".");
+            bool parseOk = split.Length <= 2;
+            
+            result = parseOk ? "" : ParserError(
+                                        "main structure",
+                                        "There are more than 3 elements"
+                                    );
 
-        private static bool ParseDelay(string commandDelay) {
-            return int.TryParse(commandDelay, out _);
+            return parseOk;
         }
 
-        private static bool ParseEvent(string commandEvent) {
-            return Array.IndexOf(possibleEvents, commandEvent) > -1;
+        private static bool ParseDelay(string commandDelay, out string result) {
+            bool parseOk = int.TryParse(commandDelay, out _);
+
+            result = parseOk ? "" : ParserError(
+                                        "delay",
+                                        "The delay element is not a number"
+                                    );
+
+            return parseOk;
         }
 
-        private static bool ParseTrigger(string commandTrigger) {
-            return Array.IndexOf(possibleTriggers, commandTrigger) > -1;
+        private static bool ParseEvent(string commandEvent, out string result) {
+            bool parseOk = Array.IndexOf(possibleEvents, commandEvent) > -1;
+
+            result = parseOk ? "" : ParserError(
+                                        "delay",
+                                        "The delay element is not a number"
+                                    );
+
+            return parseOk;
+        }
+
+        private static bool ParseTrigger(string commandTrigger, out string result) {
+            bool parseOk = Array.IndexOf(possibleTriggers, commandTrigger) > -1;
+
+            result = parseOk ? "" : ParserError(
+                                        "delay",
+                                        "The delay element is not a number"
+                                    );
+
+            return parseOk;
         }
 
 
