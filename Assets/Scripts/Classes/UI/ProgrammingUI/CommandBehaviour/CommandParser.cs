@@ -32,8 +32,11 @@ namespace Shard.UI.ProgrammingUI
         };
 
 
-        public static bool ParseCommand(string command, out string result) {
+        public static bool ParseCommand(string command, out string result, out string commandEvent, out string commandTrigger, out string commandDelay) {
             string[] split = command.Split(".");
+            commandEvent = "";
+            commandTrigger = "";
+            commandDelay = "";
 
             // Check that there are no more than two main elements
             if (!ParseMainStructure(command, out split, out result)) return false;
@@ -41,7 +44,7 @@ namespace Shard.UI.ProgrammingUI
 
             // Parse the delay, if it exists
             if (split.Length > 1){
-                string commandDelay = split[1];
+                commandDelay = split[1];
 
                 if (!ParseDelay(commandDelay, out result)) return false; 
             }
@@ -52,13 +55,13 @@ namespace Shard.UI.ProgrammingUI
 
 
             // Parse the event
-            string commandEvent = split[0];
+             commandEvent = split[0];
 
             if (!ParseEvent(commandEvent, out result)) return false;
 
 
             // Parse the trigger
-            string commandTrigger = split[1].Split(')')[0];
+             commandTrigger = split[1].Split(')')[0];
 
             if (!ParseTrigger(commandTrigger, out result)) return false;
     

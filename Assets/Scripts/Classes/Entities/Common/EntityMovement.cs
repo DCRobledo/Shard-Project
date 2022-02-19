@@ -1,6 +1,6 @@
 using Shard.Lib.Custom;
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace Shard.Entities
@@ -33,6 +33,8 @@ namespace Shard.Entities
         private bool canJump = true;
         private bool shouldJump = false;
         private bool isFacingRight = true;
+
+        private Action jumpTrigger;
 
 
         private void Awake() 
@@ -83,7 +85,7 @@ namespace Shard.Entities
         }
 
         public void Jump() {
-            if(canJump) this.shouldJump = true;
+            Jump(true);
         }
 
         public void Jump(bool jump) 
@@ -92,8 +94,11 @@ namespace Shard.Entities
             if(!jump) this.shouldJump = jump;
 
             // But we want to delay the jumps between one another
-            else if(jump && canJump)
+            else if(jump && canJump) {
                 this.shouldJump = jump;
+
+                jumpTrigger?.Invoke();
+            }
         } 
 
         private void ApplyGravity(float fallMultiplier, float lowJumpMultiplier) {

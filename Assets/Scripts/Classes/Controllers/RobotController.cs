@@ -25,6 +25,8 @@ namespace Shard.Controllers
         private BlockBehaviour blockBehaviour;
         private Coroutine blockBehaviourExecution;
 
+        private CommandBehaviour commandBehaviour;
+
         private void Awake() {
             instance = this;
 
@@ -41,10 +43,12 @@ namespace Shard.Controllers
 
         private void OnEnable() {
             BlockManagement.generateBlockBehaviourEvent += SetBlockBehaviour;
+            InputConsole.generateCommandBehaviourEvent  += SetCommandBehaviour;
         }
 
         private void OnDisable() {
             BlockManagement.generateBlockBehaviourEvent -= SetBlockBehaviour;
+            InputConsole.generateCommandBehaviourEvent  -= SetCommandBehaviour;
         }
 
 
@@ -106,6 +110,13 @@ namespace Shard.Controllers
             }
         }
 
+
+        private void SetCommandBehaviour(string commandEvent, string commandTrigger, string commandDelay) {
+            if(commandBehaviour != null) Destroy(robot.GetComponent<CommandBehaviour>());
+
+            commandBehaviour = robot.AddComponent<CommandBehaviour>();
+            commandBehaviour.CreateCommandBehaviour(commandEvent, commandTrigger, commandDelay);
+        }
 
     
         public void TurnOn() {

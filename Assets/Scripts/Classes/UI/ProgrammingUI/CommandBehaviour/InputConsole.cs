@@ -11,7 +11,8 @@ namespace Shard.UI.ProgrammingUI
         public static Action enterInputStateEvent;
         public static Action exitInputStateEvent;
 
-        public static Action<string, string> submitCommandEvent;
+        public static Action <string, string>         submitCommandEvent;
+        public static Action <string, string, string> generateCommandBehaviourEvent;
 
         private TMP_InputField inputField;
 
@@ -45,16 +46,20 @@ namespace Shard.UI.ProgrammingUI
 
         private void SubmitCommand() {   
             string command = inputField.text.ToLower();
+            string commandEvent = "";
+            string commandTrigger = "";
+            string commandDelay = "";
 
             // Parse the command
             string result = "";
-            bool isValid = CommandParser.ParseCommand(command, out result);
+            bool isValid = CommandParser.ParseCommand(command, out result, out commandEvent, out commandTrigger, out commandDelay);
             
             // Record it in the history
             submitCommandEvent?.Invoke(command, result);
 
             // Create the command behaviour
-            // CreateCommandBehavior();
+            if(isValid)
+                generateCommandBehaviourEvent?.Invoke(commandEvent, commandTrigger, commandDelay);
         }
     }
 }
