@@ -27,12 +27,25 @@ namespace Shard.UI.ProgrammingUI
 
         public void ExitInputState() {
             exitInputStateEvent?.Invoke();
-        }  
+        }
 
 
         public void EnterCommand() {
+            if (inputField.text.EndsWith(';')) {
+                inputField.text = inputField.text.Substring(0, inputField.text.Length - 1);
+
+                SubmitCommand();
+
+                inputField.text = "";
+
+                inputField.ActivateInputField();
+                inputField.Select();
+            } 
+        }  
+
+        private void SubmitCommand() {   
             string command = inputField.text.ToLower();
-            
+
             // Parse the command
             string result = "";
             bool isValid = CommandParser.ParseCommand(command, out result);
@@ -42,7 +55,6 @@ namespace Shard.UI.ProgrammingUI
 
             // Create the command behaviour
             // CreateCommandBehavior();
-
         }
     }
 }
