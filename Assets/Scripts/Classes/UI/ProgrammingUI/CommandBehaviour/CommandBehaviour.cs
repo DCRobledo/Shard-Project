@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CommandBehaviour : MonoBehaviour
 {
-    public enum CommandEvent {
+    public enum CommandAction {
         JUMP,
         WALK,
         FLIP,
@@ -13,28 +13,36 @@ public class CommandBehaviour : MonoBehaviour
         THROW,
         STOP
     }
-    private CommandEvent commandEvent;
 
     public enum TriggerInvoker {
         LILY,
         ROBOT
     }
 
+    private CommandAction commandEventAction;
+    private Action commandEvent;
+
     private TriggerInvoker commandTriggerInvoker;
-    private CommandEvent commandTriggerAction;
+    private CommandAction commandTriggerAction;
 
     private float commandDelay;
 
-    public void CreateCommandBehaviour(string commandEvent, string commandTrigger, string commandDelay) {
-        SetCommandEvent(commandEvent.ToUpper());
+
+    private void OnDisable() {
+        commandEvent = null;
+    }
+
+
+    public void CreateCommandBehaviour(string commandEventAction, string commandTrigger, string commandDelay) {
+        SetCommandEvent(commandEventAction.ToUpper());
         SetCommandTrigger(commandTrigger.ToUpper());
 
         if(commandDelay != "")
             SetCommandDelay(commandDelay);
     }
 
-    private void SetCommandEvent(string commandEvent) {
-        this.commandEvent = (CommandEvent) System.Enum.Parse(typeof(CommandEvent), commandEvent);
+    private void SetCommandEvent(string commandEventAction) {
+        this.commandEventAction = (CommandAction) System.Enum.Parse(typeof(CommandAction), commandEventAction);
     }
 
     private void SetCommandTrigger(string commandTrigger) {
@@ -43,10 +51,61 @@ public class CommandBehaviour : MonoBehaviour
         string commandTriggerAction = split[1];
 
         this.commandTriggerInvoker = (TriggerInvoker) System.Enum.Parse(typeof(TriggerInvoker), commandTriggerInvoker);
-        this.commandTriggerAction = (CommandEvent) System.Enum.Parse(typeof(CommandEvent), commandTriggerAction);
+        this.commandTriggerAction = (CommandAction) System.Enum.Parse(typeof(CommandAction), commandTriggerAction);
     }
 
     private void SetCommandDelay(string commandDelay) {
         this.commandDelay = float.Parse(commandDelay);
+    }
+
+
+    public CommandAction GetCommandEventAction()
+    {
+        return this.commandEventAction;
+    }
+
+    public void SetCommandEventAction(CommandAction commandEventAction)
+    {
+        this.commandEventAction = commandEventAction;
+    }
+
+    public Action GetCommandEvent()
+    {
+        return this.commandEvent;
+    }
+
+    public void SetCommandEvent(Action commandEvent)
+    {
+        this.commandEvent = commandEvent;
+    }
+
+    public TriggerInvoker GetCommandTriggerInvoker()
+    {
+        return this.commandTriggerInvoker;
+    }
+
+    public void SetCommandTriggerInvoker(TriggerInvoker commandTriggerInvoker)
+    {
+        this.commandTriggerInvoker = commandTriggerInvoker;
+    }
+
+    public CommandAction GetCommandTriggerAction()
+    {
+        return this.commandTriggerAction;
+    }
+
+    public void SetCommandTriggerAction(CommandAction commandTriggerAction)
+    {
+        this.commandTriggerAction = commandTriggerAction;
+    }
+
+    public float GetCommandDelay()
+    {
+        return this.commandDelay;
+    }
+
+    public void SetCommandDelay(float commandDelay)
+    {
+        this.commandDelay = commandDelay;
     }
 }

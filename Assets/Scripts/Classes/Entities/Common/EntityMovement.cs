@@ -34,7 +34,7 @@ namespace Shard.Entities
         private bool shouldJump = false;
         private bool isFacingRight = true;
 
-        private Action jumpTrigger;
+        public static Action jumpTrigger;
 
 
         private void Awake() 
@@ -53,6 +53,7 @@ namespace Shard.Entities
             ApplyGravity(this.fallMultiplier, this.lowJumpMultiplier);
         }
 
+
         public void Move() {
             float x = isFacingRight ? 1 : -1;
 
@@ -70,6 +71,7 @@ namespace Shard.Entities
             else if (x < 0 && this.gameObject.transform.localScale.x > 0) Flip();
         }
 
+
         public void Flip() {
             // Flip the entity
             GameObject entity = this.gameObject;
@@ -83,6 +85,7 @@ namespace Shard.Entities
             GameObject grabbedEntity = this.GetComponent<RelativeJoint2D>().connectedBody?.gameObject;
             if(grabbedEntity != null) TransformUtils.FlipObject(ref grabbedEntity);
         }
+
 
         public void Jump() {
             Jump(true);
@@ -125,7 +128,7 @@ namespace Shard.Entities
             canJump = true;
         }
     
-    
+
         public void Crouch(bool crouch) {
             // Modify player's y scale
             Vector3 scale = this.transform.localScale;
@@ -135,6 +138,7 @@ namespace Shard.Entities
             // And movement speed
             speed = crouch ? speed - crouchFactor : speed + crouchFactor;
         }
+    
     }
 }
 

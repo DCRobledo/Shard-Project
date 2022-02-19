@@ -116,6 +116,64 @@ namespace Shard.Controllers
 
             commandBehaviour = robot.AddComponent<CommandBehaviour>();
             commandBehaviour.CreateCommandBehaviour(commandEvent, commandTrigger, commandDelay);
+
+            LinkCommandEvent();
+            LinkCommandTrigger();
+        }
+
+        private void LinkCommandEvent() {
+            Action commandEvent = commandBehaviour.GetCommandEvent();
+
+            switch(commandBehaviour.GetCommandEventAction()) {
+                case CommandBehaviour.CommandAction.JUMP: commandEvent += jumpCommand.Execute; break;
+
+                case CommandBehaviour.CommandAction.WALK:
+                    break;
+
+                case CommandBehaviour.CommandAction.FLIP:
+                    break;
+            }
+        }
+
+        private void LinkCommandTrigger() {
+            switch (commandBehaviour.GetCommandTriggerInvoker()) {
+                case CommandBehaviour.TriggerInvoker.LILY: LinkCommandTriggerToPlayer(); break;
+
+                case CommandBehaviour.TriggerInvoker.ROBOT: LinkCommandTriggerToRobot(); break;
+            }
+        }
+
+        private void LinkCommandTriggerToPlayer() {
+            Action commandTrigger = null;
+
+
+            switch(commandBehaviour.GetCommandTriggerAction()) {
+                case CommandBehaviour.CommandAction.JUMP: /*commandTrigger = PlayerController.Instance.GetPlayerMovement().jumpTrigger;*/ break;
+
+                case CommandBehaviour.CommandAction.WALK:
+                    break;
+
+                case CommandBehaviour.CommandAction.FLIP:
+                    break;
+            }
+
+            commandTrigger += commandBehaviour.GetCommandEvent().Invoke;
+        }
+
+        private void LinkCommandTriggerToRobot() {
+            Action commandTrigger = null;
+
+            switch(commandBehaviour.GetCommandTriggerAction()) {
+                case CommandBehaviour.CommandAction.JUMP: /*commandTrigger = robotMovement.GetJumpTrigger();*/ break;
+
+                case CommandBehaviour.CommandAction.WALK:
+                    break;
+
+                case CommandBehaviour.CommandAction.FLIP:
+                    break;
+            }
+
+            commandTrigger += commandBehaviour.GetCommandEvent().Invoke;
         }
 
     
