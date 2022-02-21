@@ -3,7 +3,7 @@ using Shard.Patterns.Command;
 using Shard.Patterns.Singleton;
 using Shard.Entities;
 using Shard.UI.ProgrammingUI;
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -28,6 +28,8 @@ namespace Shard.Controllers
 
         private InputActions InputActions;
         private InputAction movement;
+
+        public static Action jumpTrigger;
 
 
         private void Awake() {
@@ -58,6 +60,7 @@ namespace Shard.Controllers
 
         private void OnEnable() {
             EnableInput();
+            EnableTriggers();
 
             // Subscribe enabling and disabling to input console state management
             InputConsole.enterInputStateEvent += DisableInput;
@@ -84,6 +87,14 @@ namespace Shard.Controllers
 
             InputActions.Player.Program.performed += context => programButton.Execute();
             InputActions.Player.Program.Enable();
+        }
+
+        private void EnableTriggers() {
+            InputActions.Player.Jump.started += context => Temp();
+        }
+
+        private void Temp() {
+            jumpTrigger?.Invoke();
         }
 
         private void OnDisable() {

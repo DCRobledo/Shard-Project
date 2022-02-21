@@ -17,11 +17,8 @@ public class RobotMovement : EntityMovement
         else if (x < 0 && this.gameObject.transform.localScale.x > 0) Flip();
     }
 
-    public override void Jump(bool jump)  {
-        if(canJump) {
+    public override void Jump()  {
+        if(canJump)
             this.shouldJump = true;
-
-            jumpTrigger?.Invoke();
-        }
     } 
 }

@@ -22,10 +22,7 @@ public class PlayerMovement : EntityMovement
         if(!jump) this.shouldJump = jump;
 
         // But we want to delay the jumps between one another
-        else if(jump && canJump) {
+        else if(jump && canJump) 
             this.shouldJump = jump;
-
-            jumpTrigger?.Invoke();
-        }
     } 
 }

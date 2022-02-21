@@ -117,57 +117,58 @@ namespace Shard.Controllers
             commandBehaviour = robot.AddComponent<CommandBehaviour>();
             commandBehaviour.CreateCommandBehaviour(commandEvent, commandTrigger, commandDelay);
 
-            LinkCommandEvent();
-            LinkCommandTrigger();
+            PlayerController.jumpTrigger += jumpCommand.Execute;
+            // LinkCommandEvent();
+            // LinkCommandTrigger();
         }
 
-        private void LinkCommandEvent() {
-            switch(commandBehaviour.GetCommandEventAction()) {
-                case CommandBehaviour.CommandAction.JUMP: CommandBehaviour.commandEvent += jumpCommand.Execute; break;
+        // private void LinkCommandEvent() {
+        //     switch(commandBehaviour.GetCommandEventAction()) {
+        //         case CommandBehaviour.CommandAction.JUMP: PlayerMovement.jumpTrigger += jumpCommand.Execute; break;
 
-                case CommandBehaviour.CommandAction.WALK:
-                    break;
+        //         case CommandBehaviour.CommandAction.WALK:
+        //             break;
 
-                case CommandBehaviour.CommandAction.FLIP:
-                    break;
-            }
-        }
+        //         case CommandBehaviour.CommandAction.FLIP:
+        //             break;
+        //     }
+        // }
 
-        private void LinkCommandTrigger() {
-            switch (commandBehaviour.GetCommandTriggerInvoker()) {
-                case CommandBehaviour.TriggerInvoker.LILY: LinkCommandTriggerToPlayer(); break;
+        // private void LinkCommandTrigger() {
+        //     switch (commandBehaviour.GetCommandTriggerInvoker()) {
+        //         case CommandBehaviour.TriggerInvoker.LILY: LinkCommandTriggerToPlayer(); break;
 
-                case CommandBehaviour.TriggerInvoker.ROBOT: LinkCommandTriggerToRobot(); break;
-            }
-        }
+        //         case CommandBehaviour.TriggerInvoker.ROBOT: LinkCommandTriggerToRobot(); break;
+        //     }
+        // }
 
-        private void LinkCommandTriggerToPlayer() {
-            switch(commandBehaviour.GetCommandTriggerAction()) {
-                case CommandBehaviour.CommandAction.JUMP:  break;
+        // private void LinkCommandTriggerToPlayer() {
+        //     switch(commandBehaviour.GetCommandTriggerAction()) {
+        //         case CommandBehaviour.CommandAction.JUMP: PlayerMovement.jumpTrigger += CommandBehaviour.commandTrigger.Invoke; break;
 
-                case CommandBehaviour.CommandAction.WALK:
-                    break;
+        //         case CommandBehaviour.CommandAction.WALK:
+        //             break;
 
-                case CommandBehaviour.CommandAction.FLIP:
-                    break;
-            }
-        }
+        //         case CommandBehaviour.CommandAction.FLIP:
+        //             break;
+        //     }
+        // }
 
-        private void LinkCommandTriggerToRobot() {
-            Action commandTrigger = null;
+        // private void LinkCommandTriggerToRobot() {
+        //     Action commandTrigger = null;
 
-            switch(commandBehaviour.GetCommandTriggerAction()) {
-                case CommandBehaviour.CommandAction.JUMP: /*commandTrigger = robotMovement.GetJumpTrigger();*/ break;
+        //     switch(commandBehaviour.GetCommandTriggerAction()) {
+        //         case CommandBehaviour.CommandAction.JUMP: /*commandTrigger = robotMovement.GetJumpTrigger();*/ break;
 
-                case CommandBehaviour.CommandAction.WALK:
-                    break;
+        //         case CommandBehaviour.CommandAction.WALK:
+        //             break;
 
-                case CommandBehaviour.CommandAction.FLIP:
-                    break;
-            }
+        //         case CommandBehaviour.CommandAction.FLIP:
+        //             break;
+        //     }
 
-            //commandTrigger += commandBehaviour.GetCommandEvent().Invoke;
-        }
+        //     //commandTrigger += commandBehaviour.GetCommandEvent().Invoke;
+        // }
 
     
         public void TurnOn() {

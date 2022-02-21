@@ -24,18 +24,12 @@ public class CommandBehaviour : MonoBehaviour
 
     private TriggerInvoker commandTriggerInvoker;
     private CommandAction commandTriggerAction;
-    public static Action commandTrigger;
 
     private float commandDelay;
 
 
-    private void OnEnable() {
-        commandTrigger += commandEvent.Invoke;
-    }
-
     private void OnDisable() {
         commandEvent = null;
-        commandTrigger = null;
     }
 
 

@@ -33,8 +33,6 @@ namespace Shard.Entities
         protected bool shouldJump = false;
         protected bool isFacingRight = true;
 
-        public static Action jumpTrigger;
-
 
         private void Awake() 
         {
