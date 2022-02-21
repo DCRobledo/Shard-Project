@@ -58158,6 +58158,10 @@ PrefabInstance:
       propertyPath: objectToReCall
       value: 
       objectReference: {fileID: 7628185954488362463}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: whatIsGround.m_Bits
+      value: 1088
+      objectReference: {fileID: 0}
     - target: {fileID: 8710090841162840075, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -63454,6 +63458,10 @@ PrefabInstance:
     - target: {fileID: 1489311540624490963, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
       propertyPath: m_Name
       value: robot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1489311540624490963, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
       propertyPath: speed
