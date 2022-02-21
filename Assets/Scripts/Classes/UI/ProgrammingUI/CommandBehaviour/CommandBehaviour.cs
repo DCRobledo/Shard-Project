@@ -1,7 +1,7 @@
 using Shard.Enums;
 using Shard.Entities;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class CommandBehaviour : MonoBehaviour
@@ -11,11 +11,17 @@ public class CommandBehaviour : MonoBehaviour
 
     private CommandEnum.TriggerInvoker commandTriggerInvoker;
     private EntityEnum.Action commandTriggerAction;
+    public static Action commandTrigger;
 
     private float commandDelay;
 
 
+    private void OnEnable() {
+        commandTrigger += ExecuteCommand;
+    }
+
     private void OnDisable() {
+        commandTrigger = null;
         commandEvent = null;
     }
 
@@ -43,6 +49,17 @@ public class CommandBehaviour : MonoBehaviour
 
     private void SetCommandDelay(string commandDelay) {
         this.commandDelay = float.Parse(commandDelay);
+    }
+
+
+    private void ExecuteCommand() {
+        StartCoroutine(CommandCoroutine());
+    }
+
+    private IEnumerator CommandCoroutine() {
+        yield return new WaitForSeconds(commandDelay);
+
+        commandEvent?.Invoke();
     }
 
 

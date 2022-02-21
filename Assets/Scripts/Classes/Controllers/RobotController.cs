@@ -118,7 +118,8 @@ namespace Shard.Controllers
             commandBehaviour = robot.AddComponent<CommandBehaviour>();
             commandBehaviour.CreateCommandBehaviour(commandEvent, commandTrigger, commandDelay);
 
-            PlayerController.jumpTrigger += jumpCommand.Execute;
+            PlayerController.jumpTrigger += CommandBehaviour.commandTrigger.Invoke;
+            CommandBehaviour.commandEvent += jumpCommand.Execute;
             // LinkCommandEvent();
             // LinkCommandTrigger();
         }
