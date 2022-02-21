@@ -1,3 +1,4 @@
+using Shard.Enums;
 using System;
 using System.Linq;
 using System.Collections;
@@ -38,7 +39,7 @@ namespace Shard.UI.ProgrammingUI
             if(!IsOutOfMemory() && !IsThereBlock(index - 1)) {
                 
                 // Avoid conditional block placing in indentation level 3
-                if(block.GetComponent<BehaviourBlock>().GetType() == BehaviourBlock.BlockType.CONDITIONAL && indentation == 3) 
+                if(block.GetComponent<BehaviourBlock>().GetType() == BlockEnum.BlockType.CONDITIONAL && indentation == 3) 
                     Destroy(block.gameObject);
                 
                 else {

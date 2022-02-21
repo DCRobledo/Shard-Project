@@ -1,4 +1,5 @@
 using Shard.Entities;
+using Shard.Enums;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace Shard.Patterns.Command
     
         public override void ExecuteWithParameters(params object[] parameters) { 
             
-            entityActions.ExecuteAction((EntityActions.Action) parameters[0]); 
+            entityActions.ExecuteAction((EntityEnum.Action) parameters[0]); 
         }
 
         public override void Execute() { throw new System.NotImplementedException(); }

@@ -3,6 +3,7 @@ using Shard.Patterns.Command;
 using Shard.Patterns.Singleton;
 using Shard.Entities;
 using Shard.UI.ProgrammingUI;
+using Shard.Enums;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -79,10 +80,10 @@ namespace Shard.Controllers
             InputActions.Player.Crouch.canceled += context => crouchButton.ExecuteWithParameters(false);
             InputActions.Player.Crouch.Enable();
 
-            InputActions.Player.ReCall.performed += context => reCallButton.ExecuteWithParameters(EntityActions.Action.RECALL);
+            InputActions.Player.ReCall.performed += context => reCallButton.ExecuteWithParameters(EntityEnum.Action.RECALL);
             InputActions.Player.ReCall.Enable();
 
-            InputActions.Player.Grab.performed += context => grabButton.ExecuteWithParameters(EntityActions.Action.GRAB);
+            InputActions.Player.Grab.performed += context => grabButton.ExecuteWithParameters(EntityEnum.Action.GRAB);
             InputActions.Player.Grab.Enable();
 
             InputActions.Player.Program.performed += context => programButton.Execute();

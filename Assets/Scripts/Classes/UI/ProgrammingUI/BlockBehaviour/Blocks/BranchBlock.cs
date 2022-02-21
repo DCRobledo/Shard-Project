@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Shard.Enums;
 
 namespace Shard.UI.ProgrammingUI
 {
@@ -10,7 +11,7 @@ namespace Shard.UI.ProgrammingUI
 
 
         private void Awake() {
-            type = BlockType.BRANCH;
+            type = BlockEnum.BlockType.BRANCH;
 
             nextBlockIndex = 1;
         }

@@ -1,5 +1,6 @@
 using Shard.Controllers;
 using Shard.Lib.Custom;
+using Shard.Enums;
 using System;
 using System.Linq;
 using System.Collections;
@@ -11,15 +12,6 @@ namespace Shard.Entities
 {
     public class EntityActions : MonoBehaviour
     {
-        public enum Action {
-            RECALL,
-            GRAB,
-            RELEASE,
-            THROW,
-            CLAP,
-            USE_OBJECT
-        }
-
         #if UNITY_EDITOR 
             [TagSelector]
          #endif
@@ -55,15 +47,14 @@ namespace Shard.Entities
         public void ChangeObjectToReCall(GameObject objectToReCall) { this.objectToReCall = objectToReCall; }
 
 
-        public void ExecuteAction(Action action) {
+        public void ExecuteAction(EntityEnum.Action action) {
             switch (action)
             {
-                case Action.RECALL:     ReCall(); break;
-                case Action.GRAB:       Grab();   break;
-                case Action.RELEASE:    Grab();   break;
-                case Action.THROW:                break;
-                case Action.CLAP:                 break;
-                case Action.USE_OBJECT:           break;
+                case EntityEnum.Action.RECALL:     ReCall(); break;
+                case EntityEnum.Action.GRAB:       Grab();   break;
+                case EntityEnum.Action.RELEASE:    Grab();   break;
+                case EntityEnum.Action.THROW:                break;
+                case EntityEnum.Action.CLAP:                 break;
             }
         }
 

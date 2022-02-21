@@ -1,3 +1,4 @@
+using Shard.Enums;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,14 +8,8 @@ namespace Shard.UI.ProgrammingUI
 {
     public class ConditionalBlock : BehaviourBlock
     {
-        public enum ConditionalType {
-            IF,
-            ELSE_IF,
-            ELSE
-        }
-
         [SerializeField]
-        private ConditionalType conditionalType;
+        private BlockEnum.ConditionalType conditionalType;
 
         [SerializeField]
         private TMP_Dropdown elementDropDown;
@@ -31,11 +26,11 @@ namespace Shard.UI.ProgrammingUI
 
 
         private void Awake() {
-            type = BlockType.CONDITIONAL;
+            type = BlockEnum.BlockType.CONDITIONAL;
 
-            condition = conditionalType == ConditionalType.ELSE ? null : new Condition(0, 0);
+            condition = conditionalType == BlockEnum.ConditionalType.ELSE ? null : new Condition(0, 0);
 
-            if(conditionalType != ConditionalType.ELSE) {
+            if(conditionalType != BlockEnum.ConditionalType.ELSE) {
                 elementDropDown.onValueChanged.AddListener(context => SetConditionElement(elementDropDown.value));
                 stateDropDown.onValueChanged.AddListener(context => SetConditionState(stateDropDown.value));
             } 
@@ -80,7 +75,7 @@ namespace Shard.UI.ProgrammingUI
         }
 
 
-        public ConditionalType GetConditionalType() {
+        public BlockEnum.ConditionalType GetConditionalType() {
             return this.conditionalType;
         }
 
@@ -117,19 +112,9 @@ namespace Shard.UI.ProgrammingUI
 
     public class Condition
     {
-        public enum ConditionalElement{
-            GROUND,
-            VOID,
-            SPIKE,
-            BOX
-        } private ConditionalElement element;
+        private BlockEnum.ConditionalElement element;
 
-        public enum ConditionalState {
-            AHEAD,
-            BEHIND,
-            BELOW,
-            ABOVE
-        } private ConditionalState state;
+        private BlockEnum.ConditionalState state;
 
         public Func<string> isMetEvent;
 
@@ -144,24 +129,24 @@ namespace Shard.UI.ProgrammingUI
         }
 
 
-        public ConditionalElement GetElement()
+        public BlockEnum.ConditionalElement GetElement()
         {
             return this.element;
         }
 
         public void SetElement(int element)
         {
-            this.element = (ConditionalElement) element;
+            this.element = (BlockEnum.ConditionalElement) element;
         }
 
-        public ConditionalState GetState()
+        public BlockEnum.ConditionalState GetState()
         {
             return this.state;
         }
 
         public void SetState(int state)
         {
-            this.state = (ConditionalState) state;
+            this.state = (BlockEnum.ConditionalState) state;
         }
 
         public new string ToString() {

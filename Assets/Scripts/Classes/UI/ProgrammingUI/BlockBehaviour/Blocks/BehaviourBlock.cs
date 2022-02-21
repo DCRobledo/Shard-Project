@@ -1,3 +1,4 @@
+using Shard.Enums;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,15 +6,9 @@ using UnityEngine;
 namespace Shard.UI.ProgrammingUI
 {
     public abstract class BehaviourBlock : MonoBehaviour
-    {
-        public enum BlockType {
-            ACTION,
-            CONDITIONAL,
-            BRANCH
-        } 
-        
+    {        
         [SerializeField]
-        protected BlockType type;
+        protected BlockEnum.BlockType type;
 
         protected BlockLocation location;
 
@@ -23,12 +18,12 @@ namespace Shard.UI.ProgrammingUI
         public abstract new string ToString();
         
 
-        public new BlockType GetType()
+        public new BlockEnum.BlockType GetType()
         {
             return this.type;
         }
 
-        public void SetType(BlockType type)
+        public void SetType(BlockEnum.BlockType type)
         {
             this.type = type;
         }

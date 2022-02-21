@@ -1,3 +1,4 @@
+using Shard.Enums;
 using System;
 using UnityEngine;
 
@@ -5,20 +6,14 @@ namespace Shard.UI.ProgrammingUI
 {
     public class ActionBlock : BehaviourBlock
     {
-        public enum BlockAction {
-            WALK,
-            FLIP,
-            JUMP
-        }
-
         [SerializeField]
-        private BlockAction action;
+        private EntityEnum.Action action;
 
         public Action executeActionEvent;
 
 
         private void Awake() {
-            type = BlockType.ACTION;
+            type = BlockEnum.BlockType.ACTION;
         }
 
         public override BlockLocation Execute() {
@@ -32,12 +27,12 @@ namespace Shard.UI.ProgrammingUI
         }
 
 
-        public BlockAction GetAction()
+        public EntityEnum.Action GetAction()
         {
             return this.action;
         }
 
-        public void SetAction(BlockAction action)
+        public void SetAction(EntityEnum.Action action)
         {
             this.action = action;
         }

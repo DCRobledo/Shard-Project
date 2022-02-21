@@ -2,6 +2,7 @@ using Shard.Entities;
 using Shard.Patterns.Command;
 using Shard.Patterns.Singleton;
 using Shard.UI.ProgrammingUI;
+using Shard.Enums;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -66,7 +67,7 @@ namespace Shard.Controllers
             for (int i = blockBehaviour.GetMinIndex() + 1; i < blockBehaviour.GetMaxIndex() + 1; i++) {
                 BehaviourBlock currentBlock = blockBehaviour.GetBlock(i);
 
-                if (currentBlock.GetType() == BehaviourBlock.BlockType.ACTION) {
+                if (currentBlock.GetType() == BlockEnum.BlockType.ACTION) {
                     ActionBlock actionBlock = currentBlock as ActionBlock;
 
                     LinkRobotAction(ref actionBlock);
@@ -76,9 +77,9 @@ namespace Shard.Controllers
 
         private void LinkRobotAction(ref ActionBlock block) {
             switch (block.GetAction()) {
-                case ActionBlock.BlockAction.WALK: block.executeActionEvent += moveCommand.Execute ; break;
-                case ActionBlock.BlockAction.JUMP: block.executeActionEvent += jumpCommand.Execute; break;
-                case ActionBlock.BlockAction.FLIP: block.executeActionEvent += flipCommand.Execute; break;
+                case EntityEnum.Action.MOVE: block.executeActionEvent += moveCommand.Execute ; break;
+                case EntityEnum.Action.JUMP: block.executeActionEvent += jumpCommand.Execute; break;
+                case EntityEnum.Action.FLIP: block.executeActionEvent += flipCommand.Execute; break;
 
                 default: break;
             }
@@ -88,7 +89,7 @@ namespace Shard.Controllers
             for (int i = blockBehaviour.GetMinIndex() + 1; i < blockBehaviour.GetMaxIndex() + 1; i++) {
                 BehaviourBlock currentBlock = blockBehaviour.GetBlock(i);
 
-                if (currentBlock.GetType() == BehaviourBlock.BlockType.CONDITIONAL) {
+                if (currentBlock.GetType() == BlockEnum.BlockType.CONDITIONAL) {
                     ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
 
                     LinkRobotSensor(ref conditionalBlock);
@@ -101,10 +102,10 @@ namespace Shard.Controllers
             block.GetCondition().isMetEvent = null;
 
             switch(block.GetCondition().GetState()) {
-                case Condition.ConditionalState.AHEAD:  block.GetCondition().isMetEvent += robotSensors.CheckAhead;  break;
-                case Condition.ConditionalState.BEHIND: block.GetCondition().isMetEvent += robotSensors.CheckBehind; break;
-                case Condition.ConditionalState.ABOVE:  block.GetCondition().isMetEvent += robotSensors.CheckAbove;  break;
-                case Condition.ConditionalState.BELOW:  block.GetCondition().isMetEvent += robotSensors.CheckBelow;  break;
+                case BlockEnum.ConditionalState.AHEAD:  block.GetCondition().isMetEvent += robotSensors.CheckAhead;  break;
+                case BlockEnum.ConditionalState.BEHIND: block.GetCondition().isMetEvent += robotSensors.CheckBehind; break;
+                case BlockEnum.ConditionalState.ABOVE:  block.GetCondition().isMetEvent += robotSensors.CheckAbove;  break;
+                case BlockEnum.ConditionalState.BELOW:  block.GetCondition().isMetEvent += robotSensors.CheckBelow;  break;
 
                 default: break;
             }

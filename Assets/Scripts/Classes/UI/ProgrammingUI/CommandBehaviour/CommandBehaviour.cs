@@ -1,3 +1,4 @@
+using Shard.Enums;
 using Shard.Entities;
 using System;
 using System.Collections.Generic;
@@ -5,25 +6,11 @@ using UnityEngine;
 
 public class CommandBehaviour : MonoBehaviour
 {
-    public enum CommandAction {
-        JUMP,
-        WALK,
-        FLIP,
-        GRAB,
-        THROW,
-        STOP
-    }
-
-    public enum TriggerInvoker {
-        LILY,
-        ROBOT
-    }
-
-    private CommandAction commandEventAction;
+    private EntityEnum.Action commandEventAction;
     public static Action commandEvent;
 
-    private TriggerInvoker commandTriggerInvoker;
-    private CommandAction commandTriggerAction;
+    private CommandEnum.TriggerInvoker commandTriggerInvoker;
+    private EntityEnum.Action commandTriggerAction;
 
     private float commandDelay;
 
@@ -42,7 +29,7 @@ public class CommandBehaviour : MonoBehaviour
     }
 
     private void SetCommandEvent(string commandEventAction) {
-        this.commandEventAction = (CommandAction) System.Enum.Parse(typeof(CommandAction), commandEventAction);
+        this.commandEventAction = (EntityEnum.Action) System.Enum.Parse(typeof(EntityEnum.Action), commandEventAction);
     }
 
     private void SetCommandTrigger(string commandTrigger) {
@@ -50,8 +37,8 @@ public class CommandBehaviour : MonoBehaviour
         string commandTriggerInvoker = split[0];
         string commandTriggerAction = split[1];
 
-        this.commandTriggerInvoker = (TriggerInvoker) System.Enum.Parse(typeof(TriggerInvoker), commandTriggerInvoker);
-        this.commandTriggerAction = (CommandAction) System.Enum.Parse(typeof(CommandAction), commandTriggerAction);
+        this.commandTriggerInvoker = (CommandEnum.TriggerInvoker) System.Enum.Parse(typeof(CommandEnum.TriggerInvoker), commandTriggerInvoker);
+        this.commandTriggerAction = (EntityEnum.Action) System.Enum.Parse(typeof(EntityEnum.Action), commandTriggerAction);
     }
 
     private void SetCommandDelay(string commandDelay) {
@@ -59,32 +46,32 @@ public class CommandBehaviour : MonoBehaviour
     }
 
 
-    public CommandAction GetCommandEventAction()
+    public EntityEnum.Action GetCommandEventAction()
     {
         return this.commandEventAction;
     }
 
-    public void SetCommandEventAction(CommandAction commandEventAction)
+    public void SetCommandEventAction(EntityEnum.Action commandEventAction)
     {
         this.commandEventAction = commandEventAction;
     }
 
-    public TriggerInvoker GetCommandTriggerInvoker()
+    public CommandEnum.TriggerInvoker GetCommandTriggerInvoker()
     {
         return this.commandTriggerInvoker;
     }
 
-    public void SetCommandTriggerInvoker(TriggerInvoker commandTriggerInvoker)
+    public void SetCommandTriggerInvoker(CommandEnum.TriggerInvoker commandTriggerInvoker)
     {
         this.commandTriggerInvoker = commandTriggerInvoker;
     }
 
-    public CommandAction GetCommandTriggerAction()
+    public EntityEnum.Action GetCommandTriggerAction()
     {
         return this.commandTriggerAction;
     }
 
-    public void SetCommandTriggerAction(CommandAction commandTriggerAction)
+    public void SetCommandTriggerAction(EntityEnum.Action commandTriggerAction)
     {
         this.commandTriggerAction = commandTriggerAction;
     }

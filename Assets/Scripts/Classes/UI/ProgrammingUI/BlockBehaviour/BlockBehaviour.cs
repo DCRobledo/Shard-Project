@@ -1,3 +1,4 @@
+using Shard.Enums;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,8 @@ namespace Shard.UI.ProgrammingUI
             }
 
             AssignConditionalInformation();
+
+            Print();
         }
 
         private void AssignConditionalInformation() {
@@ -35,11 +38,11 @@ namespace Shard.UI.ProgrammingUI
                     BehaviourBlock currentBlock = GetBlock(i, j);
                     if(currentBlock != null) {
 
-                        if(currentBlock.GetType() == BehaviourBlock.BlockType.CONDITIONAL) {
+                        if(currentBlock.GetType() == BlockEnum.BlockType.CONDITIONAL) {
                             ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
 
                             // Link them with an ELSE block, if it exists and set their indexes
-                            if(conditionalBlock.GetConditionalType() != ConditionalBlock.ConditionalType.ELSE) {
+                            if(conditionalBlock.GetConditionalType() != BlockEnum.ConditionalType.ELSE) {
                                 LookForElseBlock(ref conditionalBlock);
                                 LookForEndOfConditional(ref conditionalBlock);
                             }
@@ -55,10 +58,10 @@ namespace Shard.UI.ProgrammingUI
                 BehaviourBlock currentBlock = GetBlock(i, block.GetIndentation());
 
                 if(currentBlock != null) {
-                    if(currentBlock.GetType() == BehaviourBlock.BlockType.CONDITIONAL) {
+                    if(currentBlock.GetType() == BlockEnum.BlockType.CONDITIONAL) {
                         ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
 
-                        if(!block.Equals(conditionalBlock) && conditionalBlock.GetConditionalType() != ConditionalBlock.ConditionalType.IF) {
+                        if(!block.Equals(conditionalBlock) && conditionalBlock.GetConditionalType() != BlockEnum.ConditionalType.IF) {
                             block.SetElseBlock(conditionalBlock);
 
                             return;   
@@ -78,7 +81,7 @@ namespace Shard.UI.ProgrammingUI
                 BehaviourBlock currentBlock = GetBlock(i);
                 if(currentBlock != null) {
 
-                    if(currentBlock.GetType() == BehaviourBlock.BlockType.CONDITIONAL) {
+                    if(currentBlock.GetType() == BlockEnum.BlockType.CONDITIONAL) {
                         ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
                         if(block.GetElseBlock().Equals(conditionalBlock)) continue;
                     }
