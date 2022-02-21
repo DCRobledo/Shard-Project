@@ -113,7 +113,7 @@ namespace Shard.Controllers
 
 
         private void SetCommandBehaviour(string commandEvent, string commandTrigger, string commandDelay) {
-            if(commandBehaviour != null) Destroy(robot.GetComponent<CommandBehaviour>());
+            if(commandBehaviour != null) ResetCommandBehaviour();
 
             commandBehaviour = robot.AddComponent<CommandBehaviour>();
             commandBehaviour.CreateCommandBehaviour(commandEvent, commandTrigger, commandDelay);
@@ -122,6 +122,14 @@ namespace Shard.Controllers
             CommandBehaviour.commandEvent += jumpCommand.Execute;
             // LinkCommandEvent();
             // LinkCommandTrigger();
+        }
+
+        private void ResetCommandBehaviour() {
+            UnlinkCommandTrigger();
+
+            commandBehaviour = null;
+
+            Destroy(robot.GetComponent<CommandBehaviour>());
         }
 
         // private void LinkCommandEvent() {
@@ -171,6 +179,10 @@ namespace Shard.Controllers
 
         //     //commandTrigger += commandBehaviour.GetCommandEvent().Invoke;
         // }
+
+        private void UnlinkCommandTrigger() {
+            PlayerController.jumpTrigger = null;
+        }
 
     
         public void TurnOn() {
