@@ -8,7 +8,7 @@ namespace Shard.UI.ProgrammingUI
     {
         private static string[] possibleEvents = {
             "jump",
-            "walk",
+            "move",
             "grab",
             "crouch",
             "throw",
@@ -16,14 +16,14 @@ namespace Shard.UI.ProgrammingUI
 
         private static string[] possibleTriggers = {
             "lily_jump",
-            "lily_walk",
+            "lily_move",
             "lily_clap",
             "lily_grab",
             "lily_crouch",
             "lily_throw",
 
             "robot_jump",
-            "robot_walk",
+            "robot_move",
             "robot_grab",
             "robot_crouch",
             "robot_throw",

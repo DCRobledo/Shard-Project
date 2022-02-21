@@ -27,6 +27,7 @@ namespace Shard.Controllers
         private Coroutine blockBehaviourExecution;
 
         private CommandBehaviour commandBehaviour;
+        
 
         private void Awake() {
             instance = this;
@@ -133,19 +134,13 @@ namespace Shard.Controllers
         private void LinkCommandEvent() {
             switch(commandBehaviour.GetCommandEventAction()) {
                 case EntityEnum.Action.JUMP: CommandBehaviour.commandEvent += jumpCommand.Execute; break;
-
-                case EntityEnum.Action.MOVE:
-                    break;
-
-                case EntityEnum.Action.FLIP:
-                    break;
+                case EntityEnum.Action.MOVE: CommandBehaviour.commandEvent += moveCommand.Execute; break;
             }
         }
 
         private void LinkCommandTrigger() {
             switch (commandBehaviour.GetCommandTriggerInvoker()) {
                 case CommandEnum.TriggerInvoker.LILY: LinkCommandTriggerToPlayer(); break;
-
                 case CommandEnum.TriggerInvoker.ROBOT: LinkCommandTriggerToRobot(); break;
             }
         }
@@ -153,24 +148,14 @@ namespace Shard.Controllers
         private void LinkCommandTriggerToPlayer() {
             switch(commandBehaviour.GetCommandTriggerAction()) {
                 case EntityEnum.Action.JUMP: PlayerController.jumpTrigger += CommandBehaviour.commandTrigger.Invoke; break;
-
-                case EntityEnum.Action.MOVE:
-                    break;
-
-                case EntityEnum.Action.FLIP:
-                    break;
+                case EntityEnum.Action.MOVE: PlayerController.jumpTrigger += CommandBehaviour.commandTrigger.Invoke; break;
             }
         }
 
         private void LinkCommandTriggerToRobot() {
             switch(commandBehaviour.GetCommandTriggerAction()) {
-                case EntityEnum.Action.JUMP: CommandBehaviour.commandEvent += jumpCommand.Execute; break;
-
-                case EntityEnum.Action.MOVE:
-                    break;
-
-                case EntityEnum.Action.FLIP:
-                    break;
+                case EntityEnum.Action.JUMP: break;
+                case EntityEnum.Action.MOVE: break;
             }
         }
 

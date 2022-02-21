@@ -26,8 +26,6 @@ namespace Shard.UI.ProgrammingUI
             }
 
             AssignConditionalInformation();
-
-            Print();
         }
 
         private void AssignConditionalInformation() {
