@@ -5,34 +5,33 @@ using UnityEngine;
 
 namespace Shard.Entities
 {
-    public class EntityMovement : MonoBehaviour
+    public abstract class EntityMovement : MonoBehaviour
     {
         [SerializeField]
-        private float speed = 10f;
+        protected float speed = 10f;
         [SerializeField]
-        private float jumpForce = 12f;
+        protected float jumpForce = 12f;
         [SerializeField] [Range(1, 10)]
-        private float fallMultiplier = 2.5f;
+        protected float fallMultiplier = 2.5f;
         [SerializeField] [Range(1, 10)]
-        private float lowJumpMultiplier = 2f;
+        protected float lowJumpMultiplier = 2f;
         [SerializeField] [Range(1, 10)]
-        private float crouchFactor = 2f;
-        
+        protected float crouchFactor = 2f;
 
         [SerializeField]
-        private LayerMask whatIsGround;
+        protected LayerMask whatIsGround;
 
         [SerializeField] [Range(0, .3f)]
-        private float smoothingFactor = .05f;
+        protected float smoothingFactor = .05f;
 
-        private Vector3 velocity = Vector3.zero;
+        protected Vector3 velocity = Vector3.zero;
 
-        private Rigidbody2D rigidBody;
-        private BoxCollider2D boxCollider2D; 
+        protected Rigidbody2D rigidBody;
+        protected BoxCollider2D boxCollider2D; 
 
-        private bool canJump = true;
-        private bool shouldJump = false;
-        private bool isFacingRight = true;
+        protected bool canJump = true;
+        protected bool shouldJump = false;
+        protected bool isFacingRight = true;
 
         public static Action jumpTrigger;
 
@@ -54,22 +53,13 @@ namespace Shard.Entities
         }
 
 
-        public void Move() {
-            float x = isFacingRight ? 1 : -1;
+        public virtual void Move() {}
 
-            Move(x, 0f);
-        }
+        public virtual void Move(float x, float y) {}
 
-        public void Move(float x, float y) 
-        {
-            // Compute the new target velocity, smooth it, and apply it
-            Vector3 targetVelocity = new Vector2(Mathf.Round(x) * speed, rigidBody.velocity.y);
-            rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, smoothingFactor);
+        public virtual void Jump() {}
 
-            // Flip if necessary
-            if      (x > 0 && this.gameObject.transform.localScale.x < 0) Flip();
-            else if (x < 0 && this.gameObject.transform.localScale.x > 0) Flip();
-        }
+        public virtual void Jump(bool jump) {}
 
 
         public void Flip() {
@@ -86,24 +76,6 @@ namespace Shard.Entities
             if(grabbedEntity != null) TransformUtils.FlipObject(ref grabbedEntity);
         }
 
-
-        public void Jump() {
-            Jump(true);
-        }
-
-        public void Jump(bool jump) 
-        {
-            // Realising the jump button is always allowed
-            if(!jump) this.shouldJump = jump;
-
-            // But we want to delay the jumps between one another
-            else if(jump && canJump) {
-                this.shouldJump = jump;
-
-                jumpTrigger?.Invoke();
-            }
-        } 
-
         private void ApplyGravity(float fallMultiplier, float lowJumpMultiplier) {
             // Regular jump gravity
             if(rigidBody.velocity.y < 0) {
@@ -119,15 +91,6 @@ namespace Shard.Entities
         {
             return Detection.DetectGround(this.boxCollider2D, this.whatIsGround, .25f, false);
         }
-
-        private IEnumerator TimerOnJump(float seconds) {
-            canJump = false;
-
-            yield return new WaitForSeconds(seconds);
-
-            canJump = true;
-        }
-    
 
         public void Crouch(bool crouch) {
             // Modify player's y scale

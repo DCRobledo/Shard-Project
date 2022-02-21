@@ -37,7 +37,7 @@ namespace Shard.Controllers
             // Get the player game object and its components
             player = GameObject.Find("player");
 
-            playerMovement = player.GetComponent<EntityMovement>();
+            playerMovement = player.GetComponent<PlayerMovement>();
             playerActions = player.GetComponent<EntityActions>();
 
             // Initialize the input system

@@ -20,16 +20,22 @@ public class CommandBehaviour : MonoBehaviour
     }
 
     private CommandAction commandEventAction;
-    private Action commandEvent;
+    public static Action commandEvent;
 
     private TriggerInvoker commandTriggerInvoker;
     private CommandAction commandTriggerAction;
+    public static Action commandTrigger;
 
     private float commandDelay;
 
 
+    private void OnEnable() {
+        commandTrigger += commandEvent.Invoke;
+    }
+
     private void OnDisable() {
         commandEvent = null;
+        commandTrigger = null;
     }
 
 
@@ -67,16 +73,6 @@ public class CommandBehaviour : MonoBehaviour
     public void SetCommandEventAction(CommandAction commandEventAction)
     {
         this.commandEventAction = commandEventAction;
-    }
-
-    public Action GetCommandEvent()
-    {
-        return this.commandEvent;
-    }
-
-    public void SetCommandEvent(Action commandEvent)
-    {
-        this.commandEvent = commandEvent;
     }
 
     public TriggerInvoker GetCommandTriggerInvoker()

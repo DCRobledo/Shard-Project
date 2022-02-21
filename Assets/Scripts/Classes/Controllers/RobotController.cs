@@ -32,7 +32,7 @@ namespace Shard.Controllers
 
             robot = GameObject.Find("robot");
 
-            robotMovement = robot.GetComponent<EntityMovement>();
+            robotMovement = robot.GetComponent<RobotMovement>();
             robotActions = robot.GetComponent<EntityActions>();
             robotSensors = robot.GetComponent<RobotSensors>();
 
@@ -122,10 +122,8 @@ namespace Shard.Controllers
         }
 
         private void LinkCommandEvent() {
-            Action commandEvent = commandBehaviour.GetCommandEvent();
-
             switch(commandBehaviour.GetCommandEventAction()) {
-                case CommandBehaviour.CommandAction.JUMP: commandEvent += jumpCommand.Execute; break;
+                case CommandBehaviour.CommandAction.JUMP: CommandBehaviour.commandEvent += jumpCommand.Execute; break;
 
                 case CommandBehaviour.CommandAction.WALK:
                     break;
@@ -144,11 +142,8 @@ namespace Shard.Controllers
         }
 
         private void LinkCommandTriggerToPlayer() {
-            Action commandTrigger = null;
-
-
             switch(commandBehaviour.GetCommandTriggerAction()) {
-                case CommandBehaviour.CommandAction.JUMP: /*commandTrigger = PlayerController.Instance.GetPlayerMovement().jumpTrigger;*/ break;
+                case CommandBehaviour.CommandAction.JUMP:  break;
 
                 case CommandBehaviour.CommandAction.WALK:
                     break;
@@ -156,8 +151,6 @@ namespace Shard.Controllers
                 case CommandBehaviour.CommandAction.FLIP:
                     break;
             }
-
-            commandTrigger += commandBehaviour.GetCommandEvent().Invoke;
         }
 
         private void LinkCommandTriggerToRobot() {
@@ -173,7 +166,7 @@ namespace Shard.Controllers
                     break;
             }
 
-            commandTrigger += commandBehaviour.GetCommandEvent().Invoke;
+            //commandTrigger += commandBehaviour.GetCommandEvent().Invoke;
         }
 
     

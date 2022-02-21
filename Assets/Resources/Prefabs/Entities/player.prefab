@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8710090841162840073}
   - component: {fileID: 8710090841162840074}
   - component: {fileID: 8710090841162840072}
-  - component: {fileID: 742019966}
-  - component: {fileID: 1449738687}
   - component: {fileID: 1079310985}
+  - component: {fileID: 1449738687}
+  - component: {fileID: 7185410182843016199}
   m_Layer: 7
   m_Name: player
   m_TagString: Player
@@ -136,44 +136,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.0000303}
   m_EdgeRadius: 0
---- !u!114 &742019966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8710090841162840084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1926f492b8a870c42a7df823d3609c07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 8
-  jumpForce: 8
-  fallMultiplier: 2.5
-  lowJumpMultiplier: 2
-  crouchFactor: 3
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
-  smoothingFactor: 0.05
---- !u!114 &1449738687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8710090841162840084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 821a52de5a9a31e47a393b3059196676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsGrabbable:
-  - Robot
-  grabRange: 1.5
-  reCallCoolDown: 1
-  objectToReCall: {fileID: 0}
 --- !u!254 &1079310985
 RelativeJoint2D:
   m_ObjectHideFlags: 0
@@ -193,3 +155,41 @@ RelativeJoint2D:
   m_AutoConfigureOffset: 0
   m_LinearOffset: {x: 1.4, y: 0.16}
   m_AngularOffset: 0
+--- !u!114 &1449738687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710090841162840084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821a52de5a9a31e47a393b3059196676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsGrabbable:
+  - Robot
+  grabRange: 1.5
+  reCallCoolDown: 1
+  objectToReCall: {fileID: 0}
+--- !u!114 &7185410182843016199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710090841162840084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5d380872fb30964ab8293619088f15d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 8
+  jumpForce: 8
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
+  crouchFactor: 3
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  smoothingFactor: 0.05

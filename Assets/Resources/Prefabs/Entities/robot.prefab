@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1489311540624490957}
   - component: {fileID: 1489311540624490959}
   - component: {fileID: 7803451227653538638}
-  - component: {fileID: 7803451229057493689}
-  - component: {fileID: 7803451227821160568}
   - component: {fileID: 1879859047307610033}
+  - component: {fileID: 7803451227821160568}
+  - component: {fileID: 2574153355941885088}
   m_Layer: 7
   m_Name: robot
   m_TagString: Robot
@@ -156,7 +156,7 @@ RelativeJoint2D:
   m_AutoConfigureOffset: 0
   m_LinearOffset: {x: 1.4, y: 0.16}
   m_AngularOffset: 0
---- !u!114 &7803451229057493689
+--- !u!114 &1879859047307610033
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,18 +165,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1489311540624490963}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1926f492b8a870c42a7df823d3609c07, type: 3}
+  m_Script: {fileID: 11500000, guid: b060fa3ca7b9e134693dd36f7883327c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
-  jumpForce: 8
-  fallMultiplier: 2.5
-  lowJumpMultiplier: 2
-  crouchFactor: 3
-  whatIsGround:
+  sensorDetectionLayer:
     serializedVersion: 2
     m_Bits: 64
-  smoothingFactor: 0.05
 --- !u!114 &7803451227821160568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +187,7 @@ MonoBehaviour:
   grabRange: 1.5
   reCallCoolDown: 1
   objectToReCall: {fileID: 0}
---- !u!114 &1879859047307610033
+--- !u!114 &2574153355941885088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,9 +196,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1489311540624490963}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b060fa3ca7b9e134693dd36f7883327c, type: 3}
+  m_Script: {fileID: 11500000, guid: 88b86cca0d26f1646aefebd8cb94140a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensorDetectionLayer:
+  speed: 10
+  jumpForce: 12
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
+  crouchFactor: 2
+  whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  smoothingFactor: 0.05

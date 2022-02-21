@@ -63455,5 +63455,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: robot
       objectReference: {fileID: 0}
+    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
+      propertyPath: speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
+      propertyPath: jumpForce
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
