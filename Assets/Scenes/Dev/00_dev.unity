@@ -62446,7 +62446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2372801133744263059, guid: 45128911f56a7d243a9fa8497f2574fb, type: 3}
       propertyPath: m_Name
-      value: WALK
+      value: MOVE
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45128911f56a7d243a9fa8497f2574fb, type: 3}

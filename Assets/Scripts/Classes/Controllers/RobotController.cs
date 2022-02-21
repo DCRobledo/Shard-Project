@@ -118,10 +118,8 @@ namespace Shard.Controllers
             commandBehaviour = robot.AddComponent<CommandBehaviour>();
             commandBehaviour.CreateCommandBehaviour(commandEvent, commandTrigger, commandDelay);
 
-            PlayerController.jumpTrigger += CommandBehaviour.commandTrigger.Invoke;
-            CommandBehaviour.commandEvent += jumpCommand.Execute;
-            // LinkCommandEvent();
-            // LinkCommandTrigger();
+            LinkCommandEvent();
+            LinkCommandTrigger();
         }
 
         private void ResetCommandBehaviour() {
@@ -132,53 +130,49 @@ namespace Shard.Controllers
             Destroy(robot.GetComponent<CommandBehaviour>());
         }
 
-        // private void LinkCommandEvent() {
-        //     switch(commandBehaviour.GetCommandEventAction()) {
-        //         case CommandBehaviour.CommandAction.JUMP: PlayerMovement.jumpTrigger += jumpCommand.Execute; break;
+        private void LinkCommandEvent() {
+            switch(commandBehaviour.GetCommandEventAction()) {
+                case EntityEnum.Action.JUMP: CommandBehaviour.commandEvent += jumpCommand.Execute; break;
 
-        //         case CommandBehaviour.CommandAction.WALK:
-        //             break;
+                case EntityEnum.Action.MOVE:
+                    break;
 
-        //         case CommandBehaviour.CommandAction.FLIP:
-        //             break;
-        //     }
-        // }
+                case EntityEnum.Action.FLIP:
+                    break;
+            }
+        }
 
-        // private void LinkCommandTrigger() {
-        //     switch (commandBehaviour.GetCommandTriggerInvoker()) {
-        //         case CommandBehaviour.TriggerInvoker.LILY: LinkCommandTriggerToPlayer(); break;
+        private void LinkCommandTrigger() {
+            switch (commandBehaviour.GetCommandTriggerInvoker()) {
+                case CommandEnum.TriggerInvoker.LILY: LinkCommandTriggerToPlayer(); break;
 
-        //         case CommandBehaviour.TriggerInvoker.ROBOT: LinkCommandTriggerToRobot(); break;
-        //     }
-        // }
+                case CommandEnum.TriggerInvoker.ROBOT: LinkCommandTriggerToRobot(); break;
+            }
+        }
 
-        // private void LinkCommandTriggerToPlayer() {
-        //     switch(commandBehaviour.GetCommandTriggerAction()) {
-        //         case CommandBehaviour.CommandAction.JUMP: PlayerMovement.jumpTrigger += CommandBehaviour.commandTrigger.Invoke; break;
+        private void LinkCommandTriggerToPlayer() {
+            switch(commandBehaviour.GetCommandTriggerAction()) {
+                case EntityEnum.Action.JUMP: PlayerController.jumpTrigger += CommandBehaviour.commandTrigger.Invoke; break;
 
-        //         case CommandBehaviour.CommandAction.WALK:
-        //             break;
+                case EntityEnum.Action.MOVE:
+                    break;
 
-        //         case CommandBehaviour.CommandAction.FLIP:
-        //             break;
-        //     }
-        // }
+                case EntityEnum.Action.FLIP:
+                    break;
+            }
+        }
 
-        // private void LinkCommandTriggerToRobot() {
-        //     Action commandTrigger = null;
+        private void LinkCommandTriggerToRobot() {
+            switch(commandBehaviour.GetCommandTriggerAction()) {
+                case EntityEnum.Action.JUMP: CommandBehaviour.commandEvent += jumpCommand.Execute; break;
 
-        //     switch(commandBehaviour.GetCommandTriggerAction()) {
-        //         case CommandBehaviour.CommandAction.JUMP: /*commandTrigger = robotMovement.GetJumpTrigger();*/ break;
+                case EntityEnum.Action.MOVE:
+                    break;
 
-        //         case CommandBehaviour.CommandAction.WALK:
-        //             break;
-
-        //         case CommandBehaviour.CommandAction.FLIP:
-        //             break;
-        //     }
-
-        //     //commandTrigger += commandBehaviour.GetCommandEvent().Invoke;
-        // }
+                case EntityEnum.Action.FLIP:
+                    break;
+            }
+        }
 
         private void UnlinkCommandTrigger() {
             PlayerController.jumpTrigger = null;
