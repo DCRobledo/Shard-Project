@@ -148,7 +148,7 @@ namespace Shard.Controllers
         private void LinkCommandTriggerToPlayer() {
             switch(commandBehaviour.GetCommandTriggerAction()) {
                 case EntityEnum.Action.JUMP: PlayerController.jumpTrigger += CommandBehaviour.commandTrigger.Invoke; break;
-                case EntityEnum.Action.MOVE: PlayerController.jumpTrigger += CommandBehaviour.commandTrigger.Invoke; break;
+                case EntityEnum.Action.MOVE: PlayerController.moveTrigger += CommandBehaviour.commandTrigger.Invoke; break;
             }
         }
 
