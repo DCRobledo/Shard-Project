@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1879859047307610033}
   - component: {fileID: 7803451227821160568}
   - component: {fileID: 2574153355941885088}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: robot
   m_TagString: Robot
   m_Icon: {fileID: 0}
@@ -199,8 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b86cca0d26f1646aefebd8cb94140a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  jumpForce: 12
+  speed: 6
+  jumpForce: 8
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   crouchFactor: 2

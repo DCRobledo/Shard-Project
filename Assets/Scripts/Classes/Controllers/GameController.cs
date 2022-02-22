@@ -12,11 +12,14 @@ namespace Shard.Controllers
         [SerializeField]
         private bool showGameFlowTriggers = false;
 
+        [SerializeField]
+        private float respawnDelay = 1f;
+
         private static GameController instance = null;
         public static new GameController Instance { get { return (GameController) instance; }}
 
         private GameObject[] checkpoints;
-        private Dictionary<EntityEnum.Entity, GameObject> checkpointRecord = new Dictionary<EntityEnum.Entity, GameObject>();
+        private Dictionary<EntityEnum.Entity, Vector3> checkpointRecord = new Dictionary<EntityEnum.Entity, Vector3>();
 
         private GameObject[] deathTriggers;
 
@@ -31,10 +34,6 @@ namespace Shard.Controllers
             robot = GameObject.Find("robot");
 
             checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
-
-            checkpointRecord.Add(EntityEnum.Entity.PLAYER, checkpoints[0]);
-            checkpointRecord.Add(EntityEnum.Entity.ROBOT, checkpoints[0]);
-
             deathTriggers = GameObject.FindGameObjectsWithTag("Death Trigger");
         }
 
@@ -51,7 +50,7 @@ namespace Shard.Controllers
         }
 
 
-        private void UpdateCheckpoint(string entityTag, GameObject checkpoint) {
+        private void UpdateCheckpoint(string entityTag, Vector3 checkpoint) {
             try
             {
                 EntityEnum.Entity entity = (EntityEnum.Entity) System.Enum.Parse(typeof(EntityEnum.Entity), entityTag.ToUpper());
@@ -62,20 +61,26 @@ namespace Shard.Controllers
         }
 
         private void ReturnToLastCheckpoint(string entityTag) {
-            try
-            {
+            try {
                 EntityEnum.Entity entity = (EntityEnum.Entity) System.Enum.Parse(typeof(EntityEnum.Entity), entityTag.ToUpper());
 
                 switch (entity) {
-                    case EntityEnum.Entity.PLAYER: player.transform.position = GetLastCheckpoint(entity); break;
-                    case EntityEnum.Entity.ROBOT:  robot.transform.position  = GetLastCheckpoint(entity); break;
+                    case EntityEnum.Entity.PLAYER: StartCoroutine(ReturnToLastCheckPoint(player, GetLastCheckpoint(entity))); break;
+                    case EntityEnum.Entity.ROBOT:  StartCoroutine(ReturnToLastCheckPoint(robot, GetLastCheckpoint(entity))); break;
                 }
+                
             }
             catch (System.Exception) {}
         }
 
+        private IEnumerator ReturnToLastCheckPoint(GameObject entity, Vector3 lastCheckpoint) {
+            yield return new WaitForSeconds(respawnDelay);
+
+            entity.transform.position = lastCheckpoint;
+        }
+
         public Vector3 GetLastCheckpoint(EntityEnum.Entity entity) {
-            return checkpointRecord[entity].transform.position;
+            return checkpointRecord[entity];
         }
     }
 }
