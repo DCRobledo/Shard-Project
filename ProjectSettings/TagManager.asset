@@ -10,6 +10,8 @@ TagManager:
   - Outside Scrollable Block Area
   - Behaviour Block
   - Ground
+  - Checkpoint
+  - Death Trigger
   layers:
   - Default
   - TransparentFX
@@ -22,8 +24,8 @@ TagManager:
   - VFX
   - Lights
   - Robot
-  - 
-  - 
+  - Checkpoints
+  - Death Triggers
   - 
   - 
   - 
@@ -61,4 +63,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 1822665525
+    locked: 0
+  - name: Gizmos
+    uniqueID: 1169673957
     locked: 0
