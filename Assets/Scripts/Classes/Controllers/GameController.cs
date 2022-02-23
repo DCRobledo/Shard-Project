@@ -1,6 +1,7 @@
 using Shard.Patterns.Singleton;
 using Shard.Enums;
 using Shard.Gameflow;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,9 @@ namespace Shard.Controllers
 
         private GameObject player;
         private GameObject robot;
+
+        public static Action playerDeathEvent;
+        public static Action robotDeathEvent;  
 
 
         private void Awake() {
@@ -65,8 +69,8 @@ namespace Shard.Controllers
                 EntityEnum.Entity entity = (EntityEnum.Entity) System.Enum.Parse(typeof(EntityEnum.Entity), entityTag.ToUpper());
 
                 switch (entity) {
-                    case EntityEnum.Entity.PLAYER: StartCoroutine(ReturnToLastCheckPoint(player, GetLastCheckpoint(entity))); break;
-                    case EntityEnum.Entity.ROBOT:  StartCoroutine(ReturnToLastCheckPoint(robot, GetLastCheckpoint(entity))); break;
+                    case EntityEnum.Entity.PLAYER: playerDeathEvent?.Invoke(); StartCoroutine(ReturnToLastCheckPoint(player, GetLastCheckpoint(entity))); break;
+                    case EntityEnum.Entity.ROBOT:  robotDeathEvent?.Invoke();  StartCoroutine(ReturnToLastCheckPoint(robot, GetLastCheckpoint(entity)));  break;
                 }
                 
             }

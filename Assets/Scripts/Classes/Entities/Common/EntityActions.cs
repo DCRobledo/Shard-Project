@@ -40,9 +40,20 @@ namespace Shard.Entities
             grabJoint.enabled = false;
         } 
 
+        private void OnEnable() {
+            // Subscribe the death event
+            GameController.playerDeathEvent += Grab;
+        }
+
+        private void OnDisable() {
+            // Unsubscribe the death event
+            GameController.playerDeathEvent += Grab;
+        }
+
         private void Update() {
             grabbableObjects = CheckGrabbableObjects();
         }
+        
 
         public void ChangeObjectToReCall(GameObject objectToReCall) { this.objectToReCall = objectToReCall; }
 

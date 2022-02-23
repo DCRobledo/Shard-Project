@@ -133,11 +133,6 @@ namespace Shard.Controllers
             
             moveButton.ExecuteWithParameters(parameters);
         }
-
-
-        public EntityMovement GetPlayerMovement() {
-            return this.playerMovement;
-        }
     }
 }
 
