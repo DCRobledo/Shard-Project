@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 1489311540624490959}
   - component: {fileID: 7803451227653538638}
   - component: {fileID: 1879859047307610033}
-  - component: {fileID: 7803451227821160568}
   - component: {fileID: 2574153355941885088}
+  - component: {fileID: 5311644229418030700}
   m_Layer: 10
   m_Name: robot
   m_TagString: Robot
@@ -171,22 +171,6 @@ MonoBehaviour:
   sensorDetectionLayer:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &7803451227821160568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1489311540624490963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 821a52de5a9a31e47a393b3059196676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsGrabbable: []
-  grabRange: 1.5
-  reCallCoolDown: 1
-  objectToReCall: {fileID: 0}
 --- !u!114 &2574153355941885088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,3 +192,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   smoothingFactor: 0.05
+--- !u!114 &5311644229418030700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489311540624490963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2883ef9eebcb714594729e09da51ae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsGrabbable: []
+  grabRange: 1

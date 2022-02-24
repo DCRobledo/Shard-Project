@@ -8,34 +8,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Shard.Entities
-
 {
-    public class EntityActions : MonoBehaviour
+    public abstract class EntityActions : MonoBehaviour
     {
         #if UNITY_EDITOR 
             [TagSelector]
          #endif
         [SerializeField]
-        private string[] whatIsGrabbable = new string[] { };
+        protected string[] whatIsGrabbable = new string[] { };
 
         [SerializeField]
-        private float grabRange = 1f;
-        [SerializeField]
-        private float reCallCoolDown = 1f;
+        protected float grabRange = 1f;
 
-        [SerializeField]
-        private GameObject objectToReCall;
-
-        private List<GameObject> grabbableObjects = new List<GameObject>();
+        protected List<GameObject> grabbableObjects = new List<GameObject>();
         
-        private RelativeJoint2D grabJoint;
-
-        private bool canReCall = true;
+        protected RelativeJoint2D grabJoint;
 
 
-        private void Awake() {
-            objectToReCall = GameObject.Find("robot");
-
+        protected virtual void Awake() {
             grabJoint = this.GetComponent<RelativeJoint2D>();
             grabJoint.enabled = false;
         } 
@@ -55,7 +45,9 @@ namespace Shard.Entities
         }
         
 
-        public void ChangeObjectToReCall(GameObject objectToReCall) { this.objectToReCall = objectToReCall; }
+        public virtual void ReCall() {}
+
+        public virtual void ChangeObjectToReCall(GameObject objectToReCall) {}
 
 
         public void ExecuteAction(EntityEnum.Action action) {
@@ -67,27 +59,6 @@ namespace Shard.Entities
                 case EntityEnum.Action.THROW:                break;
                 case EntityEnum.Action.CLAP:                 break;
             }
-        }
-
-
-        public void ReCall()
-        {
-            if (canReCall) {
-                // Recall the entity
-                Vector3 entityPosition = this.GetComponent<Transform>().position;
-                objectToReCall.GetComponent<Transform>().position = new Vector3(entityPosition.x + 1.5f, entityPosition.y + 1f);
-
-                // Start cooldown
-                StartCoroutine(ReCallCoolDown(reCallCoolDown));
-            }
-        }
-
-        private IEnumerator ReCallCoolDown(float seconds) {
-            canReCall = false;
-
-            yield return new WaitForSeconds(seconds);
-
-            canReCall = true;
         }
 
         public void Grab() 
