@@ -1,3 +1,4 @@
+using Shard.Enums;
 using Shard.Patterns.Singleton;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,11 +11,6 @@ namespace Shard.Controllers
         private static UIController instance = null;
         public static new UIController Instance { get { return (UIController) instance; }}
 
-        private enum UIType {
-            PROGRAMMING_UI,
-            HUD
-        }
-
         private GameObject programmingUI;
         
 
@@ -26,12 +22,13 @@ namespace Shard.Controllers
             programmingUI = GameObject.Find("programmingUI");
         }
 
-        public void ToggleProgrammingUI() { ToggleUI(UIType.PROGRAMMING_UI); }
 
-        private void ToggleUI(UIType type) {
+        public void ToggleProgrammingUI() { ToggleUI(UIEnum.UIType.PROGRAMMING_UI); }
+
+        private void ToggleUI(UIEnum.UIType type) {
             switch(type) {
-                case UIType.PROGRAMMING_UI: programmingUI.SetActive(!programmingUI.activeSelf); break;
-                case UIType.HUD:                                                                break;
+                case UIEnum.UIType.PROGRAMMING_UI: programmingUI.SetActive(!programmingUI.activeSelf); break;
+                case UIEnum.UIType.HUD:                                                                break;
 
                 default: break;
             }

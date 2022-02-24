@@ -59,7 +59,6 @@ namespace Shard.Controllers
             programButton = new ProgramCommand();
         }
 
-
         private void OnEnable() {
             EnableInput();
             EnableTriggers();
@@ -95,13 +94,6 @@ namespace Shard.Controllers
             InputActions.Player.Jump.started += context => InvokeTrigger(EntityEnum.Action.JUMP);
         }
 
-        private void InvokeTrigger(EntityEnum.Action trigger) {
-            switch(trigger) {
-                case EntityEnum.Action.MOVE: moveTrigger?.Invoke(); break;
-                case EntityEnum.Action.JUMP: jumpTrigger?.Invoke(); break;
-            }
-        }
-
         private void OnDisable() {
             DisableInput();
 
@@ -120,11 +112,17 @@ namespace Shard.Controllers
             InputActions.Player.Program.Disable();
         }
 
-
         private void FixedUpdate() {
             MovePlayer(movement.ReadValue<Vector2>());
         }
 
+
+        private void InvokeTrigger(EntityEnum.Action trigger) {
+            switch(trigger) {
+                case EntityEnum.Action.MOVE: moveTrigger?.Invoke(); break;
+                case EntityEnum.Action.JUMP: jumpTrigger?.Invoke(); break;
+            }
+        }
 
         private void MovePlayer(Vector2 direction) {
             object[] parameters = {direction.x, direction.y};
