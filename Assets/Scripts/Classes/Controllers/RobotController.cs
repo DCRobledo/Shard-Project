@@ -68,7 +68,7 @@ namespace Shard.Controllers
             for (int i = blockBehaviour.GetMinIndex() + 1; i < blockBehaviour.GetMaxIndex() + 1; i++) {
                 BehaviourBlock currentBlock = blockBehaviour.GetBlock(i);
 
-                if (currentBlock.GetType() == BlockEnum.BlockType.ACTION) {
+                if (currentBlock?.GetType() == BlockEnum.BlockType.ACTION) {
                     ActionBlock actionBlock = currentBlock as ActionBlock;
 
                     LinkRobotAction(ref actionBlock);
@@ -90,10 +90,11 @@ namespace Shard.Controllers
             for (int i = blockBehaviour.GetMinIndex() + 1; i < blockBehaviour.GetMaxIndex() + 1; i++) {
                 BehaviourBlock currentBlock = blockBehaviour.GetBlock(i);
 
-                if (currentBlock.GetType() == BlockEnum.BlockType.CONDITIONAL) {
+                if (currentBlock?.GetType() == BlockEnum.BlockType.CONDITIONAL) {
                     ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
 
-                    LinkRobotSensor(ref conditionalBlock);
+                    if (conditionalBlock.GetConditionalType() != BlockEnum.ConditionalType.ELSE)
+                        LinkRobotSensor(ref conditionalBlock);
                 }
             }
         }

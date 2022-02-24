@@ -99,7 +99,7 @@ namespace Shard.UI.ProgrammingUI
             // Execute the first block
             BehaviourBlock currentBlock = GetBlock();
 
-            //Debug.Log("Execute -> " + currentBlock.GetBlockLocation().ToString());
+            Debug.Log("Execute -> " + currentBlock?.GetBlockLocation().ToString());
 
             BlockLocation nextBlockLocation = currentBlock.Execute(); 
 
@@ -112,7 +112,7 @@ namespace Shard.UI.ProgrammingUI
                 // Get the next block
                 currentBlock = GetBlock(nextBlockLocation.GetIndex(), nextBlockLocation.GetIndentation());
 
-                //Debug.Log("Execute -> " + currentBlock.GetBlockLocation().ToString());
+                Debug.Log("Execute -> " + currentBlock?.GetBlockLocation().ToString());
 
                 if(currentBlock != null) {   
                     // Execute the block and get the next block location
@@ -139,9 +139,13 @@ namespace Shard.UI.ProgrammingUI
         {
             if(index == -1) return GetBlock();
 
-            if      (GetBlock(index, 1) != null) return GetBlock(index, 1);
-            else if (GetBlock(index, 2) != null) return GetBlock(index, 2);
-                                                 return GetBlock(index, 3);
+            for (int i = index; i <= maxIndex; i++) {
+                if      (GetBlock(i, 1) != null) return GetBlock(i, 1);
+                else if (GetBlock(i, 2) != null) return GetBlock(i, 2);
+                else if (GetBlock(i, 3) != null) return GetBlock(i, 3);
+            }
+
+            return null;
         }
 
         public BehaviourBlock GetBlock(int index, int indentation)
