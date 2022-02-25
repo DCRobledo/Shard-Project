@@ -96,6 +96,8 @@ namespace Shard.UI.ProgrammingUI
 
 
         public IEnumerator ExecuteBehavior() {
+            int iterationCounter = 0, maxIteration = 5000;
+
             // Execute the first block
             BehaviourBlock currentBlock = GetBlock();
 
@@ -107,6 +109,11 @@ namespace Shard.UI.ProgrammingUI
 
             // Now, we go through each block in the behaviour until we reach the end of it
             while(nextBlockLocation.GetIndex() <= this.maxIndex) {
+                if (iterationCounter >= maxIteration) {
+                    Debug.LogError("ERROR IN COROUTINE: The program was stuck");
+                    break;
+                }
+
                 yield return null;
 
                 // Get the next block
@@ -118,6 +125,8 @@ namespace Shard.UI.ProgrammingUI
                     // Execute the block and get the next block location
                     nextBlockLocation = currentBlock.Execute();
                 }
+
+                iterationCounter++;
             }
         }
 
