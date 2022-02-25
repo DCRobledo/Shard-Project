@@ -123,8 +123,11 @@ namespace Shard.UI.ProgrammingUI
                     // Execute the block and get the next block location
                     nextBlockLocation = currentBlock.Execute();
 
-                    if (currentBlock.GetType() == BlockEnum.BlockType.BRANCH)
+                    if (currentBlock.GetType() == BlockEnum.BlockType.BRANCH) {
                         yield return null;
+                        iterationCounter = 0;
+                    }
+                        
                 }
 
                 iterationCounter++;
