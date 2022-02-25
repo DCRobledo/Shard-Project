@@ -42,7 +42,7 @@ namespace Shard.Controllers
             player = GameObject.Find("player");
 
             playerMovement = player.GetComponent<PlayerMovement>();
-            playerActions = player.GetComponent<EntityActions>();
+            playerActions = player.GetComponent<PlayerActions>();
 
             // Initialize the input system
             AwakeInput();

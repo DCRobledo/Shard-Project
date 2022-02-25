@@ -35,7 +35,7 @@ namespace Shard.Controllers
             robot = GameObject.Find("robot");
 
             robotMovement = robot.GetComponent<RobotMovement>();
-            robotActions = robot.GetComponent<EntityActions>();
+            robotActions = robot.GetComponent<RobotActions>();
             robotSensors = robot.GetComponent<RobotSensors>();
 
             jumpCommand = new JumpCommand(robotMovement);
