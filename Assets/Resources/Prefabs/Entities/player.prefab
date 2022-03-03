@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 8710090841162840084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.091731, y: 2.255117, z: 1}
+  m_LocalScale: {x: 0.94357985, y: 1.0172832, z: 0.4511}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -153,7 +153,7 @@ RelativeJoint2D:
   m_MaxTorque: 10000
   m_CorrectionScale: 0.3
   m_AutoConfigureOffset: 0
-  m_LinearOffset: {x: 1.8, y: -0.3}
+  m_LinearOffset: {x: 0.88, y: -0.14}
   m_AngularOffset: 0
 --- !u!114 &7185410182843016199
 MonoBehaviour:
@@ -167,10 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5d380872fb30964ab8293619088f15d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
-  jumpForce: 8
-  fallMultiplier: 2.5
-  lowJumpMultiplier: 2
+  speed: 5
+  jumpForce: 6
+  fallMultiplier: 1.5
+  lowJumpMultiplier: 1.15
   crouchFactor: 3
   whatIsGround:
     serializedVersion: 2
