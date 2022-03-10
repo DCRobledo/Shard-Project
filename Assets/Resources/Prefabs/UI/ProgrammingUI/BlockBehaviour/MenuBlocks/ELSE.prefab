@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c091509bcbfe64449212e1091d83371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  draggableBlockPrefab: {fileID: 1511664979210757610, guid: 2df06dfe4d9c55d49981086e8681c5b7, type: 3}
+  draggableBlockPrefab: {fileID: 1511664979210757610, guid: 4e25e33f49bb76648b8affc767dae9d2, type: 3}
   dragSpeed: 0.05
 --- !u!222 &6820156122731561804
 CanvasRenderer:
