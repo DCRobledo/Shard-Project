@@ -543,6 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragSpeed: 0.05
+  highlightFactor: 0.15
 --- !u!114 &1900692820266312929
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ namespace Shard.UI.ProgrammingUI
 
         [SerializeField]
         private float dragSpeed = .05f;
+        [SerializeField]
+        private float highlightFactor = 0.07f;
 
         private Vector3 velocity = Vector3.zero;
 
@@ -63,7 +65,7 @@ namespace Shard.UI.ProgrammingUI
         }
 
         private void HighlightBlockSpace(bool highlight) {
-            float alphaModifier = highlight ? .07f : -.07f;
+            float alphaModifier = highlight ? highlightFactor : -highlightFactor;
 
             GameObject blockSpaceImage = currentBlockSpace.transform.parent.parent.GetChild(0).gameObject;
             VisualUtils.ChangeObjectImage(ref blockSpaceImage, a: alphaModifier);
