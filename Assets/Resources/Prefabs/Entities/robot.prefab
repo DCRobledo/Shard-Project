@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1879859047307610033}
   - component: {fileID: 2574153355941885088}
   - component: {fileID: 5311644229418030700}
+  - component: {fileID: 7628185954488362433}
   m_Layer: 10
   m_Name: robot
   m_TagString: Robot
@@ -32,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 1489311540624490963}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.5706, y: -6.8491, z: 11.870356}
-  m_LocalScale: {x: 0.6938601, y: 0.66400176, z: 0.8023287}
+  m_LocalScale: {x: 0.65049386, y: 0.87150234, z: 0.8023287}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,12 +80,12 @@ SpriteRenderer:
   m_SortingLayerID: 890116537
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f7ac049805c9c7e4891403938d02d31f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 22fd2357de1dfb348816df602057aa4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_DrawMode: 1
+  m_Size: {x: 0.92, y: 1.05}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -124,18 +125,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0020790696, y: -0.122372836}
+  m_Offset: {x: 0.00064346194, y: -0.11883986}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.9375, y: 1.3125}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.9375, y: 1.4375}
+    newSize: {x: 0.92, y: 1.05}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.94833744, y: 1.0647144}
+  m_Size: {x: 0.9309122, y: 0.839311}
   m_EdgeRadius: 0
 --- !u!254 &7803451227653538638
 RelativeJoint2D:
@@ -192,6 +193,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   smoothingFactor: 0.05
+  isAscending: 0
+  isFalling: 0
 --- !u!114 &5311644229418030700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,3 +209,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsGrabbable: []
   grabRange: 1
+--- !u!95 &7628185954488362433
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489311540624490963}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 448e7e75b0bc8a64da5420ede8cc8bba, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

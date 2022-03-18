@@ -169,7 +169,8 @@ namespace Shard.Controllers
             if(blockBehaviourExecution != null)
                 StopCoroutine(blockBehaviourExecution);
 
-            blockBehaviourExecution = StartCoroutine(blockBehaviour.ExecuteBehavior());
+            if(blockBehaviour != null)
+                blockBehaviourExecution = StartCoroutine(blockBehaviour.ExecuteBehavior());
         }
 
         public void TurnOff() {
