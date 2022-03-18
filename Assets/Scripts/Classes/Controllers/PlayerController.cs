@@ -30,6 +30,7 @@ namespace Shard.Controllers
         private InputActions InputActions;
         private InputAction movement;
 
+        public static Action stopTrigger;
         public static Action moveTrigger;
         public static Action jumpTrigger;
 
@@ -119,6 +120,7 @@ namespace Shard.Controllers
 
         private void InvokeTrigger(EntityEnum.Action trigger) {
             switch(trigger) {
+                case EntityEnum.Action.STOP: stopTrigger?.Invoke(); break;
                 case EntityEnum.Action.MOVE: moveTrigger?.Invoke(); break;
                 case EntityEnum.Action.JUMP: jumpTrigger?.Invoke(); break;
             }
@@ -128,6 +130,7 @@ namespace Shard.Controllers
             object[] parameters = {direction.x, direction.y};
 
             if((float) parameters[0] != 0) InvokeTrigger(EntityEnum.Action.MOVE);
+            else                           InvokeTrigger(EntityEnum.Action.STOP);
             
             moveButton.ExecuteWithParameters(parameters);
         }
