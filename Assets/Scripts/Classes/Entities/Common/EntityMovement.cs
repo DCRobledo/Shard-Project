@@ -29,9 +29,12 @@ namespace Shard.Entities
         protected Rigidbody2D rigidBody;
         protected BoxCollider2D boxCollider2D; 
 
-        protected bool canJump = true;
-        protected bool shouldJump = false;
+        public bool isAscending = false;
+        public bool isFalling = false;
+        protected bool shouldCheckGround = true;
         protected bool isFacingRight = true;
+
+        public static Action landTrigger;
 
 
         private void Awake() 
@@ -44,9 +47,16 @@ namespace Shard.Entities
 
         private void FixedUpdate() {
             // Jump if requested
-            if (IsGrounded() && shouldJump)
+            if (isAscending && IsGrounded())
                 rigidBody.velocity += Vector2.up * jumpForce;
 
+            // Check for landing
+            if (isFalling && IsGrounded()) {
+                landTrigger?.Invoke();
+
+                isFalling = false;
+            }
+                        
             ApplyGravity(this.fallMultiplier, this.lowJumpMultiplier);
         }
 
@@ -66,12 +76,7 @@ namespace Shard.Entities
         }
 
         public void Jump(bool jump) {
-            // Realising the jump button is always allowed
-            if(!jump) this.shouldJump = jump;
-
-            // But we want to delay the jumps between one another
-            else if(jump && canJump) 
-                this.shouldJump = jump;
+            this.isAscending = jump;
         }
 
 
@@ -93,10 +98,13 @@ namespace Shard.Entities
             // Regular jump gravity
             if(rigidBody.velocity.y < 0) {
                 rigidBody.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.fixedDeltaTime;
-                shouldJump = false;
+
+                isAscending = false;
+                isFalling = true;
             }
+
             // Low jump gravity
-            else if (rigidBody.velocity.y > 0 && !shouldJump)
+            else if (rigidBody.velocity.y > 0 && !isAscending)
                 rigidBody.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
         }
 
