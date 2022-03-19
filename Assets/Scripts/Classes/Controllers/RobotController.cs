@@ -4,6 +4,7 @@ using Shard.Patterns.Singleton;
 using Shard.UI.ProgrammingUI;
 using Shard.Enums;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -166,6 +167,13 @@ namespace Shard.Controllers
 
     
         public void TurnOn() {
+            StartCoroutine(TurnOnCoroutine());
+        }
+
+        private IEnumerator TurnOnCoroutine() {
+            // Wait for the robot to turn on
+            yield return new WaitForSeconds(0.8f);
+
             if(blockBehaviourExecution != null)
                 StopCoroutine(blockBehaviourExecution);
 
