@@ -34,6 +34,7 @@ namespace Shard.Entities
         protected bool shouldCheckGround = true;
         protected bool isFacingRight = true;
 
+        public static Action jumpTrigger;
         public static Action landTrigger;
 
 
@@ -47,8 +48,12 @@ namespace Shard.Entities
 
         private void FixedUpdate() {
             // Jump if requested
-            if (isAscending && IsGrounded())
+            if (isAscending && IsGrounded()) {
+                jumpTrigger?.Invoke();
+
                 rigidBody.velocity += Vector2.up * jumpForce;
+            }
+                
 
             // Check for landing
             if (isFalling && IsGrounded()) {
@@ -123,6 +128,9 @@ namespace Shard.Entities
             speed = crouch ? speed - crouchFactor : speed + crouchFactor;
         }
     
+        public Vector2 GetVelocity() {
+            return this.rigidBody.velocity;
+        }
     }
 }
 

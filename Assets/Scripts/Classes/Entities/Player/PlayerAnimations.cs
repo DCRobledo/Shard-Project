@@ -18,7 +18,7 @@ namespace Shard.Entities
             PlayerController.stopTrigger += UnsetIsMoving;
             PlayerController.moveTrigger += SetIsMoving;
 
-            PlayerController.jumpTrigger += SetIsJumping;
+            PlayerMovement.jumpTrigger += SetIsJumping;
             PlayerMovement.landTrigger += UnsetIsJumping;
         }
 
@@ -26,7 +26,7 @@ namespace Shard.Entities
             PlayerController.stopTrigger -= UnsetIsMoving;
             PlayerController.moveTrigger -= SetIsMoving;
 
-            PlayerController.jumpTrigger -= SetIsJumping;
+            PlayerMovement.jumpTrigger -= SetIsJumping;
             PlayerMovement.landTrigger -= UnsetIsJumping;
         }
 
