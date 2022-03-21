@@ -17,33 +17,27 @@ namespace Shard.Entities
         private void OnEnable() {
             PlayerController.stopTrigger += UnsetIsMoving;
             PlayerController.moveTrigger += SetIsMoving;
-
-            PlayerMovement.jumpTrigger += SetIsJumping;
-            PlayerMovement.landTrigger += UnsetIsJumping;
         }
 
         private void OnDisable() {
             PlayerController.stopTrigger -= UnsetIsMoving;
             PlayerController.moveTrigger -= SetIsMoving;
-
-            PlayerMovement.jumpTrigger -= SetIsJumping;
-            PlayerMovement.landTrigger -= UnsetIsJumping;
         }
 
 
-        private void SetIsMoving() {
+        public void SetIsMoving() {
             animator.SetBool("isMoving", true);
         }
 
-        private void UnsetIsMoving() {
+        public void UnsetIsMoving() {
             animator.SetBool("isMoving", false);
         }
 
-        private void SetIsJumping() {
+        public void SetIsJumping() {
             animator.SetBool("isJumping", true);
         }
 
-        private void UnsetIsJumping() {
+        public void UnsetIsJumping() {
             animator.SetBool("isJumping", false);
         }
     }

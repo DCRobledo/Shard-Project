@@ -14,16 +14,6 @@ namespace Shard.Entities
             this.animator = this.GetComponent<Animator>();
         }
 
-        private void OnEnable() {
-            RobotMovement.jumpTrigger += SetIsJumping;
-            RobotMovement.landTrigger += UnsetIsJumping;
-        }
-
-        private void OnDisable() {
-            RobotMovement.jumpTrigger -= SetIsJumping;
-            RobotMovement.landTrigger -= UnsetIsJumping;
-        }
-
         private void Update() {
             Vector2 velocity = GetComponent<RobotMovement>().GetVelocity();
 
@@ -33,11 +23,11 @@ namespace Shard.Entities
         }
 
 
-        private void SetIsJumping() {
+        public void SetIsJumping() {
             animator.SetBool("isJumping", true);
         }
 
-        private void UnsetIsJumping() {
+        public void UnsetIsJumping() {
             animator.SetBool("isJumping", false);
         }
     }

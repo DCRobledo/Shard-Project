@@ -2,6 +2,7 @@ using Shard.Lib.Custom;
 using System.Collections;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Shard.Entities
 {
@@ -29,13 +30,16 @@ namespace Shard.Entities
         protected Rigidbody2D rigidBody;
         protected BoxCollider2D boxCollider2D; 
 
-        public bool isAscending = false;
-        public bool isFalling = false;
+        protected bool isAscending = false;
+        protected bool isFalling = false;
         protected bool shouldCheckGround = true;
         protected bool isFacingRight = true;
 
-        public static Action jumpTrigger;
-        public static Action landTrigger;
+        [SerializeField]
+        protected UnityEvent jumpTrigger;
+
+        [SerializeField]
+        protected UnityEvent landTrigger;
 
 
         private void Awake() 
