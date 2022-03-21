@@ -40,5 +40,9 @@ namespace Shard.Entities
         public void UnsetIsJumping() {
             animator.SetBool("isJumping", false);
         }
+
+        public void SetGrabTrigger() {
+            animator.SetTrigger("grabTrigger");
+        }
     }
 }

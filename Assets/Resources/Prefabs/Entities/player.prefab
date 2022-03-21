@@ -155,7 +155,7 @@ RelativeJoint2D:
   m_MaxTorque: 10000
   m_CorrectionScale: 0.3
   m_AutoConfigureOffset: 0
-  m_LinearOffset: {x: 0.88, y: -0.14}
+  m_LinearOffset: {x: 0.63, y: 0.1}
   m_AngularOffset: 0
 --- !u!114 &7185410182843016199
 MonoBehaviour:
@@ -223,6 +223,21 @@ MonoBehaviour:
   whatIsGrabbable:
   - Robot
   grabRange: 1.5
+  grabTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6708790270809338178}
+        m_TargetAssemblyTypeName: Shard.Entities.PlayerAnimations, Scripts
+        m_MethodName: SetGrabTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   reCallCoolDown: 1
   objectToReCall: {fileID: 0}
 --- !u!114 &6708790270809338178

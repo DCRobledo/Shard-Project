@@ -238,6 +238,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsGrabbable: []
   grabRange: 1
+  grabTrigger:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2809128413183804608
 MonoBehaviour:
   m_ObjectHideFlags: 0

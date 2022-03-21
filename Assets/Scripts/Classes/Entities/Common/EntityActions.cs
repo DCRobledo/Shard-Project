@@ -6,6 +6,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Shard.Entities
 {
@@ -23,6 +24,9 @@ namespace Shard.Entities
         protected List<GameObject> grabbableObjects = new List<GameObject>();
         
         protected RelativeJoint2D grabJoint;
+
+        [SerializeField]
+        protected UnityEvent grabTrigger;
 
 
         protected virtual void Awake() {
@@ -68,6 +72,8 @@ namespace Shard.Entities
             {
                 grabJoint.connectedBody = grabJoint.connectedBody == null ? grabbableObjects[0].GetComponent<Rigidbody2D>() : null;
                 grabJoint.enabled = grabJoint.connectedBody != null;
+
+                grabTrigger?.Invoke();
             }
         }
 
