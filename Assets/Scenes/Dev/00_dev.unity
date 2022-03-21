@@ -9981,62 +9981,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 433936477}
     m_Modifications:
-    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: jumpTrigger.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: landTrigger.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: jumpTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: landTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: jumpTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1890417705}
-    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: landTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1890417705}
-    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: jumpTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: landTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: jumpTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetIsJumping
-      objectReference: {fileID: 0}
-    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: landTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UnsetIsJumping
-      objectReference: {fileID: 0}
-    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: jumpTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Shard.Entities.PlayerAnimations, Scripts
-      objectReference: {fileID: 0}
-    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: landTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Shard.Entities.PlayerAnimations, Scripts
-      objectReference: {fileID: 0}
-    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: jumpTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: landTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 8710090841162840075, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -10283,17 +10227,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4190447353342432532, guid: 8df9c0689a76d594b9f7b96fa6f37608, type: 3}
   m_PrefabInstance: {fileID: 4190447351665819041}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1890417705 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6708790270809338178, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-  m_PrefabInstance: {fileID: 1314553789}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97a4cd3f9bc655a478d4f867d3f9baa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1919734782
 GameObject:
   m_ObjectHideFlags: 0
@@ -13513,17 +13446,6 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 7628185954488362433, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
   m_PrefabInstance: {fileID: 9040934750402323468}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7628185954488362434 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2809128413183804608, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-  m_PrefabInstance: {fileID: 9040934750402323468}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 573aed49882ec5644af26466c90b04c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8321095585050317200
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13721,70 +13643,6 @@ PrefabInstance:
     - target: {fileID: 1489311540624490963, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
       propertyPath: m_Name
       value: robot
-      objectReference: {fileID: 0}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: speed
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: jumpForce
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: jumpTrigger.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: landTrigger.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: jumpTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: landTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: jumpTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 7628185954488362434}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: landTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 7628185954488362434}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: jumpTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: landTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: jumpTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetIsJumping
-      objectReference: {fileID: 0}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: landTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UnsetIsJumping
-      objectReference: {fileID: 0}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: jumpTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Shard.Entities.RobotAnimations, Scripts
-      objectReference: {fileID: 0}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: landTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Shard.Entities.RobotAnimations, Scripts
-      objectReference: {fileID: 0}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: jumpTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 2574153355941885088, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
-      propertyPath: landTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
