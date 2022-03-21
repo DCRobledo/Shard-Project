@@ -12,6 +12,7 @@ namespace Shard.Controllers
         public static new UIController Instance { get { return (UIController) instance; }}
 
         private GameObject programmingUI;
+        private Animator animatorPUI;
         
 
         private void Awake() {
@@ -20,6 +21,9 @@ namespace Shard.Controllers
 
             // Get the programming UI
             programmingUI = GameObject.Find("programmingUI");
+
+            // Get the PUI's components
+            animatorPUI = programmingUI.GetComponent<Animator>();
         }
 
 
@@ -27,8 +31,7 @@ namespace Shard.Controllers
 
         private void ToggleUI(UIEnum.UIType type) {
             switch(type) {
-                case UIEnum.UIType.PROGRAMMING_UI: programmingUI.SetActive(!programmingUI.activeSelf); break;
-                case UIEnum.UIType.HUD:                                                                break;
+                case UIEnum.UIType.PROGRAMMING_UI: animatorPUI.SetTrigger("togglePUI"); break;
 
                 default: break;
             }
