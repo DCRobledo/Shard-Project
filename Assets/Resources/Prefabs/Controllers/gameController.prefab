@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5414967365545048199}
-  - component: {fileID: 5414967365545048198}
+  - component: {fileID: 593879061630449544}
   m_Layer: 0
   m_Name: gameController
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5414967365545048198
+--- !u!114 &593879061630449544
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5414967365545048192}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fce25f6b89df1e4a951dcad872bc21d, type: 3}
+  m_Script: {fileID: 11500000, guid: 904061a97ff33b24cb44885ec14999e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  showVisuals: 0
+  respawnDelay: 1
