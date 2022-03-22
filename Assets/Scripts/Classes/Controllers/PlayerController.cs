@@ -16,6 +16,9 @@ namespace Shard.Controllers
         private static PlayerController instance = null;
         public static new PlayerController Instance { get { return (PlayerController) instance; }}
 
+        [SerializeField]
+        private bool selfControlled = false;
+
         private GameObject player;
         private EntityMovement playerMovement;
         private EntityActions playerActions;
@@ -61,33 +64,36 @@ namespace Shard.Controllers
         }
 
         private void OnEnable() {
-            EnableInput();
-            EnableTriggers();
+            // Subscribe actions and movement to input
+            movement = InputActions.Player.Movement;
+
+            InputActions.Player.Jump.started += context => jumpButton.ExecuteWithParameters(true);
+            InputActions.Player.Jump.canceled += context => jumpButton.ExecuteWithParameters(false);
+
+            InputActions.Player.Crouch.started += context => crouchButton.ExecuteWithParameters(true);
+            InputActions.Player.Crouch.canceled += context => crouchButton.ExecuteWithParameters(false);
+
+            InputActions.Player.ReCall.performed += context => reCallButton.ExecuteWithParameters(EntityEnum.Action.RECALL);
+            InputActions.Player.Grab.performed += context => grabButton.ExecuteWithParameters(EntityEnum.Action.GRAB);
+
+            InputActions.Player.Program.performed += context => programButton.Execute();
 
             // Subscribe enabling and disabling to input console state management
             InputConsole.enterInputStateEvent += DisableInput;
             InputConsole.exitInputStateEvent += EnableInput;
+
+            
+            if(selfControlled) EnableInput();
+            EnableTriggers();
         }
 
-        private void EnableInput() {
-            movement = InputActions.Player.Movement;
+        public void EnableInput() {
             movement.Enable();
 
-            InputActions.Player.Jump.started += context => jumpButton.ExecuteWithParameters(true);
-            InputActions.Player.Jump.canceled += context => jumpButton.ExecuteWithParameters(false);
             InputActions.Player.Jump.Enable();
-
-            InputActions.Player.Crouch.started += context => crouchButton.ExecuteWithParameters(true);
-            InputActions.Player.Crouch.canceled += context => crouchButton.ExecuteWithParameters(false);
             InputActions.Player.Crouch.Enable();
-
-            InputActions.Player.ReCall.performed += context => reCallButton.ExecuteWithParameters(EntityEnum.Action.RECALL);
             InputActions.Player.ReCall.Enable();
-
-            InputActions.Player.Grab.performed += context => grabButton.ExecuteWithParameters(EntityEnum.Action.GRAB);
             InputActions.Player.Grab.Enable();
-
-            InputActions.Player.Program.performed += context => programButton.Execute();
             InputActions.Player.Program.Enable();
         }
 
@@ -103,7 +109,7 @@ namespace Shard.Controllers
             InputConsole.exitInputStateEvent -= EnableInput;
         }
 
-        private void DisableInput() {
+        public void DisableInput() {
             movement.Disable();
 
             InputActions.Player.Jump.Disable();
