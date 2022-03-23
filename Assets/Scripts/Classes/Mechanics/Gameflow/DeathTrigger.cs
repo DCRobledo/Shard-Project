@@ -6,10 +6,10 @@ namespace Shard.Gameflow
 {
     public class DeathTrigger : MonoBehaviour
     {
-        public Action<string> deathTriggerEvent;
+        public static Action<string> deathTriggerEvent;
 
         private void OnTriggerEnter2D(Collider2D other) {
-            deathTriggerEvent?.Invoke(other.transform.tag);
+            deathTriggerEvent?.Invoke(other.tag);
         }
     }
 }

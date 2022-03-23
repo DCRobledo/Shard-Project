@@ -6,10 +6,11 @@ namespace Shard.Gameflow
 {
     public class Checkpoint : MonoBehaviour
     {
-        public Action<string, Vector3> checkpointItEvent;
+        public static Action<string, Vector3> checkpointEvent;
 
         private void OnTriggerEnter2D(Collider2D other) {
-            checkpointItEvent?.Invoke(other.transform.tag, other.transform.position);
+            if(other.tag == "Player" || other.tag == "Robot")
+                checkpointEvent?.Invoke(other.tag, other.transform.position);
         }
     }
 }

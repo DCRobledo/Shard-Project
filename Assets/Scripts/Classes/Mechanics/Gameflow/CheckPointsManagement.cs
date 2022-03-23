@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace Shard.Gameflow 
 {
@@ -15,10 +16,13 @@ namespace Shard.Gameflow
         [SerializeField]
         private float respawnDelay = 1f;
 
-        private GameObject[] checkpoints;
-        private Dictionary<EntityEnum.Entity, Vector3> checkpointRecord = new Dictionary<EntityEnum.Entity, Vector3>();
+        [SerializeField]
+        private GameObject checkpoints;
 
-        private GameObject[] deathTriggers;
+        [SerializeField]
+        private GameObject deathTriggers;
+
+        private Dictionary<EntityEnum.Entity, Vector3> checkpointRecord = new Dictionary<EntityEnum.Entity, Vector3>();
 
         private GameObject player;
         private GameObject robot;
@@ -31,26 +35,29 @@ namespace Shard.Gameflow
             player = GameObject.Find("player");
             robot = GameObject.Find("robot");
 
-            checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
-            deathTriggers = GameObject.FindGameObjectsWithTag("Death Trigger");
+            checkpoints.GetComponent<TilemapRenderer>().enabled = showVisuals;
+            deathTriggers.GetComponent<TilemapRenderer>().enabled = showVisuals;
+
+            checkpointRecord.Add(EntityEnum.Entity.PLAYER, player.transform.position);
+            checkpointRecord.Add(EntityEnum.Entity.ROBOT, robot.transform.position);
         }
 
         private void OnEnable() {
-            foreach (GameObject checkpoint in checkpoints) {
-                checkpoint.GetComponent<Checkpoint>().checkpointItEvent += UpdateCheckpoint;
-                checkpoint.GetComponent<SpriteRenderer>().enabled = showVisuals;
-            }
-                
-            foreach (GameObject deathTrigger in deathTriggers) {
-                deathTrigger.GetComponent<DeathTrigger>().deathTriggerEvent += ReturnToLastCheckpoint;
-                deathTrigger.GetComponent<SpriteRenderer>().enabled = showVisuals;
-            }    
+            Checkpoint.checkpointEvent += UpdateCheckpoint;
+            DeathTrigger.deathTriggerEvent += ReturnToLastCheckpoint;
+        }
+
+        private void OnDisable() {
+            Checkpoint.checkpointEvent -= UpdateCheckpoint;
+            DeathTrigger.deathTriggerEvent -= ReturnToLastCheckpoint;
         }
 
 
         private void UpdateCheckpoint(string entityTag, Vector3 checkpoint) {
             try
             {
+                Debug.Log("Checkpoint " + entityTag);
+
                 EntityEnum.Entity entity = (EntityEnum.Entity) System.Enum.Parse(typeof(EntityEnum.Entity), entityTag.ToUpper());
 
                 checkpointRecord[entity] = checkpoint;
@@ -60,18 +67,20 @@ namespace Shard.Gameflow
 
         private void ReturnToLastCheckpoint(string entityTag) {
             try {
+                Debug.Log("DeathTrigger " + entityTag);
+
                 EntityEnum.Entity entity = (EntityEnum.Entity) System.Enum.Parse(typeof(EntityEnum.Entity), entityTag.ToUpper());
 
                 switch (entity) {
-                    case EntityEnum.Entity.PLAYER: playerDeathEvent?.Invoke(); StartCoroutine(ReturnToLastCheckPoint(player, GetLastCheckpoint(entity))); break;
-                    case EntityEnum.Entity.ROBOT:  robotDeathEvent?.Invoke();  StartCoroutine(ReturnToLastCheckPoint(robot, GetLastCheckpoint(entity)));  break;
+                    case EntityEnum.Entity.PLAYER: playerDeathEvent?.Invoke(); StartCoroutine(ReturnToLastCheckpointCoroutine(player, GetLastCheckpoint(entity))); break;
+                    case EntityEnum.Entity.ROBOT:  robotDeathEvent?.Invoke();  StartCoroutine(ReturnToLastCheckpointCoroutine(robot, GetLastCheckpoint(entity)));  break;
                 }
                 
             }
             catch (System.Exception) {}
         }
 
-        private IEnumerator ReturnToLastCheckPoint(GameObject entity, Vector3 lastCheckpoint) {
+        private IEnumerator ReturnToLastCheckpointCoroutine(GameObject entity, Vector3 lastCheckpoint) {
             yield return new WaitForSeconds(respawnDelay);
 
             entity.transform.position = lastCheckpoint;

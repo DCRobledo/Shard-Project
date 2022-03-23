@@ -1,4 +1,4 @@
-using Shard.Controllers;
+using Shard.Gameflow;
 using Shard.Lib.Custom;
 using Shard.Enums;
 using System;
@@ -36,12 +36,12 @@ namespace Shard.Entities
 
         private void OnEnable() {
             // Subscribe the death event
-            GameController.playerDeathEvent += Grab;
+            CheckPointsManagement.playerDeathEvent += Grab;
         }
 
         private void OnDisable() {
             // Unsubscribe the death event
-            GameController.playerDeathEvent += Grab;
+            CheckPointsManagement.playerDeathEvent += Grab;
         }
 
         private void Update() {
