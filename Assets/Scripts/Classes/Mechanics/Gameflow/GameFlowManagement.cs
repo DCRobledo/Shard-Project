@@ -15,6 +15,9 @@ namespace Shard.Gameflow
         private GameObject blackPanel;
         private Animator animator;
 
+        [SerializeField]
+        private GameObject winTrigger;
+
 
         private void Awake() {
             this.animator = blackPanel.GetComponent<Animator>();
