@@ -12,6 +12,8 @@ namespace Shard.Gameflow
     {
         [SerializeField]
         private bool playStartSequence = true;
+        [SerializeField]
+        private bool playEndSequence = true;
 
         [SerializeField]
         private GameObject levelTransitionGO;
@@ -31,8 +33,8 @@ namespace Shard.Gameflow
         private GameObject player;
         private Animator playerAnimator;
 
-        public GameObject mainCamera;
-        public CinemachineBrain cameraBrain;
+        private GameObject mainCamera;
+        private CinemachineBrain cameraBrain;
 
 
         private void Awake() {
@@ -114,7 +116,10 @@ namespace Shard.Gameflow
             PlayerController.Instance.DisableInput();
 
             // Start end level sequence
-            StartCoroutine(EndLevelSequence());
+            if(playEndSequence)
+                StartCoroutine(EndLevelSequence());
+            else
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         private IEnumerator EndLevelSequence() {
