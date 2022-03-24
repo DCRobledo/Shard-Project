@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using Cinemachine;
 
 namespace Shard.Gameflow
 {
@@ -30,11 +31,17 @@ namespace Shard.Gameflow
         private GameObject player;
         private Animator playerAnimator;
 
+        private GameObject mainCamera;
+        private CinemachineBrain cameraBrain;
+
 
         private void Awake() {
             this.player = GameObject.Find("player");
 
-            this.playerAnimator = player.GetComponent<Animator>();
+            this.mainCamera = GameObject.Find("camera");
+            this.cameraBrain = mainCamera.GetComponent<CinemachineBrain>();
+
+            this.playerAnimator          = player.GetComponent<Animator>();
             this.levelTransitionAnimator = levelTransitionGO.GetComponent<Animator>();
             this.startDoorAnimator       = startDoor.GetComponent<Animator>();
             this.endDoorAnimator         = endDoor.GetComponent<Animator>();
@@ -61,6 +68,10 @@ namespace Shard.Gameflow
 
 
         private IEnumerator StartLevelSequence() {
+            // Set camera x_offset to 0
+            float cameraOffset = cameraBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneWidth;
+            cameraBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneWidth = 0f;
+
             // Move player to start door and hide it
             player.transform.localPosition = startDoor.transform.localPosition;
 
@@ -87,6 +98,9 @@ namespace Shard.Gameflow
             yield return new WaitForSeconds(0.25f);
             levelTransitionAnimator.SetTrigger("openSecondHalf");
 
+            // Reset camera offset
+            cameraBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneWidth = cameraOffset;
+
             // Activate player input
             PlayerController.Instance.EnableInput();
 
@@ -112,6 +126,9 @@ namespace Shard.Gameflow
         private IEnumerator EndLevelSequence() {
             this.levelTransitionGO.SetActive(true);
             this.levelTransitionAnimator.Play("idle_open");
+
+            // Set camera x_offset to 0
+            cameraBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneWidth = 0f;
 
             // Move player to end door
             player.transform.localPosition = endDoor.transform.localPosition;
