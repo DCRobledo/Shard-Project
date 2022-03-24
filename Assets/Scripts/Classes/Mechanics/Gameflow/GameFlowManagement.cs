@@ -27,8 +27,14 @@ namespace Shard.Gameflow
         [SerializeField]
         private GameObject winTrigger;
 
+        private GameObject player;
+        private Animator playerAnimator;
+
 
         private void Awake() {
+            this.player = GameObject.Find("player");
+            this.playerAnimator = player.GetComponent<Animator>();
+
             this.levelTransitionGO.SetActive(true);
 
             this.levelTransitionAnimator = levelTransitionGO.GetComponent<Animator>();
@@ -54,26 +60,51 @@ namespace Shard.Gameflow
 
 
         private IEnumerator StartLevelSequence() {
+            // Move player to start door and hide it
+            player.transform.localPosition = startDoor.transform.localPosition;
+
+            Color playerColor = Color.white; playerColor.a = 0f;
+            player.GetComponent<SpriteRenderer>().color = playerColor;
+
+            playerAnimator.SetBool("isMoving", true);
+
+
             // Wait for first half opening to finish
             yield return new WaitForSeconds(levelTransitionAnimator.GetCurrentAnimatorStateInfo(0).length);
+
 
             // Open start door
             startDoorAnimator.SetTrigger("open");
             yield return new WaitForSeconds(2);
 
+
             // Fade in player
+            yield return PlayerFadeIn(playerColor);
+            playerAnimator.SetBool("isMoving", false);
+
 
             // Play second half opening
             levelTransitionAnimator.SetTrigger("openSecondHalf");
             yield return new WaitForSeconds(levelTransitionAnimator.GetCurrentAnimatorStateInfo(0).length);
 
+
             // Activate player input
             PlayerController.Instance.EnableInput();
 
-            // Activate robot functionality
 
             // Close door
             startDoorAnimator.SetTrigger("close");
+        }
+
+        private IEnumerator PlayerFadeIn(Color playerColor) {
+            do {
+                playerColor.a += 0.05f;
+
+                player.GetComponent<SpriteRenderer>().color = playerColor;
+
+                yield return null;
+
+            } while (playerColor.a < 1f);
         }
 
         private void EndLevel() {

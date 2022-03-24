@@ -37,6 +37,8 @@ namespace Shard.Controllers
         public static Action moveTrigger;
         public static Action jumpTrigger;
 
+        private bool isMoving = false;
+
 
         private void Awake() {
             // Init the controller's instance
@@ -135,8 +137,17 @@ namespace Shard.Controllers
         private void MovePlayer(Vector2 direction) {
             object[] parameters = {direction.x, direction.y};
 
-            if((float) parameters[0] != 0) InvokeTrigger(EntityEnum.Action.MOVE);
-            else                           InvokeTrigger(EntityEnum.Action.STOP);
+            if((float) parameters[0] != 0) {
+                isMoving = true;
+                
+                InvokeTrigger(EntityEnum.Action.MOVE);
+            } 
+
+            else if(isMoving) {
+                isMoving = false;
+
+                InvokeTrigger(EntityEnum.Action.STOP);
+            }                         
             
             moveButton.ExecuteWithParameters(parameters);
         }
