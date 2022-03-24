@@ -17,6 +17,10 @@ namespace Shard.Gameflow
         private Animator levelTransitionAnimator;
 
         [SerializeField]
+        private GameObject startDoor;
+        private Animator startDoorAnimator;
+
+        [SerializeField]
         private GameObject endDoor;
         private Animator endDoorAnimator;
 
@@ -28,6 +32,7 @@ namespace Shard.Gameflow
             this.levelTransitionGO.SetActive(true);
 
             this.levelTransitionAnimator = levelTransitionGO.GetComponent<Animator>();
+            this.startDoorAnimator       = startDoor.GetComponent<Animator>();
             this.endDoorAnimator         = endDoor.GetComponent<Animator>();
 
             if (!playStartAnimation) levelTransitionAnimator.Play("idle_open");
@@ -53,6 +58,8 @@ namespace Shard.Gameflow
             yield return new WaitForSeconds(levelTransitionAnimator.GetCurrentAnimatorStateInfo(0).length);
 
             // Open start door
+            startDoorAnimator.SetTrigger("open");
+            yield return new WaitForSeconds(2);
 
             // Fade in player
 
@@ -66,6 +73,7 @@ namespace Shard.Gameflow
             // Activate robot functionality
 
             // Close door
+            startDoorAnimator.SetTrigger("close");
         }
 
         private void EndLevel() {
