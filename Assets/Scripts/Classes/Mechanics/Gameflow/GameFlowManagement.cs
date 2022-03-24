@@ -39,10 +39,7 @@ namespace Shard.Gameflow
             this.startDoorAnimator       = startDoor.GetComponent<Animator>();
             this.endDoorAnimator         = endDoor.GetComponent<Animator>();
 
-            this.levelTransitionGO.SetActive(true);
-
-            if (!playStartSequence)
-                levelTransitionAnimator.Play("idle_open");
+            this.levelTransitionGO.SetActive(playStartSequence);
 
             winTrigger.GetComponent<TilemapRenderer>().enabled = false;
         }
@@ -96,6 +93,9 @@ namespace Shard.Gameflow
             // Close door
             yield return new WaitForSeconds(0.5f);
             startDoorAnimator.SetTrigger("close");
+            
+            yield return new WaitForSeconds(levelTransitionAnimator.GetCurrentAnimatorStateInfo(0).length);
+            this.levelTransitionGO.SetActive(false);
         }
 
         private IEnumerator PlayerFadeIn(Color playerColor) {
