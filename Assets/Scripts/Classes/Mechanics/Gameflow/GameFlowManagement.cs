@@ -68,37 +68,35 @@ namespace Shard.Gameflow
 
             playerAnimator.SetBool("isMoving", true);
 
-
             // Wait for first half opening to finish
             yield return new WaitForSeconds(levelTransitionAnimator.GetCurrentAnimatorStateInfo(0).length);
 
-
             // Open start door
             startDoorAnimator.SetTrigger("open");
-            yield return new WaitForSeconds(2);
-
+            yield return new WaitForSeconds(1.5f);
 
             // Fade in player
-            yield return PlayerFadeIn(playerColor);
+            StartCoroutine(PlayerFadeIn(playerColor));
+            yield return new WaitForSeconds(0.5f);
+
+            // Stop player
             playerAnimator.SetBool("isMoving", false);
 
-
             // Play second half opening
+            yield return new WaitForSeconds(0.25f);
             levelTransitionAnimator.SetTrigger("openSecondHalf");
-            yield return new WaitForSeconds(levelTransitionAnimator.GetCurrentAnimatorStateInfo(0).length);
-
 
             // Activate player input
             PlayerController.Instance.EnableInput();
 
-
             // Close door
+            yield return new WaitForSeconds(0.5f);
             startDoorAnimator.SetTrigger("close");
         }
 
         private IEnumerator PlayerFadeIn(Color playerColor) {
             do {
-                playerColor.a += 0.05f;
+                playerColor.a += 0.01f;
 
                 player.GetComponent<SpriteRenderer>().color = playerColor;
 
