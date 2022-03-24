@@ -9424,11 +9424,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8710090841162840075, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.49
+      value: -29.15
       objectReference: {fileID: 0}
     - target: {fileID: 8710090841162840075, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.96
+      value: -4.71
       objectReference: {fileID: 0}
     - target: {fileID: 8710090841162840075, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13808,7 +13808,7 @@ PrefabInstance:
       objectReference: {fileID: 1697090949}
     - target: {fileID: 2044979010, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
       propertyPath: playStartSequence
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 593879061630449544, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
       propertyPath: checkpoints
@@ -14569,19 +14569,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8499614076658296176, guid: b47c293707da48d4d8a258ae47d7defe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.49
+      value: -29.15
       objectReference: {fileID: 0}
     - target: {fileID: 8499614076658296176, guid: b47c293707da48d4d8a258ae47d7defe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.48
+      value: -3.2300003
       objectReference: {fileID: 0}
     - target: {fileID: 8499614076839949340, guid: b47c293707da48d4d8a258ae47d7defe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.49
+      value: -29.15
       objectReference: {fileID: 0}
     - target: {fileID: 8499614076839949340, guid: b47c293707da48d4d8a258ae47d7defe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.48
+      value: -3.2300003
       objectReference: {fileID: 0}
     - target: {fileID: 8499614076839949343, guid: b47c293707da48d4d8a258ae47d7defe, type: 3}
       propertyPath: m_Follow

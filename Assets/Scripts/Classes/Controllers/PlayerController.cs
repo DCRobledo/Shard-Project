@@ -18,6 +18,7 @@ namespace Shard.Controllers
 
         [SerializeField]
         private bool selfControlled = false;
+        private bool isMoving = false;
 
         private GameObject player;
         private EntityMovement playerMovement;
@@ -36,8 +37,7 @@ namespace Shard.Controllers
         public static Action stopTrigger;
         public static Action moveTrigger;
         public static Action jumpTrigger;
-
-        private bool isMoving = false;
+        
 
 
         private void Awake() {

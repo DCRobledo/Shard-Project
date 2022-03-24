@@ -112,6 +112,7 @@ namespace Shard.Gameflow
             this.levelTransitionGO.SetActive(false);
         }
 
+
         private void EndLevel() {
             // Prevent multiple event triggering
             WinTrigger.endLevelEvent -= EndLevel;
@@ -131,11 +132,7 @@ namespace Shard.Gameflow
             cameraBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneWidth = 0f;
 
             // Move player to end door
-            player.transform.localPosition = endDoor.transform.localPosition;
-
-            Color playerColor = player.GetComponent<SpriteRenderer>().color;
-
-            playerAnimator.SetBool("isMoving", true);
+            StartCoroutine(MovePlayerToDoor(endDoor.transform.localPosition));
 
             // Play first half of close animation
             levelTransitionAnimator.SetTrigger("closeFirstHalf");
@@ -146,6 +143,8 @@ namespace Shard.Gameflow
             yield return new WaitForSeconds(1.5f);
 
             // Fade out player
+            playerAnimator.SetBool("isMoving", true);
+            Color playerColor = player.GetComponent<SpriteRenderer>().color;
             yield return PlayerFadeOut(playerColor);
 
             // Close door
@@ -162,6 +161,25 @@ namespace Shard.Gameflow
             yield return null;
         }
 
+
+        private IEnumerator MovePlayerToDoor(Vector3 doorPosition) {
+            do {
+                playerAnimator.SetBool("isMoving", true);
+
+                float distanceSign = player.transform.localPosition.x < doorPosition.x ? 1f : -1f;
+
+                Vector3 playerPosition = player.transform.localPosition; 
+
+                playerPosition.x += 0.025f * distanceSign;
+
+                player.transform.localPosition = playerPosition;
+
+                yield return null;
+            } while (player.transform.localPosition.x < doorPosition.x - 0.1f || player.transform.localPosition.x > doorPosition.x + 0.1f);
+
+             playerAnimator.SetBool("isMoving", false);
+        }
+
         private IEnumerator PlayerFadeIn(Color playerColor) {
             do {
                 playerColor.a += 0.08f;
@@ -175,7 +193,7 @@ namespace Shard.Gameflow
 
         private IEnumerator PlayerFadeOut(Color playerColor) {
             do {
-                playerColor.a -= 0.08f;
+                playerColor.a -= 0.04f;
 
                 player.GetComponent<SpriteRenderer>().color = playerColor;
 
