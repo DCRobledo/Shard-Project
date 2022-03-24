@@ -25,16 +25,18 @@ namespace Shard.Gameflow
 
 
         private void Awake() {
+            this.levelTransitionGO.SetActive(true);
+
             this.levelTransitionAnimator = levelTransitionGO.GetComponent<Animator>();
             this.endDoorAnimator         = endDoor.GetComponent<Animator>();
 
-            if (!playStartAnimation) levelTransitionAnimator.Play("idle_transparent");
+            if (!playStartAnimation) levelTransitionAnimator.Play("idle_open");
 
             winTrigger.GetComponent<TilemapRenderer>().enabled = false;
         }
 
         private void Start() {
-            StartCoroutine(StartLevel());
+            StartCoroutine(StartLevelSequence());
         }
 
         private void OnEnable() {
@@ -46,14 +48,24 @@ namespace Shard.Gameflow
         }
 
 
-        private IEnumerator StartLevel() {
-            // Wait for start animation to finish
+        private IEnumerator StartLevelSequence() {
+            // Wait for first half opening to finish
+            yield return new WaitForSeconds(levelTransitionAnimator.GetCurrentAnimatorStateInfo(0).length);
+
+            // Open start door
+
+            // Fade in player
+
+            // Play second half opening
+            levelTransitionAnimator.SetTrigger("openSecondHalf");
             yield return new WaitForSeconds(levelTransitionAnimator.GetCurrentAnimatorStateInfo(0).length);
 
             // Activate player input
             PlayerController.Instance.EnableInput();
 
             // Activate robot functionality
+
+            // Close door
         }
 
         private void EndLevel() {
