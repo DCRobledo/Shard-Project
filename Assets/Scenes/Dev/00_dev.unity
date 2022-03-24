@@ -13806,6 +13806,10 @@ PrefabInstance:
       propertyPath: levelTransitionGO
       value: 
       objectReference: {fileID: 1697090949}
+    - target: {fileID: 2044979010, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
+      propertyPath: playStartSequence
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 593879061630449544, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
       propertyPath: checkpoints
       value: 

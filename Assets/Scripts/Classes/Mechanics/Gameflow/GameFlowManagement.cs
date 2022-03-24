@@ -10,7 +10,7 @@ namespace Shard.Gameflow
     public class GameFlowManagement : MonoBehaviour
     {
         [SerializeField]
-        private bool playStartAnimation = true;
+        private bool playStartSequence = true;
 
         [SerializeField]
         private GameObject levelTransitionGO;
@@ -33,21 +33,25 @@ namespace Shard.Gameflow
 
         private void Awake() {
             this.player = GameObject.Find("player");
+
             this.playerAnimator = player.GetComponent<Animator>();
-
-            this.levelTransitionGO.SetActive(true);
-
             this.levelTransitionAnimator = levelTransitionGO.GetComponent<Animator>();
             this.startDoorAnimator       = startDoor.GetComponent<Animator>();
             this.endDoorAnimator         = endDoor.GetComponent<Animator>();
 
-            if (!playStartAnimation) levelTransitionAnimator.Play("idle_open");
+            this.levelTransitionGO.SetActive(true);
+
+            if (!playStartSequence)
+                levelTransitionAnimator.Play("idle_open");
 
             winTrigger.GetComponent<TilemapRenderer>().enabled = false;
         }
 
         private void Start() {
-            StartCoroutine(StartLevelSequence());
+            if (playStartSequence)
+                StartCoroutine(StartLevelSequence());
+            else
+                PlayerController.Instance.EnableInput();
         }
 
         private void OnEnable() {
@@ -96,7 +100,7 @@ namespace Shard.Gameflow
 
         private IEnumerator PlayerFadeIn(Color playerColor) {
             do {
-                playerColor.a += 0.01f;
+                playerColor.a += 0.08f;
 
                 player.GetComponent<SpriteRenderer>().color = playerColor;
 
