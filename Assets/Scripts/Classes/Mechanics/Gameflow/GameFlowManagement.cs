@@ -93,9 +93,56 @@ namespace Shard.Gameflow
             // Close door
             yield return new WaitForSeconds(0.5f);
             startDoorAnimator.SetTrigger("close");
-            
+
             yield return new WaitForSeconds(levelTransitionAnimator.GetCurrentAnimatorStateInfo(0).length);
             this.levelTransitionGO.SetActive(false);
+        }
+
+        private void EndLevel() {
+            // Prevent multiple event triggering
+            WinTrigger.endLevelEvent -= EndLevel;
+
+            // Disable player input
+            PlayerController.Instance.DisableInput();
+
+            // Start end level sequence
+            StartCoroutine(EndLevelSequence());
+        }
+
+        private IEnumerator EndLevelSequence() {
+            this.levelTransitionGO.SetActive(true);
+            this.levelTransitionAnimator.Play("idle_open");
+
+            // Move player to end door
+            player.transform.localPosition = endDoor.transform.localPosition;
+
+            Color playerColor = player.GetComponent<SpriteRenderer>().color;
+
+            playerAnimator.SetBool("isMoving", true);
+
+            // Play first half of close animation
+            levelTransitionAnimator.SetTrigger("closeFirstHalf");
+            yield return new WaitForSeconds(levelTransitionAnimator.GetCurrentAnimatorStateInfo(0).length);
+
+            // Open door
+            endDoorAnimator.SetTrigger("open");
+            yield return new WaitForSeconds(1.5f);
+
+            // Fade out player
+            yield return PlayerFadeOut(playerColor);
+
+            // Close door
+            endDoorAnimator.SetTrigger("close");
+            yield return new WaitForSeconds(1.5f);
+
+            // Play second half of close animation
+            levelTransitionAnimator.SetTrigger("closeSecondHalf");
+            yield return new WaitForSeconds(levelTransitionAnimator.GetCurrentAnimatorStateInfo(0).length + 1f);
+
+            // Load next level
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+            yield return null;
         }
 
         private IEnumerator PlayerFadeIn(Color playerColor) {
@@ -109,40 +156,16 @@ namespace Shard.Gameflow
             } while (playerColor.a < 1f);
         }
 
-        private void EndLevel() {
-            // Disable robot functionality
+        private IEnumerator PlayerFadeOut(Color playerColor) {
+            do {
+                playerColor.a -= 0.08f;
 
-            // Disable player input
-            PlayerController.Instance.DisableInput();
+                player.GetComponent<SpriteRenderer>().color = playerColor;
 
-            // Start end level sequence
-            StartCoroutine(EndLevelSequence());
+                yield return null;
+
+            } while (playerColor.a > 0f);
         }
-
-        private IEnumerator EndLevelSequence() {
-            // Play first half of fade out animation
-
-            // Open end door
-            endDoorAnimator.SetTrigger("open");
-            //yield return new WaitForSeconds(endDoorAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.averageDuration);
-
-            // Walk player into door
-
-            // Fade out player
-
-            // Close end door
-            endDoorAnimator.SetTrigger("close");
-            //yield return new WaitForSeconds(endDoorAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.averageDuration);
-
-            // Play second half of fade out animation
-            levelTransitionAnimator.SetTrigger("endLevel");
-
-            // Load next level
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
-            yield return null;
-        }
-
     }
 }
 
