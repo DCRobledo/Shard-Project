@@ -62,5 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playStartAnimation: 1
-  blackPanel: {fileID: 0}
+  levelTransitionGO: {fileID: 0}
+  startDoor: {fileID: 0}
+  endDoor: {fileID: 0}
   winTrigger: {fileID: 0}
