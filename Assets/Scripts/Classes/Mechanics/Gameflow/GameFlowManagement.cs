@@ -31,8 +31,8 @@ namespace Shard.Gameflow
         private GameObject player;
         private Animator playerAnimator;
 
-        private GameObject mainCamera;
-        private CinemachineBrain cameraBrain;
+        public GameObject mainCamera;
+        public CinemachineBrain cameraBrain;
 
 
         private void Awake() {
@@ -68,10 +68,6 @@ namespace Shard.Gameflow
 
 
         private IEnumerator StartLevelSequence() {
-            // Set camera x_offset to 0
-            float cameraOffset = cameraBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneWidth;
-            cameraBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneWidth = 0f;
-
             // Move player to start door and hide it
             player.transform.localPosition = startDoor.transform.localPosition;
 
@@ -97,9 +93,6 @@ namespace Shard.Gameflow
             // Play second half opening
             yield return new WaitForSeconds(0.25f);
             levelTransitionAnimator.SetTrigger("openSecondHalf");
-
-            // Reset camera offset
-            cameraBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneWidth = cameraOffset;
 
             // Activate player input
             PlayerController.Instance.EnableInput();
@@ -157,8 +150,6 @@ namespace Shard.Gameflow
 
             // Load next level
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
-            yield return null;
         }
 
 
