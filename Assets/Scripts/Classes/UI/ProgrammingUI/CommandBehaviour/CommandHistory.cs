@@ -21,11 +21,15 @@ namespace Shard.UI.ProgrammingUI
         }
 
         private void OnEnable() {
-            InputConsole.submitCommandEvent += RecordCommand;
+            InputConsole.submitCommandEvent      += RecordCommand;
+            InputConsole.getPreviousCommandEvent += GetCommand;
+            InputConsole.getNextCommandEvent     += GetCommand;
         }
 
         private void OnDisable() {
-            InputConsole.submitCommandEvent -= RecordCommand;
+            InputConsole.submitCommandEvent      -= RecordCommand;
+            InputConsole.getPreviousCommandEvent -= GetCommand;
+            InputConsole.getNextCommandEvent     -= GetCommand;
         }
 
 
@@ -53,10 +57,10 @@ namespace Shard.UI.ProgrammingUI
             resultTextGO.GetComponent<TextMeshProUGUI>().SetText(result);
         }
 
-
-
         public string GetCommand(int index) {
-            return this.commandHistory[index];
+            if(index < 0)                           return this.commandHistory[0];
+            else if (index >= commandHistory.Count) return "";
+                                                    return this.commandHistory[index];
         }
     }
 }

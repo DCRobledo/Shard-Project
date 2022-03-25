@@ -196,6 +196,54 @@ namespace Shard.Input
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""CommandConsole"",
+            ""id"": ""2b5b6980-3122-4d1d-9acb-bd4d1c250c85"",
+            ""actions"": [
+                {
+                    ""name"": ""PreviousCommand"",
+                    ""type"": ""Button"",
+                    ""id"": ""fd2af30a-7490-4b18-a221-630b2d781312"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextCommand"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8c511d1-ffd0-4fb5-ab8b-1456ca8c640e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ddb7f732-c486-4c92-949e-917b69c1db0d"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PreviousCommand"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16b9d9f3-4d52-4104-ae7c-7a7fde18ea51"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextCommand"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -208,6 +256,10 @@ namespace Shard.Input
             m_Player_Grab = m_Player.FindAction("Grab", throwIfNotFound: true);
             m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
             m_Player_Program = m_Player.FindAction("Program", throwIfNotFound: true);
+            // CommandConsole
+            m_CommandConsole = asset.FindActionMap("CommandConsole", throwIfNotFound: true);
+            m_CommandConsole_PreviousCommand = m_CommandConsole.FindAction("PreviousCommand", throwIfNotFound: true);
+            m_CommandConsole_NextCommand = m_CommandConsole.FindAction("NextCommand", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -336,6 +388,47 @@ namespace Shard.Input
             }
         }
         public PlayerActions @Player => new PlayerActions(this);
+
+        // CommandConsole
+        private readonly InputActionMap m_CommandConsole;
+        private ICommandConsoleActions m_CommandConsoleActionsCallbackInterface;
+        private readonly InputAction m_CommandConsole_PreviousCommand;
+        private readonly InputAction m_CommandConsole_NextCommand;
+        public struct CommandConsoleActions
+        {
+            private @InputActions m_Wrapper;
+            public CommandConsoleActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @PreviousCommand => m_Wrapper.m_CommandConsole_PreviousCommand;
+            public InputAction @NextCommand => m_Wrapper.m_CommandConsole_NextCommand;
+            public InputActionMap Get() { return m_Wrapper.m_CommandConsole; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(CommandConsoleActions set) { return set.Get(); }
+            public void SetCallbacks(ICommandConsoleActions instance)
+            {
+                if (m_Wrapper.m_CommandConsoleActionsCallbackInterface != null)
+                {
+                    @PreviousCommand.started -= m_Wrapper.m_CommandConsoleActionsCallbackInterface.OnPreviousCommand;
+                    @PreviousCommand.performed -= m_Wrapper.m_CommandConsoleActionsCallbackInterface.OnPreviousCommand;
+                    @PreviousCommand.canceled -= m_Wrapper.m_CommandConsoleActionsCallbackInterface.OnPreviousCommand;
+                    @NextCommand.started -= m_Wrapper.m_CommandConsoleActionsCallbackInterface.OnNextCommand;
+                    @NextCommand.performed -= m_Wrapper.m_CommandConsoleActionsCallbackInterface.OnNextCommand;
+                    @NextCommand.canceled -= m_Wrapper.m_CommandConsoleActionsCallbackInterface.OnNextCommand;
+                }
+                m_Wrapper.m_CommandConsoleActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @PreviousCommand.started += instance.OnPreviousCommand;
+                    @PreviousCommand.performed += instance.OnPreviousCommand;
+                    @PreviousCommand.canceled += instance.OnPreviousCommand;
+                    @NextCommand.started += instance.OnNextCommand;
+                    @NextCommand.performed += instance.OnNextCommand;
+                    @NextCommand.canceled += instance.OnNextCommand;
+                }
+            }
+        }
+        public CommandConsoleActions @CommandConsole => new CommandConsoleActions(this);
         public interface IPlayerActions
         {
             void OnMovement(InputAction.CallbackContext context);
@@ -344,6 +437,11 @@ namespace Shard.Input
             void OnGrab(InputAction.CallbackContext context);
             void OnCrouch(InputAction.CallbackContext context);
             void OnProgram(InputAction.CallbackContext context);
+        }
+        public interface ICommandConsoleActions
+        {
+            void OnPreviousCommand(InputAction.CallbackContext context);
+            void OnNextCommand(InputAction.CallbackContext context);
         }
     }
 }

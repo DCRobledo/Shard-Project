@@ -1,3 +1,4 @@
+using Shard.Input;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,15 @@ namespace Shard.UI.ProgrammingUI
         public static Action <string, string>         submitCommandEvent;
         public static Action <string, string, string> generateCommandBehaviourEvent;
 
+        public static Func <int, string> getPreviousCommandEvent;
+        public static Func <int, string> getNextCommandEvent;
+
+        private int currentCommandIndex;
+        private int numOfCommands;
+
         private TMP_InputField inputField;
+
+        private InputActions inputActions;
 
 
         private void Awake() {
@@ -25,18 +34,38 @@ namespace Shard.UI.ProgrammingUI
                     EnterCommand();
                 }
             );
+
+            inputActions = new InputActions();
         }
+
+        private void OnEnable() {
+            inputActions.CommandConsole.PreviousCommand.performed += context => GetPreviousCommand();
+            inputActions.CommandConsole.NextCommand.performed     += context => GetNextCommand();
+        }
+        
+        private void OnDisable() {
+            inputActions.CommandConsole.PreviousCommand.performed -= context => GetPreviousCommand();
+            inputActions.CommandConsole.NextCommand.performed     -= context => GetNextCommand();
+        }
+
 
         public void EnterInputState() {
             enterInputStateEvent?.Invoke();
+
+            inputActions.CommandConsole.Enable();
         }
 
         public void ExitInputState() {
             exitInputStateEvent?.Invoke();
+
+            inputActions.CommandConsole.Disable();
         }
 
 
         public void EnterCommand() {
+            numOfCommands++;
+            currentCommandIndex++;
+
             inputField.text = inputField.text.Substring(0, inputField.text.Length);
 
             SubmitCommand();
@@ -63,6 +92,18 @@ namespace Shard.UI.ProgrammingUI
             // Create the command behaviour
             if(isValid)
                 generateCommandBehaviourEvent?.Invoke(commandEvent, commandTrigger, commandDelay);
+        }
+    
+        private void GetPreviousCommand() {
+            if(currentCommandIndex > 0) currentCommandIndex--;
+
+            inputField.text = getPreviousCommandEvent?.Invoke(currentCommandIndex);
+        }
+
+        private void GetNextCommand() {
+            if(currentCommandIndex < numOfCommands) currentCommandIndex++;
+
+            inputField.text = getNextCommandEvent?.Invoke(currentCommandIndex);
         }
     }
 }

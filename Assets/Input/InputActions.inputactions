@@ -172,6 +172,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "CommandConsole",
+            "id": "2b5b6980-3122-4d1d-9acb-bd4d1c250c85",
+            "actions": [
+                {
+                    "name": "PreviousCommand",
+                    "type": "Button",
+                    "id": "fd2af30a-7490-4b18-a221-630b2d781312",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NextCommand",
+                    "type": "Button",
+                    "id": "b8c511d1-ffd0-4fb5-ab8b-1456ca8c640e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ddb7f732-c486-4c92-949e-917b69c1db0d",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousCommand",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "16b9d9f3-4d52-4104-ae7c-7a7fde18ea51",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextCommand",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
