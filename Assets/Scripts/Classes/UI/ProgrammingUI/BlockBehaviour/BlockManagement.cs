@@ -78,6 +78,8 @@ namespace Shard.UI.ProgrammingUI
         }
 
         public void GenerateBlockBehaviour() {
+            StartCoroutine(BlockBehaviourSubmissionFeedback());
+
             List<GameObject> blocks = new List<GameObject>();
             int minIndex = 0;
             int maxIndex = 0;
@@ -134,6 +136,44 @@ namespace Shard.UI.ProgrammingUI
         private bool IsOutOfMemory() {
             return GetNumOfBlocks() >= maxMemory;
         }
-    }
+    
 
+        private IEnumerator BlockBehaviourSubmissionFeedback() {
+            for (int i = 1; i < this.transform.childCount + 1; i++) {
+                if (IsThereBlock(i - 1)) {
+                    GameObject block = GetBlock(i - 1);
+                    
+                    StartCoroutine(PopUpBlock(block, 0.008f));
+
+                    yield return new WaitForSeconds(0.1f);
+                } 
+            }
+        }
+
+        private IEnumerator PopUpBlock(GameObject block, float rate) {
+            yield return AnimateBlockScale(block, rate, 1.1f);
+            yield return AnimateBlockScale(block, rate, 0.9f);
+            yield return AnimateBlockScale(block, rate, 1f);
+
+            Vector3 blockScale = block.GetComponent<RectTransform>().localScale;
+            blockScale.x = 1f; blockScale.y = 1f; blockScale.z = 1f;
+            block.GetComponent<RectTransform>().localScale = blockScale; 
+        }
+
+        private IEnumerator AnimateBlockScale(GameObject block,float rate, float targetScale) {
+            Vector3 blockScale = block.GetComponent<RectTransform>().localScale;
+            int scaleModifierSign = blockScale.x < targetScale ? 1 : -1;
+
+            do {
+                blockScale.x += rate * scaleModifierSign;
+                blockScale.y += rate * scaleModifierSign;
+                blockScale.z += rate * scaleModifierSign;
+
+                block.GetComponent<RectTransform>().localScale = blockScale;
+
+                yield return null;
+
+            } while (blockScale.x < targetScale * scaleModifierSign);
+        }
+    }
 }
