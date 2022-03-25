@@ -1,19 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Shard.Controllers;
 
 namespace Shard.Entities
 {
     public class RobotMovement : EntityMovement
     {
         public override void Move() { 
-            float x = isFacingRight ? 1 : -1;
+            if (RobotController.Instance.IsRobotOn())
+            {
+                float x = isFacingRight ? 1 : -1;
 
-            Move(x, rigidBody.velocity.y);
+                Move(x, rigidBody.velocity.y);
+            }
         }
 
         public override void Jump()  {
-            Jump(true);
+            if (RobotController.Instance.IsRobotOn())
+                Jump(true);
         } 
     }
 }

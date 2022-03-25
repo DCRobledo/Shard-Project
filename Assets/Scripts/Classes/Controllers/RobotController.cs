@@ -28,6 +28,8 @@ namespace Shard.Controllers
         private Coroutine blockBehaviourExecution;
 
         private CommandBehaviour commandBehaviour;
+
+        private bool isRobotOn = false;
         
 
         private void Awake() {
@@ -167,6 +169,8 @@ namespace Shard.Controllers
 
     
         public void TurnOn() {
+            isRobotOn = true;
+
             StartCoroutine(TurnOnCoroutine());
         }
 
@@ -182,9 +186,14 @@ namespace Shard.Controllers
         }
 
         public void TurnOff() {
+            isRobotOn = false;
+
             if(blockBehaviourExecution != null)
                 StopCoroutine(blockBehaviourExecution);
         }
+
+
+        public bool IsRobotOn() { return this.isRobotOn; }
     }
 }
 
