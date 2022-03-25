@@ -13815,9 +13815,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1681444269}
     - target: {fileID: 2044979010, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
+      propertyPath: playEndSequence
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2044979010, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
       propertyPath: levelTransitionGO
       value: 
       objectReference: {fileID: 1697090949}
+    - target: {fileID: 2044979010, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
+      propertyPath: playStartSequence
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 593879061630449544, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
       propertyPath: checkpoints
       value: 
@@ -14290,6 +14298,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7067749871954507190, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067749872312782829, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7462215039972224530, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}

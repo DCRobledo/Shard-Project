@@ -19,8 +19,13 @@ namespace Shard.UI.ProgrammingUI
 
         private void Awake() {
             inputField = this.GetComponent<TMP_InputField>();
-        }
 
+            inputField.onSubmit.AddListener( 
+                (string input) => {
+                    EnterCommand();
+                }
+            );
+        }
 
         public void EnterInputState() {
             enterInputStateEvent?.Invoke();
@@ -32,16 +37,14 @@ namespace Shard.UI.ProgrammingUI
 
 
         public void EnterCommand() {
-            if (inputField.text.EndsWith(';')) {
-                inputField.text = inputField.text.Substring(0, inputField.text.Length - 1);
+            inputField.text = inputField.text.Substring(0, inputField.text.Length);
 
-                SubmitCommand();
+            SubmitCommand();
 
-                inputField.text = "";
+            inputField.text = "";
 
-                inputField.ActivateInputField();
-                inputField.Select();
-            } 
+            inputField.ActivateInputField();
+            inputField.Select();
         }  
 
         private void SubmitCommand() {   
