@@ -47,7 +47,7 @@ namespace Shard.Entities
             this.rigidBody = this.GetComponent<Rigidbody2D>();
             this.boxCollider2D =  this.GetComponent<BoxCollider2D>();
 
-            isFacingRight = this.transform.localScale.x >= 0f;
+            
         }
 
         private void FixedUpdate() {
@@ -58,7 +58,6 @@ namespace Shard.Entities
                 rigidBody.velocity += Vector2.up * jumpForce;
             }
                 
-
             // Check for landing
             if (isFalling && IsGrounded()) {
                 landTrigger?.Invoke();
@@ -67,6 +66,8 @@ namespace Shard.Entities
             }
                         
             ApplyGravity(this.fallMultiplier, this.lowJumpMultiplier);
+
+            isFacingRight = this.transform.localScale.x >= 0f; 
         }
 
 

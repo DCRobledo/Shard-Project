@@ -30,6 +30,7 @@ namespace Shard.Controllers
         private CommandBehaviour commandBehaviour;
 
         private bool isRobotOn = false;
+        public bool isRobotGrabbed = false;
         
 
         private void Awake() {
@@ -194,6 +195,8 @@ namespace Shard.Controllers
 
 
         public bool IsRobotOn() { return this.isRobotOn; }
+        public bool IsRobotGrabbed() { return this.isRobotGrabbed; }
+        public void ToggleIsRobotGrabbed() { this.isRobotGrabbed = !this.isRobotGrabbed; }
     }
 }
 

@@ -1,6 +1,7 @@
 using Shard.Gameflow;
 using Shard.Lib.Custom;
 using Shard.Enums;
+using Shard.Controllers;
 using System;
 using System.Linq;
 using System.Collections;
@@ -70,6 +71,10 @@ namespace Shard.Entities
             // Grab the nearest object if we are not grabbing anything else
             if(grabbableObjects.Count > 0)
             {
+                // Tell the robot that it is being grabbed
+                if(grabbableObjects[0]?.tag == "Robot")
+                    RobotController.Instance.ToggleIsRobotGrabbed();
+
                 grabJoint.connectedBody = grabJoint.connectedBody == null ? grabbableObjects[0].GetComponent<Rigidbody2D>() : null;
                 grabJoint.enabled = grabJoint.connectedBody != null;
 
