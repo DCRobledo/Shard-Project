@@ -2680,23 +2680,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &731487232 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 815307389, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
-  m_PrefabInstance: {fileID: 7067749870706978594}
-  m_PrefabAsset: {fileID: 0}
---- !u!225 &731487236
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 731487232}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &770234676
 GameObject:
   m_ObjectHideFlags: 0
@@ -9455,34 +9438,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 433936477}
     m_Modifications:
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: grabTrigger.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: grabTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: grabTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 515211191}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: grabTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: grabTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ToggleIsRobotGrabbed
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: grabTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Shard.Controllers.RobotController, Scripts
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: grabTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 8710090841162840075, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -13868,17 +13823,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1681444269}
     - target: {fileID: 2044979010, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
-      propertyPath: playEndSequence
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2044979010, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
       propertyPath: levelTransitionGO
       value: 
       objectReference: {fileID: 1697090949}
-    - target: {fileID: 2044979010, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
-      propertyPath: playStartSequence
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 593879061630449544, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
       propertyPath: checkpoints
       value: 
@@ -14351,10 +14298,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7067749871954507190, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7067749872312782829, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
-      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7462215039972224530, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
