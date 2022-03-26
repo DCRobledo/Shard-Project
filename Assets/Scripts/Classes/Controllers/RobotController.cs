@@ -194,9 +194,21 @@ namespace Shard.Controllers
         }
 
 
+        public void ToggleIsRobotGrabbed() {
+            // Update control variable
+            this.isRobotGrabbed = !this.isRobotGrabbed;
+
+            // Update boxcollider2D
+            robot.GetComponent<BoxCollider2D>().enabled = !isRobotGrabbed;
+
+            // Update rigidbody2D gravity scale
+            float gravityScale = robot.GetComponent<Rigidbody2D>().gravityScale;
+            gravityScale = isRobotGrabbed ? gravityScale / 2f : gravityScale * 2f;
+            robot.GetComponent<Rigidbody2D>().gravityScale = gravityScale; 
+        }
+
         public bool IsRobotOn() { return this.isRobotOn; }
         public bool IsRobotGrabbed() { return this.isRobotGrabbed; }
-        public void ToggleIsRobotGrabbed() { this.isRobotGrabbed = !this.isRobotGrabbed; }
     }
 }
 

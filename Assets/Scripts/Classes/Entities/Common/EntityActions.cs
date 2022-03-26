@@ -68,18 +68,30 @@ namespace Shard.Entities
 
         public void Grab() 
         {
-            // Grab the nearest object if we are not grabbing anything else
-            if(grabbableObjects.Count > 0)
-            {
-                // Tell the robot that it is being grabbed
-                if(grabbableObjects[0]?.tag == "Robot")
+            // If we are grabbing, we release the object
+            if(grabJoint.connectedBody != null) {
+                // Tell the robot that it is no longer being grabbed
+                if(grabJoint.connectedBody.tag == "Robot")
                     RobotController.Instance.ToggleIsRobotGrabbed();
 
-                grabJoint.connectedBody = grabJoint.connectedBody == null ? grabbableObjects[0].GetComponent<Rigidbody2D>() : null;
-                grabJoint.enabled = grabJoint.connectedBody != null;
-
-                grabTrigger?.Invoke();
+                grabJoint.connectedBody = null;
+                grabJoint.enabled = false;
             }
+
+            else {
+                // Grab the nearest object if we are not grabbing anything else
+                if(grabbableObjects.Count > 0)
+                {
+                    // Tell the robot that it is being grabbed
+                    if(grabbableObjects[0]?.tag == "Robot")
+                        RobotController.Instance.ToggleIsRobotGrabbed();
+
+                    grabJoint.connectedBody = grabbableObjects[0].GetComponent<Rigidbody2D>();
+                    grabJoint.enabled = true;
+                }
+            }
+
+            grabTrigger?.Invoke();
         }
 
         private List<GameObject> CheckGrabbableObjects() 
