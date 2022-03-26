@@ -107,7 +107,6 @@ namespace Shard.Gameflow
             this.levelTransitionGO.SetActive(false);
         }
 
-
         private void EndLevel() {
             // Prevent multiple event triggering
             WinTrigger.endLevelEvent -= EndLevel;

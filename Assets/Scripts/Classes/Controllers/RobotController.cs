@@ -30,7 +30,7 @@ namespace Shard.Controllers
         private CommandBehaviour commandBehaviour;
 
         private bool isRobotOn = false;
-        public bool isRobotGrabbed = false;
+        private bool isRobotGrabbed = false;
         
 
         private void Awake() {

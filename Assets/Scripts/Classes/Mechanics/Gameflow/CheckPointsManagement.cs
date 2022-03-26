@@ -56,8 +56,6 @@ namespace Shard.Gameflow
         private void UpdateCheckpoint(string entityTag, Vector3 checkpoint) {
             try
             {
-                Debug.Log("Checkpoint " + entityTag);
-
                 EntityEnum.Entity entity = (EntityEnum.Entity) System.Enum.Parse(typeof(EntityEnum.Entity), entityTag.ToUpper());
 
                 checkpointRecord[entity] = checkpoint;
@@ -67,8 +65,6 @@ namespace Shard.Gameflow
 
         private void ReturnToLastCheckpoint(string entityTag) {
             try {
-                Debug.Log("DeathTrigger " + entityTag);
-
                 EntityEnum.Entity entity = (EntityEnum.Entity) System.Enum.Parse(typeof(EntityEnum.Entity), entityTag.ToUpper());
 
                 switch (entity) {
