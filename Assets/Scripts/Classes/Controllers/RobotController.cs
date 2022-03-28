@@ -31,6 +31,11 @@ namespace Shard.Controllers
 
         private bool isRobotOn = false;
         private bool isRobotGrabbed = false;
+
+        public static Action turnOnTrigger;
+
+        public delegate void Hola();
+        public Hola commandEvent;
         
 
         private void Awake() {
@@ -138,9 +143,9 @@ namespace Shard.Controllers
 
         private void LinkCommandEvent() {
             switch(commandBehaviour.GetCommandEventAction()) {
-                case EntityEnum.Action.JUMP: CommandBehaviour.commandEvent += jumpCommand.Execute; break;
-                case EntityEnum.Action.MOVE: CommandBehaviour.commandEvent += moveCommand.Execute; break;
-                case EntityEnum.Action.FLIP: CommandBehaviour.commandEvent += flipCommand.Execute; break;
+                case EntityEnum.Action.JUMP:     CommandBehaviour.commandEvent += jumpCommand.Execute; break;
+                case EntityEnum.Action.MOVE:     CommandBehaviour.commandEvent += moveCommand.Execute; break;
+                case EntityEnum.Action.FLIP:     CommandBehaviour.commandEvent += flipCommand.Execute; break;
             }
         }
 
@@ -166,9 +171,12 @@ namespace Shard.Controllers
 
         private void LinkCommandTriggerToRobot() {
             switch(commandBehaviour.GetCommandTriggerAction()) {
-                case EntityEnum.Action.JUMP: break;
-                case EntityEnum.Action.MOVE: RobotMovement.moveTrigger += CommandBehaviour.commandTrigger.Invoke; break;
-                case EntityEnum.Action.FLIP: RobotMovement.flipTrigger += CommandBehaviour.commandTrigger.Invoke;break;
+                case EntityEnum.Action.JUMP:    robotMovement.SubscribeToJumpTrigger(CommandBehaviour.commandTrigger); break;
+
+                case EntityEnum.Action.MOVE:    RobotMovement.moveTrigger     += CommandBehaviour.commandTrigger.Invoke; break;
+                case EntityEnum.Action.FLIP:    RobotMovement.flipTrigger     += CommandBehaviour.commandTrigger.Invoke; break;
+
+                case EntityEnum.Action.TURN_ON: RobotController.turnOnTrigger += CommandBehaviour.commandTrigger.Invoke; break;
             }
         }
 
@@ -178,9 +186,13 @@ namespace Shard.Controllers
 
     
         public void TurnOn() {
-            isRobotOn = true;
+            if(!isRobotOn) {
+                isRobotOn = true;
 
-            StartCoroutine(TurnOnCoroutine());
+                turnOnTrigger?.Invoke();
+
+                StartCoroutine(TurnOnCoroutine());
+            }
         }
 
         private IEnumerator TurnOnCoroutine() {
@@ -195,10 +207,12 @@ namespace Shard.Controllers
         }
 
         public void TurnOff() {
-            isRobotOn = false;
+            if(isRobotOn) {
+                isRobotOn = false;
 
-            if(blockBehaviourExecution != null)
-                StopCoroutine(blockBehaviourExecution);
+                if(blockBehaviourExecution != null)
+                    StopCoroutine(blockBehaviourExecution);
+            }
         }
 
 

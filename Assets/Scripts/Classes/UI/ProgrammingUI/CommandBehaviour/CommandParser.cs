@@ -9,7 +9,7 @@ namespace Shard.UI.ProgrammingUI
         private static string[] possibleEvents = {
             "jump",
             "move",
-            "flip"
+            "flip",
         };
 
         private static string[] possibleTriggers = {

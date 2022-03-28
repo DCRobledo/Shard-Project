@@ -17,7 +17,9 @@ namespace Shard.Enums
             GRAB,
             DROP,
             THROW,
-            CLAP
+            CLAP,
+            TURN_ON,
+            TURN_OFF
         }
     }
 }

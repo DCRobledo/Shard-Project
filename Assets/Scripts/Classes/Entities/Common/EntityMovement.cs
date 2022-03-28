@@ -1,4 +1,5 @@
 using Shard.Lib.Custom;
+using Shard.Controllers;
 using System.Collections;
 using System;
 using UnityEngine;
@@ -133,6 +134,10 @@ namespace Shard.Entities
     
         public Vector2 GetVelocity() {
             return this.rigidBody.velocity;
+        }
+
+        public void SubscribeToJumpTrigger(Action commandEvent) {
+            jumpTrigger.AddListener(commandEvent.Invoke);
         }
     }
 }
