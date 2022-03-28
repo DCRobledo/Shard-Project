@@ -17,11 +17,17 @@ namespace Shard.Entities
         private void OnEnable() {
             PlayerController.stopTrigger += UnsetIsMoving;
             PlayerController.moveTrigger += SetIsMoving;
+
+            PlayerActions.grabTrigger += SetGrabTrigger;
+            PlayerActions.dropTrigger += SetGrabTrigger;
         }
 
         private void OnDisable() {
             PlayerController.stopTrigger -= UnsetIsMoving;
             PlayerController.moveTrigger -= SetIsMoving;
+
+            PlayerActions.grabTrigger -= SetGrabTrigger;
+            PlayerActions.dropTrigger -= SetGrabTrigger;
         }
 
 

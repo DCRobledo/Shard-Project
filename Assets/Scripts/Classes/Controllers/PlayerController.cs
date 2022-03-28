@@ -37,8 +37,6 @@ namespace Shard.Controllers
         public static Action stopTrigger;
         public static Action moveTrigger;
         public static Action jumpTrigger;
-        public static Action flipTrigger;
-        public static Action crouchTrigger;
 
 
         private void Awake() {
@@ -84,7 +82,6 @@ namespace Shard.Controllers
             // Subscribe enabling and disabling to input console state management
             InputConsole.enterInputStateEvent += DisableInput;
             InputConsole.exitInputStateEvent += EnableInput;
-
             
             if(selfControlled) EnableInput();
             EnableTriggers();
@@ -132,13 +129,8 @@ namespace Shard.Controllers
                 case EntityEnum.Action.STOP:   stopTrigger?.Invoke();  break;
                 case EntityEnum.Action.MOVE:   moveTrigger?.Invoke();  break;
                 case EntityEnum.Action.JUMP:   jumpTrigger?.Invoke();  break;
-                case EntityEnum.Action.FLIP:   flipTrigger?.Invoke();  break;
-                case EntityEnum.Action.CROUCH: crouchTrigger?.Invoke(); break;
             }
         }
-
-        public void InvokeFlipTrigger()   { InvokeTrigger(EntityEnum.Action.FLIP);   }
-        public void InvokeCrouchTrigger() { InvokeTrigger(EntityEnum.Action.CROUCH); }
 
         private void MovePlayer(Vector2 direction) {
             object[] parameters = {direction.x, direction.y};

@@ -26,12 +26,6 @@ namespace Shard.Entities
         
         protected RelativeJoint2D grabJoint;
 
-        [SerializeField]
-        protected UnityEvent grabTrigger;
-
-        [SerializeField]
-        protected UnityEvent dropTrigger;
-
 
         protected virtual void Awake() {
             grabJoint = this.GetComponent<RelativeJoint2D>();
@@ -63,13 +57,11 @@ namespace Shard.Entities
             {
                 case EntityEnum.Action.RECALL:     ReCall(); break;
                 case EntityEnum.Action.GRAB:       Grab();   break;
-                case EntityEnum.Action.RELEASE:    Grab();   break;
-                case EntityEnum.Action.THROW:                break;
-                case EntityEnum.Action.CLAP:                 break;
+                case EntityEnum.Action.DROP:    Grab();   break;
             }
         }
 
-        public void Grab() 
+        public virtual void Grab() 
         {
             // If we are grabbing, we release the object
             if(grabJoint.connectedBody != null) {
@@ -79,8 +71,6 @@ namespace Shard.Entities
 
                 grabJoint.connectedBody = null;
                 grabJoint.enabled = false;
-
-                dropTrigger?.Invoke();
             }
 
             else {
@@ -94,8 +84,6 @@ namespace Shard.Entities
                     grabJoint.connectedBody = grabbableObjects[0].GetComponent<Rigidbody2D>();
                     grabJoint.enabled = true;
                 }
-
-                grabTrigger?.Invoke();
             }
         }
 

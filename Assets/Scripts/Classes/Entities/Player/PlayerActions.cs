@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Shard.Entities
@@ -13,6 +13,9 @@ namespace Shard.Entities
         private GameObject objectToReCall;
 
         private bool canReCall = true;
+
+        public static Action grabTrigger;
+        public static Action dropTrigger;
 
 
         protected override void Awake() {
@@ -42,6 +45,13 @@ namespace Shard.Entities
             yield return new WaitForSeconds(seconds);
 
             canReCall = true;
+        }
+    
+        public override void Grab() {
+             if(grabJoint.connectedBody != null) dropTrigger?.Invoke();
+             else if(grabbableObjects.Count > 0) grabTrigger?.Invoke();
+
+             base.Grab();
         }
     }
 }

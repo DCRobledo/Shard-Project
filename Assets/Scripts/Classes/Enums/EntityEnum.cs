@@ -15,7 +15,7 @@ namespace Shard.Enums
             STOP,
             RECALL,
             GRAB,
-            RELEASE,
+            DROP,
             THROW,
             CLAP
         }
