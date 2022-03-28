@@ -18,7 +18,8 @@ namespace Shard.Enums
             GROUND,
             VOID,
             SPIKE,
-            BOX
+            BOX,
+            LILY
         }
 
         public enum ConditionalState {
