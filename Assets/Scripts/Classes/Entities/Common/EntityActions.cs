@@ -29,6 +29,9 @@ namespace Shard.Entities
         [SerializeField]
         protected UnityEvent grabTrigger;
 
+        [SerializeField]
+        protected UnityEvent dropTrigger;
+
 
         protected virtual void Awake() {
             grabJoint = this.GetComponent<RelativeJoint2D>();
@@ -76,6 +79,8 @@ namespace Shard.Entities
 
                 grabJoint.connectedBody = null;
                 grabJoint.enabled = false;
+
+                dropTrigger?.Invoke();
             }
 
             else {
@@ -89,9 +94,9 @@ namespace Shard.Entities
                     grabJoint.connectedBody = grabbableObjects[0].GetComponent<Rigidbody2D>();
                     grabJoint.enabled = true;
                 }
-            }
 
-            grabTrigger?.Invoke();
+                grabTrigger?.Invoke();
+            }
         }
 
         private List<GameObject> CheckGrabbableObjects() 

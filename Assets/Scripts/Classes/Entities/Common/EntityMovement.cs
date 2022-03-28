@@ -34,6 +34,12 @@ namespace Shard.Entities
         protected bool isFalling = false;
         protected bool shouldCheckGround = true;
         protected bool isFacingRight = true;
+        
+        [SerializeField]
+        protected UnityEvent flipTrigger;
+
+        [SerializeField]
+        protected UnityEvent crouchTrigger;
 
         [SerializeField]
         protected UnityEvent jumpTrigger;
@@ -46,8 +52,6 @@ namespace Shard.Entities
         {
             this.rigidBody = this.GetComponent<Rigidbody2D>();
             this.boxCollider2D =  this.GetComponent<BoxCollider2D>();
-
-            
         }
 
         private void FixedUpdate() {
@@ -90,7 +94,8 @@ namespace Shard.Entities
         }
 
 
-        public void Flip() {
+        public virtual void Flip() {
+            Debug.Log("parent");
             // Flip the entity
             GameObject entity = this.gameObject;
             TransformUtils.FlipObject(ref entity);
@@ -102,6 +107,9 @@ namespace Shard.Entities
             // Flip the grabbed entity if it exists
             GameObject grabbedEntity = this.GetComponent<RelativeJoint2D>().connectedBody?.gameObject;
             if(grabbedEntity != null) TransformUtils.FlipObject(ref grabbedEntity);
+
+            // Invoke the event
+            flipTrigger?.Invoke();
         }
 
         private void ApplyGravity(float fallMultiplier, float lowJumpMultiplier) {
@@ -124,13 +132,16 @@ namespace Shard.Entities
         }
 
         public void Crouch(bool crouch) {
-            // Modify player's y scale
+            // Modify y scale
             Vector3 scale = this.transform.localScale;
             scale.y = crouch ? scale.y - crouchFactor * .1f : scale.y + crouchFactor * .1f;
             this.transform.localScale = scale;
 
             // And movement speed
             speed = crouch ? speed - crouchFactor : speed + crouchFactor;
+
+            // Invoke event
+            if (crouch) crouchTrigger?.Invoke();
         }
     
         public Vector2 GetVelocity() {

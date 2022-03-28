@@ -9438,6 +9438,62 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 433936477}
     m_Modifications:
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: flipTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: crouchTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: flipTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: crouchTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: flipTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2126256955}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: crouchTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2126256955}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: flipTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: flipTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InvokeFlipTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: crouchTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: crouchTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InvokeCrouchTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: flipTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Shard.Controllers.PlayerController, Scripts
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: crouchTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Shard.Controllers.PlayerController, Scripts
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: flipTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: crouchTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8710090841162840075, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -13348,6 +13404,17 @@ Transform:
   m_Father: {fileID: 502589380}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2126256955 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1448907132188752844, guid: f3b4f373f8c94e644a1e2e6ab0735061, type: 3}
+  m_PrefabInstance: {fileID: 1448907133405386952}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1511753348f506b4e8b95ce616d097f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &287445423546781731
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -31,6 +31,8 @@ namespace Shard.Controllers
 
         private bool isRobotOn = false;
         private bool isRobotGrabbed = false;
+
+        public static Action turnOnEvent;
         
 
         private void Awake() {
@@ -152,8 +154,10 @@ namespace Shard.Controllers
 
         private void LinkCommandTriggerToPlayer() {
             switch(commandBehaviour.GetCommandTriggerAction()) {
-                case EntityEnum.Action.JUMP: PlayerController.jumpTrigger += CommandBehaviour.commandTrigger.Invoke; break;
-                case EntityEnum.Action.MOVE: PlayerController.moveTrigger += CommandBehaviour.commandTrigger.Invoke; break;
+                case EntityEnum.Action.JUMP:   PlayerController.jumpTrigger   += CommandBehaviour.commandTrigger.Invoke; break;
+                case EntityEnum.Action.MOVE:   PlayerController.moveTrigger   += CommandBehaviour.commandTrigger.Invoke; break;
+                case EntityEnum.Action.FLIP:   PlayerController.flipTrigger   += CommandBehaviour.commandTrigger.Invoke; break;
+                case EntityEnum.Action.CROUCH: PlayerController.crouchTrigger += CommandBehaviour.commandTrigger.Invoke; break;
             }
         }
 

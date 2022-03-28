@@ -7,6 +7,10 @@ namespace Shard.Entities
 {
     public class PlayerMovement : EntityMovement
     {
-        
+        public override void Flip() {
+            base.Flip();
+
+            Debug.Log("child");
+        }
     }
 }
