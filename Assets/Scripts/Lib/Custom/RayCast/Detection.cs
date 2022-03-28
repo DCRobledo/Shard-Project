@@ -73,7 +73,7 @@ namespace Shard.Lib.Custom
             return isGrounded;
         }
 
-        public static string DetectObject(BoxCollider2D boxCollider2D, LayerMask layerMask, Direction direction, float offset) {
+        public static string DetectObject(BoxCollider2D boxCollider2D, LayerMask layerMask, Direction direction, float offset, string defaultResult = null) {
             float xDirection = direction == Direction.RIGHT ? 1f : (direction == Direction.LEFT ? -1f : 0f);
             float yDirection = direction == Direction.UP ? 1f : (direction == Direction.DOWN ? -1f : 0f);
 
@@ -89,7 +89,7 @@ namespace Shard.Lib.Custom
                 layerMask
             );      
 
-            return rayCastHit.collider != null ? rayCastHit.collider.transform.tag : null;
+            return rayCastHit.collider != null ? rayCastHit.collider.transform.tag : defaultResult;
         }  
     }
 }
