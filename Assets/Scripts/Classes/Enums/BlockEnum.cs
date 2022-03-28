@@ -19,7 +19,8 @@ namespace Shard.Enums
             VOID,
             SPIKE,
             BOX,
-            LILY
+            LILY,
+            PLAYER
         }
 
         public enum ConditionalState {

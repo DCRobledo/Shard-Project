@@ -136,7 +136,8 @@ namespace Shard.UI.ProgrammingUI
 
         public void SetElement(int element)
         {
-            this.element = (BlockEnum.ConditionalElement) element;
+            BlockEnum.ConditionalElement conditionalElement = (BlockEnum.ConditionalElement) element;
+            this.element = conditionalElement == BlockEnum.ConditionalElement.LILY ? BlockEnum.ConditionalElement.PLAYER : conditionalElement;
         }
 
         public BlockEnum.ConditionalState GetState()
