@@ -31,8 +31,6 @@ namespace Shard.Controllers
 
         private bool isRobotOn = false;
         private bool isRobotGrabbed = false;
-
-        public static Action turnOnEvent;
         
 
         private void Awake() {
@@ -142,6 +140,7 @@ namespace Shard.Controllers
             switch(commandBehaviour.GetCommandEventAction()) {
                 case EntityEnum.Action.JUMP: CommandBehaviour.commandEvent += jumpCommand.Execute; break;
                 case EntityEnum.Action.MOVE: CommandBehaviour.commandEvent += moveCommand.Execute; break;
+                case EntityEnum.Action.FLIP: CommandBehaviour.commandEvent += flipCommand.Execute; break;
             }
         }
 
@@ -168,7 +167,8 @@ namespace Shard.Controllers
         private void LinkCommandTriggerToRobot() {
             switch(commandBehaviour.GetCommandTriggerAction()) {
                 case EntityEnum.Action.JUMP: break;
-                case EntityEnum.Action.MOVE: break;
+                case EntityEnum.Action.MOVE: RobotMovement.moveTrigger += CommandBehaviour.commandTrigger.Invoke; break;
+                case EntityEnum.Action.FLIP: RobotMovement.flipTrigger += CommandBehaviour.commandTrigger.Invoke;break;
             }
         }
 

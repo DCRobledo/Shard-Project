@@ -42,11 +42,16 @@ namespace Shard.UI.ProgrammingUI
 
         private void SetCommandTrigger(string commandTrigger) {
             string[] split = commandTrigger.Split('_');
-            string commandTriggerInvoker = split[0];
-            string commandTriggerAction = split[1];
 
-            this.commandTriggerInvoker = (CommandEnum.TriggerInvoker) System.Enum.Parse(typeof(CommandEnum.TriggerInvoker), commandTriggerInvoker);
-            this.commandTriggerAction = (EntityEnum.Action) System.Enum.Parse(typeof(EntityEnum.Action), commandTriggerAction);
+            this.commandTriggerInvoker =
+                split.Length > 1 ?
+                    (CommandEnum.TriggerInvoker) System.Enum.Parse(typeof(CommandEnum.TriggerInvoker), split[0]) :
+                    CommandEnum.TriggerInvoker.ROBOT;
+
+            this.commandTriggerAction =
+                split.Length > 1 ?
+                    (EntityEnum.Action) System.Enum.Parse(typeof(EntityEnum.Action), split[1]) :
+                    (EntityEnum.Action) System.Enum.Parse(typeof(EntityEnum.Action), commandTrigger);
         }
 
         private void SetCommandDelay(string commandDelay) {

@@ -20,9 +20,11 @@ namespace Shard.UI.ProgrammingUI
             "lily_grab",
             "lily_drop",
 
-            "robot_jump",
-            "robot_move",
-            "robot_flip",
+            "jump",
+            "move",
+            "flip",
+
+            "turn_on"
         };
 
 
