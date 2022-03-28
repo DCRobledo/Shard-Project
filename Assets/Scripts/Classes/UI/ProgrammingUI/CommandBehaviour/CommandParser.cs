@@ -101,7 +101,7 @@ namespace Shard.UI.ProgrammingUI
         }
 
         private static bool ParseDelay(string commandDelay, out string result) {
-            bool parseOk = int.TryParse(commandDelay, out _);
+            bool parseOk = float.TryParse(commandDelay.Replace(',', '.'), out _);
 
             result = parseOk ? "" : "ERROR: The delay element is not a number";
 

@@ -14335,6 +14335,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7067749870668953152, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
+      propertyPath: m_Padding.m_Left
+      value: 35
+      objectReference: {fileID: 0}
     - target: {fileID: 7067749871323266427, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
