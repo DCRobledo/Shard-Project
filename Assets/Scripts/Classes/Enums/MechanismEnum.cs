@@ -6,5 +6,10 @@ namespace Shard.Enums
             OPEN,
             CLOSE
         }
+
+        public enum ButtonType {
+            PRESS,
+            PRESS_RELEASE
+        }
     }
 }

@@ -90,6 +90,27 @@ namespace Shard.Lib.Custom
             );      
 
             return rayCastHit.collider != null ? rayCastHit.collider.transform.tag : defaultResult;
+        }
+
+        public static List<string> DetectObjects(BoxCollider2D boxCollider2D, LayerMask layerMask, float offset) {
+            List<string> detectedObjects = new List<string>();
+
+            RaycastHit2D[] rayCastHits = 
+            Physics2D.BoxCastAll(
+                boxCollider2D.bounds.center,
+                boxCollider2D.bounds.size,
+                0f,
+                Vector2.down,
+                offset,
+                layerMask
+            );
+
+            if(rayCastHits.Length == 0) return null;
+
+            foreach (RaycastHit2D raycastHit in rayCastHits)
+                detectedObjects.Add(raycastHit.collider.tag);
+
+            return detectedObjects;    
         }  
     }
 }

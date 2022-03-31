@@ -15,42 +15,55 @@ namespace Shard.Mechanisms
         [SerializeField]
         private float movingDistance = 2f;
 
-        private Vector3 originalPosition;
-
         private bool isOpen;
 
         [SerializeField]
         private List<GameObject> openingButtons;
+        [SerializeField]
+        private List<GameObject> closingButtons;
+        [SerializeField]
+        private List<GameObject> toggleButtons;
 
 
         private void Awake() {
             isOpen = initialState == MechanismEnum.DoorState.OPEN;
-
-            originalPosition = this.transform.localPosition; 
         }
 
         private void OnEnable() {
             foreach (GameObject button in openingButtons)
-                button.GetComponent<Button>().buttonPressEvent += Open;
+                button.GetComponent<Button>().buttonEvent += Open;
+
+            foreach (GameObject button in closingButtons)
+                button.GetComponent<Button>().buttonEvent += Close;
+
+            foreach (GameObject button in toggleButtons)
+                button.GetComponent<Button>().buttonEvent += Toggle;
         }
 
         private void OnDisable() {
             foreach (GameObject button in openingButtons)
-                button.GetComponent<Button>().buttonPressEvent -= Open;
+                button.GetComponent<Button>().buttonEvent -= Open;
+
+            foreach (GameObject button in closingButtons)
+                button.GetComponent<Button>().buttonEvent -= Close;
+            
+            foreach (GameObject button in toggleButtons)
+                button.GetComponent<Button>().buttonEvent += Toggle;
         }
 
 
         public void Open() { if(!isOpen) StartCoroutine(OpenAnimation()); }
 
         private IEnumerator OpenAnimation() {
-            Vector3 doorPosition = this.transform.localPosition;
+            Vector3 startingPosition = this.transform.localPosition;
+            Vector3 doorPosition = startingPosition;
 
             do {
                 doorPosition.y += movingSpeed;
                 this.transform.localPosition = doorPosition;
 
                 yield return null;
-            } while (doorPosition.y < originalPosition.y + movingDistance);
+            } while (doorPosition.y < startingPosition.y + movingDistance);
 
             isOpen = true;
         }
@@ -58,17 +71,20 @@ namespace Shard.Mechanisms
         public void Close() { if(isOpen) StartCoroutine(CloseAnimation()); }
 
         private IEnumerator CloseAnimation() {
-            Vector3 doorPosition = this.transform.localPosition;
+            Vector3 startingPosition = this.transform.localPosition;
+            Vector3 doorPosition = startingPosition;
 
             do {
                 doorPosition.y -= movingSpeed;
                 this.transform.localPosition = doorPosition;
 
                 yield return null;
-            } while (doorPosition.y > originalPosition.y);
+            } while (doorPosition.y > startingPosition.y - movingDistance);
 
             isOpen = false;
         }
+    
+        public void Toggle() { if(!isOpen) StartCoroutine(OpenAnimation()); else StartCoroutine(CloseAnimation()); }
     }
 }
 

@@ -2744,6 +2744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1110b99febc5fe940b2a6e6af60dbc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonType: 1
   canBePressedBy:
   - Player
   - Robot
@@ -10960,7 +10961,9 @@ MonoBehaviour:
   initialState: 1
   movingSpeed: 0.1
   movingDistance: 2
-  openingButtons:
+  openingButtons: []
+  closingButtons: []
+  toggleButtons:
   - {fileID: 762053373}
 --- !u!61 &1669056648
 BoxCollider2D:
