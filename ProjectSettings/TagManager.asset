@@ -12,6 +12,8 @@ TagManager:
   - Ground
   - Checkpoint
   - Death Trigger
+  - Button
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -26,7 +28,7 @@ TagManager:
   - Robot
   - Checkpoints
   - Death Triggers
-  - 
+  - Mechanisms
   - 
   - 
   - 
