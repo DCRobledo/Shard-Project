@@ -20,8 +20,8 @@ namespace Shard.Mechanisms
 
         public Action buttonEvent;
 
-        public GameObject pressingEntity;
-        private bool shouldCheckForRelease = false;
+        private GameObject pressingEntity;
+        public bool shouldCheckForRelease = false;
 
 
         private void OnTriggerEnter2D(Collider2D other) {
@@ -42,8 +42,8 @@ namespace Shard.Mechanisms
 
 
         private void CheckForRelease() {
-            Debug.Log(Detection.DetectObject(GetComponent<BoxCollider2D>(), LayerMask.GetMask("Player"), Detection.Direction.UP, 2f));
-            if(pressingEntity.tag == Detection.DetectObject(GetComponent<BoxCollider2D>(), pressingEntity.layer, Detection.Direction.UP, 0.2f)) {
+            string detectedEntity = Detection.DetectObject(GetComponent<BoxCollider2D>(), LayerMask.GetMask(LayerMask.LayerToName(pressingEntity.layer)), Detection.Direction.UP, 0.2f);
+            if(pressingEntity.tag != detectedEntity) {
                 buttonEvent?.Invoke();
 
                 pressingEntity = null;
