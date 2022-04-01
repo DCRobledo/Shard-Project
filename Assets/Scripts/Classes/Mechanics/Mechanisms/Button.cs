@@ -21,17 +21,22 @@ namespace Shard.Mechanisms
         public Action buttonEvent;
 
         private GameObject pressingEntity;
-        public bool shouldCheckForRelease = false;
+        private bool shouldCheckForRelease = false;
 
+        [SerializeField]
+        private Sprite releasedSprite;
+        [SerializeField]
+        private Sprite pressedSprite;
+        
 
         private void OnTriggerEnter2D(Collider2D other) {
             if(canBePressedBy.Contains(other.tag)) {
                 buttonEvent?.Invoke();
 
-                if(buttonType == MechanismEnum.ButtonType.PRESS_RELEASE) {
-                    pressingEntity = other.gameObject;
-                    shouldCheckForRelease = true;
-                }
+                this.GetComponent<SpriteRenderer>().sprite = pressedSprite;
+
+                pressingEntity = other.gameObject;
+                shouldCheckForRelease = true;
             }
         }
 
@@ -44,7 +49,10 @@ namespace Shard.Mechanisms
         private void CheckForRelease() {
             string detectedEntity = Detection.DetectObject(GetComponent<BoxCollider2D>(), LayerMask.GetMask(LayerMask.LayerToName(pressingEntity.layer)), Detection.Direction.UP, 0.2f);
             if(pressingEntity.tag != detectedEntity) {
-                buttonEvent?.Invoke();
+                if(buttonType == MechanismEnum.ButtonType.PRESS_RELEASE)
+                    buttonEvent?.Invoke();
+
+                this.GetComponent<SpriteRenderer>().sprite = releasedSprite;
 
                 pressingEntity = null;
                 shouldCheckForRelease = false;
