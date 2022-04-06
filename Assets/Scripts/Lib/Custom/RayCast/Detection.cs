@@ -73,7 +73,7 @@ namespace Shard.Lib.Custom
             return isGrounded;
         }
 
-        public static string DetectObject(BoxCollider2D boxCollider2D, LayerMask layerMask, Direction direction, float offset, string defaultResult = null) {
+        public static string DetectObject(BoxCollider2D boxCollider2D, LayerMask layerMask, Direction direction, Vector3 size, float offset, string defaultResult = null) {
             float xDirection = direction == Direction.RIGHT ? 1f : (direction == Direction.LEFT ? -1f : 0f);
             float yDirection = direction == Direction.UP ? 1f : (direction == Direction.DOWN ? -1f : 0f);
 
@@ -82,7 +82,7 @@ namespace Shard.Lib.Custom
             RaycastHit2D rayCastHit = 
             Physics2D.BoxCast(
                 boxCollider2D.bounds.center,
-                boxCollider2D.bounds.size,
+                size,
                 0f,
                 castDirection,
                 offset,
@@ -111,6 +111,23 @@ namespace Shard.Lib.Custom
                 detectedObjects.Add(raycastHit.collider.tag);
 
             return detectedObjects;    
+        }
+
+        public static string DetectObject(BoxCollider2D boxCollider2D, LayerMask layerMask, Direction direction, string defaultResult = null) {
+            float xDirection = direction == Direction.RIGHT ? 1f : (direction == Direction.LEFT ? -1f : 0f);
+            float yDirection = direction == Direction.UP ? 1f : (direction == Direction.DOWN ? -1f : 0f);
+
+            Vector2 castDirection = new Vector2(xDirection, yDirection);
+
+            RaycastHit2D rayCastHit = 
+            Physics2D.Raycast (
+                boxCollider2D.bounds.center,
+                castDirection,
+                boxCollider2D.bounds.size.x + 0.5f,
+                layerMask
+            );    
+
+            return rayCastHit.collider != null ? rayCastHit.collider.transform.tag : defaultResult;
         }  
     }
 }

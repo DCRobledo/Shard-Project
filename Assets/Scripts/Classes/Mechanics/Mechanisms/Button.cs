@@ -47,7 +47,15 @@ namespace Shard.Mechanisms
 
 
         private void CheckForRelease() {
-            string detectedEntity = Detection.DetectObject(GetComponent<BoxCollider2D>(), LayerMask.GetMask(LayerMask.LayerToName(pressingEntity.layer)), Detection.Direction.UP, 0.2f);
+            string detectedEntity = 
+                Detection.DetectObject(
+                    GetComponent<BoxCollider2D>(),
+                     LayerMask.GetMask(LayerMask.LayerToName(pressingEntity.layer)),
+                     Detection.Direction.UP,
+                     GetComponent<BoxCollider2D>().bounds.size,
+                     0.2f
+                );
+            
             if(pressingEntity.tag != detectedEntity) {
                 if(buttonType == MechanismEnum.ButtonType.PRESS_RELEASE)
                     buttonEvent?.Invoke();
