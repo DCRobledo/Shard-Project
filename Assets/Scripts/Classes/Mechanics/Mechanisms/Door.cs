@@ -16,6 +16,7 @@ namespace Shard.Mechanisms
         private float movingDistance = 2f;
 
         private bool isOpen;
+        private bool isClosing;
 
         [SerializeField]
         private List<GameObject> openingButtons;
@@ -52,9 +53,11 @@ namespace Shard.Mechanisms
         }
 
 
-        public void Open() { if(!isOpen) StartCoroutine(OpenAnimation()); }
+        public void Open() { if(!isOpen && !isClosing) StartCoroutine(OpenAnimation()); }
 
         private IEnumerator OpenAnimation() {
+            isClosing = false;
+
             Vector3 startingPosition = this.transform.localPosition;
             Vector3 doorPosition = startingPosition;
 
@@ -71,6 +74,8 @@ namespace Shard.Mechanisms
         public void Close() { if(isOpen) StartCoroutine(CloseAnimation()); }
 
         private IEnumerator CloseAnimation() {
+            isClosing = true;
+
             Vector3 startingPosition = this.transform.localPosition;
             Vector3 doorPosition = startingPosition;
 
