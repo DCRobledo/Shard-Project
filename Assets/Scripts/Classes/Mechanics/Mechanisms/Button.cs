@@ -18,7 +18,7 @@ namespace Shard.Mechanisms
         [SerializeField]
         protected string[] canBePressedBy = new string[] { };
 
-        public Action buttonEvent;
+        public Action<GameObject, bool> buttonEvent;
 
         private GameObject pressingEntity;
         private bool shouldCheckForRelease = false;
@@ -31,7 +31,7 @@ namespace Shard.Mechanisms
 
         private void OnTriggerEnter2D(Collider2D other) {
             if(canBePressedBy.Contains(other.tag)) {
-                buttonEvent?.Invoke();
+                buttonEvent?.Invoke(this.gameObject, true);
 
                 this.GetComponent<SpriteRenderer>().sprite = pressedSprite;
 
@@ -58,7 +58,7 @@ namespace Shard.Mechanisms
             
             if(pressingEntity.tag != detectedEntity) {
                 if(buttonType == MechanismEnum.ButtonType.PRESS_RELEASE)
-                    buttonEvent?.Invoke();
+                    buttonEvent?.Invoke(this.gameObject, false);
 
                 this.GetComponent<SpriteRenderer>().sprite = releasedSprite;
 

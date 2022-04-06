@@ -11,5 +11,11 @@ namespace Shard.Enums
             PRESS,
             PRESS_RELEASE
         }
+
+        public enum DoorAction {
+            OPEN,
+            CLOSE,
+            TOGGLE
+        }
     }
 }
