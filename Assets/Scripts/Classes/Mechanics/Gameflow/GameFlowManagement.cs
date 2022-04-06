@@ -27,9 +27,6 @@ namespace Shard.Gameflow
         private GameObject endDoor;
         private Animator endDoorAnimator;
 
-        [SerializeField]
-        private GameObject winTrigger;
-
         private GameObject player;
         private Animator playerAnimator;
 
@@ -49,8 +46,6 @@ namespace Shard.Gameflow
             this.endDoorAnimator         = endDoor.GetComponent<Animator>();
 
             this.levelTransitionGO.SetActive(playStartSequence);
-
-            winTrigger.GetComponent<TilemapRenderer>().enabled = false;
         }
 
         private void Start() {
