@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6023264764911674142}
   - component: {fileID: 6023264764911674129}
-  - component: {fileID: 6023264764911674143}
   - component: {fileID: 6023264764911674130}
   - component: {fileID: 6023264764911674131}
+  - component: {fileID: 2166783775580108807}
   m_Layer: 13
   m_Name: sideDoor
   m_TagString: Door
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6023264764911674141}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -41.0647, y: -7.806, z: 5.935178}
-  m_LocalScale: {x: 1.2848297, y: 1.1121104, z: 1}
+  m_LocalScale: {x: 1.2848297, y: 1.2174613, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -87,24 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6023264764911674143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6023264764911674141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0b6106b37b5eff48a73ff32468e3547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialState: 1
-  movingSpeed: 2
-  movingDistance: 2.3
-  openingButtons: []
-  closingButtons: []
-  toggleButtons: []
 --- !u!95 &6023264764911674130
 Animator:
   serializedVersion: 4
@@ -151,3 +133,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.375, y: 2.5}
   m_EdgeRadius: 0
+--- !u!114 &2166783775580108807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023264764911674141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b6106b37b5eff48a73ff32468e3547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialState: 1
+  movingSpeed: 2
+  movingDistance: 2
+  startingPosition: {x: 0, y: 0, z: 0}
+  endingPosition: {x: 0, y: 0, z: 0}
+  buttonConnections: []

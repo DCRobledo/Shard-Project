@@ -67,14 +67,12 @@ namespace Shard.Mechanisms
                 StopCoroutine(closeAnimation);
                 closeAnimation = null;
             } 
-            
+
             if(openAnimation == null)
                 openAnimation = StartCoroutine(OpenAnimation());
         }
 
         private IEnumerator OpenAnimation() {
-            Debug.Log("Open");
-
             Vector3 doorPosition = this.transform.localPosition;
 
             while (doorPosition.y < endingPosition.y) {
@@ -96,8 +94,6 @@ namespace Shard.Mechanisms
         }
 
         private IEnumerator CloseAnimation() {
-            Debug.Log("Close");
-
             Vector3 doorPosition = this.transform.localPosition;
             
             while (doorPosition.y > startingPosition.y) {
@@ -109,8 +105,6 @@ namespace Shard.Mechanisms
         }
     
         public void Toggle() {
-            Debug.Log("Toggle");
-
             if(openAnimation == null)
                 Open();
             else
