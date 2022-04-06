@@ -10,8 +10,8 @@ namespace Shard.Mechanisms
         [SerializeField]
         private MechanismEnum.DoorState initialState;
 
-        [SerializeField]
-        private float movingSpeed = 0.1f;
+        [SerializeField] [Range (1, 10)]
+        private int movingSpeed;
         [SerializeField]
         private float movingDistance = 2f;
 
@@ -59,7 +59,7 @@ namespace Shard.Mechanisms
             Vector3 doorPosition = startingPosition;
 
             do {
-                doorPosition.y += movingSpeed;
+                doorPosition.y += movingSpeed * 0.01f;
                 this.transform.localPosition = doorPosition;
 
                 yield return null;
@@ -75,7 +75,7 @@ namespace Shard.Mechanisms
             Vector3 doorPosition = startingPosition;
 
             do {
-                doorPosition.y -= movingSpeed;
+                doorPosition.y -= movingSpeed * 0.01f;
                 this.transform.localPosition = doorPosition;
 
                 yield return null;

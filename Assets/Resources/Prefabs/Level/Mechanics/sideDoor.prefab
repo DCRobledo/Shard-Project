@@ -100,12 +100,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialState: 1
-  movingSpeed: 0.1
-  movingDistance: 2
+  movingSpeed: 2
+  movingDistance: 2.3
   openingButtons: []
   closingButtons: []
-  toggleButtons:
-  - {fileID: 0}
+  toggleButtons: []
 --- !u!95 &6023264764911674130
 Animator:
   serializedVersion: 4

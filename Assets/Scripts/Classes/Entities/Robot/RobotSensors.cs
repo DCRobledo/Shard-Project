@@ -31,7 +31,9 @@ namespace Shard.Entities
         }
 
         public string CheckBelow() {
-            return Detection.DetectObject(boxCollider2D, sensorDetectionLayer, Detection.Direction.DOWN, 0.5f, "Void");
+            string result = Detection.DetectObject(boxCollider2D, sensorDetectionLayer, Detection.Direction.DOWN, 0.5f, "Void");
+            Debug.Log(result);
+            return result;
         }
 
         public string CheckAbove() {
