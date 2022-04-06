@@ -15,25 +15,21 @@ namespace Shard.Mechanisms
         [SerializeField]
         private float movingDistance = 2f;
 
-        private bool isOpen;
-        private bool isClosing;
+        public Vector3 startingPosition;
+        public Vector3 endingPosition;
 
-        [SerializeField]
-        private List<GameObject> openingButtons;
-        [SerializeField]
-        private List<(GameObject, bool)> requiredButtonsToOpen;
-
-        [SerializeField]
-        private List<GameObject> closingButtons;
-        [SerializeField]
-        private List<GameObject> toggleButtons;
+        private Coroutine openAnimation;
+        private Coroutine closeAnimation;
 
         [SerializeField]
         private List<ButtonConnection> buttonConnections;
 
 
         private void Awake() {
-            isOpen = initialState == MechanismEnum.DoorState.OPEN;
+            Vector3 movingDistanceVector = initialState == MechanismEnum.DoorState.OPEN ? new Vector3(0, -movingDistance, 0) : new Vector3(0, movingDistance, 0);
+
+            startingPosition = this.transform.localPosition;
+            endingPosition = startingPosition + movingDistanceVector;
         }
 
         private void OnEnable() {
@@ -66,60 +62,82 @@ namespace Shard.Mechanisms
                     buttonConnections[i].GetButtons()[j].GetButton().GetComponent<Button>().buttonEvent -= UpdateButtonState;
         }
 
-
-        public void Open() {
-            if(!isOpen && !isClosing)
-                StartCoroutine(OpenAnimation());
+        private void Open() {
+            if(closeAnimation != null) {
+                StopCoroutine(closeAnimation);
+                closeAnimation = null;
+            } 
+            
+            if(openAnimation == null)
+                openAnimation = StartCoroutine(OpenAnimation());
         }
 
         private IEnumerator OpenAnimation() {
-            isClosing = false;
+            Debug.Log("Open");
 
-            Vector3 startingPosition = this.transform.localPosition;
-            Vector3 doorPosition = startingPosition;
+            Vector3 doorPosition = this.transform.localPosition;
 
-            do {
+            while (doorPosition.y < endingPosition.y) {
                 doorPosition.y += movingSpeed * 0.01f;
                 this.transform.localPosition = doorPosition;
 
                 yield return null;
-            } while (doorPosition.y < startingPosition.y + movingDistance);
-
-            isOpen = true;
+            }
         }
 
-        public void Close() {
-            if(isOpen)
-                StartCoroutine(CloseAnimation());
+        private void Close() {
+            if(openAnimation != null) {
+                StopCoroutine(openAnimation);
+                openAnimation = null;
+            } 
+
+            if(closeAnimation == null)
+                closeAnimation = StartCoroutine(CloseAnimation());
         }
 
         private IEnumerator CloseAnimation() {
-            isClosing = true;
+            Debug.Log("Close");
 
-            Vector3 startingPosition = this.transform.localPosition;
-            Vector3 doorPosition = startingPosition;
-
-            do {
+            Vector3 doorPosition = this.transform.localPosition;
+            
+            while (doorPosition.y > startingPosition.y) {
                 doorPosition.y -= movingSpeed * 0.01f;
                 this.transform.localPosition = doorPosition;
 
                 yield return null;
-            } while (doorPosition.y > startingPosition.y - movingDistance);
-
-            isOpen = false;
+            } 
         }
     
         public void Toggle() {
-            if(!isOpen)
-                StartCoroutine(OpenAnimation());
+            Debug.Log("Toggle");
+
+            if(openAnimation == null)
+                Open();
             else
-                StartCoroutine(CloseAnimation());
+                Close();
         }
     
 
         private void UpdateButtonState(GameObject button, bool state) {
             foreach (ButtonConnection buttonConnection in buttonConnections)
                 buttonConnection.UpdateButtonState(button, state);
+            
+            CheckForAction();
+        }
+
+        private void CheckForAction() {
+            foreach (ButtonConnection buttonConnection in buttonConnections)
+                switch(buttonConnection.GetAction()) {
+                    case MechanismEnum.DoorAction.OPEN:   
+                        if(buttonConnection.IsActive()) Open();
+                        else                            Close();
+                    break;
+                    case MechanismEnum.DoorAction.CLOSE:   
+                        if(buttonConnection.IsActive()) Open();
+                        else                            Close();
+                    break;
+                    case MechanismEnum.DoorAction.TOGGLE: Toggle(); break;   
+                }
         }
     }
 
@@ -150,6 +168,7 @@ namespace Shard.Mechanisms
         }
 
         public List<ButtonTracker> GetButtons() { return this.buttons; }
+        public MechanismEnum.DoorAction GetAction() { return this.action; }
     }
 
     [System.Serializable]
