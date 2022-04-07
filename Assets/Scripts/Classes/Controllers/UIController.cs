@@ -11,7 +11,9 @@ namespace Shard.Controllers
         private static UIController instance = null;
         public static new UIController Instance { get { return (UIController) instance; }}
 
+        [SerializeField]
         private GameObject programmingUI;
+
         private Animator animatorPUI;
         
 
@@ -19,8 +21,8 @@ namespace Shard.Controllers
             // Init the controller's instance
             instance = this;
 
-            // Get the programming UI
-            programmingUI = GameObject.Find("programmingUI");
+            // Activate the programming UI
+            programmingUI.SetActive(true);
 
             // Get the PUI's components
             animatorPUI = programmingUI.GetComponent<Animator>();
