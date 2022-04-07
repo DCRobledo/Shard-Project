@@ -170,13 +170,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpForce: 7
-  fallMultiplier: 1.5
-  lowJumpMultiplier: 1.15
+  jumpForce: 15
+  fallMultiplier: 2
+  lowJumpMultiplier: 1.5
   crouchFactor: 3
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 1088
+    m_Bits: 9280
   smoothingFactor: 0.05
   jumpTrigger:
     m_PersistentCalls:
@@ -223,21 +223,6 @@ MonoBehaviour:
   whatIsGrabbable:
   - Robot
   grabRange: 1.5
-  grabTrigger:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6708790270809338178}
-        m_TargetAssemblyTypeName: Shard.Entities.PlayerAnimations, Scripts
-        m_MethodName: SetGrabTrigger
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   reCallCoolDown: 1
   objectToReCall: {fileID: 0}
 --- !u!114 &6708790270809338178

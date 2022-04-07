@@ -31,9 +31,10 @@ namespace Shard.Entities
         protected Rigidbody2D rigidBody;
         protected BoxCollider2D boxCollider2D; 
 
+        protected bool canJump = false;
         protected bool isAscending = false;
-        protected bool isFalling = false;
-        protected bool shouldCheckGround = true;
+        protected bool shouldCheckForGround = true;
+
         protected bool isFacingRight = true;
 
         [SerializeField]
@@ -50,18 +51,13 @@ namespace Shard.Entities
         }
 
         private void FixedUpdate() {
-            // Jump if requested
-            if (isAscending && IsGrounded()) {
-                jumpTrigger?.Invoke();
-
-                rigidBody.velocity += Vector2.up * jumpForce;
-            }
-                
             // Check for landing
-            if (isFalling && IsGrounded()) {
+            if (shouldCheckForGround && !isAscending && IsGrounded()) {
                 landTrigger?.Invoke();
 
-                isFalling = false;
+                canJump = true;
+
+                StartCoroutine(CheckLandingDelay());
             }
                         
             ApplyGravity(this.fallMultiplier, this.lowJumpMultiplier);
@@ -85,7 +81,15 @@ namespace Shard.Entities
         }
 
         public void Jump(bool jump) {
-            this.isAscending = jump;
+            // Releasing the jump is always allowed
+            if(!jump) this.isAscending = jump;
+
+            // But we can only jump if we are grounded
+            else if(canJump) {
+                jumpTrigger?.Invoke();
+
+                rigidBody.velocity += Vector2.up * jumpForce;
+            }
         }
 
 
@@ -109,7 +113,6 @@ namespace Shard.Entities
                 rigidBody.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.fixedDeltaTime;
 
                 isAscending = false;
-                isFalling = true;
             }
 
             // Low jump gravity
@@ -135,6 +138,15 @@ namespace Shard.Entities
         public Vector2 GetVelocity() {
             return this.rigidBody.velocity;
         }
+
+        public IEnumerator CheckLandingDelay() {
+            this.shouldCheckForGround = false;
+
+            yield return new WaitForSeconds(0.5f);
+
+            this.shouldCheckForGround = true;
+        }
+
 
         public void SubscribeToJumpTrigger(Action commandEvent) {
             jumpTrigger.AddListener(commandEvent.Invoke);

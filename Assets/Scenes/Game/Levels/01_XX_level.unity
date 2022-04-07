@@ -8937,6 +8937,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 433936477}
     m_Modifications:
     - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: jumpForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: fallMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
+      propertyPath: lowJumpMultiplier
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185410182843016199, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: whatIsGround.m_Bits
       value: 9280
       objectReference: {fileID: 0}
@@ -12755,11 +12767,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1489311540624490956, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 120.81
+      value: 112.82
       objectReference: {fileID: 0}
     - target: {fileID: 1489311540624490956, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.345
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 1489311540624490956, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
       propertyPath: m_LocalPosition.z
