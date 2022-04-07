@@ -10,17 +10,16 @@ namespace Shard.Entities
         public static Action flipTrigger;
         public static Action crouchTrigger;
 
+        private new void FixedUpdate() {
+            if(isCrouched) crouchTrigger?.Invoke();
+
+            base.FixedUpdate();
+        }
+
         public override void Flip() {
             flipTrigger?.Invoke();
 
             base.Flip();
-        }
-
-        public override void Crouch(bool crouch)
-        {
-            if(crouch) crouchTrigger?.Invoke();
-            
-            base.Crouch(crouch);
         }
     }
 }

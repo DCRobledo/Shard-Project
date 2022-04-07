@@ -20,7 +20,8 @@ namespace Shard.Enums
             SPIKE,
             BOX,
             LILY,
-            PLAYER
+            BUTTON,
+            PLAYER,
         }
 
         public enum ConditionalState {

@@ -36,6 +36,7 @@ namespace Shard.Entities
         protected bool shouldCheckForGround = true;
 
         protected bool isFacingRight = true;
+        protected bool isCrouched = false;
 
         [SerializeField]
         protected UnityEvent jumpTrigger;
@@ -50,7 +51,7 @@ namespace Shard.Entities
             this.boxCollider2D =  this.GetComponent<BoxCollider2D>();
         }
 
-        private void FixedUpdate() {
+        protected void FixedUpdate() {
             // Check for landing
             if (shouldCheckForGround && !isAscending && IsGrounded()) {
                 landTrigger?.Invoke();
@@ -135,6 +136,8 @@ namespace Shard.Entities
 
             // And movement speed
             speed = crouch ? speed - crouchFactor : speed + crouchFactor;
+
+            this.isCrouched = crouch;
         }
     
         public Vector2 GetVelocity() {
