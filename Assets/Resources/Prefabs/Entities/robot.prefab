@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensorDetectionLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
 --- !u!114 &2574153355941885088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,14 +185,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b86cca0d26f1646aefebd8cb94140a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
-  jumpForce: 6
+  speed: 3
+  jumpForce: 12
   fallMultiplier: 1.5
   lowJumpMultiplier: 1.15
   crouchFactor: 2
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 8256
   smoothingFactor: 0.05
   jumpTrigger:
     m_PersistentCalls:
@@ -238,9 +238,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsGrabbable: []
   grabRange: 1
-  grabTrigger:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2809128413183804608
 MonoBehaviour:
   m_ObjectHideFlags: 0

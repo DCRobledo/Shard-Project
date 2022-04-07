@@ -88,6 +88,8 @@ namespace Shard.Entities
             else if(canJump) {
                 jumpTrigger?.Invoke();
 
+                canJump = false;
+
                 rigidBody.velocity += Vector2.up * jumpForce;
             }
         }
