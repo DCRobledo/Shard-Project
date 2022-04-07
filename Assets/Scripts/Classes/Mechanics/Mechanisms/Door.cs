@@ -15,8 +15,8 @@ namespace Shard.Mechanisms
         [SerializeField]
         private float movingDistance = 2f;
 
-        public Vector3 startingPosition;
-        public Vector3 endingPosition;
+        public Vector3 openPosition;
+        public Vector3 closePosition;
 
         private Coroutine openAnimation;
         private Coroutine closeAnimation;
@@ -26,10 +26,13 @@ namespace Shard.Mechanisms
 
 
         private void Awake() {
-            Vector3 movingDistanceVector = initialState == MechanismEnum.DoorState.OPEN ? new Vector3(0, -movingDistance, 0) : new Vector3(0, movingDistance, 0);
-
-            startingPosition = this.transform.localPosition;
-            endingPosition = startingPosition + movingDistanceVector;
+            if(initialState == MechanismEnum.DoorState.OPEN) {
+                openPosition = this.transform.localPosition;
+                closePosition = openPosition - new Vector3(0, movingDistance, 0);
+            } else {
+                closePosition = this.transform.localPosition;
+                openPosition = closePosition + new Vector3(0, movingDistance, 0);
+            }
         }
 
         private void OnEnable() {
@@ -75,7 +78,7 @@ namespace Shard.Mechanisms
         private IEnumerator OpenAnimation() {
             Vector3 doorPosition = this.transform.localPosition;
 
-            while (doorPosition.y < endingPosition.y) {
+            while (doorPosition.y < openPosition.y) {
                 doorPosition.y += movingSpeed * 0.01f;
                 this.transform.localPosition = doorPosition;
 
@@ -96,7 +99,7 @@ namespace Shard.Mechanisms
         private IEnumerator CloseAnimation() {
             Vector3 doorPosition = this.transform.localPosition;
             
-            while (doorPosition.y > startingPosition.y) {
+            while (doorPosition.y > closePosition.y) {
                 doorPosition.y -= movingSpeed * 0.01f;
                 this.transform.localPosition = doorPosition;
 
@@ -105,10 +108,18 @@ namespace Shard.Mechanisms
         }
     
         public void Toggle() {
-            if(openAnimation == null)
+            // If both animations are null, then it is the first time the door is activated
+            if (openAnimation == null && closeAnimation == null) {
+                if (initialState == MechanismEnum.DoorState.OPEN) Close();
+                else                                              Open();
+            }
+
+            else {
+                if(openAnimation == null)
                 Open();
-            else
-                Close();
+                else
+                    Close();
+            }
         }
     
 

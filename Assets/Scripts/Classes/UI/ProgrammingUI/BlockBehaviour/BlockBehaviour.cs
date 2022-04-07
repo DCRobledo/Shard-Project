@@ -79,7 +79,7 @@ namespace Shard.UI.ProgrammingUI
                 BehaviourBlock currentBlock = GetBlock(i);
                 if(currentBlock != null) {
 
-                    if(currentBlock.GetType() == BlockEnum.BlockType.CONDITIONAL) {
+                    if(currentBlock.GetType() == BlockEnum.BlockType.CONDITIONAL && block.GetElseBlock() != null) {
                         ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
                         if(block.GetElseBlock().Equals(conditionalBlock)) continue;
                     }
