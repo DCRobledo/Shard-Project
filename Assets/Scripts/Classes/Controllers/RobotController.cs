@@ -32,10 +32,11 @@ namespace Shard.Controllers
         private bool isRobotOn = false;
         private bool isRobotGrabbed = false;
 
-        public static Action turnOnTrigger;
+        private float gravityScale;
+        private float mass;
+        private float angularDrag;
 
-        public delegate void Hola();
-        public Hola commandEvent;
+        public static Action turnOnTrigger;
         
 
         private void Awake() {
@@ -50,6 +51,10 @@ namespace Shard.Controllers
             jumpCommand = new JumpCommand(robotMovement);
             moveCommand = new MoveCommand(robotMovement);
             flipCommand = new FlipCommand(robotMovement);
+
+            gravityScale = robot.GetComponent<Rigidbody2D>().gravityScale;
+            mass = robot.GetComponent<Rigidbody2D>().mass;
+            angularDrag = robot.GetComponent<Rigidbody2D>().angularDrag;
         }
 
         private void OnEnable() {
@@ -223,10 +228,11 @@ namespace Shard.Controllers
             // Update boxcollider2D
             robot.GetComponent<BoxCollider2D>().enabled = !isRobotGrabbed;
 
-            // Update rigidbody2D gravity scale
-            float gravityScale = robot.GetComponent<Rigidbody2D>().gravityScale;
-            gravityScale = isRobotGrabbed ? gravityScale / 2f : gravityScale * 2f;
-            robot.GetComponent<Rigidbody2D>().gravityScale = gravityScale; 
+            // Update rigidbody2D parameters
+
+            robot.GetComponent<Rigidbody2D>().gravityScale = isRobotGrabbed ? 0f : gravityScale;
+            robot.GetComponent<Rigidbody2D>().mass         = isRobotGrabbed ? 0f : mass; 
+            robot.GetComponent<Rigidbody2D>().angularDrag  = isRobotGrabbed ? 0f : angularDrag;  
         }
 
         public bool IsRobotOn() { return this.isRobotOn; }
