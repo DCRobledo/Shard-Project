@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensorDetectionLayer:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 24768
 --- !u!114 &2574153355941885088
 MonoBehaviour:
   m_ObjectHideFlags: 0

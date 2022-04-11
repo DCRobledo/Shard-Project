@@ -19,8 +19,7 @@ namespace Shard.Controllers
         [SerializeField]
         private bool selfControlled = false;
         private bool isMoving = false;
-        private bool isPressingDown = false;
-
+        
         private GameObject player;
         private EntityMovement playerMovement;
         private EntityActions playerActions;
