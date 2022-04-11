@@ -34,6 +34,7 @@ namespace Shard.Entities
         protected bool canJump = false;
         protected bool isAscending = false;
         protected bool shouldCheckForGround = true;
+        protected bool isPressingDown = false;
 
         protected bool isFacingRight = true;
         protected bool isCrouched = false;
@@ -71,6 +72,26 @@ namespace Shard.Entities
 
         public virtual void Jump() {}
 
+        public virtual void Drop() {
+            // Check if we are in a platform
+            RaycastHit2D rayCastHit = 
+            Physics2D.Raycast (
+                boxCollider2D.bounds.center,
+                Vector2.down,
+                boxCollider2D.bounds.size.x + 0.5f,
+                LayerMask.GetMask("Platforms")
+            );
+
+            if(rayCastHit.collider != null) {
+                // If we are, allow drop on it
+                GameObject platform = rayCastHit.collider.gameObject;
+                platform.GetComponent<OneWayPlatform>().AllowDrop();
+            }
+
+            // Otherwise, jump
+            else Jump(true);
+        }
+
         public void Move(float x, float y) {
             // Compute the new target velocity, smooth it, and apply it
             Vector3 targetVelocity = new Vector2(Mathf.Round(x) * speed, rigidBody.velocity.y);
@@ -84,6 +105,9 @@ namespace Shard.Entities
         public void Jump(bool jump) {
             // Releasing the jump is always allowed
             if(!jump) this.isAscending = jump;
+
+            // Check if we want to drop or jump
+            else if(this.isPressingDown) Drop();
 
             // But we can only jump if we are grounded
             else if(canJump) {
@@ -152,6 +176,10 @@ namespace Shard.Entities
             this.shouldCheckForGround = true;
         }
 
+
+        public void SetIsPressingDown(bool isPressingDown) {
+            this.isPressingDown = isPressingDown;
+        }
 
         public void SubscribeToJumpTrigger(Action commandEvent) {
             jumpTrigger.AddListener(commandEvent.Invoke);

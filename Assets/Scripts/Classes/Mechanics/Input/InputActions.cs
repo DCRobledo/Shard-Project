@@ -82,6 +82,15 @@ namespace Shard.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""054fce41-c651-4e70-b2ae-8f08c777aa8f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -194,6 +203,17 @@ namespace Shard.Input
                     ""action"": ""Program"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f1e9867-4cc5-4067-b991-01d210607fb5"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -256,6 +276,7 @@ namespace Shard.Input
             m_Player_Grab = m_Player.FindAction("Grab", throwIfNotFound: true);
             m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
             m_Player_Program = m_Player.FindAction("Program", throwIfNotFound: true);
+            m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
             // CommandConsole
             m_CommandConsole = asset.FindActionMap("CommandConsole", throwIfNotFound: true);
             m_CommandConsole_PreviousCommand = m_CommandConsole.FindAction("PreviousCommand", throwIfNotFound: true);
@@ -325,6 +346,7 @@ namespace Shard.Input
         private readonly InputAction m_Player_Grab;
         private readonly InputAction m_Player_Crouch;
         private readonly InputAction m_Player_Program;
+        private readonly InputAction m_Player_Drop;
         public struct PlayerActions
         {
             private @InputActions m_Wrapper;
@@ -335,6 +357,7 @@ namespace Shard.Input
             public InputAction @Grab => m_Wrapper.m_Player_Grab;
             public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
             public InputAction @Program => m_Wrapper.m_Player_Program;
+            public InputAction @Drop => m_Wrapper.m_Player_Drop;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -362,6 +385,9 @@ namespace Shard.Input
                     @Program.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnProgram;
                     @Program.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnProgram;
                     @Program.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnProgram;
+                    @Drop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
+                    @Drop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
+                    @Drop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -384,6 +410,9 @@ namespace Shard.Input
                     @Program.started += instance.OnProgram;
                     @Program.performed += instance.OnProgram;
                     @Program.canceled += instance.OnProgram;
+                    @Drop.started += instance.OnDrop;
+                    @Drop.performed += instance.OnDrop;
+                    @Drop.canceled += instance.OnDrop;
                 }
             }
         }
@@ -437,6 +466,7 @@ namespace Shard.Input
             void OnGrab(InputAction.CallbackContext context);
             void OnCrouch(InputAction.CallbackContext context);
             void OnProgram(InputAction.CallbackContext context);
+            void OnDrop(InputAction.CallbackContext context);
         }
         public interface ICommandConsoleActions
         {

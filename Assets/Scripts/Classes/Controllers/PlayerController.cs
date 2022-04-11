@@ -19,6 +19,7 @@ namespace Shard.Controllers
         [SerializeField]
         private bool selfControlled = false;
         private bool isMoving = false;
+        private bool isPressingDown = false;
 
         private GameObject player;
         private EntityMovement playerMovement;
@@ -71,6 +72,9 @@ namespace Shard.Controllers
             InputActions.Player.Jump.started += context => jumpButton.ExecuteWithParameters(true);
             InputActions.Player.Jump.canceled += context => jumpButton.ExecuteWithParameters(false);
 
+            InputActions.Player.Drop.started += context => playerMovement.SetIsPressingDown(true);
+            InputActions.Player.Drop.canceled += context => playerMovement.SetIsPressingDown(false);
+
             InputActions.Player.Crouch.started += context => crouchButton.ExecuteWithParameters(true);
             InputActions.Player.Crouch.canceled += context => crouchButton.ExecuteWithParameters(false);
 
@@ -91,6 +95,7 @@ namespace Shard.Controllers
             movement.Enable();
 
             InputActions.Player.Jump.Enable();
+            InputActions.Player.Drop.Enable();
             InputActions.Player.Crouch.Enable();
             InputActions.Player.ReCall.Enable();
             InputActions.Player.Grab.Enable();
@@ -113,6 +118,7 @@ namespace Shard.Controllers
             movement.Disable();
 
             InputActions.Player.Jump.Disable();
+            InputActions.Player.Drop.Disable();
             InputActions.Player.Crouch.Disable();
             InputActions.Player.ReCall.Disable();
             InputActions.Player.Grab.Disable();
@@ -149,6 +155,7 @@ namespace Shard.Controllers
             
             moveButton.ExecuteWithParameters(parameters);
         }
+
     }
 }
 
