@@ -15,7 +15,13 @@ namespace Shard.UI.ProgrammingUI
 
 
         private void OnTriggerEnter2D(Collider2D other) {
-            isInScrollArea = other.transform.tag == "Behaviour Block" ? isInScrollArea : other.transform.tag == "Scrollable Block Area";
+            if(other.tag == "Scrollable Block Area")
+                isInScrollArea = true;
+        }
+
+        private void OnTriggerExit2D(Collider2D other) {
+            if(other.tag == "Scrollable Block Area")
+                isInScrollArea = false;
         }
 
 
