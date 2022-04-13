@@ -5,7 +5,10 @@ namespace Shard.Enums
         public enum VirtualCamera {
             MAIN,
             ZOOM_IN,
-            ZOOM_OUT
+            ZOOM_OUT,
+            LEFT_PIVOT,
+            TOP_PIVOT,
+            TOP_PIVOT_ZOOM_OUT
         }
     }
 }

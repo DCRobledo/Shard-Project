@@ -91,6 +91,7 @@ namespace Shard.Gameflow
             yield return new WaitForSeconds(0.25f);
             levelTransitionAnimator.SetTrigger("openSecondHalf");
 
+
             // Activate player input
             PlayerController.Instance.EnableInput();
 
