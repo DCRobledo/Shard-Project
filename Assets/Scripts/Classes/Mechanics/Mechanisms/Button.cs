@@ -29,8 +29,8 @@ namespace Shard.Mechanisms
         private Sprite pressedSprite;
         
 
-        private void OnTriggerEnter2D(Collider2D other) {
-            if(canBePressedBy.Contains(other.tag)) {
+        private void OnCollisionEnter2D(Collision2D other) {
+            if(canBePressedBy.Contains(other.collider.tag)) {
                 buttonEvent?.Invoke(this.gameObject, true);
 
                 this.GetComponent<SpriteRenderer>().sprite = pressedSprite;
@@ -39,6 +39,7 @@ namespace Shard.Mechanisms
                 shouldCheckForRelease = true;
             }
         }
+
 
         private void Update() {
             if(shouldCheckForRelease)
@@ -49,10 +50,10 @@ namespace Shard.Mechanisms
         private void CheckForRelease() {
             string detectedEntity = 
                 Detection.DetectObject(
-                    GetComponent<BoxCollider2D>(),
+                    GetComponent<PolygonCollider2D>(),
                      LayerMask.GetMask(LayerMask.LayerToName(pressingEntity.layer)),
                      Detection.Direction.UP,
-                     GetComponent<BoxCollider2D>().bounds.size,
+                     GetComponent<PolygonCollider2D>().bounds.size,
                      0.2f
                 );
             

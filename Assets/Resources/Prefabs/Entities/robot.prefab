@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1489311540624490956}
   - component: {fileID: 1489311540624490958}
   - component: {fileID: 1489311540624490957}
-  - component: {fileID: 1489311540624490959}
+  - component: {fileID: 221188669112787972}
   - component: {fileID: 7803451227653538638}
   - component: {fileID: 1879859047307610033}
   - component: {fileID: 2574153355941885088}
@@ -113,8 +113,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &1489311540624490959
-BoxCollider2D:
+--- !u!60 &221188669112787972
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -126,7 +126,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00064346194, y: -0.15454447}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -136,9 +136,32 @@ BoxCollider2D:
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.95823985, y: 0.89031684}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.47371194, y: 0.07991454}
+      - {x: -0.4734884, y: -0.2880645}
+      - {x: -0.41491422, y: -0.28868553}
+      - {x: -0.41632533, y: -0.339362}
+      - {x: -0.3495931, y: -0.34630087}
+      - {x: -0.34982917, y: -0.3912559}
+      - {x: -0.28792775, y: -0.39844972}
+      - {x: -0.2880384, y: -0.44707823}
+      - {x: -0.22068167, y: -0.45163128}
+      - {x: -0.22219679, y: -0.5965443}
+      - {x: -0.035870932, y: -0.60234183}
+      - {x: -0.022836037, y: -0.44459745}
+      - {x: 0.22094037, y: -0.44854617}
+      - {x: 0.22875677, y: -0.60128254}
+      - {x: 0.4130023, y: -0.6036363}
+      - {x: 0.41388932, y: -0.44566166}
+      - {x: 0.4712306, y: -0.44471353}
+      - {x: 0.47518745, y: 0.17938128}
+      - {x: -0.2854508, y: 0.18267728}
+      - {x: -0.3018906, y: 0.1806742}
+      - {x: -0.34940696, y: 0.18275826}
+      - {x: -0.37179908, y: 0.18162678}
+      - {x: -0.41189325, y: 0.18439874}
+      - {x: -0.41121194, y: 0.0831638}
 --- !u!254 &7803451227653538638
 RelativeJoint2D:
   m_ObjectHideFlags: 0

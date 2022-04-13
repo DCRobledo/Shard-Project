@@ -225,8 +225,8 @@ namespace Shard.Controllers
             // Update control variable
             this.isRobotGrabbed = !this.isRobotGrabbed;
 
-            // Update boxcollider2D
-            robot.GetComponent<BoxCollider2D>().enabled = !isRobotGrabbed;
+            // Update polygonCollider2D
+            robot.GetComponent<PolygonCollider2D>().enabled = !isRobotGrabbed;
 
             // Update rigidbody2D parameters
 

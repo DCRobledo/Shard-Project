@@ -42,14 +42,14 @@ namespace Shard.Lib.Custom
             return detectedGameObjects;
         }
     
-        public static bool DetectGround(BoxCollider2D boxCollider2D, LayerMask whatIsGround, float offset, bool debug = false) {
+        public static bool DetectGround(PolygonCollider2D polygonCollider2D, LayerMask whatIsGround, float offset, bool debug = false) {
             bool isGrounded;
 
             // Check ground through raycasting the circle collider
             RaycastHit2D rayCastHit = 
             Physics2D.BoxCast(
-                boxCollider2D.bounds.center,
-                boxCollider2D.bounds.size,
+                polygonCollider2D.bounds.center,
+                polygonCollider2D.bounds.size,
                 0f,
                 Vector2.down,
                 offset,
@@ -61,10 +61,10 @@ namespace Shard.Lib.Custom
             if (debug) {
                 Color rayColor = isGrounded ? Color.green : Color.red;
                 DebugUtils.DebugBoxRayCast(
-                    boxCollider2D.bounds.center,
+                    polygonCollider2D.bounds.center,
                     Vector2.down,
-                    boxCollider2D.bounds.extents.x,
-                    boxCollider2D.bounds.extents.y + offset,
+                    polygonCollider2D.bounds.extents.x,
+                    polygonCollider2D.bounds.extents.y + offset,
                     rayColor
                 );
             }
@@ -73,7 +73,7 @@ namespace Shard.Lib.Custom
             return isGrounded;
         }
 
-        public static string DetectObject(BoxCollider2D boxCollider2D, LayerMask layerMask, Direction direction, Vector3 size, float offset, string defaultResult = null) {
+        public static string DetectObject(PolygonCollider2D polygonCollider2D, LayerMask layerMask, Direction direction, Vector3 size, float offset, string defaultResult = null) {
             float xDirection = direction == Direction.RIGHT ? 1f : (direction == Direction.LEFT ? -1f : 0f);
             float yDirection = direction == Direction.UP ? 1f : (direction == Direction.DOWN ? -1f : 0f);
 
@@ -81,7 +81,7 @@ namespace Shard.Lib.Custom
 
             RaycastHit2D rayCastHit = 
             Physics2D.BoxCast(
-                boxCollider2D.bounds.center,
+                polygonCollider2D.bounds.center,
                 size,
                 0f,
                 castDirection,
@@ -92,13 +92,13 @@ namespace Shard.Lib.Custom
             return rayCastHit.collider != null ? rayCastHit.collider.transform.tag : defaultResult;
         }
 
-        public static List<string> DetectObjects(BoxCollider2D boxCollider2D, LayerMask layerMask, float offset) {
+        public static List<string> DetectObjects(PolygonCollider2D polygonCollider2D, LayerMask layerMask, float offset) {
             List<string> detectedObjects = new List<string>();
 
             RaycastHit2D[] rayCastHits = 
             Physics2D.BoxCastAll(
-                boxCollider2D.bounds.center,
-                boxCollider2D.bounds.size,
+                polygonCollider2D.bounds.center,
+                polygonCollider2D.bounds.size,
                 0f,
                 Vector2.down,
                 offset,
@@ -113,7 +113,7 @@ namespace Shard.Lib.Custom
             return detectedObjects;    
         }
 
-        public static string DetectObject(BoxCollider2D boxCollider2D, LayerMask layerMask, Direction direction, string defaultResult = null) {
+        public static string DetectObject(PolygonCollider2D polygonCollider2D, LayerMask layerMask, Direction direction, string defaultResult = null) {
             float xDirection = direction == Direction.RIGHT ? 1f : (direction == Direction.LEFT ? -1f : 0f);
             float yDirection = direction == Direction.UP ? 1f : (direction == Direction.DOWN ? -1f : 0f);
 
@@ -121,9 +121,9 @@ namespace Shard.Lib.Custom
 
             RaycastHit2D rayCastHit = 
             Physics2D.Raycast (
-                boxCollider2D.bounds.center,
+                polygonCollider2D.bounds.center,
                 castDirection,
-                boxCollider2D.bounds.size.x + 0.5f,
+                polygonCollider2D.bounds.size.x + 0.5f,
                 layerMask
             );    
 

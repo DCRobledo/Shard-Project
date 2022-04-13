@@ -29,7 +29,7 @@ namespace Shard.Entities
         protected Vector3 velocity = Vector3.zero;
 
         protected Rigidbody2D rigidBody;
-        protected BoxCollider2D boxCollider2D; 
+        protected PolygonCollider2D polygonCollider2D; 
 
         protected bool canJump = false;
         protected bool isAscending = false;
@@ -49,7 +49,7 @@ namespace Shard.Entities
         private void Awake() 
         {
             this.rigidBody = this.GetComponent<Rigidbody2D>();
-            this.boxCollider2D =  this.GetComponent<BoxCollider2D>();
+            this.polygonCollider2D =  this.GetComponent<PolygonCollider2D>();
         }
 
         protected void FixedUpdate() {
@@ -76,9 +76,9 @@ namespace Shard.Entities
             // Check if we are in a platform
             RaycastHit2D rayCastHit = 
             Physics2D.Raycast (
-                boxCollider2D.bounds.center,
+                polygonCollider2D.bounds.center,
                 Vector2.down,
-                boxCollider2D.bounds.size.x + 0.5f,
+                polygonCollider2D.bounds.size.x + 0.5f,
                 LayerMask.GetMask("Platforms")
             );
 
@@ -149,7 +149,7 @@ namespace Shard.Entities
 
         private bool IsGrounded() 
         {
-            return Detection.DetectGround(this.boxCollider2D, this.whatIsGround, .25f, false);
+            return Detection.DetectGround(this.polygonCollider2D, this.whatIsGround, .25f, false);
         }
 
         public virtual void Crouch(bool crouch) {

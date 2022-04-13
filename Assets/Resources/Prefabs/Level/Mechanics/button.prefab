@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 4079692209500297044}
   - component: {fileID: 4079692209500297045}
   - component: {fileID: 4079692209500296875}
-  - component: {fileID: 9215192780335161191}
-  - component: {fileID: 457217412068573590}
+  - component: {fileID: 5587815409308587094}
   m_Layer: 13
   m_Name: button
   m_TagString: Button
@@ -105,33 +104,7 @@ MonoBehaviour:
   - Robot
   releasedSprite: {fileID: 21300000, guid: 4ffd7763058547447aa44ff5ba488953, type: 3}
   pressedSprite: {fileID: 21300000, guid: 62a6555a38ce1a343876c8b73a09daa0, type: 3}
---- !u!61 &9215192780335161191
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4079692209500296872}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0000011920929, y: -0.06192714}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.25, y: 0.25}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.1263816, y: 0.12614572}
-  m_EdgeRadius: 0
---- !u!60 &457217412068573590
+--- !u!60 &5587815409308587094
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,9 +129,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.44849393, y: 0.00252185}
-      - {x: -0.4498818, y: 0.001376271}
-      - {x: -0.56490684, y: -0.13541251}
-      - {x: 0.62350875, y: -0.13696808}
-      - {x: 0.4430138, y: -0.000000007450581}
-      - {x: 0.43991098, y: 0.0011455792}
+    - - {x: 0.40676612, y: 0.015984066}
+      - {x: -0.2772325, y: 0.015581444}
+      - {x: -0.625, y: -0.125}
+      - {x: 0.6232809, y: -0.12776002}
