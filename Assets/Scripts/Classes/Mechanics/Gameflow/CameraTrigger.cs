@@ -10,6 +10,10 @@ namespace Shard.Gameflow
         [SerializeField]
         private CameraEnum.VirtualCamera targetCamera;
 
+        private void Awake() {
+            this.transform.parent.GetComponent<SpriteRenderer>().enabled = false;
+        }
+
 
         private void OnTriggerEnter2D(Collider2D other) {
             if(other.tag == "Player") {
