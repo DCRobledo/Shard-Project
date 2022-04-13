@@ -8,19 +8,12 @@ namespace Shard.Gameflow
     public class CameraTrigger : MonoBehaviour
     {
         [SerializeField]
-        private CameraEnum.VirtualCamera originCamera;
-        [SerializeField]
         private CameraEnum.VirtualCamera targetCamera;
-
-        private bool isInTargetCamera = false;
 
 
         private void OnTriggerEnter2D(Collider2D other) {
             if(other.tag == "Player") {
-                if(isInTargetCamera) CameraSwitcher.SwitchCamera(originCamera);
-                else                 CameraSwitcher.SwitchCamera(targetCamera);
-
-                isInTargetCamera = !isInTargetCamera;
+                CameraSwitcher.SwitchCamera(targetCamera);
 
                 StartCoroutine(CameraTriggerDelay());
             }
