@@ -20,8 +20,18 @@ namespace Shard.Entities
         }
 
         public override void Jump()  {
-            if (RobotController.Instance.IsRobotOn())
+            if (RobotController.Instance.IsRobotOn()) {
+                // We want the robot to jump from the player's arms
+                if(RobotController.Instance.IsRobotGrabbed())
+                {
+                    PlayerController.Instance.ReleaseRobot();
+
+                    this.canJump = true;
+                }
+
                 Jump(true);
+            }
+                
         }
 
         public override void Flip()

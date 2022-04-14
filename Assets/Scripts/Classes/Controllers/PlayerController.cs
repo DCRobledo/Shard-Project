@@ -155,6 +155,7 @@ namespace Shard.Controllers
             moveButton.ExecuteWithParameters(parameters);
         }
 
+        public void ReleaseRobot() { grabButton.ExecuteWithParameters(EntityEnum.Action.GRAB); }
     }
 }
 
