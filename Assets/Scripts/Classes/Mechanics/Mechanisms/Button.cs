@@ -1,7 +1,7 @@
 using Shard.Enums;
 using Shard.Lib.Custom;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -21,7 +21,11 @@ namespace Shard.Mechanisms
         public Action<GameObject, bool> buttonEvent;
 
         private GameObject pressingEntity;
+        private bool shouldCheckForPress = true;
         private bool shouldCheckForRelease = false;
+
+        [SerializeField]
+        private float pressDelay;
 
         [SerializeField]
         private Sprite releasedSprite;
@@ -30,13 +34,15 @@ namespace Shard.Mechanisms
         
 
         private void OnCollisionEnter2D(Collision2D other) {
-            if(canBePressedBy.Contains(other.collider.tag)) {
+            if(shouldCheckForPress && canBePressedBy.Contains(other.collider.tag)) {
                 buttonEvent?.Invoke(this.gameObject, true);
 
                 this.GetComponent<SpriteRenderer>().sprite = pressedSprite;
 
                 pressingEntity = other.gameObject;
                 shouldCheckForRelease = true;
+
+                StartCoroutine(PressDelay());
             }
         }
 
@@ -66,6 +72,14 @@ namespace Shard.Mechanisms
                 pressingEntity = null;
                 shouldCheckForRelease = false;
             }
+        }
+
+        private IEnumerator PressDelay() {
+            shouldCheckForPress = false;
+
+            yield return new WaitForSeconds(pressDelay);
+
+            shouldCheckForPress = true;
         }
     }
 }

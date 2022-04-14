@@ -102,6 +102,7 @@ MonoBehaviour:
   canBePressedBy:
   - Player
   - Robot
+  pressDelay: 0.5
   releasedSprite: {fileID: 21300000, guid: 4ffd7763058547447aa44ff5ba488953, type: 3}
   pressedSprite: {fileID: 21300000, guid: 62a6555a38ce1a343876c8b73a09daa0, type: 3}
 --- !u!60 &5587815409308587094
