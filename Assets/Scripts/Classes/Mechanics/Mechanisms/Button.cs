@@ -33,8 +33,8 @@ namespace Shard.Mechanisms
         private Sprite pressedSprite;
         
 
-        private void OnCollisionEnter2D(Collision2D other) {
-            if(shouldCheckForPress && canBePressedBy.Contains(other.collider.tag)) {
+        private void OnTriggerEnter2D(Collider2D other) {
+            if(shouldCheckForPress && canBePressedBy.Contains(other.tag)) {
                 buttonEvent?.Invoke(this.gameObject, true);
 
                 this.GetComponent<SpriteRenderer>().sprite = pressedSprite;
