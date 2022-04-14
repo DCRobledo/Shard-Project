@@ -31,11 +31,11 @@ namespace Shard.Entities
         }
 
         public string CheckBelow() {
-            return Detection.DetectObject(polygonCollider2D, sensorDetectionLayer, Detection.Direction.DOWN, "Void");
+            return Detection.DetectObject(polygonCollider2D, sensorDetectionLayer, Detection.Direction.DOWN, defaultResult:"Void");
         }
 
         public string CheckAbove() {
-            return Detection.DetectObject(polygonCollider2D, sensorDetectionLayer, Detection.Direction.UP, "Void");
+            return Detection.DetectObject(polygonCollider2D, sensorDetectionLayer, Detection.Direction.UP, 1f, "Void");
         }
     }
 }

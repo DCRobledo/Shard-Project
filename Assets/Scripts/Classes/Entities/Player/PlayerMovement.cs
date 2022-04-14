@@ -21,15 +21,5 @@ namespace Shard.Entities
 
             base.Flip();
         }
-
-        // public override void Drop()
-        // {
-        //     if(PlayerController.Instance.IsPressingDown() && CheckPlatformBelow())
-        //         base.Drop();
-        // }
-
-        // private bool CheckPlatformBelow() {
-        //     return true;
-        // }
     }
 }

@@ -113,7 +113,7 @@ namespace Shard.Lib.Custom
             return detectedObjects;    
         }
 
-        public static string DetectObject(PolygonCollider2D polygonCollider2D, LayerMask layerMask, Direction direction, string defaultResult = null) {
+        public static string DetectObject(PolygonCollider2D polygonCollider2D, LayerMask layerMask, Direction direction, float offset = 0.5f, string defaultResult = null) {
             float xDirection = direction == Direction.RIGHT ? 1f : (direction == Direction.LEFT ? -1f : 0f);
             float yDirection = direction == Direction.UP ? 1f : (direction == Direction.DOWN ? -1f : 0f);
 
@@ -123,7 +123,7 @@ namespace Shard.Lib.Custom
             Physics2D.Raycast (
                 polygonCollider2D.bounds.center,
                 castDirection,
-                polygonCollider2D.bounds.size.x + 0.5f,
+                polygonCollider2D.bounds.size.x + offset,
                 layerMask
             );    
 

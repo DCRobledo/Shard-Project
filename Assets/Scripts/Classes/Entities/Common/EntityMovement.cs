@@ -87,9 +87,6 @@ namespace Shard.Entities
                 GameObject platform = rayCastHit.collider.gameObject;
                 platform.GetComponent<OneWayPlatform>().AllowDrop();
             }
-
-            // Otherwise, jump
-            else Jump(true);
         }
 
         public void Move(float x, float y) {
