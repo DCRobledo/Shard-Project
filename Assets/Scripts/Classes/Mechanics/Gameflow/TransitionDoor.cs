@@ -9,11 +9,12 @@ namespace Shard.Gameflow
         [SerializeField]
         private string sceneToLoad;
 
-        public static Action<string> transitionDoorEvent;
-
         private void OnTriggerEnter2D(Collider2D other) {
-            if(other.tag == "Player")
-                transitionDoorEvent?.Invoke(sceneToLoad);
+            if(other.tag == "Player") {
+                this.GetComponent<BoxCollider2D>().enabled = false;
+
+                GameFlowManagement.endLevelEvent?.Invoke(sceneToLoad, this.gameObject);
+            }
         }
     }
 }

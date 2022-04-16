@@ -1,6 +1,6 @@
 using Shard.Controllers;
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -23,7 +23,6 @@ namespace Shard.Gameflow
         private GameObject startDoor;
         private Animator startDoorAnimator;
 
-        [SerializeField]
         private GameObject endDoor;
         private Animator endDoorAnimator;
 
@@ -32,6 +31,8 @@ namespace Shard.Gameflow
 
         private GameObject mainCamera;
         private CinemachineBrain cameraBrain;
+
+        public static Action<string, GameObject> endLevelEvent;
 
 
         private void Awake() {
@@ -43,7 +44,6 @@ namespace Shard.Gameflow
             this.playerAnimator          = player.GetComponent<Animator>();
             this.levelTransitionAnimator = levelTransitionGO.GetComponent<Animator>();
             this.startDoorAnimator       = startDoor.GetComponent<Animator>();
-            this.endDoorAnimator         = endDoor.GetComponent<Animator>();
 
             this.levelTransitionGO.SetActive(playStartSequence);
         }
@@ -56,11 +56,11 @@ namespace Shard.Gameflow
         }
 
         private void OnEnable() {
-            TransitionDoor.transitionDoorEvent += EndLevel;
+            endLevelEvent += EndLevel;
         }
 
         private void OnDisable() {
-            TransitionDoor.transitionDoorEvent -= EndLevel;
+            endLevelEvent -= EndLevel;
         }
 
 
@@ -103,21 +103,21 @@ namespace Shard.Gameflow
             this.levelTransitionGO.SetActive(false);
         }
 
-        private void EndLevel(string sceneToLoad) {
-            // Prevent multiple event triggering
-            TransitionDoor.transitionDoorEvent -= EndLevel;
-
+        public void EndLevel(string sceneToLoad, GameObject transitionDoor) {
             // Disable player input
             PlayerController.Instance.DisableInput();
 
             // Start end level sequence
             if(playEndSequence)
-                StartCoroutine(EndLevelSequence(sceneToLoad));
+                StartCoroutine(EndLevelSequence(sceneToLoad, transitionDoor));
             else
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                SceneManager.LoadScene(sceneToLoad);
         }
 
-        private IEnumerator EndLevelSequence(string sceneToLoad) {
+        private IEnumerator EndLevelSequence(string sceneToLoad, GameObject transitionDoor) {
+            this.endDoor = transitionDoor;
+            this.endDoorAnimator = transitionDoor.GetComponent<Animator>();
+
             this.levelTransitionGO.SetActive(true);
             this.levelTransitionAnimator.Play("idle_open");
 
