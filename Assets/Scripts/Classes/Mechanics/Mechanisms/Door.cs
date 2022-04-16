@@ -15,8 +15,8 @@ namespace Shard.Mechanisms
         [SerializeField]
         private float movingDistance = 2f;
 
-        public Vector3 openPosition;
-        public Vector3 closePosition;
+        private Vector3 openPosition;
+        private Vector3 closePosition;
 
         private Coroutine openAnimation;
         private Coroutine closeAnimation;
@@ -180,7 +180,6 @@ namespace Shard.Mechanisms
     public class ButtonTracker {
         [SerializeField]
         private GameObject button;
-        [SerializeField]
         private bool state;
 
         public ButtonTracker(GameObject button, bool state)

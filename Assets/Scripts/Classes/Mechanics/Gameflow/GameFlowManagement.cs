@@ -122,7 +122,8 @@ namespace Shard.Gameflow
             this.levelTransitionAnimator.Play("idle_open");
 
             // Set camera x_offset to 0
-            cameraBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneWidth = 0f;
+            CinemachineStateDrivenCamera vcam = cameraBrain.ActiveVirtualCamera as CinemachineStateDrivenCamera;
+            vcam.LiveChild.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_DeadZoneWidth = 0f;
 
             // Move player to end door
             StartCoroutine(MovePlayerToDoor(endDoor.transform.localPosition));
