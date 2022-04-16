@@ -195,7 +195,7 @@ MonoBehaviour:
   crouchFactor: 2
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 8256
+    m_Bits: 24640
   smoothingFactor: 0.05
   jumpTrigger:
     m_PersistentCalls:
