@@ -30,6 +30,7 @@ namespace Shard.Controllers
         private Command grabButton;
         private Command crouchButton;
         private Command programButton;
+        private Command returnToCheckpointButton;
 
         private InputActions InputActions;
         private InputAction movement;
@@ -62,6 +63,7 @@ namespace Shard.Controllers
             reCallButton = new ActionCommand(playerActions);
             grabButton = new ActionCommand(playerActions);
             programButton = new ProgramCommand();
+            returnToCheckpointButton = new ReturnToCheckpointCommand(EntityEnum.Entity.PLAYER);
         }
 
         private void OnEnable() {
@@ -82,6 +84,8 @@ namespace Shard.Controllers
 
             InputActions.Player.Program.performed += context => programButton.Execute();
 
+            InputActions.Player.ReturnToCheckpoint.performed += context => returnToCheckpointButton.Execute();
+
             // Subscribe enabling and disabling to input console state management
             InputConsole.enterInputStateEvent += DisableInput;
             InputConsole.exitInputStateEvent += EnableInput;
@@ -99,6 +103,7 @@ namespace Shard.Controllers
             InputActions.Player.ReCall.Enable();
             InputActions.Player.Grab.Enable();
             InputActions.Player.Program.Enable();
+            InputActions.Player.ReturnToCheckpoint.Enable();
         }
 
         private void EnableTriggers() {
@@ -122,6 +127,7 @@ namespace Shard.Controllers
             InputActions.Player.ReCall.Disable();
             InputActions.Player.Grab.Disable();
             InputActions.Player.Program.Disable();
+            InputActions.Player.ReturnToCheckpoint.Disable();
         }
 
         private void FixedUpdate() {

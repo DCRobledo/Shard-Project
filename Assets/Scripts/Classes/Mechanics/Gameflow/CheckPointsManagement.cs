@@ -30,6 +30,8 @@ namespace Shard.Gameflow
         public static Action playerDeathEvent;
         public static Action robotDeathEvent;  
 
+        public static Action<EntityEnum.Entity> returnToLastCheckpointEvent;
+
 
         private void Awake() {
             player = GameObject.Find("player");
@@ -45,11 +47,15 @@ namespace Shard.Gameflow
         private void OnEnable() {
             Checkpoint.checkpointEvent += UpdateCheckpoint;
             DeathTrigger.deathTriggerEvent += ReturnToLastCheckpoint;
+
+            returnToLastCheckpointEvent += ReturnToLastCheckpoint; 
         }
 
         private void OnDisable() {
             Checkpoint.checkpointEvent -= UpdateCheckpoint;
             DeathTrigger.deathTriggerEvent -= ReturnToLastCheckpoint;
+
+            returnToLastCheckpointEvent -= ReturnToLastCheckpoint; 
         }
 
 
@@ -62,6 +68,8 @@ namespace Shard.Gameflow
             }
             catch (System.Exception) {}
         }
+
+        private void ReturnToLastCheckpoint(EntityEnum.Entity entity) { ReturnToLastCheckpoint(entity.ToString()); }
 
         private void ReturnToLastCheckpoint(string entityTag) {
             try {

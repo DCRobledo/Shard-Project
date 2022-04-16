@@ -91,6 +91,15 @@ namespace Shard.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReturnToCheckpoint"",
+                    ""type"": ""Button"",
+                    ""id"": ""7473dc43-3fa8-46a5-b335-f27abf757230"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -214,6 +223,17 @@ namespace Shard.Input
                     ""action"": ""Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67412186-9de4-4647-8794-858ddac53a78"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReturnToCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -277,6 +297,7 @@ namespace Shard.Input
             m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
             m_Player_Program = m_Player.FindAction("Program", throwIfNotFound: true);
             m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
+            m_Player_ReturnToCheckpoint = m_Player.FindAction("ReturnToCheckpoint", throwIfNotFound: true);
             // CommandConsole
             m_CommandConsole = asset.FindActionMap("CommandConsole", throwIfNotFound: true);
             m_CommandConsole_PreviousCommand = m_CommandConsole.FindAction("PreviousCommand", throwIfNotFound: true);
@@ -347,6 +368,7 @@ namespace Shard.Input
         private readonly InputAction m_Player_Crouch;
         private readonly InputAction m_Player_Program;
         private readonly InputAction m_Player_Drop;
+        private readonly InputAction m_Player_ReturnToCheckpoint;
         public struct PlayerActions
         {
             private @InputActions m_Wrapper;
@@ -358,6 +380,7 @@ namespace Shard.Input
             public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
             public InputAction @Program => m_Wrapper.m_Player_Program;
             public InputAction @Drop => m_Wrapper.m_Player_Drop;
+            public InputAction @ReturnToCheckpoint => m_Wrapper.m_Player_ReturnToCheckpoint;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -388,6 +411,9 @@ namespace Shard.Input
                     @Drop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
                     @Drop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
                     @Drop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
+                    @ReturnToCheckpoint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReturnToCheckpoint;
+                    @ReturnToCheckpoint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReturnToCheckpoint;
+                    @ReturnToCheckpoint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReturnToCheckpoint;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -413,6 +439,9 @@ namespace Shard.Input
                     @Drop.started += instance.OnDrop;
                     @Drop.performed += instance.OnDrop;
                     @Drop.canceled += instance.OnDrop;
+                    @ReturnToCheckpoint.started += instance.OnReturnToCheckpoint;
+                    @ReturnToCheckpoint.performed += instance.OnReturnToCheckpoint;
+                    @ReturnToCheckpoint.canceled += instance.OnReturnToCheckpoint;
                 }
             }
         }
@@ -467,6 +496,7 @@ namespace Shard.Input
             void OnCrouch(InputAction.CallbackContext context);
             void OnProgram(InputAction.CallbackContext context);
             void OnDrop(InputAction.CallbackContext context);
+            void OnReturnToCheckpoint(InputAction.CallbackContext context);
         }
         public interface ICommandConsoleActions
         {
