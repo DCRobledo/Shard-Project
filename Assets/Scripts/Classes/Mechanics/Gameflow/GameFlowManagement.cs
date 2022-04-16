@@ -56,11 +56,11 @@ namespace Shard.Gameflow
         }
 
         private void OnEnable() {
-            WinTrigger.endLevelEvent += EndLevel;
+            TransitionDoor.transitionDoorEvent += EndLevel;
         }
 
         private void OnDisable() {
-            WinTrigger.endLevelEvent -= EndLevel;
+            TransitionDoor.transitionDoorEvent -= EndLevel;
         }
 
 
@@ -103,21 +103,21 @@ namespace Shard.Gameflow
             this.levelTransitionGO.SetActive(false);
         }
 
-        private void EndLevel() {
+        private void EndLevel(string sceneToLoad) {
             // Prevent multiple event triggering
-            WinTrigger.endLevelEvent -= EndLevel;
+            TransitionDoor.transitionDoorEvent -= EndLevel;
 
             // Disable player input
             PlayerController.Instance.DisableInput();
 
             // Start end level sequence
             if(playEndSequence)
-                StartCoroutine(EndLevelSequence());
+                StartCoroutine(EndLevelSequence(sceneToLoad));
             else
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-        private IEnumerator EndLevelSequence() {
+        private IEnumerator EndLevelSequence(string sceneToLoad) {
             this.levelTransitionGO.SetActive(true);
             this.levelTransitionAnimator.Play("idle_open");
 
@@ -150,7 +150,7 @@ namespace Shard.Gameflow
             yield return new WaitForSeconds(levelTransitionAnimator.GetCurrentAnimatorStateInfo(0).length + 1f);
 
             // Load next level
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(sceneToLoad);
         }
 
 
