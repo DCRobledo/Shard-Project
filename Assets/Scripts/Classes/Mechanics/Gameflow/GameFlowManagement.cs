@@ -110,8 +110,11 @@ namespace Shard.Gameflow
             // Start end level sequence
             if(playEndSequence)
                 StartCoroutine(EndLevelSequence(sceneToLoad, transitionDoor));
-            else
-                SceneManager.LoadScene(sceneToLoad);
+            else {
+                if(sceneToLoad.ToLower() == "exit") Application.Quit();
+                else SceneManager.LoadScene(sceneToLoad);
+            }
+                
         }
 
         private IEnumerator EndLevelSequence(string sceneToLoad, GameObject transitionDoor) {
@@ -149,8 +152,9 @@ namespace Shard.Gameflow
             levelTransitionAnimator.SetTrigger("closeSecondHalf");
             yield return new WaitForSeconds(levelTransitionAnimator.GetCurrentAnimatorStateInfo(0).length + 1f);
 
-            // Load next level
-            SceneManager.LoadScene(sceneToLoad);
+            // Load next level or quit
+            if(sceneToLoad.ToLower() == "exit") Application.Quit();
+            else SceneManager.LoadScene(sceneToLoad);
         }
 
 
