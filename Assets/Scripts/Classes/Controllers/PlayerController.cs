@@ -5,7 +5,7 @@ using Shard.Entities;
 using Shard.UI.ProgrammingUI;
 using Shard.Enums;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +19,10 @@ namespace Shard.Controllers
         [SerializeField]
         private bool selfControlled = false;
         private bool isMoving = false;
+
+        private Coroutine checkForStop;
+
+        private Vector2 movingDirection;
         
         private GameObject player;
         private EntityMovement playerMovement;
@@ -130,8 +134,10 @@ namespace Shard.Controllers
             InputActions.Player.ReturnToCheckpoint.Disable();
         }
 
+
         private void FixedUpdate() {
-            MovePlayer(movement.ReadValue<Vector2>());
+            movingDirection = movement.ReadValue<Vector2>();
+            MovePlayer();
         }
 
 
@@ -143,8 +149,8 @@ namespace Shard.Controllers
             }
         }
 
-        private void MovePlayer(Vector2 direction) {
-            object[] parameters = {direction.x, direction.y};
+        private void MovePlayer() {
+            object[] parameters = {movingDirection.x, movingDirection.y};
 
             if((float) parameters[0] != 0) {
                 isMoving = true;
@@ -152,13 +158,22 @@ namespace Shard.Controllers
                 InvokeTrigger(EntityEnum.Action.MOVE);
             } 
 
-            else if(isMoving) {
+            else if(isMoving) 
+            {
                 isMoving = false;
+                checkForStop = StartCoroutine(CheckForStop());
+            }
 
-                InvokeTrigger(EntityEnum.Action.STOP);
-            }                         
-            
             moveButton.ExecuteWithParameters(parameters);
+        }
+
+        private IEnumerator CheckForStop() {
+            // Wait for a couple of frames to know if it is a full stop or just a change in the moving direction
+            for(int i = 0; i < 5 && movingDirection.x == 0; i++)
+                yield return new WaitForEndOfFrame();
+            
+            if(movingDirection.x == 0) 
+                InvokeTrigger(EntityEnum.Action.STOP);
         }
 
         public void ReleaseRobot() { 
