@@ -211,16 +211,7 @@ namespace Shard.Controllers
                 isRobotOn = true;
 
                 turnOnTrigger?.Invoke();
-
-                StartCoroutine(TurnOnCoroutine());
             }
-        }
-
-        private IEnumerator TurnOnCoroutine() {
-            // Wait for the robot to turn on
-            yield return new WaitForSeconds(0.8f);
-
-            StartBlockBehaviour();
         }
 
         public void TurnOff() {
@@ -237,7 +228,7 @@ namespace Shard.Controllers
                 if(blockBehaviourExecution != null)
                     StopCoroutine(blockBehaviourExecution);
 
-                if(blockBehaviour != null)
+                if(blockBehaviour != null && !blockBehaviour.IsEmpty())
                     blockBehaviourExecution = StartCoroutine(blockBehaviour.ExecuteBehavior());
             }
         }

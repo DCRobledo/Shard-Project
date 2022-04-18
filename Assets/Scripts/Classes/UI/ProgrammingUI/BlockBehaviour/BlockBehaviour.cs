@@ -175,6 +175,9 @@ namespace Shard.UI.ProgrammingUI
             return this.maxIndex;
         }
 
+        public bool IsEmpty() {
+            return this.blocks.Length <= 0;
+        }
 
         public void Print() {
             Debug.Log(this.ToString(0));
