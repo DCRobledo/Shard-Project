@@ -10,7 +10,7 @@ namespace Shard.Gameflow
         public void ReCallRobot() {
             GameObject.FindGameObjectWithTag("Robot").transform.position = this.transform.position;
 
-            RobotController.Instance.TurnOff();
+            UIController.Instance.TurnOffButtonClick();
         }
     }
 }

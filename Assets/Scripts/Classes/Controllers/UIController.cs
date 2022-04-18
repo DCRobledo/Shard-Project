@@ -3,6 +3,8 @@ using Shard.Patterns.Singleton;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace Shard.Controllers 
 {
@@ -13,8 +15,11 @@ namespace Shard.Controllers
 
         [SerializeField]
         private GameObject programmingUI;
+    
         [SerializeField]
-        private GameObject overlayPUI;
+        private Button turnOnButton;
+        [SerializeField]
+        private Button turnOffButton;
 
         private Animator animatorPUI;
         
@@ -40,5 +45,9 @@ namespace Shard.Controllers
                 default: break;
             }
         }
+    
+        public void TurnOnButtonClick() { turnOnButton.onClick?.Invoke(); }
+
+        public void TurnOffButtonClick() { turnOffButton.onClick?.Invoke(); }
     }
 }
