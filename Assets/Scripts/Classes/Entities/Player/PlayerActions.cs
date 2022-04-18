@@ -37,7 +37,7 @@ namespace Shard.Entities
                 if (reCallZone != null)
                 {
                     // Recall the robot
-                    reCallZone.GetComponent<ReCallZone>().ReCallRobot();
+                     StartCoroutine(reCallZone.GetComponent<ReCallZone>().ReCallRobot());
 
                     // Start cooldown
                     StartCoroutine(ReCallCoolDown(reCallCoolDown));
