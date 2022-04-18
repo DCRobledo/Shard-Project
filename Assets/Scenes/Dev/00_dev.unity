@@ -19652,26 +19652,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 433936477}
     m_Modifications:
     - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotDroppedEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotGrabbedEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotDroppedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotGrabbedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotGrabbedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: robotDroppedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1792849388}
@@ -19687,62 +19667,6 @@ PrefabInstance:
       propertyPath: robotGrabbedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 515211191}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotGrabbedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 515211191}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotDroppedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotGrabbedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotGrabbedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotDroppedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: StartBlockBehaviour
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotGrabbedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: StopBlockBehaviour
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotGrabbedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: StopBlockBehaviour
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotDroppedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Shard.Controllers.RobotController, Scripts
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotGrabbedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Shard.Controllers.RobotController, Scripts
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotGrabbedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: Shard.Controllers.RobotController, Scripts
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotDroppedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotDroppedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotGrabbedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 801170383226687560, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
-      propertyPath: robotGrabbedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 8710090841162840075, guid: 88bdb689cda8515459fcf17be98e5958, type: 3}
       propertyPath: m_RootOrder
       value: 1
