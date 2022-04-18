@@ -138,7 +138,7 @@ namespace Shard.Controllers
             LinkCommandTrigger();
         }
 
-        private void ResetCommandBehaviour() {
+        public void ResetCommandBehaviour() {
             UnlinkCommandTrigger();
 
             commandBehaviour = null;
@@ -187,7 +187,22 @@ namespace Shard.Controllers
         }
 
         private void UnlinkCommandTrigger() {
-            PlayerController.jumpTrigger = null;
+            PlayerController.jumpTrigger  -= CommandBehaviour.commandTrigger.Invoke;
+            PlayerController.moveTrigger  -= CommandBehaviour.commandTrigger.Invoke;
+            PlayerController.stopTrigger  -= commandBehaviour.StopAllCoroutines;
+
+            PlayerMovement.flipTrigger    -= CommandBehaviour.commandTrigger.Invoke;
+            PlayerMovement.crouchTrigger  -= CommandBehaviour.commandTrigger.Invoke;
+
+            PlayerActions.grabTrigger     -= CommandBehaviour.commandTrigger.Invoke;
+            PlayerActions.dropTrigger     -= CommandBehaviour.commandTrigger.Invoke;
+
+            robotMovement.UnsubscribeFromJumpTrigger(CommandBehaviour.commandTrigger);
+
+            RobotMovement.moveTrigger     -= CommandBehaviour.commandTrigger.Invoke;
+            RobotMovement.flipTrigger     -= CommandBehaviour.commandTrigger.Invoke;
+
+            RobotController.turnOnTrigger -= CommandBehaviour.commandTrigger.Invoke;
         }
 
     
@@ -232,9 +247,6 @@ namespace Shard.Controllers
                 StopCoroutine(blockBehaviourExecution);
         }
 
-        public void ClearCommandBehaviour() {
-            if(commandBehaviour != null) Destroy(robot.GetComponent<CommandBehaviour>());
-        }
 
 
         public void ToggleIsRobotGrabbed() {

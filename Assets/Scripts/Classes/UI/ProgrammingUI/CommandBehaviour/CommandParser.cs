@@ -37,7 +37,7 @@ namespace Shard.UI.ProgrammingUI
 
             // Check if it is a 'clear' command
             if(command == "clear") {
-                RobotController.Instance.ClearCommandBehaviour();
+                RobotController.Instance.ResetCommandBehaviour();
                 result = "CLEAR: The previous command behaviour has been removed";
                 return false;
             }

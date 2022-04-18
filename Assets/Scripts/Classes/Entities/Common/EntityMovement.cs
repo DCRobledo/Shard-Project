@@ -181,6 +181,10 @@ namespace Shard.Entities
         public void SubscribeToJumpTrigger(Action commandEvent) {
             jumpTrigger.AddListener(commandEvent.Invoke);
         }
+
+        public void UnsubscribeFromJumpTrigger(Action commandEvent) {
+            jumpTrigger.RemoveListener(commandEvent.Invoke);
+        }
     }
 }
 
