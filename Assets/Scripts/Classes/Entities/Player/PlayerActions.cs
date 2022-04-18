@@ -72,5 +72,8 @@ namespace Shard.Entities
             }
         }
 
+        public void ReleaseRobot() {
+            base.Grab();
+        }
     }
 }

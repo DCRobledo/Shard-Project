@@ -1,5 +1,7 @@
 using Shard.Controllers;
 using System;
+using System.Collections;
+using UnityEngine;
 
 namespace Shard.Entities
 {

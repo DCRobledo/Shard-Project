@@ -204,11 +204,7 @@ namespace Shard.Controllers
             // Wait for the robot to turn on
             yield return new WaitForSeconds(0.8f);
 
-            if(blockBehaviourExecution != null)
-                StopCoroutine(blockBehaviourExecution);
-
-            if(blockBehaviour != null)
-                blockBehaviourExecution = StartCoroutine(blockBehaviour.ExecuteBehavior());
+            StartBlockBehaviour();
         }
 
         public void TurnOff() {
@@ -218,6 +214,21 @@ namespace Shard.Controllers
                 if(blockBehaviourExecution != null)
                     StopCoroutine(blockBehaviourExecution);
             }
+        }
+
+        public void StartBlockBehaviour() {
+            if(isRobotOn) {
+                if(blockBehaviourExecution != null)
+                    StopCoroutine(blockBehaviourExecution);
+
+                if(blockBehaviour != null)
+                    blockBehaviourExecution = StartCoroutine(blockBehaviour.ExecuteBehavior());
+            }
+        }
+
+        public void StopBlockBehaviour() {
+            if(blockBehaviourExecution != null)
+                StopCoroutine(blockBehaviourExecution);
         }
 
 

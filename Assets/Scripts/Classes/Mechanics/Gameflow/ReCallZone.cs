@@ -1,3 +1,4 @@
+using Shard.Controllers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace Shard.Gameflow
     {
         public void ReCallRobot() {
             GameObject.FindGameObjectWithTag("Robot").transform.position = this.transform.position;
+
+            RobotController.Instance.TurnOff();
         }
     }
 }
