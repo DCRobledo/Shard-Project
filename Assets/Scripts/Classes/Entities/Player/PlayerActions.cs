@@ -1,6 +1,9 @@
+using Shard.Lib.Custom;
+using Shard.Gameflow;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Shard.Entities
 {
@@ -9,49 +12,65 @@ namespace Shard.Entities
         [SerializeField]
         private float reCallCoolDown = 1f;
 
-        [SerializeField]
-        private GameObject objectToReCall;
-
-        private bool canReCall = true;
+        private bool isReCallInCooldown = false;
 
         public static Action grabTrigger;
         public static Action dropTrigger;
 
+        [SerializeField]
+        private UnityEvent robotGrabbedEvent;
+        [SerializeField]
+        private UnityEvent robotDroppedEvent;
 
-        protected override void Awake() {
-            objectToReCall = GameObject.Find("robot");
-
-            base.Awake();
-        }
-
-
-        public override void ChangeObjectToReCall(GameObject objectToReCall) { this.objectToReCall = objectToReCall; }
     
         public override void ReCall()
         {
-            if (canReCall) {
-                // Recall the entity
-                Vector3 entityPosition = this.GetComponent<Transform>().position;
-                objectToReCall.GetComponent<Transform>().position = new Vector3(entityPosition.x + 1.5f, entityPosition.y + 1f);
+            if (!isReCallInCooldown) {
+                // Check if we are inside a recall zone
+                GameObject reCallZone = Detection.DetectObject(
+                    this.GetComponent<PolygonCollider2D>(),
+                    LayerMask.GetMask("ReCallZones"),
+                    this.GetComponent<PolygonCollider2D>().bounds.size,
+                    0.2f
+                );
+                
+                if (reCallZone != null)
+                {
+                    // Recall the robot
+                    reCallZone.GetComponent<ReCallZone>().ReCallRobot();
 
-                // Start cooldown
-                StartCoroutine(ReCallCoolDown(reCallCoolDown));
+                    // Start cooldown
+                    StartCoroutine(ReCallCoolDown(reCallCoolDown));
+                }
             }
         }
 
         private IEnumerator ReCallCoolDown(float seconds) {
-            canReCall = false;
+            isReCallInCooldown = true;
 
             yield return new WaitForSeconds(seconds);
 
-            canReCall = true;
+            isReCallInCooldown = false;
         }
+
     
         public override void Grab() {
-             if(grabJoint.connectedBody != null) dropTrigger?.Invoke();
-             else if(grabbableObjects.Count > 0) grabTrigger?.Invoke();
+            if(grabJoint.connectedBody != null) {
+                dropTrigger?.Invoke();
 
-             base.Grab();
+                if(grabJoint.connectedBody.tag == "Robot")
+                    robotDroppedEvent?.Invoke();
+            }
+
+            base.Grab();
+
+            if(grabJoint.connectedBody != null) {
+                grabTrigger?.Invoke();
+
+                if(grabJoint.connectedBody.tag == "Robot")
+                    robotGrabbedEvent?.Invoke();
+            }
         }
+
     }
 }

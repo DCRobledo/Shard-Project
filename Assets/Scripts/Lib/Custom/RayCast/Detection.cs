@@ -92,6 +92,20 @@ namespace Shard.Lib.Custom
             return rayCastHit.collider != null ? rayCastHit.collider.transform.tag : defaultResult;
         }
 
+        public static GameObject DetectObject(PolygonCollider2D polygonCollider2D, LayerMask layerMask, Vector3 size, float offset) {
+            RaycastHit2D rayCastHit = 
+            Physics2D.BoxCast(
+                polygonCollider2D.bounds.center,
+                size,
+                0f,
+                Vector2.down,
+                offset,
+                layerMask
+            );      
+
+            return rayCastHit.collider != null ? rayCastHit.collider.gameObject : null;
+        }
+
         public static List<string> DetectObjects(PolygonCollider2D polygonCollider2D, LayerMask layerMask, float offset) {
             List<string> detectedObjects = new List<string>();
 

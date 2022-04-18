@@ -13,6 +13,8 @@ namespace Shard.Controllers
 
         [SerializeField]
         private GameObject programmingUI;
+        [SerializeField]
+        private GameObject overlayPUI;
 
         private Animator animatorPUI;
         
