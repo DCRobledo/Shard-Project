@@ -76,7 +76,7 @@ namespace Shard.UI.ProgrammingUI
             inputField.Select();
         }  
 
-        private void SubmitCommand() {   
+        private void SubmitCommand() {
             string command = inputField.text.ToLower();
             string commandEvent = "";
             string commandTrigger = "";

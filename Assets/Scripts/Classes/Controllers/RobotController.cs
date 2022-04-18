@@ -232,6 +232,10 @@ namespace Shard.Controllers
                 StopCoroutine(blockBehaviourExecution);
         }
 
+        public void ClearCommandBehaviour() {
+            if(commandBehaviour != null) Destroy(robot.GetComponent<CommandBehaviour>());
+        }
+
 
         public void ToggleIsRobotGrabbed() {
             // Update control variable

@@ -1,3 +1,4 @@
+using Shard.Controllers;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,37 +35,46 @@ namespace Shard.UI.ProgrammingUI
             commandTrigger = "";
             commandDelay = "";
 
-            // Check that there are no more than two main elements
-            if (!ParseMainStructure(command, out split, out result)) return false;
-
-
-            // Parse the delay, if it exists
-            if (split.Length > 1){
-                commandDelay = split[1];
-
-                if (!ParseDelay(commandDelay, out result)) return false; 
+            // Check if it is a 'clear' command
+            if(command == "clear") {
+                RobotController.Instance.ClearCommandBehaviour();
+                result = "CLEAR: The previous command behaviour has been removed";
+                return false;
             }
-                
 
-            // Now, check that the trigger is surroned by brackets
-            if (!ParseTriggersBrackets(split[0], out split, out result)) return false;
-
-
-            // Parse the event
-             commandEvent = split[0];
-
-            if (!ParseEvent(commandEvent, out result)) return false;
+            else {
+                // Check that there are no more than two main elements
+                if (!ParseMainStructure(command, out split, out result)) return false;
 
 
-            // Parse the trigger
-             commandTrigger = split[1].Split(')')[0];
+                // Parse the delay, if it exists
+                if (split.Length > 1){
+                    commandDelay = split[1];
 
-            if (!ParseTrigger(commandTrigger, out result)) return false;
-    
+                    if (!ParseDelay(commandDelay, out result)) return false; 
+                }
+                    
 
-            // Parse OK
-            result = "OK: A new command behaviour has been created"; 
-            return true;
+                // Now, check that the trigger is surroned by brackets
+                if (!ParseTriggersBrackets(split[0], out split, out result)) return false;
+
+
+                // Parse the event
+                commandEvent = split[0];
+
+                if (!ParseEvent(commandEvent, out result)) return false;
+
+
+                // Parse the trigger
+                commandTrigger = split[1].Split(')')[0];
+
+                if (!ParseTrigger(commandTrigger, out result)) return false;
+        
+
+                // Parse OK
+                result = "OK: A new command behaviour has been created"; 
+                return true;
+            }
         }
 
 
