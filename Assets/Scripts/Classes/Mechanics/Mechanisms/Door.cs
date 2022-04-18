@@ -36,30 +36,12 @@ namespace Shard.Mechanisms
         }
 
         private void OnEnable() {
-            // foreach (GameObject button in openingButtons)
-            //     button.GetComponent<Button>().buttonEvent += Open;
-
-            // foreach (GameObject button in closingButtons)
-            //     button.GetComponent<Button>().buttonEvent += Close;
-
-            // foreach (GameObject button in toggleButtons)
-            //     button.GetComponent<Button>().buttonEvent += Toggle;
-
             for(int i = 0; i < buttonConnections.Count; i++)
                 for(int j = 0; j < buttonConnections[i].GetButtons().Count; j++)
                     buttonConnections[i].GetButtons()[j].GetButton().GetComponent<Button>().buttonEvent += UpdateButtonState;
         }
 
         private void OnDisable() {
-            // foreach (GameObject button in openingButtons)
-            //     button.GetComponent<Button>().buttonEvent -= Open;
-
-            // foreach (GameObject button in closingButtons)
-            //     button.GetComponent<Button>().buttonEvent -= Close;
-            
-            // foreach (GameObject button in toggleButtons)
-            //     button.GetComponent<Button>().buttonEvent += Toggle;
-
             for(int i = 0; i < buttonConnections.Count; i++)
                 for(int j = 0; j < buttonConnections[i].GetButtons().Count; j++)
                     buttonConnections[i].GetButtons()[j].GetButton().GetComponent<Button>().buttonEvent -= UpdateButtonState;
@@ -116,7 +98,7 @@ namespace Shard.Mechanisms
 
             else {
                 if(openAnimation == null)
-                Open();
+                    Open();
                 else
                     Close();
             }
@@ -135,11 +117,11 @@ namespace Shard.Mechanisms
                 switch(buttonConnection.GetAction()) {
                     case MechanismEnum.DoorAction.OPEN:   
                         if(buttonConnection.IsActive()) Open();
-                        else                            Close();
+                        //else                            Close();
                     break;
                     case MechanismEnum.DoorAction.CLOSE:   
-                        if(buttonConnection.IsActive()) Open();
-                        else                            Close();
+                        if(buttonConnection.IsActive()) Close();
+                        //else                            Close();
                     break;
                     case MechanismEnum.DoorAction.TOGGLE: Toggle(); break;   
                 }
