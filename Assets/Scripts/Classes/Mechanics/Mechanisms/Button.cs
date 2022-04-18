@@ -20,7 +20,6 @@ namespace Shard.Mechanisms
 
         public Action<GameObject, bool> buttonEvent;
 
-        private GameObject pressingEntity;
         private bool shouldCheckForPress = true;
         private bool shouldCheckForRelease = false;
 
@@ -39,7 +38,6 @@ namespace Shard.Mechanisms
 
                 this.GetComponent<SpriteRenderer>().sprite = pressedSprite;
 
-                pressingEntity = other.gameObject;
                 shouldCheckForRelease = true;
 
                 StartCoroutine(PressDelay());
@@ -57,19 +55,18 @@ namespace Shard.Mechanisms
             string detectedEntity = 
                 Detection.DetectObject(
                     GetComponent<PolygonCollider2D>(),
-                     LayerMask.GetMask(LayerMask.LayerToName(pressingEntity.layer)),
+                     LayerMask.GetMask(canBePressedBy),
                      Detection.Direction.UP,
                      GetComponent<PolygonCollider2D>().bounds.size,
                      0.2f
                 );
             
-            if(pressingEntity.tag != detectedEntity) {
+            if(detectedEntity == null) {
                 if(buttonType == MechanismEnum.ButtonType.PRESS_RELEASE)
                     buttonEvent?.Invoke(this.gameObject, false);
 
                 this.GetComponent<SpriteRenderer>().sprite = releasedSprite;
 
-                pressingEntity = null;
                 shouldCheckForRelease = false;
             }
         }
