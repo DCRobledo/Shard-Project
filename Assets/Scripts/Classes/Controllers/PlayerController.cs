@@ -27,6 +27,7 @@ namespace Shard.Controllers
         private GameObject player;
         private EntityMovement playerMovement;
         private EntityActions playerActions;
+        private PlayerAnimations playerAnimations;
 
         private Command jumpButton;
         private Command moveButton;
@@ -53,6 +54,7 @@ namespace Shard.Controllers
 
             playerMovement = player.GetComponent<PlayerMovement>();
             playerActions = player.GetComponent<PlayerActions>();
+            playerAnimations = player.GetComponent<PlayerAnimations>();
 
             // Initialize the input system
             AwakeInput();
@@ -178,6 +180,8 @@ namespace Shard.Controllers
 
         public void ReleaseRobot() { 
             (playerActions as PlayerActions).ReleaseRobot();
+
+            playerAnimations.SetGrabTrigger();
         }
     }
 }
