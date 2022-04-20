@@ -35,7 +35,7 @@ namespace Shard.Entities
         }
 
         public string CheckAbove() {
-            return Detection.DetectObject(polygonCollider2D, sensorDetectionLayer, Detection.Direction.UP, 1f, "Void");
+            return Detection.DetectObject(polygonCollider2D, sensorDetectionLayer, Detection.Direction.UP, 2f, "Void", true);
         }
     }
 }

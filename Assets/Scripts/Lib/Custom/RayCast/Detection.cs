@@ -127,7 +127,7 @@ namespace Shard.Lib.Custom
             return detectedObjects;    
         }
 
-        public static string DetectObject(PolygonCollider2D polygonCollider2D, LayerMask layerMask, Direction direction, float offset = 0.5f, string defaultResult = null) {
+        public static string DetectObject(PolygonCollider2D polygonCollider2D, LayerMask layerMask, Direction direction, float offset = 0.5f, string defaultResult = null, bool debug = false) {
             float xDirection = direction == Direction.RIGHT ? 1f : (direction == Direction.LEFT ? -1f : 0f);
             float yDirection = direction == Direction.UP ? 1f : (direction == Direction.DOWN ? -1f : 0f);
 
@@ -139,6 +139,14 @@ namespace Shard.Lib.Custom
                 castDirection,
                 polygonCollider2D.bounds.size.x + offset,
                 layerMask
+            );
+
+            Color rayColor = rayCastHit.collider != null ? Color.red : Color.green;
+
+            Debug.DrawRay(
+                polygonCollider2D.bounds.center,
+                castDirection,
+                rayColor
             );    
 
             return rayCastHit.collider != null ? rayCastHit.collider.transform.tag : defaultResult;

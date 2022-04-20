@@ -101,6 +101,8 @@ namespace Shard.UI.ProgrammingUI
             // Execute the first block
             BehaviourBlock currentBlock = GetBlock();
 
+            // Debug.Log("Execute -> " + currentBlock?.GetBlockLocation().ToString());
+
             BlockLocation nextBlockLocation = currentBlock.Execute(); 
 
             yield return null;
@@ -121,7 +123,7 @@ namespace Shard.UI.ProgrammingUI
                     // Execute the block and get the next block location
                     nextBlockLocation = currentBlock.Execute();
 
-                    if (currentBlock.GetType() == BlockEnum.BlockType.ACTION) {
+                    if (currentBlock.GetType() != BlockEnum.BlockType.CONDITIONAL) {
                         yield return null;
                         iterationCounter = 0;
                     }
