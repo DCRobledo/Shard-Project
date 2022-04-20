@@ -89,16 +89,7 @@ namespace Shard.Entities
 
         private List<GameObject> CheckGrabbableObjects() 
         {
-            // Clear past objects
-            VisualUtils.ChangeObjectsColor(ref grabbableObjects, -.2f, -.2f, -.2f);
-                
-            // Detect grabbable objects
-            List<GameObject> detectedGrabbableObjects = Detection.DetectNearObjects(this.gameObject.transform.position, grabRange, whatIsGrabbable);
-
-            // Add visual cue for grabbable objects
-            VisualUtils.ChangeObjectsColor(ref detectedGrabbableObjects, .2f, .2f, .2f);
-
-            return detectedGrabbableObjects;        
+            return Detection.DetectNearObjects(this.gameObject.transform.position, grabRange, whatIsGrabbable);        
         }
     }
 }
