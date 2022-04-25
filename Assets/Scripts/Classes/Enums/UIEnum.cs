@@ -7,6 +7,12 @@ namespace Shard.Enums
             HUD,
             PAUSE_UI
         }
+
+        public enum PauseOptionType {
+            RESUME,
+            HELP,
+            EXIT
+        }
     }
 }
 
