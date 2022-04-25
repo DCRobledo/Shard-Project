@@ -2,6 +2,7 @@ using Shard.Entities;
 using Shard.Patterns.Command;
 using Shard.Patterns.Singleton;
 using Shard.UI.ProgrammingUI;
+using Shard.Gameflow;
 using Shard.Enums;
 using System;
 using System.Collections;
@@ -55,16 +56,24 @@ namespace Shard.Controllers
             gravityScale = robot.GetComponent<Rigidbody2D>().gravityScale;
             mass = robot.GetComponent<Rigidbody2D>().mass;
             angularDrag = robot.GetComponent<Rigidbody2D>().angularDrag;
+
+            
         }
 
         private void OnEnable() {
             BlockManagement.generateBlockBehaviourEvent += SetBlockBehaviour;
             InputConsole.generateCommandBehaviourEvent  += SetCommandBehaviour;
+
+            GameFlowManagement.sceneChangeEvent += ResetBlockBehaviour;
+            GameFlowManagement.sceneChangeEvent += ResetCommandBehaviour;
         }
 
         private void OnDisable() {
             BlockManagement.generateBlockBehaviourEvent -= SetBlockBehaviour;
             InputConsole.generateCommandBehaviourEvent  -= SetCommandBehaviour;
+
+            GameFlowManagement.sceneChangeEvent -= ResetBlockBehaviour;
+            GameFlowManagement.sceneChangeEvent -= ResetCommandBehaviour;
         }
 
 
@@ -127,6 +136,16 @@ namespace Shard.Controllers
             }
         }
 
+        public void ResetBlockBehaviour() {
+            StopBlockBehaviour();
+
+            if(blockBehaviour != null) {
+                blockBehaviour = null;
+
+                Destroy(robot.GetComponent<BlockBehaviour>());
+            }
+        }
+
 
         private void SetCommandBehaviour(string commandEvent, string commandTrigger, string commandDelay) {
             if(commandBehaviour != null) ResetCommandBehaviour();
@@ -139,11 +158,13 @@ namespace Shard.Controllers
         }
 
         public void ResetCommandBehaviour() {
-            UnlinkCommandTrigger();
+            if(commandBehaviour != null) {
+                UnlinkCommandTrigger();
 
-            commandBehaviour = null;
+                commandBehaviour = null;
 
-            Destroy(robot.GetComponent<CommandBehaviour>());
+                Destroy(robot.GetComponent<CommandBehaviour>());
+            }
         }
 
         private void LinkCommandEvent() {

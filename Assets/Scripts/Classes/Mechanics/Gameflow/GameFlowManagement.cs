@@ -33,6 +33,7 @@ namespace Shard.Gameflow
         private CinemachineBrain cameraBrain;
 
         public static Action<string, GameObject> endLevelEvent;
+        public static Action sceneChangeEvent;
 
 
         private void Awake() {
@@ -112,7 +113,10 @@ namespace Shard.Gameflow
                 StartCoroutine(EndLevelSequence(sceneToLoad, transitionDoor));
             else {
                 if(sceneToLoad.ToLower() == "exit") Application.Quit();
-                else SceneManager.LoadScene(sceneToLoad);
+                else {
+                    sceneChangeEvent?.Invoke();
+                    SceneManager.LoadScene(sceneToLoad);
+                }
             }
                 
         }
@@ -154,7 +158,10 @@ namespace Shard.Gameflow
 
             // Load next level or quit
             if(sceneToLoad.ToLower() == "exit") Application.Quit();
-            else SceneManager.LoadScene(sceneToLoad);
+            else {
+                sceneChangeEvent?.Invoke();
+                SceneManager.LoadScene(sceneToLoad);
+            } 
         }
 
 
