@@ -1,6 +1,6 @@
 using Shard.Enums;
 using Shard.Patterns.Singleton;
-using System.Collections;
+using Shard.Gameflow;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +15,8 @@ namespace Shard.Controllers
 
         [SerializeField]
         private GameObject programmingUI;
+        [SerializeField]
+        private GameObject pauseUI;
     
         [SerializeField]
         private Button turnOnButton;
@@ -35,12 +37,23 @@ namespace Shard.Controllers
             animatorPUI = programmingUI.GetComponent<Animator>();
         }
 
+        private void OnEnable() {
+            GameFlowManagement.pauseEvent += TogglePauseUI;
+            GameFlowManagement.unPauseEvent += TogglePauseUI;
+        }
+
+        private void OnDisable() {
+            GameFlowManagement.pauseEvent -= TogglePauseUI;
+            GameFlowManagement.unPauseEvent -= TogglePauseUI;
+        }
 
         public void ToggleProgrammingUI() { ToggleUI(UIEnum.UIType.PROGRAMMING_UI); }
+        public void TogglePauseUI() { ToggleUI(UIEnum.UIType.PAUSE_UI); }
 
         private void ToggleUI(UIEnum.UIType type) {
             switch(type) {
                 case UIEnum.UIType.PROGRAMMING_UI: animatorPUI.SetTrigger("togglePUI"); break;
+                case UIEnum.UIType.PAUSE_UI: pauseUI.SetActive(!pauseUI.activeInHierarchy); break;
 
                 default: break;
             }

@@ -4,7 +4,8 @@ namespace Shard.Enums
     {
         public enum UIType {
             PROGRAMMING_UI,
-            HUD
+            HUD,
+            PAUSE_UI
         }
     }
 }

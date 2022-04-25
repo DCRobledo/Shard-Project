@@ -100,6 +100,15 @@ namespace Shard.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""a948e656-5862-4a7d-835c-7eb6fb998af7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -234,6 +243,17 @@ namespace Shard.Input
                     ""action"": ""ReturnToCheckpoint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69290ca4-ecd9-445a-9d8d-5603f1ad02e8"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -298,6 +318,7 @@ namespace Shard.Input
             m_Player_Program = m_Player.FindAction("Program", throwIfNotFound: true);
             m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
             m_Player_ReturnToCheckpoint = m_Player.FindAction("ReturnToCheckpoint", throwIfNotFound: true);
+            m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
             // CommandConsole
             m_CommandConsole = asset.FindActionMap("CommandConsole", throwIfNotFound: true);
             m_CommandConsole_PreviousCommand = m_CommandConsole.FindAction("PreviousCommand", throwIfNotFound: true);
@@ -369,6 +390,7 @@ namespace Shard.Input
         private readonly InputAction m_Player_Program;
         private readonly InputAction m_Player_Drop;
         private readonly InputAction m_Player_ReturnToCheckpoint;
+        private readonly InputAction m_Player_Pause;
         public struct PlayerActions
         {
             private @InputActions m_Wrapper;
@@ -381,6 +403,7 @@ namespace Shard.Input
             public InputAction @Program => m_Wrapper.m_Player_Program;
             public InputAction @Drop => m_Wrapper.m_Player_Drop;
             public InputAction @ReturnToCheckpoint => m_Wrapper.m_Player_ReturnToCheckpoint;
+            public InputAction @Pause => m_Wrapper.m_Player_Pause;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -414,6 +437,9 @@ namespace Shard.Input
                     @ReturnToCheckpoint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReturnToCheckpoint;
                     @ReturnToCheckpoint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReturnToCheckpoint;
                     @ReturnToCheckpoint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReturnToCheckpoint;
+                    @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                    @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                    @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -442,6 +468,9 @@ namespace Shard.Input
                     @ReturnToCheckpoint.started += instance.OnReturnToCheckpoint;
                     @ReturnToCheckpoint.performed += instance.OnReturnToCheckpoint;
                     @ReturnToCheckpoint.canceled += instance.OnReturnToCheckpoint;
+                    @Pause.started += instance.OnPause;
+                    @Pause.performed += instance.OnPause;
+                    @Pause.canceled += instance.OnPause;
                 }
             }
         }
@@ -497,6 +526,7 @@ namespace Shard.Input
             void OnProgram(InputAction.CallbackContext context);
             void OnDrop(InputAction.CallbackContext context);
             void OnReturnToCheckpoint(InputAction.CallbackContext context);
+            void OnPause(InputAction.CallbackContext context);
         }
         public interface ICommandConsoleActions
         {

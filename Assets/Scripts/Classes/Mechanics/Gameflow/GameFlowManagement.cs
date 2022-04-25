@@ -15,6 +15,8 @@ namespace Shard.Gameflow
         [SerializeField]
         private bool playEndSequence = true;
 
+        private static bool isGamePaused;
+
         [SerializeField]
         private GameObject levelTransitionGO;
         private Animator levelTransitionAnimator;
@@ -34,6 +36,9 @@ namespace Shard.Gameflow
 
         public static Action<string, GameObject> endLevelEvent;
         public static Action sceneChangeEvent;
+
+        public static Action pauseEvent;
+        public static Action unPauseEvent;
 
 
         private void Awake() {
@@ -203,6 +208,23 @@ namespace Shard.Gameflow
                 yield return null;
 
             } while (playerColor.a > 0f);
+        }
+    
+        public static void Pause() {
+            if (!isGamePaused) {
+                pauseEvent?.Invoke();
+
+                isGamePaused = true;
+
+                Time.timeScale = 0f;
+            }
+            else {
+                unPauseEvent?.Invoke();
+
+                isGamePaused = false;
+
+                Time.timeScale = 1f;
+            }        
         }
     }
 }
