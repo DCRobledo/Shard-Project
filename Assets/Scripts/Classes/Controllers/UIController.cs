@@ -62,5 +62,7 @@ namespace Shard.Controllers
         public void TurnOnButtonClick() { turnOnButton.onClick?.Invoke(); }
 
         public void TurnOffButtonClick() { turnOffButton.onClick?.Invoke(); }
+
+        public bool IsPUIOn() { return programmingUI.activeInHierarchy; }
     }
 }

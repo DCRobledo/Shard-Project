@@ -1,3 +1,4 @@
+using Shard.Controllers;
 using Shard.Gameflow;
 using Shard.Enums;
 using System.Collections;
@@ -14,6 +15,9 @@ namespace Shard.UI.PauseUI
         [SerializeField]
         private GameObject exitOptions;
 
+        [SerializeField]
+        private GameObject helpUI;
+
         public void ToggleOption(GameObject option) {
             Color optionColor = option.GetComponent<TextMeshProUGUI>().color;
 
@@ -22,9 +26,22 @@ namespace Shard.UI.PauseUI
 
         public void ExecuteOption(PauseOption option) {
             switch(option.GetOptionType()) {
-                case UIEnum.PauseOptionType.RESUME: GameFlowManagement.Pause(); break;
-                case UIEnum.PauseOptionType.HELP:   break;
-                case UIEnum.PauseOptionType.EXIT:   mainOptions.SetActive(false); exitOptions.SetActive(true); break;
+                case UIEnum.PauseOptionType.RESUME: 
+                    GameFlowManagement.Pause();
+                break;
+
+                case UIEnum.PauseOptionType.HELP:
+                    if(!UIController.Instance.IsPUIOn())
+                        UIController.Instance.ToggleProgrammingUI();
+
+                    helpUI.SetActive(true);
+                    this.gameObject.SetActive(false);
+                break;
+
+                case UIEnum.PauseOptionType.EXIT:
+                   mainOptions.SetActive(false);
+                   exitOptions.SetActive(true);
+                break;
             }
         }
 
