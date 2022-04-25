@@ -46,5 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   programmingUI: {fileID: 0}
+  pauseUI: {fileID: 0}
   turnOnButton: {fileID: 0}
   turnOffButton: {fileID: 0}

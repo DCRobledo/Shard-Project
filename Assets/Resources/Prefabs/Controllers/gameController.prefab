@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd70559cb2c92b49828dabbdba5b8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playStartSequence: 1
+  playStartSequence: 0
   playEndSequence: 1
   levelTransitionGO: {fileID: 0}
   startDoor: {fileID: 0}
