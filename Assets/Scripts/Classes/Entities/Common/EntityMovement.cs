@@ -34,6 +34,7 @@ namespace Shard.Entities
         protected bool canJump = false;
         protected bool isAscending = false;
         protected bool shouldCheckForGround = true;
+        protected bool canCheckForGround = true;
         protected bool isPressingDown = false;
 
         protected bool isFacingRight = true;
@@ -56,6 +57,8 @@ namespace Shard.Entities
             // Check for landing
             if (shouldCheckForGround && !isAscending && IsGrounded()) {
                 landTrigger?.Invoke();
+
+                shouldCheckForGround = false;
 
                 canJump = true;
 
@@ -137,6 +140,8 @@ namespace Shard.Entities
                 rigidBody.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.fixedDeltaTime;
 
                 isAscending = false;
+
+                shouldCheckForGround = true;
             }
 
             // Low jump gravity
@@ -166,11 +171,11 @@ namespace Shard.Entities
         }
 
         public IEnumerator CheckLandingDelay() {
-            this.shouldCheckForGround = false;
+            this.canCheckForGround = false;
 
             yield return new WaitForSeconds(0.5f);
 
-            this.shouldCheckForGround = true;
+            this.canCheckForGround = true;
         }
 
 
@@ -178,12 +183,20 @@ namespace Shard.Entities
             this.isPressingDown = isPressingDown;
         }
 
-        public void SubscribeToJumpTrigger(Action commandEvent) {
-            jumpTrigger.AddListener(commandEvent.Invoke);
+        public void SubscribeToJumpTrigger(Action myEvent) {
+            jumpTrigger.AddListener(myEvent.Invoke);
         }
 
-        public void UnsubscribeFromJumpTrigger(Action commandEvent) {
-            jumpTrigger.RemoveListener(commandEvent.Invoke);
+        public void UnsubscribeFromJumpTrigger(Action myEvent) {
+            jumpTrigger.RemoveListener(myEvent.Invoke);
+        }
+
+        public void SubscribeToLandTrigger(Action myEvent) {
+            landTrigger.AddListener(myEvent.Invoke);
+        }
+
+        public void UnsubscribeFromLandTrigger(Action myEvent) {
+            landTrigger.RemoveListener(myEvent.Invoke);
         }
     }
 }
