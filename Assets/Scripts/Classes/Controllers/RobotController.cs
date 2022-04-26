@@ -38,6 +38,7 @@ namespace Shard.Controllers
         private float angularDrag;
 
         public static Action turnOnTrigger;
+        public static Action turnOffTrigger;
         
 
         private void Awake() {
@@ -238,6 +239,8 @@ namespace Shard.Controllers
         public void TurnOff() {
             if(isRobotOn) {
                 isRobotOn = false;
+
+                turnOffTrigger?.Invoke();
 
                 if(blockBehaviourExecution != null)
                     StopCoroutine(blockBehaviourExecution);

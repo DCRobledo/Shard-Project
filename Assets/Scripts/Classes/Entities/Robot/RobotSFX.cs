@@ -21,6 +21,12 @@ namespace Shard.Entities
             RobotMovement.moveTrigger += PlayMoveSFX;
             RobotMovement.stopTrigger += StopMoveSFX;
 
+            // Turn_On SFX
+            RobotController.turnOnTrigger += PlayTurnOnSFX;
+
+            // Turn_Off SFX
+            RobotController.turnOffTrigger += PlayTurnOffSFX;
+
             base.OnEnable();
         }
 
@@ -29,8 +35,17 @@ namespace Shard.Entities
             RobotMovement.moveTrigger += PlayMoveSFX;
             RobotMovement.stopTrigger += StopMoveSFX;
 
+            // Turn_On SFX
+            RobotController.turnOnTrigger -= PlayTurnOnSFX;
+
+            // Turn_Off SFX
+            RobotController.turnOffTrigger -= PlayTurnOffSFX;
+
             base.OnDisable();
         }
+
+        protected void PlayTurnOnSFX() { AudioController.Instance.Play("RobotTurnOn"); }
+        protected void PlayTurnOffSFX() { AudioController.Instance.Play("RobotTurnOff"); }
     }
 }
 
