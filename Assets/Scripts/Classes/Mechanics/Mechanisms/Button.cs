@@ -34,6 +34,8 @@ namespace Shard.Mechanisms
 
         private void OnTriggerEnter2D(Collider2D other) {
             if(shouldCheckForPress && canBePressedBy.Contains(other.tag)) {
+                AudioController.Instance.Play("ButtonPressed");
+
                 buttonEvent?.Invoke(this.gameObject, true);
 
                 this.GetComponent<SpriteRenderer>().sprite = pressedSprite;
@@ -63,7 +65,12 @@ namespace Shard.Mechanisms
             
             if(detectedEntity == null) {
                 if(buttonType == MechanismEnum.ButtonType.PRESS_RELEASE)
+                {
+                    AudioController.Instance.Play("ButtonReleased");
+
                     buttonEvent?.Invoke(this.gameObject, false);
+                }
+                    
 
                 this.GetComponent<SpriteRenderer>().sprite = releasedSprite;
 

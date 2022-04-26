@@ -21,7 +21,7 @@ namespace Shard.Lib.Custom
         }
 
         private void Start() {
-            //FadeIn("BackgroundMusic", 4f);
+            FadeIn("BackgroundMusic", 4f);
         }
 
 

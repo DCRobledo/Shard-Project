@@ -1,4 +1,5 @@
 using Shard.Enums;
+using Shard.Lib.Custom;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -58,6 +59,8 @@ namespace Shard.Mechanisms
         }
 
         private IEnumerator OpenAnimation() {
+            AudioController.Instance.Play("DoorMove");
+
             Vector3 doorPosition = this.transform.localPosition;
 
             while (doorPosition.y < openPosition.y) {
@@ -79,6 +82,8 @@ namespace Shard.Mechanisms
         }
 
         private IEnumerator CloseAnimation() {
+            AudioController.Instance.Play("DoorMove");
+
             Vector3 doorPosition = this.transform.localPosition;
             
             while (doorPosition.y > closePosition.y) {
