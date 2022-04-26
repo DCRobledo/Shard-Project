@@ -1,4 +1,5 @@
 using Shard.Controllers;
+using Shard.Lib.Custom;
 using System.Collections;
 using System;
 using UnityEngine;
@@ -132,6 +133,9 @@ namespace Shard.Gameflow
 
             this.levelTransitionGO.SetActive(true);
             this.levelTransitionAnimator.Play("idle_open");
+
+            // Fade out music
+            AudioController.Instance.FadeOut("BackgroundMusic", 4f);
 
             // Set camera x_offset to 0
             CinemachineStateDrivenCamera vcam = cameraBrain.ActiveVirtualCamera as CinemachineStateDrivenCamera;
