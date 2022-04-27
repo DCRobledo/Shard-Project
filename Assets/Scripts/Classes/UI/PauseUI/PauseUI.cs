@@ -1,6 +1,7 @@
 using Shard.Controllers;
 using Shard.Gameflow;
 using Shard.Enums;
+using Shard.Lib.Custom;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,6 +48,8 @@ namespace Shard.UI.PauseUI
 
         public void ConfirmExit() { Application.Quit(); }
         public void DismissExit() { mainOptions.SetActive(true); exitOptions.SetActive(false); }
+
+        public void PlayOptionSFX() { AudioController.Instance.Play("SelectOptionUI"); }
         
     }
 }

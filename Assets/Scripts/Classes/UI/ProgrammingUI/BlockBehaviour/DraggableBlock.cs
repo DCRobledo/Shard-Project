@@ -61,6 +61,9 @@ namespace Shard.UI.ProgrammingUI
                 );
 
                 HighlightBlockSpace(false);
+
+                // Play put block SFX
+                AudioController.Instance.Play("PutBlock");
             }  
         }
 
@@ -79,6 +82,9 @@ namespace Shard.UI.ProgrammingUI
             this.transform.position = position;
 
             HighlightBlockSpace(true);
+
+            // Play grab block SFX
+            AudioController.Instance.Play("GrabBlock");
         }
 
         public void OnDrag(PointerEventData eventData)

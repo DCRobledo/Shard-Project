@@ -1,6 +1,7 @@
 using Shard.Enums;
 using Shard.Patterns.Singleton;
 using Shard.Gameflow;
+using Shard.Lib.Custom;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,8 @@ namespace Shard.Controllers
         private Button turnOffButton;
 
         private Animator animatorPUI;
+
+        private bool isPUIOn;
         
 
         private void Awake() {
@@ -47,7 +50,15 @@ namespace Shard.Controllers
             GameFlowManagement.unPauseEvent -= TogglePauseUI;
         }
 
-        public void ToggleProgrammingUI() { ToggleUI(UIEnum.UIType.PROGRAMMING_UI); }
+        public void ToggleProgrammingUI() {
+            string sfxToPlay = IsPUIOn() ? "ClosePUI" : "OpenPUI"; 
+            AudioController.Instance.Play(sfxToPlay);
+
+            ToggleUI(UIEnum.UIType.PROGRAMMING_UI);
+
+            isPUIOn = !isPUIOn;
+        }
+
         public void TogglePauseUI() { ToggleUI(UIEnum.UIType.PAUSE_UI); }
 
         private void ToggleUI(UIEnum.UIType type) {
@@ -63,6 +74,6 @@ namespace Shard.Controllers
 
         public void TurnOffButtonClick() { turnOffButton.onClick?.Invoke(); }
 
-        public bool IsPUIOn() { return programmingUI.activeInHierarchy; }
+        public bool IsPUIOn() { return this.isPUIOn; }
     }
 }

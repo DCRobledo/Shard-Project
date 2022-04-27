@@ -218,12 +218,16 @@ namespace Shard.Gameflow
             if (!isGamePaused) {
                 pauseEvent?.Invoke();
 
+                AudioController.Instance.Play("Pause");
+
                 isGamePaused = true;
 
                 Time.timeScale = 0f;
             }
             else {
                 unPauseEvent?.Invoke();
+
+                AudioController.Instance.Play("UnPause");
 
                 isGamePaused = false;
 

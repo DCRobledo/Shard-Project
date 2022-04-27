@@ -1,4 +1,5 @@
 using Shard.Enums;
+using Shard.Lib.Custom;
 using System;
 using System.Linq;
 using System.Collections;
@@ -70,6 +71,8 @@ namespace Shard.UI.ProgrammingUI
         }
 
         public void ClearBlocks() {
+            AudioController.Instance.Play("ClearButton");
+
             for (int i = 1; i < this.transform.childCount + 1; i++) {
                 GameObject block = GetBlock(i - 1);
 
@@ -79,6 +82,8 @@ namespace Shard.UI.ProgrammingUI
 
         public void GenerateBlockBehaviour() {
             StartCoroutine(BlockBehaviourSubmissionFeedback());
+
+            AudioController.Instance.Play("SubmitButton");
 
             List<GameObject> blocks = new List<GameObject>();
             int minIndex = 0;

@@ -33,6 +33,9 @@ namespace Shard.UI.ProgrammingUI
             // Enter dragging state
             VisualUtils.ChangeObjectImage(ref blockImage, a:-.7f);
 
+            // Play grab block SFX
+            AudioController.Instance.Play("GrabBlock");
+
             // Create the draggable block
             CreateDraggableBlock();
         }

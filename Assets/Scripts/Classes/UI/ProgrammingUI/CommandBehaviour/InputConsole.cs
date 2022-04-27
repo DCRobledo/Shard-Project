@@ -1,4 +1,5 @@
 using Shard.Input;
+using Shard.Lib.Custom;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -85,6 +86,10 @@ namespace Shard.UI.ProgrammingUI
             // Parse the command
             string result = "";
             bool isValid = CommandParser.ParseCommand(command, out result, out commandEvent, out commandTrigger, out commandDelay);
+
+            // Play the corresponding SFX
+            if (isValid) AudioController.Instance.Play("CommandOk");
+            else         AudioController.Instance.Play("CommandError");
             
             // Record it in the history
             submitCommandEvent?.Invoke(command, result);
