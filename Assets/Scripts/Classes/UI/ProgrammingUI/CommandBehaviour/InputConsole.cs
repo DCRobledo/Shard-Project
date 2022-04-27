@@ -110,6 +110,10 @@ namespace Shard.UI.ProgrammingUI
 
             inputField.text = getNextCommandEvent?.Invoke(currentCommandIndex);
         }
+    
+        public void PlayWriteSFX() {
+            AudioController.Instance.Play("Write" + UnityEngine.Random.Range(1, 11).ToString());
+        }
     }
 }
 
