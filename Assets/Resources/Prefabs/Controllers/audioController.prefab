@@ -50,3 +50,183 @@ MonoBehaviour:
     volume: 0.3
     pitch: 1
     loop: 1
+  - name: PlayerJump
+    clip: {fileID: 8300000, guid: 17213ae3a7ab1d0488048c21ee8427ee, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: PlayerLand
+    clip: {fileID: 8300000, guid: aaa8781eaa061334393abcdb199d56eb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: PlayerGrab
+    clip: {fileID: 8300000, guid: 7324eaa64b4e7a64f8f9606c899ef4a2, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: PlayerDrop
+    clip: {fileID: 8300000, guid: 7324eaa64b4e7a64f8f9606c899ef4a2, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: PlayerMove
+    clip: {fileID: 8300000, guid: f87ee8684c10b3144b539c75c31f7514, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 1
+  - name: RobotJump
+    clip: {fileID: 8300000, guid: 0852a43b1869a8642afe48a8f8296781, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+  - name: RobotMove
+    clip: {fileID: 8300000, guid: 53d3e6480b8822c4182791c7ad86cde2, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+  - name: RobotLand
+    clip: {fileID: 8300000, guid: d4b331c69f683a3438eb044a24053c61, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: RobotTurnOn
+    clip: {fileID: 8300000, guid: 2d726b6b155354143a7e0d1ccd2a0301, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: RobotTurnOff
+    clip: {fileID: 8300000, guid: e151189e007eee4459a680f101f65832, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: ButtonPressed
+    clip: {fileID: 8300000, guid: 20d4f8e64534f374a8ee84a9f086812a, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: ButtonReleased
+    clip: {fileID: 8300000, guid: 0ab4b1e5dcda8334eb24ddc9181ba519, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: DoorMove
+    clip: {fileID: 8300000, guid: 9c06b9e939714284c80bc2e98d8e9d3f, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: Pause
+    clip: {fileID: 8300000, guid: 77108d9096edb474888338c9c705835a, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: UnPause
+    clip: {fileID: 8300000, guid: 6886a39cf3d659341a51bca1a7bf75a6, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: SelectOptionUI
+    clip: {fileID: 8300000, guid: afcea8d427f2e934997fefaec8f61d63, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: CommandOk
+    clip: {fileID: 8300000, guid: 424e759cf1666e74b8cfdcfb3bb3457a, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: CommandError
+    clip: {fileID: 8300000, guid: 4809e33146dea5140a25c4358d216687, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: GrabBlock
+    clip: {fileID: 8300000, guid: 8ad4baea477a47d448e7d8b926affa74, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: PutBlock
+    clip: {fileID: 8300000, guid: d128cceb9f2b129408c555b901f55713, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: SubmitButton
+    clip: {fileID: 8300000, guid: abcc6e561c2df0f43b5a8868872ab5c2, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: ClearButton
+    clip: {fileID: 8300000, guid: cd94134c74a897e418db0ddcfcc7a0a2, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: OpenPUI
+    clip: {fileID: 8300000, guid: 781e648ca0a897a488401d94fe9bb98f, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: ClosePUI
+    clip: {fileID: 8300000, guid: 12a77e9401d54b44b80af26ee0af6def, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: Write1
+    clip: {fileID: 8300000, guid: c2a63c0468e4d7b4ca6a91f007a3536b, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: Write2
+    clip: {fileID: 8300000, guid: ca7188e2f45876e4aaf0b85cb0f95386, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: Write3
+    clip: {fileID: 8300000, guid: 63c08f84631ce3247a2c369e6e06830d, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: Write4
+    clip: {fileID: 8300000, guid: b702c81b98e308840927e8c5449301a1, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: Write5
+    clip: {fileID: 8300000, guid: 5d0c6777ba59825498e877830b22f4a9, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: Write6
+    clip: {fileID: 8300000, guid: b8c42d11270992c42805f03f133e2c34, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: Write7
+    clip: {fileID: 8300000, guid: 0f116f7d71af2d8468c8b7a3919387e6, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: Write8
+    clip: {fileID: 8300000, guid: f44ec7b2932124a418b8d012a694ab1e, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: Write9
+    clip: {fileID: 8300000, guid: bb9499b3ff1c3c842be0b27f4d6c4c77, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: Write10
+    clip: {fileID: 8300000, guid: 770ff8fd8cc980f49b821e0737add1e8, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: Write11
+    clip: {fileID: 8300000, guid: 58af03f1581339e4da10f76121fdedc2, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: LevelTransition
+    clip: {fileID: 8300000, guid: 46bae3821a028c94884b08b6ff46de14, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0

@@ -219,6 +219,7 @@ namespace Shard.Gameflow
                 pauseEvent?.Invoke();
 
                 AudioController.Instance.Play("Pause");
+                AudioController.Instance.Pause("BackgroundMusic");
 
                 isGamePaused = true;
 
@@ -228,6 +229,7 @@ namespace Shard.Gameflow
                 unPauseEvent?.Invoke();
 
                 AudioController.Instance.Play("UnPause");
+                AudioController.Instance.UnPause("BackgroundMusic");
 
                 isGamePaused = false;
 

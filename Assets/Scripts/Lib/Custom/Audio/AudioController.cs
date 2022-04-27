@@ -44,13 +44,31 @@ namespace Shard.Lib.Custom
                 mySound.GetSource().Stop();
         }
 
+        public void Pause(string name) {
+            Sound mySound = Array.Find(sounds, sound => sound.GetName() == name);
+
+            if(mySound == null)
+                Debug.LogWarning($"WARNING: Sound {name} not found");
+            else
+                mySound.GetSource().Pause();
+        }
+
+        public void UnPause(string name) {
+            Sound mySound = Array.Find(sounds, sound => sound.GetName() == name);
+
+            if(mySound == null)
+                Debug.LogWarning($"WARNING: Sound {name} not found");
+            else
+                mySound.GetSource().UnPause();
+        }
+
 
         public void FadeIn(String soundName, float fadeDuration) {
             Sound mySound = Array.Find(sounds, sound => sound.GetName() == soundName);
 
             if(mySound == null)
                 Debug.LogWarning($"WARNING: Sound {name} not found");
-            else
+            else 
                 StartCoroutine(FadeInCoroutine(mySound, fadeDuration));
         }
 
@@ -65,7 +83,7 @@ namespace Shard.Lib.Custom
 
         private IEnumerator FadeInCoroutine(Sound sound, float fadeDuration)
         {
-            Play(sound.GetName());
+            sound.GetSource().Play();
 
             float currentTime = 0;
             float start = sound.GetSource().volume;
@@ -91,6 +109,8 @@ namespace Shard.Lib.Custom
                 sound.GetSource().volume = Mathf.Lerp(start, 0, currentTime / fadeDuration);
                 yield return null;
             }
+
+            sound.GetSource().Stop();
 
             yield break;
         }

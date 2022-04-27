@@ -228,6 +228,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isMoving: 0
 --- !u!114 &5311644229418030700
 MonoBehaviour:
   m_ObjectHideFlags: 0
