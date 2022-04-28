@@ -43,6 +43,8 @@ namespace Shard.Entities
                 {
                     PlayerController.Instance.ReleaseRobot();
 
+                    RobotController.Instance.StartBlockBehaviour();
+
                     this.canJump = true;
                 }
 
