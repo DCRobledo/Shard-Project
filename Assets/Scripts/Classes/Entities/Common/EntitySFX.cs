@@ -19,6 +19,13 @@ namespace Shard.Entities
         protected Action jumpSFX;
         protected Action landSFX;
 
+        protected bool isMoveSFXPlaying = false;
+        protected bool isStuckInWall = false;
+
+        private Coroutine moveSFXProtection;
+
+        private Vector2 lastPosition;
+
 
         protected void Awake() {
             this.entityNameNormalized = entityType.ToString().Substring(0, 1) + (entityType.ToString().Substring(1)).ToLower();
@@ -42,13 +49,47 @@ namespace Shard.Entities
             // landSFX -= PlayLandSFX;
         }
 
+        private void Update() {
+            if((isMoveSFXPlaying || isStuckInWall) && moveSFXProtection == null) 
+                moveSFXProtection = StartCoroutine(MoveSFXProtection());
+        }
+
+        private IEnumerator MoveSFXProtection() {
+            Vector2 lastPosition = this.transform.localPosition;
+
+            yield return new WaitForSeconds(0.1f);
+
+            // Check if the entity is walking towards a wall
+            Vector2 currentPosition = this.transform.localPosition;
+
+            if (currentPosition.x == lastPosition.x) {
+                isStuckInWall = true;
+
+                StopMoveSFX();
+            }
+            else 
+                isStuckInWall = false; 
+
+            moveSFXProtection = null;
+        }
+
         protected void PlayJumpSFX() { AudioController.Instance.Play(entityNameNormalized + "Jump"); }
         protected void PlayLandSFX() { AudioController.Instance.Play(entityNameNormalized + "Land"); }
         protected void PlayGrabSFX() { AudioController.Instance.Play(entityNameNormalized + "Grab"); }
         protected void PlayDropSFX() { AudioController.Instance.Play(entityNameNormalized + "Drop"); }
 
-        protected void PlayMoveSFX() { AudioController.Instance.Play(entityNameNormalized + "Move"); }
-        protected void StopMoveSFX() { AudioController.Instance.Stop(entityNameNormalized + "Move"); }
+        protected void PlayMoveSFX() {
+            if(!isStuckInWall) {
+                AudioController.Instance.Play(entityNameNormalized + "Move");
+
+                isMoveSFXPlaying = true;
+            } 
+        }
+        protected void StopMoveSFX() { 
+            AudioController.Instance.Stop(entityNameNormalized + "Move");
+
+            isMoveSFXPlaying = false;
+        }
     }
 }
 
