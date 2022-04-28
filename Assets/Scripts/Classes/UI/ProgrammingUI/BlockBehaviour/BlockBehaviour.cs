@@ -105,7 +105,7 @@ namespace Shard.UI.ProgrammingUI
 
             BlockLocation nextBlockLocation = currentBlock.Execute(); 
 
-            yield return null;
+            yield return new WaitForFixedUpdate();
 
             // Now, we go through each block in the behaviour until we reach the end of it
             while(nextBlockLocation.GetIndex() <= this.maxIndex) {
@@ -124,7 +124,7 @@ namespace Shard.UI.ProgrammingUI
                     nextBlockLocation = currentBlock.Execute();
 
                     if (currentBlock.GetType() != BlockEnum.BlockType.CONDITIONAL) {
-                        yield return null;
+                        yield return new WaitForFixedUpdate();
                         iterationCounter = 0;
                     }
                         
