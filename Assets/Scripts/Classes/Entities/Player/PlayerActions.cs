@@ -37,7 +37,10 @@ namespace Shard.Entities
                 if (reCallZone != null)
                 {
                     // Recall the robot
-                     StartCoroutine(reCallZone.GetComponent<ReCallZone>().ReCallRobot());
+                    StartCoroutine(reCallZone.GetComponent<ReCallZone>().ReCallRobot());
+
+                    // Play recall SFX 
+                    AudioController.Instance.Play("ReCall");
 
                     // Start cooldown
                     StartCoroutine(ReCallCoolDown(reCallCoolDown));
