@@ -8,6 +8,9 @@ namespace Shard.Lib.Custom
     public class AudioController : MonoBehaviour
     {
         [SerializeField]
+        private AudioMixer audioMixer;
+
+        [SerializeField]
         private Sound[] sounds;
 
         public static AudioController Instance;
@@ -16,8 +19,12 @@ namespace Shard.Lib.Custom
         private void Awake() {
             Instance = this;
 
-            foreach (Sound sound in sounds)
-                sound.SetSource(gameObject.AddComponent<AudioSource>());
+            foreach (Sound sound in sounds) {
+                AudioMixerGroup targetMixer = audioMixer.FindMatchingGroups("Master/" + sound.GetTargetMixer().ToString())[0];
+
+                sound.SetSource(gameObject.AddComponent<AudioSource>(), targetMixer);
+            }
+                
         }
 
         private void Start() {

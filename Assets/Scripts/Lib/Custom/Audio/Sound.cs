@@ -20,6 +20,14 @@ namespace Shard.Lib.Custom
         [SerializeField]
         private bool loop;
 
+        public enum TargetMixer {
+            SFX,
+            Music
+        }
+
+        [SerializeField]
+        private TargetMixer targetMixer;
+
         private AudioSource source;
 
 
@@ -78,13 +86,18 @@ namespace Shard.Lib.Custom
             return this.source;
         }
 
-        public void SetSource(AudioSource source)
+        public void SetSource(AudioSource source, AudioMixerGroup mixer)
         {
             this.source = source;
             this.source.clip = this.clip;
             this.source.volume = this.volume;
             this.source.pitch = this.pitch;
             this.source.loop = this.loop;
+            this.source.outputAudioMixerGroup = mixer;
+        }
+
+        public TargetMixer GetTargetMixer() {
+            return this.targetMixer;
         }
 
     }
