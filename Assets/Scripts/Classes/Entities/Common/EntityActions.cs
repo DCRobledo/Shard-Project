@@ -39,7 +39,7 @@ namespace Shard.Entities
 
         private void OnDisable() {
             // Unsubscribe the death event
-            CheckPointsManagement.playerDeathEvent += Grab;
+            CheckPointsManagement.playerDeathEvent -= Grab;
         }
 
         private void Update() {

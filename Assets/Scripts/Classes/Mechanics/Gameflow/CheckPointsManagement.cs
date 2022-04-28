@@ -74,10 +74,17 @@ namespace Shard.Gameflow
         private void ReturnToLastCheckpoint(string entityTag) {
             try {
                 EntityEnum.Entity entity = (EntityEnum.Entity) System.Enum.Parse(typeof(EntityEnum.Entity), entityTag.ToUpper());
-
+                
                 switch (entity) {
-                    case EntityEnum.Entity.PLAYER: playerDeathEvent?.Invoke(); StartCoroutine(ReturnToLastCheckpointCoroutine(player, GetLastCheckpoint(entity))); break;
-                    case EntityEnum.Entity.ROBOT:  robotDeathEvent?.Invoke();  StartCoroutine(ReturnToLastCheckpointCoroutine(robot, GetLastCheckpoint(entity)));  break;
+                    case EntityEnum.Entity.PLAYER:
+                        StartCoroutine(ReturnToLastCheckpointCoroutine(player, GetLastCheckpoint(entity)));
+                        playerDeathEvent?.Invoke();
+                    break;
+
+                    case EntityEnum.Entity.ROBOT:
+                        StartCoroutine(ReturnToLastCheckpointCoroutine(robot, GetLastCheckpoint(entity)));
+                        robotDeathEvent?.Invoke();
+                    break;
                 }
                 
             }
