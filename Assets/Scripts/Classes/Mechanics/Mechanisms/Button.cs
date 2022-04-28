@@ -2,6 +2,7 @@ using Shard.Enums;
 using Shard.Lib.Custom;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -23,6 +24,8 @@ namespace Shard.Mechanisms
         private bool shouldCheckForPress = true;
         private bool shouldCheckForRelease = false;
 
+        private int numberOfPressingEntites;
+
         [SerializeField]
         private float pressDelay;
 
@@ -34,48 +37,39 @@ namespace Shard.Mechanisms
 
         private void OnTriggerEnter2D(Collider2D other) {
             if(shouldCheckForPress && canBePressedBy.Contains(other.tag)) {
-                AudioController.Instance.Play("ButtonPressed");
-
-                buttonEvent?.Invoke(this.gameObject, true);
-
-                this.GetComponent<SpriteRenderer>().sprite = pressedSprite;
-
-                shouldCheckForRelease = true;
-
-                StartCoroutine(PressDelay());
+                Debug.Log("Pressed");
+                Press();
             }
         }
 
-
-        private void Update() {
-            if(shouldCheckForRelease)
-                CheckForRelease();
+        private void OnTriggerExit2D(Collider2D other) {
+            if(shouldCheckForRelease && canBePressedBy.Contains(other.tag)) {
+                Debug.Log("Released");
+                Release();
+            }
         }
 
+        private void Press() {
+            buttonEvent?.Invoke(this.gameObject, true);
 
-        private void CheckForRelease() {
-            string detectedEntity = 
-                Detection.DetectObject(
-                    GetComponent<PolygonCollider2D>(),
-                     LayerMask.GetMask(canBePressedBy),
-                     Detection.Direction.UP,
-                     GetComponent<PolygonCollider2D>().bounds.size,
-                     0.2f
-                );
+            AudioController.Instance.Play("ButtonPressed");
+
+            this.GetComponent<SpriteRenderer>().sprite = pressedSprite;
+
+            shouldCheckForRelease = true;
+            shouldCheckForPress = false;
+        }
+
+        private void Release() {
+            if(buttonType == MechanismEnum.ButtonType.PRESS_RELEASE)
+                buttonEvent?.Invoke(this.gameObject, false);
             
-            if(detectedEntity == null) {
-                if(buttonType == MechanismEnum.ButtonType.PRESS_RELEASE)
-                {
-                    AudioController.Instance.Play("ButtonReleased");
+            AudioController.Instance.Play("ButtonReleased");
+                
+            this.GetComponent<SpriteRenderer>().sprite = releasedSprite;
 
-                    buttonEvent?.Invoke(this.gameObject, false);
-                }
-                    
-
-                this.GetComponent<SpriteRenderer>().sprite = releasedSprite;
-
-                shouldCheckForRelease = false;
-            }
+            shouldCheckForRelease = false;
+            StartCoroutine(PressDelay());
         }
 
         private IEnumerator PressDelay() {
