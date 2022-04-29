@@ -31,7 +31,7 @@ namespace Shard.Entities
         protected Rigidbody2D rigidBody;
         protected PolygonCollider2D polygonCollider2D; 
 
-        protected bool canJump = false;
+        public bool canJump = false;
         protected bool isAscending = false;
         protected bool shouldCheckForGround = true;
         protected bool canCheckForGround = true;

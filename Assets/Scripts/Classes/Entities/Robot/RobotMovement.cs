@@ -11,7 +11,8 @@ namespace Shard.Entities
         public static Action stopTrigger;
         public static Action flipTrigger;
 
-        public bool isMoving;
+        private bool isMoving;
+        private bool isJumpOnCooldown = false;
 
         private void Update() {
             Vector2 velocity = GetComponent<RobotMovement>().GetVelocity();
@@ -37,7 +38,7 @@ namespace Shard.Entities
         }
 
         public override void Jump()  {
-            if (RobotController.Instance.IsRobotOn()) {
+            if (!isJumpOnCooldown && RobotController.Instance.IsRobotOn()) {
                 // We want the robot to jump from the player's arms
                 if(RobotController.Instance.IsRobotGrabbed())
                 {
@@ -49,8 +50,18 @@ namespace Shard.Entities
                 }
 
                 Jump(true);
+
+                StartCoroutine(JumpCoolDown());
             }
                 
+        }
+
+        private IEnumerator JumpCoolDown() {
+            isJumpOnCooldown = true;
+
+            yield return new WaitForSeconds(0.2f);
+
+            isJumpOnCooldown = false;
         }
 
         public override void Flip()
