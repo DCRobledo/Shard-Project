@@ -268,3 +268,9 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     targetMixer: 0
+  - name: ReCall
+    clip: {fileID: 8300000, guid: 3432c869ba22f554fae896687461f3c4, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    targetMixer: 0
