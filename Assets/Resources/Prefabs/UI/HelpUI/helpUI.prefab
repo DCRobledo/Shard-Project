@@ -311,7 +311,7 @@ MonoBehaviour:
 
     The template you should use is:
 
-    event. Trigger(delay)'
+    event(trigger).delay'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 46c5a0821a0651e40a76041e2cc06b13, type: 2}
   m_sharedMaterial: {fileID: -5554816425854017699, guid: 46c5a0821a0651e40a76041e2cc06b13, type: 2}
