@@ -30,13 +30,12 @@ namespace Shard.Entities
 
         protected Rigidbody2D rigidBody;
         protected PolygonCollider2D polygonCollider2D; 
-
-        public bool canJump = false;
+        
+        protected bool isJumpOnCooldown = false;
         protected bool isAscending = false;
-        protected bool shouldCheckForGround = true;
-        protected bool canCheckForGround = true;
+        protected bool shouldCheckForLand = true;
+        protected bool forceJump = false;
         protected bool isPressingDown = false;
-
         protected bool isFacingRight = true;
         protected bool isCrouched = false;
 
@@ -55,14 +54,10 @@ namespace Shard.Entities
 
         protected void FixedUpdate() {
             // Check for landing
-            if (shouldCheckForGround && !isAscending && IsGrounded()) {
+            if (shouldCheckForLand && !isAscending && IsGrounded()) {
                 landTrigger?.Invoke();
 
-                shouldCheckForGround = false;
-
-                canJump = true;
-
-                StartCoroutine(CheckLandingDelay());
+                shouldCheckForLand = false;
             }
                         
             ApplyGravity(this.fallMultiplier, this.lowJumpMultiplier);
@@ -110,13 +105,24 @@ namespace Shard.Entities
             else if(this.isPressingDown) Drop();
 
             // But we can only jump if we are grounded
-            else if(canJump) {
+            else if(forceJump || (IsGrounded() && !isJumpOnCooldown)) {
                 jumpTrigger?.Invoke();
 
-                canJump = false;
-
                 rigidBody.velocity += Vector2.up * jumpForce;
+
+                StartCoroutine(JumpCoolDown());
+
+                if(forceJump) 
+                    forceJump = false;
             }
+        }
+
+        private IEnumerator JumpCoolDown() {
+            isJumpOnCooldown = true;
+
+            yield return new WaitForSeconds(0.2f);
+
+            isJumpOnCooldown = false;
         }
 
 
@@ -141,7 +147,7 @@ namespace Shard.Entities
 
                 isAscending = false;
 
-                shouldCheckForGround = true;
+                shouldCheckForLand = true;
             }
 
             // Low jump gravity
@@ -168,14 +174,6 @@ namespace Shard.Entities
     
         public Vector2 GetVelocity() {
             return this.rigidBody.velocity;
-        }
-
-        public IEnumerator CheckLandingDelay() {
-            this.canCheckForGround = false;
-
-            yield return new WaitForSeconds(0.5f);
-
-            this.canCheckForGround = true;
         }
 
 

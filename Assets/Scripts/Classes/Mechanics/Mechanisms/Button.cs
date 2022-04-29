@@ -36,17 +36,13 @@ namespace Shard.Mechanisms
         
 
         private void OnTriggerEnter2D(Collider2D other) {
-            if(shouldCheckForPress && canBePressedBy.Contains(other.tag)) {
-                Debug.Log("Pressed");
+            if(shouldCheckForPress && canBePressedBy.Contains(other.tag))
                 Press();
-            }
         }
 
         private void OnTriggerExit2D(Collider2D other) {
-            if(shouldCheckForRelease && canBePressedBy.Contains(other.tag)) {
-                Debug.Log("Released");
+            if(shouldCheckForRelease && canBePressedBy.Contains(other.tag))
                 Release();
-            }
         }
 
         private void Press() {
