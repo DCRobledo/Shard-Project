@@ -272,10 +272,10 @@ namespace Shard.Controllers
             robot.GetComponent<PolygonCollider2D>().enabled = !isRobotGrabbed;
 
             // Update rigidbody2D parameters
-
-            robot.GetComponent<Rigidbody2D>().gravityScale = isRobotGrabbed ? 0f : gravityScale;
-            robot.GetComponent<Rigidbody2D>().mass         = isRobotGrabbed ? 0f : mass; 
-            robot.GetComponent<Rigidbody2D>().angularDrag  = isRobotGrabbed ? 0f : angularDrag;  
+            Rigidbody2D rigidbody2D = robot.GetComponent<Rigidbody2D>();
+            rigidbody2D.gravityScale = isRobotGrabbed ? 0f : gravityScale;
+            rigidbody2D.mass         = isRobotGrabbed ? 0f : mass; 
+            rigidbody2D.angularDrag  = isRobotGrabbed ? 0f : angularDrag;  
         }
 
         public bool IsRobotOn() { return this.isRobotOn; }

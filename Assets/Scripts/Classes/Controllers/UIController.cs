@@ -18,6 +18,8 @@ namespace Shard.Controllers
         private GameObject programmingUI;
         [SerializeField]
         private GameObject pauseUI;
+        [SerializeField]
+        private GameObject helpUI;
     
         [SerializeField]
         private Button turnOnButton;
@@ -50,30 +52,40 @@ namespace Shard.Controllers
             GameFlowManagement.unPauseEvent -= TogglePauseUI;
         }
 
-        public void ToggleProgrammingUI() {
-            string sfxToPlay = IsPUIOn() ? "ClosePUI" : "OpenPUI"; 
-            AudioController.Instance.Play(sfxToPlay);
-
-            ToggleUI(UIEnum.UIType.PROGRAMMING_UI);
-
-            isPUIOn = !isPUIOn;
-        }
-
-        public void TogglePauseUI() { ToggleUI(UIEnum.UIType.PAUSE_UI); }
 
         private void ToggleUI(UIEnum.UIType type) {
             switch(type) {
-                case UIEnum.UIType.PROGRAMMING_UI: animatorPUI.SetTrigger("togglePUI"); break;
-                case UIEnum.UIType.PAUSE_UI: pauseUI.SetActive(!pauseUI.activeInHierarchy); break;
+                case UIEnum.UIType.PROGRAMMING_UI: ToggleProgrammingUI(); break;
+                case UIEnum.UIType.PAUSE_UI:  TogglePauseUI(); break;
+                case UIEnum.UIType.HELP_UI: ToggleHelpUI(); break;
 
                 default: break;
             }
         }
-    
-        public void TurnOnButtonClick() { turnOnButton.onClick?.Invoke(); }
 
+        public void ToggleProgrammingUI() {
+            animatorPUI.SetTrigger("togglePUI");
+
+            string sfxToPlay = IsPUIOn() ? "ClosePUI" : "OpenPUI"; 
+            AudioController.Instance.Play(sfxToPlay);
+
+            isPUIOn = !isPUIOn;
+
+            if(IsHelpUIOn())
+                ToggleHelpUI();
+        }
+        public void TogglePauseUI() {
+            pauseUI.SetActive(!pauseUI.activeInHierarchy);
+        }
+        public void ToggleHelpUI() {
+            helpUI.SetActive(!helpUI.activeInHierarchy);
+        }
+
+        public void TurnOnButtonClick() { turnOnButton.onClick?.Invoke(); }
         public void TurnOffButtonClick() { turnOffButton.onClick?.Invoke(); }
 
+
         public bool IsPUIOn() { return this.isPUIOn; }
+        public bool IsHelpUIOn() { return this.helpUI.activeInHierarchy; }
     }
 }

@@ -137961,6 +137961,10 @@ PrefabInstance:
       value: UIController
       objectReference: {fileID: 0}
     - target: {fileID: 4190447353342432535, guid: 8df9c0689a76d594b9f7b96fa6f37608, type: 3}
+      propertyPath: helpUI
+      value: 
+      objectReference: {fileID: 907368371}
+    - target: {fileID: 4190447353342432535, guid: 8df9c0689a76d594b9f7b96fa6f37608, type: 3}
       propertyPath: pauseUI
       value: 
       objectReference: {fileID: 882311666}

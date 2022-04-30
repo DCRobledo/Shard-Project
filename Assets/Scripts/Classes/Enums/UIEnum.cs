@@ -5,7 +5,8 @@ namespace Shard.Enums
         public enum UIType {
             PROGRAMMING_UI,
             HUD,
-            PAUSE_UI
+            PAUSE_UI,
+            HELP_UI
         }
 
         public enum PauseOptionType {

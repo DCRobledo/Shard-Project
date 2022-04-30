@@ -139,10 +139,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.34532318, y: 0.18418154}
-      - {x: -0.34258014, y: -0.5947148}
-      - {x: 0.47361153, y: -0.59591454}
-      - {x: 0.47423607, y: 0.18204361}
+    - - {x: -0.34, y: 0.18}
+      - {x: -0.34, y: -0.59}
+      - {x: 0.47, y: -0.59}
+      - {x: 0.47, y: 0.18}
 --- !u!254 &7803451227653538638
 RelativeJoint2D:
   m_ObjectHideFlags: 0
@@ -228,7 +228,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isMoving: 0
 --- !u!114 &5311644229418030700
 MonoBehaviour:
   m_ObjectHideFlags: 0
