@@ -32,7 +32,7 @@ namespace Shard.Entities
 
                 float x = isFacingRight ? 1 : -1;
 
-                Move(x, rigidBody.velocity.y);
+                Move(x, 0);
             }
         }
 

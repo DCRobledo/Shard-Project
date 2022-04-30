@@ -43,7 +43,9 @@ namespace Shard.Controllers
 
         private void Awake() {
             instance = this;
+        }
 
+        private void Start() {
             robot = GameObject.Find("robot");
 
             robotMovement = robot.GetComponent<RobotMovement>();
@@ -57,8 +59,6 @@ namespace Shard.Controllers
             gravityScale = robot.GetComponent<Rigidbody2D>().gravityScale;
             mass = robot.GetComponent<Rigidbody2D>().mass;
             angularDrag = robot.GetComponent<Rigidbody2D>().angularDrag;
-
-            
         }
 
         private void OnEnable() {
@@ -186,7 +186,7 @@ namespace Shard.Controllers
         private void LinkCommandTriggerToPlayer() {
             switch(commandBehaviour.GetCommandTriggerAction()) {
                 case EntityEnum.Action.JUMP:   PlayerController.jumpTrigger += CommandBehaviour.commandTrigger.Invoke; break;
-                case EntityEnum.Action.MOVE:   PlayerController.moveTrigger += CommandBehaviour.commandTrigger.Invoke;
+                case EntityEnum.Action.MOVE:   PlayerController.moveTrigger += CommandBehaviour.commandTrigger.Invoke; 
                                                PlayerController.stopTrigger += commandBehaviour.StopAllCoroutines;     break;
 
                 case EntityEnum.Action.FLIP:   PlayerMovement.flipTrigger   += CommandBehaviour.commandTrigger.Invoke; break;
@@ -261,7 +261,6 @@ namespace Shard.Controllers
             if(blockBehaviourExecution != null)
                 StopCoroutine(blockBehaviourExecution);
         }
-
 
 
         public void ToggleIsRobotGrabbed() {

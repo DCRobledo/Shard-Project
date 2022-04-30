@@ -50,6 +50,11 @@ namespace Shard.Controllers
             // Init the controller's instance
             instance = this;
 
+            // Initialize the input system
+            InputActions = new InputActions();
+        }
+
+        private void Start() {
             // Get the player game object and its components
             player = GameObject.Find("player");
 
@@ -57,13 +62,10 @@ namespace Shard.Controllers
             playerActions = player.GetComponent<PlayerActions>();
             playerAnimations = player.GetComponent<PlayerAnimations>();
 
-            // Initialize the input system
             AwakeInput();
         }
 
         private void AwakeInput() {
-            InputActions = new InputActions();
-
             jumpButton = new JumpCommand(playerMovement);
             moveButton = new MoveCommand(playerMovement);
             crouchButton = new CrouchCommand(playerMovement);
@@ -177,8 +179,8 @@ namespace Shard.Controllers
 
         private IEnumerator CheckForStop() {
             // Wait for a couple of frames to know if it is a full stop or just a change in the moving direction
-            for(int i = 0; i < 5 && movingDirection.x == 0; i++)
-                yield return new WaitForEndOfFrame();
+            for(int i = 0; i < 10 && movingDirection.x == 0; i++)
+                yield return new WaitForFixedUpdate();
             
             if(movingDirection.x == 0) 
                 InvokeTrigger(EntityEnum.Action.STOP);

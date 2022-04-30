@@ -34,7 +34,9 @@ namespace Shard.Controllers
         private void Awake() {
             // Init the controller's instance
             instance = this;
+        }
 
+        private void Start() {
             // Activate the programming UI
             programmingUI.SetActive(true);
 

@@ -33,7 +33,7 @@ namespace Shard.Gameflow
         public static Action<EntityEnum.Entity> returnToLastCheckpointEvent;
 
 
-        private void Awake() {
+        private void Start() {
             player = GameObject.Find("player");
             robot = GameObject.Find("robot");
 
