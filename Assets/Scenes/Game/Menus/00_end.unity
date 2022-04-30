@@ -17310,6 +17310,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: helpUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4616710686085552741, guid: 0dad313c2f544824c9ec8bfb25a3bddb, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1449931144}
+    - target: {fileID: 4616710686085552741, guid: 0dad313c2f544824c9ec8bfb25a3bddb, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayOptionSFX
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dad313c2f544824c9ec8bfb25a3bddb, type: 3}
 --- !u!1 &496787332
@@ -47831,6 +47839,17 @@ PrefabInstance:
       objectReference: {fileID: 1484632314}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7512b530f5c4344b88b7af05568abf3, type: 3}
+--- !u!114 &1449931144 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7857501733494677911, guid: a7512b530f5c4344b88b7af05568abf3, type: 3}
+  m_PrefabInstance: {fileID: 1449931143}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113935272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 245fba639d8b38d438d9cb516dde774c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1461609056
 GameObject:
   m_ObjectHideFlags: 0
@@ -59120,8 +59139,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1484632314}
     - target: {fileID: 7067749871511171222, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1449931144}
+    - target: {fileID: 7067749871511171222, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067749871511171222, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayOptionSFX
       objectReference: {fileID: 0}
     - target: {fileID: 7067749871556541798, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Target

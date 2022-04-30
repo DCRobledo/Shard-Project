@@ -24226,6 +24226,17 @@ PrefabInstance:
       objectReference: {fileID: 907368371}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7512b530f5c4344b88b7af05568abf3, type: 3}
+--- !u!114 &393099206 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7857501733494677911, guid: a7512b530f5c4344b88b7af05568abf3, type: 3}
+  m_PrefabInstance: {fileID: 393099205}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882311666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 245fba639d8b38d438d9cb516dde774c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &393607003 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4079692209500296872, guid: 98e0bf260b9f26842a7ea3a70473462e, type: 3}
@@ -28012,7 +28023,7 @@ PrefabInstance:
     - target: {fileID: 2895829387433203050, guid: 273117cb90360114c9a6559358af9833, type: 3}
       propertyPath: sounds.Array.data[0].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 4c9c2e7dbbca2e24483b7d5e895af589, type: 3}
+      objectReference: {fileID: 8300000, guid: 33cfece1f6497a1499f0e51396e2462d, type: 3}
     - target: {fileID: 2895829387433203050, guid: 273117cb90360114c9a6559358af9833, type: 3}
       propertyPath: sounds.Array.data[0].volume
       value: 0.5
@@ -28186,6 +28197,14 @@ PrefabInstance:
     - target: {fileID: 4616710686085552731, guid: 0dad313c2f544824c9ec8bfb25a3bddb, type: 3}
       propertyPath: m_Name
       value: helpUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616710686085552741, guid: 0dad313c2f544824c9ec8bfb25a3bddb, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 393099206}
+    - target: {fileID: 4616710686085552741, guid: 0dad313c2f544824c9ec8bfb25a3bddb, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayOptionSFX
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dad313c2f544824c9ec8bfb25a3bddb, type: 3}
@@ -138449,8 +138468,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 907368371}
     - target: {fileID: 7067749871511171222, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 393099206}
+    - target: {fileID: 7067749871511171222, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067749871511171222, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayOptionSFX
       objectReference: {fileID: 0}
     - target: {fileID: 7067749871556541798, guid: 1da7f9a24245d02428e032d5fb0b467b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Target
