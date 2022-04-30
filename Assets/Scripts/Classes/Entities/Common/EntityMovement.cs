@@ -90,7 +90,7 @@ namespace Shard.Entities
         public void Move(float x, float y) {
             // Compute the new target velocity, smooth it, and apply it
             Vector3 targetVelocity = new Vector2(Mathf.Round(x) * speed, rigidBody.velocity.y);
-            rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, smoothingFactor);
+            rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, smoothingFactor * Time.fixedDeltaTime);
 
             // Flip if necessary
             if      (x > 0 && this.gameObject.transform.localScale.x < 0) Flip();
