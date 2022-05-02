@@ -1,3 +1,4 @@
+using Shard.Controllers;
 using Shard.Lib.Custom;
 using Shard.Gameflow;
 using System;
@@ -61,8 +62,11 @@ namespace Shard.Entities
             if(grabJoint.connectedBody != null) {
                 dropTrigger?.Invoke();
 
-                if(grabJoint.connectedBody.tag == "Robot")
+                if(grabJoint.connectedBody.tag == "Robot") {
+                    PlayerController.Instance.ExpandPlayerCollider(false);
                     robotDroppedEvent?.Invoke();
+                }
+                    
             }
 
             base.Grab();
@@ -70,8 +74,10 @@ namespace Shard.Entities
             if(grabJoint.connectedBody != null) {
                 grabTrigger?.Invoke();
 
-                if(grabJoint.connectedBody.tag == "Robot")
+                if(grabJoint.connectedBody.tag == "Robot") {
+                    PlayerController.Instance.ExpandPlayerCollider(true);
                     robotGrabbedEvent?.Invoke();
+                }
             }
         }
 

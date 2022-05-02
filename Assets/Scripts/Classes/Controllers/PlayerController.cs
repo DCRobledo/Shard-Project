@@ -191,6 +191,19 @@ namespace Shard.Controllers
 
             playerAnimations.SetGrabTrigger();
         }
+
+        public void ExpandPlayerCollider(bool expand) {
+            PolygonCollider2D polygonCollider2D = player.GetComponent<PolygonCollider2D>();
+
+            Vector2[] points = polygonCollider2D.points;
+            float polygonModifier = expand ? 2f : .5f;
+            points[4].x *= polygonModifier;
+
+            points[3] = expand ? new Vector2(.72f, -.2f) : new Vector2(.36f, -.6f);
+            
+
+            polygonCollider2D.SetPath(0, points);
+        }
     }
 }
 
