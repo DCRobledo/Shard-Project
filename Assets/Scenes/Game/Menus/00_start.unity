@@ -25082,7 +25082,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &480955975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115774,7 +115774,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4079692209500296875, guid: 98e0bf260b9f26842a7ea3a70473462e, type: 3}
       propertyPath: buttonType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4079692209500297044, guid: 98e0bf260b9f26842a7ea3a70473462e, type: 3}
       propertyPath: m_RootOrder
@@ -115786,7 +115786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4079692209500297044, guid: 98e0bf260b9f26842a7ea3a70473462e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.12
+      value: 4.136
       objectReference: {fileID: 0}
     - target: {fileID: 4079692209500297044, guid: 98e0bf260b9f26842a7ea3a70473462e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -115895,28 +115895,20 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1461609058}
     m_ColliderPaths:
-    - - X: 209999900
-        Y: 110000041
-      - X: 209999900
-        Y: 39999959
-      - X: 209999959
-        Y: 39999900
-      - X: 240000041
-        Y: 39999900
-      - X: 240000100
-        Y: 39999959
-      - X: 240000100
-        Y: 110000041
-      - X: 240000041
-        Y: 110000100
-      - X: 209999959
-        Y: 110000100
+    - - X: 240000000
+        Y: 40000000
+      - X: 240000000
+        Y: 110000000
+      - X: 210000000
+        Y: 110000000
+      - X: 210000000
+        Y: 40000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 23.999975, y: 3.99999}
-      - {x: 23.999975, y: 11.00001}
-      - {x: 20.99999, y: 10.999974}
-      - {x: 21.000027, y: 3.99999}
+    - - {x: 23.999971, y: 4}
+      - {x: 23.999971, y: 11}
+      - {x: 21, y: 10.99997}
+      - {x: 21.000029, y: 4}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!50 &1461609060
@@ -118353,7 +118345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2166783775580108807, guid: 7ca701121e17aa14c8645eef92dd3790, type: 3}
       propertyPath: buttonConnections.Array.data[0].action
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2166783775580108807, guid: 7ca701121e17aa14c8645eef92dd3790, type: 3}
       propertyPath: buttonConnections.Array.data[0].buttons.Array.size
