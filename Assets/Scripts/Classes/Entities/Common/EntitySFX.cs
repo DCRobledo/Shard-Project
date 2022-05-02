@@ -28,6 +28,7 @@ namespace Shard.Entities
 
 
         protected void Awake() {
+            // Transform the enum format (PLAYER) to the normalized format (Player)
             this.entityNameNormalized = entityType.ToString().Substring(0, 1) + (entityType.ToString().Substring(1)).ToLower();
         }
 
@@ -50,6 +51,7 @@ namespace Shard.Entities
         }
 
         private void Update() {
+            // Check if we need to stop the move SFX
             if((isMoveSFXPlaying || isStuckInWall) && moveSFXProtection == null) 
                 moveSFXProtection = StartCoroutine(MoveSFXProtection());
         }
@@ -73,9 +75,13 @@ namespace Shard.Entities
             moveSFXProtection = null;
         }
 
+
         protected void PlayJumpSFX() { AudioController.Instance.Play(entityNameNormalized + "Jump"); }
+        
         protected void PlayLandSFX() { AudioController.Instance.Play(entityNameNormalized + "Land"); }
+        
         protected void PlayGrabSFX() { AudioController.Instance.Play(entityNameNormalized + "Grab"); }
+        
         protected void PlayDropSFX() { AudioController.Instance.Play(entityNameNormalized + "Drop"); }
 
         protected void PlayMoveSFX() {
@@ -85,6 +91,7 @@ namespace Shard.Entities
                 isMoveSFXPlaying = true;
             } 
         }
+        
         protected void StopMoveSFX() { 
             AudioController.Instance.Stop(entityNameNormalized + "Move");
 

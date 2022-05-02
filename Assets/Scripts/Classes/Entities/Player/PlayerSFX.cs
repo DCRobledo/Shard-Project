@@ -9,6 +9,7 @@ namespace Shard.Entities
 {
     public class PlayerSFX : EntitySFX
     {
+        
         private new void Awake() {
             this.movement = this.GetComponent<EntityMovement>() as PlayerMovement;
             this.actions = this.GetComponent<EntityActions>() as PlayerActions;

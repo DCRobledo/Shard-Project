@@ -42,7 +42,7 @@ namespace Shard.Gameflow
         public static Action unPauseEvent;
 
 
-        private void Awake() {
+        private void Start() {
             this.player = GameObject.Find("player");
 
             this.mainCamera = GameObject.Find("camera");
@@ -53,9 +53,7 @@ namespace Shard.Gameflow
             this.startDoorAnimator       = startDoor.GetComponent<Animator>();
 
             this.levelTransitionGO.SetActive(playStartSequence);
-        }
 
-        private void Start() {
             if (playStartSequence)
                 StartCoroutine(StartLevelSequence());
             else

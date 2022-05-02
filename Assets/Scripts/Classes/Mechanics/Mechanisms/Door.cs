@@ -24,6 +24,9 @@ namespace Shard.Mechanisms
 
         [SerializeField]
         private List<ButtonConnection> buttonConnections;
+        // Each door has one or multiple button connections.
+        //     This connections are formed by one or more buttons, all buttons inside a group need to be activated for the group to be activated.
+        //     This activation needs to be simultaneous depending on the button type (press or press & release)
 
 
         private void Awake() {

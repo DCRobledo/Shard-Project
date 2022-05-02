@@ -59,6 +59,7 @@ namespace Shard.Entities
 
     
         public override void Grab() {
+            // If we are grabbing something, we release it
             if(grabJoint.connectedBody != null) {
                 dropTrigger?.Invoke();
 
@@ -71,6 +72,7 @@ namespace Shard.Entities
 
             base.Grab();
 
+            // If code reaches here and we are still grabbing, it means we grabbed instead of dropping
             if(grabJoint.connectedBody != null) {
                 grabTrigger?.Invoke();
 

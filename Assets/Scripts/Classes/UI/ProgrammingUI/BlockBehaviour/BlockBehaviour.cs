@@ -19,6 +19,7 @@ namespace Shard.UI.ProgrammingUI
             this.minIndex = minIndex;
             this.maxIndex = maxIndex;
 
+            // Transform all blocks gameobjects into BehaviorBlock bjects
             foreach(GameObject block in blocks) {
                 BehaviourBlock behaviourBlock = block.GetComponent<BehaviourBlock>();
 
@@ -56,6 +57,8 @@ namespace Shard.UI.ProgrammingUI
                 BehaviourBlock currentBlock = GetBlock(i, block.GetIndentation());
 
                 if(currentBlock != null) {
+                    
+                    // If we encounter another conditional block, we return with or without assigning it to the current block's elseBlock
                     if(currentBlock.GetType() == BlockEnum.BlockType.CONDITIONAL) {
                         ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
 

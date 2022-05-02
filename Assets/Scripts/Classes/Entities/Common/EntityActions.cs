@@ -15,7 +15,7 @@ namespace Shard.Entities
     {
         #if UNITY_EDITOR 
             [TagSelector]
-         #endif
+        #endif
         [SerializeField]
         protected string[] whatIsGrabbable = new string[] { };
 
@@ -55,9 +55,9 @@ namespace Shard.Entities
         public void ExecuteAction(EntityEnum.Action action) {
             switch (action)
             {
-                case EntityEnum.Action.RECALL:     ReCall(); break;
-                case EntityEnum.Action.GRAB:       Grab();   break;
-                case EntityEnum.Action.DROP:    Grab();   break;
+                case EntityEnum.Action.RECALL: ReCall(); break;
+                case EntityEnum.Action.GRAB:   Grab();   break;
+                case EntityEnum.Action.DROP:   Grab();   break;
             }
         }
 

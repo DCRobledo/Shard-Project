@@ -59,9 +59,11 @@ namespace Shard.Entities
 
                 shouldCheckForLand = false;
             }
-                        
+
+            // Apply gravity            
             ApplyGravity(this.fallMultiplier, this.lowJumpMultiplier);
 
+            // Update flip control variable
             isFacingRight = this.transform.localScale.x >= 0f; 
         }
 

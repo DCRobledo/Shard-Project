@@ -60,6 +60,7 @@ namespace Shard.Gameflow
 
 
         private void UpdateCheckpoint(string entityTag, Vector3 checkpoint) {
+            // We record pairs (ENTITY, CHECKPOINT)
             try
             {
                 EntityEnum.Entity entity = (EntityEnum.Entity) System.Enum.Parse(typeof(EntityEnum.Entity), entityTag.ToUpper());

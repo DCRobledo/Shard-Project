@@ -42,20 +42,24 @@ namespace Shard.Controllers
         
 
         private void Awake() {
+            // Initialize the controller's instance
             instance = this;
         }
 
         private void Start() {
+            // Get the robot and its components
             robot = GameObject.Find("robot");
 
             robotMovement = robot.GetComponent<RobotMovement>();
             robotActions = robot.GetComponent<RobotActions>();
             robotSensors = robot.GetComponent<RobotSensors>();
 
+            // Initialize the commands
             jumpCommand = new JumpCommand(robotMovement);
             moveCommand = new MoveCommand(robotMovement);
             flipCommand = new FlipCommand(robotMovement);
 
+            // Store the rigidbody's init values
             gravityScale = robot.GetComponent<Rigidbody2D>().gravityScale;
             mass = robot.GetComponent<Rigidbody2D>().mass;
             angularDrag = robot.GetComponent<Rigidbody2D>().angularDrag;
@@ -89,6 +93,7 @@ namespace Shard.Controllers
         }
 
         private void LinkActionBlocks() {
+            // Look for all action blocks
             for (int i = blockBehaviour.GetMinIndex() + 1; i < blockBehaviour.GetMaxIndex() + 1; i++) {
                 BehaviourBlock currentBlock = blockBehaviour.GetBlock(i);
 
@@ -101,6 +106,7 @@ namespace Shard.Controllers
         }
 
         private void LinkRobotAction(ref ActionBlock block) {
+            // Link the execution of the block to the execution of its corresponding command
             switch (block.GetAction()) {
                 case EntityEnum.Action.MOVE: block.executeActionEvent += moveCommand.Execute ; break;
                 case EntityEnum.Action.JUMP: block.executeActionEvent += jumpCommand.Execute; break;
@@ -111,6 +117,7 @@ namespace Shard.Controllers
         }
 
         private void LinkConditionalBlocks() {
+            // Look for all conditional blocks
             for (int i = blockBehaviour.GetMinIndex() + 1; i < blockBehaviour.GetMaxIndex() + 1; i++) {
                 BehaviourBlock currentBlock = blockBehaviour.GetBlock(i);
 
@@ -127,6 +134,7 @@ namespace Shard.Controllers
             // Remove previous events
             block.GetCondition().isMetEvent = null;
 
+            // Link the block's condition to the robot's sensor
             switch(block.GetCondition().GetState()) {
                 case BlockEnum.ConditionalState.AHEAD:  block.GetCondition().isMetEvent += robotSensors.CheckAhead;  break;
                 case BlockEnum.ConditionalState.BEHIND: block.GetCondition().isMetEvent += robotSensors.CheckBehind; break;
@@ -169,6 +177,7 @@ namespace Shard.Controllers
         }
 
         private void LinkCommandEvent() {
+            // Link the command's event to the corresponding robot's command
             switch(commandBehaviour.GetCommandEventAction()) {
                 case EntityEnum.Action.JUMP:     CommandBehaviour.commandEvent += jumpCommand.Execute; break;
                 case EntityEnum.Action.MOVE:     CommandBehaviour.commandEvent += moveCommand.Execute; break;
@@ -177,6 +186,7 @@ namespace Shard.Controllers
         }
 
         private void LinkCommandTrigger() {
+            // Link the trigger to the corresponding entity
             switch (commandBehaviour.GetCommandTriggerInvoker()) {
                 case CommandEnum.TriggerInvoker.LILY: LinkCommandTriggerToPlayer(); break;
                 case CommandEnum.TriggerInvoker.ROBOT: LinkCommandTriggerToRobot(); break;
@@ -184,6 +194,7 @@ namespace Shard.Controllers
         }
 
         private void LinkCommandTriggerToPlayer() {
+            // Link the trigger to a player action
             switch(commandBehaviour.GetCommandTriggerAction()) {
                 case EntityEnum.Action.JUMP:   PlayerController.jumpTrigger += CommandBehaviour.commandTrigger.Invoke; break;
                 case EntityEnum.Action.MOVE:   PlayerController.moveTrigger += CommandBehaviour.commandTrigger.Invoke; 
@@ -198,6 +209,7 @@ namespace Shard.Controllers
         }
 
         private void LinkCommandTriggerToRobot() {
+            // Link the trigger to a robot action
             switch(commandBehaviour.GetCommandTriggerAction()) {
                 case EntityEnum.Action.JUMP:    robotMovement.SubscribeToJumpTrigger(CommandBehaviour.commandTrigger); break;
 

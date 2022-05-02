@@ -76,18 +76,23 @@ namespace Shard.Controllers
             if(IsHelpUIOn())
                 ToggleHelpUI();
         }
+        
         public void TogglePauseUI() {
             pauseUI.SetActive(!pauseUI.activeInHierarchy);
         }
+        
         public void ToggleHelpUI() {
             helpUI.SetActive(!helpUI.activeInHierarchy);
         }
 
+
         public void TurnOnButtonClick() { turnOnButton.onClick?.Invoke(); }
+        
         public void TurnOffButtonClick() { turnOffButton.onClick?.Invoke(); }
 
 
         public bool IsPUIOn() { return this.isPUIOn; }
+        
         public bool IsHelpUIOn() { return this.helpUI.activeInHierarchy; }
     }
 }

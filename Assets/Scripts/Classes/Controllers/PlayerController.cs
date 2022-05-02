@@ -146,6 +146,7 @@ namespace Shard.Controllers
 
 
         private void FixedUpdate() {
+            // Move player based on input direction
             movingDirection = movement.ReadValue<Vector2>();
             MovePlayer();
         }
@@ -168,6 +169,7 @@ namespace Shard.Controllers
                 InvokeTrigger(EntityEnum.Action.MOVE);
             } 
 
+            // If no input is registered, then we check for a possible stop
             else if(isMoving) 
             {
                 isMoving = false;
@@ -193,6 +195,7 @@ namespace Shard.Controllers
         }
 
         public void ExpandPlayerCollider(bool expand) {
+            // Whenever the player grabs the robot, we expand its collider to match the new sprite combination
             PolygonCollider2D polygonCollider2D = player.GetComponent<PolygonCollider2D>();
 
             Vector2[] points = polygonCollider2D.points;
