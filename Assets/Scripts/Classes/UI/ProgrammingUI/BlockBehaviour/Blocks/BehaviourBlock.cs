@@ -1,4 +1,5 @@
 using Shard.Enums;
+using Shard.Lib.Custom;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,10 @@ namespace Shard.UI.ProgrammingUI
         public abstract BlockLocation Execute();
 
         public abstract new string ToString();
+
+        public void PlaySelectingOptionSFX() {
+            AudioController.Instance.Play("SelectOptionUI");
+        }
         
 
         public new BlockEnum.BlockType GetType()
