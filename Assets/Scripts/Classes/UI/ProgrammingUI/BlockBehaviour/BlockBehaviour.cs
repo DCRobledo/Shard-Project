@@ -59,12 +59,10 @@ namespace Shard.UI.ProgrammingUI
                     if(currentBlock.GetType() == BlockEnum.BlockType.CONDITIONAL) {
                         ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
 
-                        if(!block.Equals(conditionalBlock) && conditionalBlock.GetConditionalType() != BlockEnum.ConditionalType.IF) {
+                        if(!block.Equals(conditionalBlock) && conditionalBlock.GetConditionalType() != BlockEnum.ConditionalType.IF)
                             block.SetElseBlock(conditionalBlock);
-
-                            return;   
-                        }
-                            
+                        
+                        return; 
                     }
                 }
             }
