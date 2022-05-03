@@ -21,13 +21,7 @@ namespace Shard.Mechanisms
 
         public Action<GameObject, bool> buttonEvent;
 
-        private bool shouldCheckForPress = true;
-        private bool shouldCheckForRelease = false;
-
         private int numberOfPressingEntites;
-
-        [SerializeField]
-        private float pressDelay;
 
         [SerializeField]
         private Sprite releasedSprite;
@@ -36,13 +30,22 @@ namespace Shard.Mechanisms
         
 
         private void OnTriggerEnter2D(Collider2D other) {
-            if(shouldCheckForPress && canBePressedBy.Contains(other.tag))
-                Press();
+            if(canBePressedBy.Contains(other.tag)) {
+                if(numberOfPressingEntites <= 0)
+                    Press();
+
+                numberOfPressingEntites++;
+            }
+                
         }
 
         private void OnTriggerExit2D(Collider2D other) {
-            if(shouldCheckForRelease && canBePressedBy.Contains(other.tag))
-                Release();
+            if(canBePressedBy.Contains(other.tag)) {
+                numberOfPressingEntites--;
+
+                if(numberOfPressingEntites <= 0)
+                    Release();
+            }
         }
 
         private void Press() {
@@ -51,9 +54,6 @@ namespace Shard.Mechanisms
             AudioController.Instance.Play("ButtonPressed");
 
             this.GetComponent<SpriteRenderer>().sprite = pressedSprite;
-
-            shouldCheckForRelease = true;
-            shouldCheckForPress = false;
         }
 
         private void Release() {
@@ -63,17 +63,6 @@ namespace Shard.Mechanisms
             AudioController.Instance.Play("ButtonReleased");
                 
             this.GetComponent<SpriteRenderer>().sprite = releasedSprite;
-
-            shouldCheckForRelease = false;
-            StartCoroutine(PressDelay());
-        }
-
-        private IEnumerator PressDelay() {
-            shouldCheckForPress = false;
-
-            yield return new WaitForSeconds(pressDelay);
-
-            shouldCheckForPress = true;
         }
     }
 }
