@@ -138121,7 +138121,7 @@ PrefabInstance:
       objectReference: {fileID: 8598985246768450837}
     - target: {fileID: 2044979010, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
       propertyPath: playEndSequence
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2044979010, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
       propertyPath: levelTransitionGO
@@ -138129,7 +138129,7 @@ PrefabInstance:
       objectReference: {fileID: 1697090949}
     - target: {fileID: 2044979010, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
       propertyPath: playStartSequence
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 593879061630449544, guid: 721e94453a5333b469cfd8fa0902e42b, type: 3}
       propertyPath: checkpoints
@@ -138977,11 +138977,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1489311540624490956, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -42.1
+      value: -42.01
       objectReference: {fileID: 0}
     - target: {fileID: 1489311540624490956, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.1
+      value: -23.19
       objectReference: {fileID: 0}
     - target: {fileID: 1489311540624490956, guid: baf5b57c0be36454599c4d273710bf28, type: 3}
       propertyPath: m_LocalPosition.z
