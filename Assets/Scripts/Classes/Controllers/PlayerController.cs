@@ -154,9 +154,9 @@ namespace Shard.Controllers
 
         private void InvokeTrigger(EntityEnum.Action trigger) {
             switch(trigger) {
-                case EntityEnum.Action.STOP:   stopTrigger?.Invoke();  break;
-                case EntityEnum.Action.MOVE:   moveTrigger?.Invoke();  break;
-                case EntityEnum.Action.JUMP:   jumpTrigger?.Invoke();  break;
+                case EntityEnum.Action.STOP: stopTrigger?.Invoke(); break;
+                case EntityEnum.Action.MOVE: moveTrigger?.Invoke(); break;
+                case EntityEnum.Action.JUMP: jumpTrigger?.Invoke(); break;
             }
         }
 
@@ -184,7 +184,7 @@ namespace Shard.Controllers
             for(int i = 0; i < 10 && movingDirection.x == 0; i++)
                 yield return new WaitForFixedUpdate();
             
-            if(movingDirection.x == 0) 
+            if(movingDirection.x == 0)  
                 InvokeTrigger(EntityEnum.Action.STOP);
         }
 

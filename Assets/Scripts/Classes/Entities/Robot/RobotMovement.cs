@@ -26,6 +26,8 @@ namespace Shard.Entities
         public override void Move() { 
             if (RobotController.Instance.IsRobotOn() && !RobotController.Instance.IsRobotGrabbed())
             {
+                Debug.Log("Robot move");
+
                 moveTrigger?.Invoke();
 
                 isMoving = true;
