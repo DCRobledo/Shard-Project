@@ -83,7 +83,7 @@ namespace Shard.Controllers
 
 
         private void SetBlockBehaviour(int minIndex, int maxIndex, List<GameObject> blocks) {
-            if(blockBehaviour != null) Destroy(robot.GetComponent<BlockBehaviour>());
+            if(blockBehaviour != null) ResetBlockBehaviour();
 
             blockBehaviour = robot.AddComponent<BlockBehaviour>();
             blockBehaviour.CreateBlockBehaviour(minIndex, maxIndex, blocks);
@@ -92,7 +92,7 @@ namespace Shard.Controllers
             LinkConditionalBlocks();
         }
 
-        private void LinkActionBlocks() {
+        private void LinkActionBlocks(bool link = true) {
             // Look for all action blocks
             for (int i = blockBehaviour.GetMinIndex() + 1; i < blockBehaviour.GetMaxIndex() + 1; i++) {
                 BehaviourBlock currentBlock = blockBehaviour.GetBlock(i);
@@ -100,23 +100,27 @@ namespace Shard.Controllers
                 if (currentBlock?.GetType() == BlockEnum.BlockType.ACTION) {
                     ActionBlock actionBlock = currentBlock as ActionBlock;
 
-                    LinkRobotAction(ref actionBlock);
+                    LinkRobotAction(ref actionBlock, link);
                 }
             }
         }
 
-        private void LinkRobotAction(ref ActionBlock block) {
-            // Link the execution of the block to the execution of its corresponding command
-            switch (block.GetAction()) {
-                case EntityEnum.Action.MOVE: block.executeActionEvent += moveCommand.Execute ; break;
-                case EntityEnum.Action.JUMP: block.executeActionEvent += jumpCommand.Execute; break;
-                case EntityEnum.Action.FLIP: block.executeActionEvent += flipCommand.Execute; break;
+        private void LinkRobotAction(ref ActionBlock block, bool link = true) {
+            // Link or unlink the execution of the block to the execution of its corresponding command
+            if(!link) block.executeActionEvent = null;
 
-                default: break;
+            else {
+                switch (block.GetAction()) {
+                    case EntityEnum.Action.MOVE: block.executeActionEvent += moveCommand.Execute ; break;
+                    case EntityEnum.Action.JUMP: block.executeActionEvent += jumpCommand.Execute; break;
+                    case EntityEnum.Action.FLIP: block.executeActionEvent += flipCommand.Execute; break;
+
+                    default: break;
+                }
             }
         }
 
-        private void LinkConditionalBlocks() {
+        private void LinkConditionalBlocks(bool link = true) {
             // Look for all conditional blocks
             for (int i = blockBehaviour.GetMinIndex() + 1; i < blockBehaviour.GetMaxIndex() + 1; i++) {
                 BehaviourBlock currentBlock = blockBehaviour.GetBlock(i);
@@ -125,30 +129,36 @@ namespace Shard.Controllers
                     ConditionalBlock conditionalBlock = currentBlock as ConditionalBlock;
 
                     if (conditionalBlock.GetConditionalType() != BlockEnum.ConditionalType.ELSE)
-                        LinkRobotSensor(ref conditionalBlock);
+                        LinkRobotSensor(ref conditionalBlock, link);
                 }
             }
         }
 
-        private void LinkRobotSensor(ref ConditionalBlock block) {
-            // Remove previous events
-            block.GetCondition().isMetEvent = null;
+        private void LinkRobotSensor(ref ConditionalBlock block, bool link = true) {
+            // Link or unlink the block's condition to the robot's sensor
+            if(!link) block.GetCondition().isMetEvent = null;
 
-            // Link the block's condition to the robot's sensor
-            switch(block.GetCondition().GetState()) {
-                case BlockEnum.ConditionalState.AHEAD:  block.GetCondition().isMetEvent += robotSensors.CheckAhead;  break;
-                case BlockEnum.ConditionalState.BEHIND: block.GetCondition().isMetEvent += robotSensors.CheckBehind; break;
-                case BlockEnum.ConditionalState.ABOVE:  block.GetCondition().isMetEvent += robotSensors.CheckAbove;  break;
-                case BlockEnum.ConditionalState.BELOW:  block.GetCondition().isMetEvent += robotSensors.CheckBelow;  break;
+            else {
+                switch(block.GetCondition().GetState()) {
+                    case BlockEnum.ConditionalState.AHEAD:  block.GetCondition().isMetEvent += robotSensors.CheckAhead;  break;
+                    case BlockEnum.ConditionalState.BEHIND: block.GetCondition().isMetEvent += robotSensors.CheckBehind; break;
+                    case BlockEnum.ConditionalState.ABOVE:  block.GetCondition().isMetEvent += robotSensors.CheckAbove;  break;
+                    case BlockEnum.ConditionalState.BELOW:  block.GetCondition().isMetEvent += robotSensors.CheckBelow;  break;
 
-                default: break;
+                    default: break;
+                }
             }
+            
         }
 
         public void ResetBlockBehaviour() {
             StopBlockBehaviour();
 
             if(blockBehaviour != null) {
+
+                LinkActionBlocks(false);
+                LinkConditionalBlocks(false);
+
                 blockBehaviour = null;
 
                 Destroy(robot.GetComponent<BlockBehaviour>());
