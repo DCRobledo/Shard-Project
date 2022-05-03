@@ -189,9 +189,11 @@ namespace Shard.Controllers
         }
 
         public void ReleaseRobot() { 
-            (playerActions as PlayerActions).ReleaseRobot();
+            (playerActions as PlayerActions).Grab();
 
             playerAnimations.SetGrabTrigger();
+
+            //ExpandPlayerCollider(false);
         }
 
         public void ExpandPlayerCollider(bool expand) {
