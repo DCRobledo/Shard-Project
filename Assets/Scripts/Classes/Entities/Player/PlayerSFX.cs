@@ -31,12 +31,12 @@ namespace Shard.Entities
 
         private new void OnDisable() {
             // Grab SFX
-            PlayerActions.grabTrigger += PlayGrabSFX;
-            PlayerActions.dropTrigger += PlayGrabSFX;
+            PlayerActions.grabTrigger -= PlayGrabSFX;
+            PlayerActions.dropTrigger -= PlayGrabSFX;
 
             // Walk SFX
-            PlayerController.moveTrigger += PlayMoveSFX;
-            PlayerController.stopTrigger += StopMoveSFX;
+            PlayerController.moveTrigger -= PlayMoveSFX;
+            PlayerController.stopTrigger -= StopMoveSFX;
 
             base.OnDisable();
         }

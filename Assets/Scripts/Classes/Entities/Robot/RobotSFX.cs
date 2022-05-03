@@ -32,8 +32,8 @@ namespace Shard.Entities
 
         private new void OnDisable() {
             // Walk SFX
-            RobotMovement.moveTrigger += PlayMoveSFX;
-            RobotMovement.stopTrigger += StopMoveSFX;
+            RobotMovement.moveTrigger -= PlayMoveSFX;
+            RobotMovement.stopTrigger -= StopMoveSFX;
 
             // Turn_On SFX
             RobotController.turnOnTrigger -= PlayTurnOnSFX;

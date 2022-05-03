@@ -4,6 +4,7 @@ using Shard.Lib.Custom;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Shard.Entities
 {
@@ -22,9 +23,9 @@ namespace Shard.Entities
         protected bool isMoveSFXPlaying = false;
         protected bool isStuckInWall = false;
 
-        private Coroutine moveSFXProtection;
+        protected Coroutine moveSFXProtection = null;
 
-        private Vector2 lastPosition;
+        protected Vector2 lastPosition;
 
 
         protected void Awake() {
@@ -50,31 +51,26 @@ namespace Shard.Entities
             // landSFX -= PlayLandSFX;
         }
 
-        private void Update() {
-            // Check if we need to stop the move SFX
-            if((isMoveSFXPlaying || isStuckInWall) && moveSFXProtection == null) 
-                moveSFXProtection = StartCoroutine(MoveSFXProtection());
-        }
+        
 
         private IEnumerator MoveSFXProtection() {
-            Vector2 lastPosition = this.transform.localPosition;
-
-            yield return new WaitForSeconds(0.1f);
-
             // Check if the entity is walking towards a wall
-            Vector2 currentPosition = this.transform.localPosition;
+            while(true) {
+                Vector2 lastPosition = this.transform.localPosition;
+            
+                yield return new WaitForSeconds(0.1f);
+                
+                Vector2 currentPosition = this.transform.localPosition;
 
-            if (currentPosition.x == lastPosition.x) {
-                isStuckInWall = true;
+                if(currentPosition.x == lastPosition.x) {
+                    isStuckInWall = true;
+                    StopMoveSFX();
+                }
 
-                StopMoveSFX();
+                else
+                    isStuckInWall = false;
             }
-            else 
-                isStuckInWall = false; 
-
-            moveSFXProtection = null;
         }
-
 
         protected void PlayJumpSFX() { AudioController.Instance.Play(entityNameNormalized + "Jump"); }
         
@@ -88,14 +84,14 @@ namespace Shard.Entities
             if(!isStuckInWall) {
                 AudioController.Instance.Play(entityNameNormalized + "Move");
 
-                isMoveSFXPlaying = true;
+                // Check if we need to stop the move SFX
+                if(moveSFXProtection == null) 
+                    moveSFXProtection = StartCoroutine(MoveSFXProtection());
             } 
         }
         
         protected void StopMoveSFX() { 
             AudioController.Instance.Stop(entityNameNormalized + "Move");
-
-            isMoveSFXPlaying = false;
         }
     }
 }
