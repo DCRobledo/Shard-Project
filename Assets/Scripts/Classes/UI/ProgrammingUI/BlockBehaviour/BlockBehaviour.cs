@@ -102,7 +102,7 @@ namespace Shard.UI.ProgrammingUI
             // Execute the first block
             BehaviourBlock currentBlock = GetBlock();
 
-            // Debug.Log("Execute -> " + currentBlock?.GetBlockLocation().ToString());
+            Debug.Log("Execute -> " + currentBlock?.GetBlockLocation().ToString());
 
             BlockLocation nextBlockLocation = currentBlock.Execute(); 
 
@@ -118,7 +118,7 @@ namespace Shard.UI.ProgrammingUI
                 // Get the next block
                 currentBlock = GetBlock(nextBlockLocation.GetIndex(), nextBlockLocation.GetIndentation());
 
-                // Debug.Log("Execute -> " + currentBlock?.GetBlockLocation().ToString());
+                Debug.Log("Execute -> " + currentBlock?.GetBlockLocation().ToString());
 
                 if(currentBlock != null) {   
                     // Execute the block and get the next block location

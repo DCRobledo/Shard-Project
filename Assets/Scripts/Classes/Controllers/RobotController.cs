@@ -291,6 +291,7 @@ namespace Shard.Controllers
 
             // Update polygonCollider2D
             robot.GetComponent<PolygonCollider2D>().enabled = !isRobotGrabbed;
+            robot.transform.GetChild(0).gameObject.SetActive(!isRobotGrabbed);
 
             // Update rigidbody2D parameters
             Rigidbody2D rigidbody2D = robot.GetComponent<Rigidbody2D>();
