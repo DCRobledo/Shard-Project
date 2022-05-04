@@ -165,6 +165,9 @@ namespace Shard.UI.ProgrammingUI
         public BehaviourBlock GetBlock(int index, int indentation)
         {
             BehaviourBlock block = indentation == -1 ? GetBlock(index) : blocks[index - 1, indentation - 1];
+
+            if(block == null) block = GetBlock(index);
+
             return block;
         }
 
