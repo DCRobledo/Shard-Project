@@ -140,33 +140,62 @@ namespace Shard.UI.ProgrammingUI
             this.blocks[index - 1, indentation - 1] = block;
         }
 
-        public BehaviourBlock GetBlock()
-        {
-            for (int i = 1; i <= maxIndex; i++)
-                if (GetBlock(i) != null)
-                    return GetBlock(i);
+        // public BehaviourBlock GetBlock()
+        // {
+        //     for (int i = 1; i <= maxIndex; i++)
+        //         if (GetBlock(i) != null)
+        //             return GetBlock(i);
             
-            return null;
-        }
+        //     return null;
+        // }
 
-        public BehaviourBlock GetBlock(int index)
+        // public BehaviourBlock GetBlock(int index)
+        // {
+        //     if(index == -1) return GetBlock();
+
+        //     for (int i = index; i <= maxIndex; i++) {
+        //         if      (GetBlock(i, 1) != null) return GetBlock(i, 1);
+        //         else if (GetBlock(i, 2) != null) return GetBlock(i, 2);
+        //         else if (GetBlock(i, 3) != null) return GetBlock(i, 3);
+        //     }
+
+        //     return null;
+        // }
+
+        // public BehaviourBlock GetBlock(int index, int indentation)
+        // {
+        //     BehaviourBlock block = indentation == -1 ? GetBlock(index) : blocks[index - 1, indentation - 1];
+
+        //     if(block == null) block = GetBlock(index);
+
+        //     return block;
+        // }
+
+        public BehaviourBlock GetBlock(int index = -1, int indentation = -1)
         {
-            if(index == -1) return GetBlock();
+            BehaviourBlock block = null;
 
-            for (int i = index; i <= maxIndex; i++) {
-                if      (GetBlock(i, 1) != null) return GetBlock(i, 1);
-                else if (GetBlock(i, 2) != null) return GetBlock(i, 2);
-                else if (GetBlock(i, 3) != null) return GetBlock(i, 3);
+            // We care both about the index and the indentation
+            if(index != -1 && indentation != -1)
+                block = blocks[index - 1, indentation - 1];
+            
+            // We care only about the index
+            if (index != -1 && block == null) {
+                for (int i = index; i <= maxIndex; i++) {
+                    if      (blocks[index - 1, 0] != null) block = blocks[index - 1, 0];
+                    else if (blocks[index - 1, 1] != null) block = blocks[index - 1, 1];
+                    else if (blocks[index - 1, 2] != null) block = blocks[index - 1, 2];
+                }
             }
 
-            return null;
-        }
-
-        public BehaviourBlock GetBlock(int index, int indentation)
-        {
-            BehaviourBlock block = indentation == -1 ? GetBlock(index) : blocks[index - 1, indentation - 1];
-
-            if(block == null) block = GetBlock(index);
+            // We don't care about either the index nor the indentation
+            if (block == null) {
+                for (int i = 0; i < maxIndex; i++) {
+                    if      (blocks[i, 0] != null) block = blocks[i, 0];
+                    else if (blocks[i, 1] != null) block = blocks[i, 1];
+                    else if (blocks[i, 2] != null) block = blocks[i, 2];
+                }
+            }
 
             return block;
         }
