@@ -47,8 +47,8 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 9e1cbf6992af856409265606ea3ce513, type: 2}
   sounds:
   - name: BackgroundMusic
-    clip: {fileID: 8300000, guid: 33cfece1f6497a1499f0e51396e2462d, type: 3}
-    volume: 1
+    clip: {fileID: 8300000, guid: 4cb5b892f095d2a488242df462741c0f, type: 3}
+    volume: 0.5
     pitch: 1
     loop: 1
     targetMixer: 1
@@ -77,8 +77,8 @@ MonoBehaviour:
     loop: 0
     targetMixer: 0
   - name: PlayerMove
-    clip: {fileID: 8300000, guid: f87ee8684c10b3144b539c75c31f7514, type: 3}
-    volume: 0.2
+    clip: {fileID: 8300000, guid: 9b77b0dc1b659af49bf94f41bcdbe155, type: 3}
+    volume: 1
     pitch: 1
     loop: 1
     targetMixer: 0
